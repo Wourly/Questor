@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Neurobiologie</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <div id="menu">
+        <h1>Neurobiology</h1>
+        <p>Questions</p>
+        <input id="min" placeholder="from" value="0"> <input id="max" placeholder="to">
+        <br>
+        <input id="indexes" placeholder="indexes" value="">
+        <br><br>
+        <span id="limit"></span>
+        <br><br>
+        <span id="wrongIndexes"></span>
+        <br><br>
+        <div id="readButton" class="button">Read questions</div>
+        <div id="startButton" class="button">Start test</div>
+    </div>
+    <div id="questions" class="hidden">
+
+    </div>
+    <div id="test">
+
+    </div>
+    <div id="endButton" class="button hidden">End test</div>
+
+    <script src="valid_questions.js"></script>
+    <script src="initialization.js"></script>
+    <script src="engine.js"></script>
+    <script src="run.js"></script>
+
+</body>
+</html>

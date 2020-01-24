@@ -1,0 +1,99 @@
+html, body {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+    background-color: #333;
+
+    min-height: 100vh;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+h1, p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+header, main {
+    width: 100%;
+    position: relative;
+}
+
+header {
+    min-height: 10vh;
+    padding-left: 10px;
+
+    clear: both;
+}
+
+header h1 {
+    color: #ADF;
+    font-size: 30px;
+}
+
+header p {
+    color: #666;
+    font-size: 15px;
+}
+
+main {
+    min-height: 90vh;
+
+    clear: both;
+}
+
+/*TEXT AREAS*/
+
+textarea-container {
+
+    position: absolute;
+    display: block;
+
+    width: 50%;
+    height: 100%;
+}
+
+textarea-label {
+    color: #CCC;
+
+    font-size: 20px;
+
+    height: 10%;
+}
+
+textarea {
+    padding: 8px;
+
+    display: block;
+    clear: both;
+
+    resize: none;
+    background-color: #555;
+
+    height: 100%;
+    width: 100%;
+}
+
+textarea-container[input] {
+    left: 0;
+}
+
+textarea-container[output], textarea-container[error] {
+    left: 50%;
+}
+
+textarea-container[error] textarea {
+    
+    color: #F00;
+
+    background-color: #FFF;
+
+    border-color: #F55;
+    border-width: 3px;
+
+    user-select: none;
+}
