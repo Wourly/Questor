@@ -32,12 +32,12 @@ header {
 
 header h1 {
     color: #ADF;
-    font-size: 30px;
+    font-size: 5vh;
 }
 
 header p {
     color: #666;
-    font-size: 15px;
+    font-size: 2.5vh;
 }
 
 main {
@@ -48,45 +48,27 @@ main {
 
 /*TEXT AREAS*/
 
-textarea-container {
-
-    position: absolute;
-    display: block;
-
-    width: 50%;
-    height: 100%;
-}
-
-textarea-label {
+textarea, .textarea {
+    resize: none;
+    background-color: #555;
     color: #CCC;
 
     font-size: 20px;
 
-    height: 10%;
-}
+    position: absolute;
 
-textarea {
-    padding: 8px;
-
-    display: block;
-    clear: both;
-
-    resize: none;
-    background-color: #555;
-
+    width: 50%;
     height: 100%;
-    width: 100%;
+    float: left;
+
+    padding: 8px;
 }
 
-textarea-container[input] {
+#input {
     left: 0;
 }
 
-textarea-container[output], textarea-container[error] {
-    left: 50%;
-}
-
-textarea-container[error] textarea {
+#errorContainer {
     
     color: #F00;
 
@@ -94,6 +76,29 @@ textarea-container[error] textarea {
 
     border-color: #F55;
     border-width: 3px;
-
-    user-select: none;
+    border-style: solid;
 }
+
+/*if no error, do not display error message*/
+#errorContainer:not([data-error=true]) {
+    display: none;
+}
+
+#errorContainer h1 {
+    font-size: 20px;
+}
+
+#output, #errorContainer {
+    left: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+    textarea, .textarea {
+        width: 100%;
+        height: 100vh;
+    }
+    #output, #errorContainer {
+        top: 100vh;
+        left: 0;
+    }
+  }
