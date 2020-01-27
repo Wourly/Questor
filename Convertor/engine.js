@@ -29,6 +29,44 @@ var Convertor = function (settings) {
             return '/*' + captureGroups[0] + '*/';
         };
 
+        this.textBodyProcessor2 = function (textBody, indentation) {
+
+            var splitterSequence = "|";
+
+            var markedTextBody = textBody.replace(/([@^])/g, splitterSequence + "$1");
+            
+            var splitTokens = markedTextBody.split(splitterSequence);
+
+            var bodyObject = new Object();
+
+            //index 0 is always question text
+            for (let index = 1; index < splitTokens.length; index++) {
+                //console.log(splitTokens[index]);
+
+                splitTokens[index].replace(/(.)(.*)/, function (matches, variableIdentifier, variableText) {
+                    
+                    var recognizedVariable = null;
+
+                    switch (variableIdentifier) {
+                        case '@':
+                            recognizedVariable = 'vHint';
+                            break;
+                        case '^':
+                            recognizedVariable = 'iHint';
+                            break;
+                        default:
+                            recognizedVariable = variableIdentifier;
+                            break;
+                    }
+
+                    bodyObject[recognizedVariable] = variableText.trim();
+                });
+            }
+
+            //console.log(bodyObject);
+            return '';
+        }
+
         //process text and hints from question and answer body
         this.textBodyProcessor = function (textBody, indentation) {
             
@@ -78,7 +116,8 @@ var Convertor = function (settings) {
                 returnString = returnArray.join('');
             }
 
-            console.log(JSON.parse('{' + returnString + '}'));
+            //! remove
+            //console.log(JSON.parse('{' + returnString + '}'));
             return returnString;
 
         }
@@ -93,7 +132,7 @@ var Convertor = function (settings) {
             var identificator = captureGroups[0];
             var textBody = captureGroups[1];
 
-            var bodyReplacement = this.textBodyProcessor(textBody);
+            var bodyReplacement = this.textBodyProcessor2(textBody);
 
             return '"identificator":"' + identificator + '",\n' + bodyReplacement + "'";
 
@@ -166,11 +205,26 @@ var Convertor = function (settings) {
         this.isError = false;
         this.errorContainer.removeAttribute('data-error');
 
+        var timer = new Date();
+        var startTime = timer.getTime();
+        var t0 = performance.now();
         //this.processComments();
         this.processQuestionNames();
 
         //console.log(this.outputText)
         //console.log(this.errorText)
+
+        var endTime = timer.getTime();
+        var timeLength = endTime - startTime;
+
+
+
+
+
+var t1 = performance.now();
+console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.");
+
+        //console.log('Conversion took', timeLength, 'miliseconds');
 
         this.output[this.outputContentAccessor] = this.outputText;
 
