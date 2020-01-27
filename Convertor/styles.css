@@ -64,6 +64,10 @@ textarea, .textarea {
     padding: 8px;
 }
 
+.textarea {
+    word-wrap: break-word;
+}
+
 #input {
     left: 0;
 }

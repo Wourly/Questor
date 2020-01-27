@@ -20,39 +20,43 @@ var Convertor = function (settings) {
     //settings
     this.settings = new Object();
     this.regExp = new Object();
+    this.blocks = new Object();
 
-        //commenting
-        this.settings.commentsMarker = settings.commentsMarker ? settings.commentsMarker : '=';
-        this.regExp.comments = new Object();
-        this.regExp.comments.pattern = new RegExp('/' + this.settings.commentsMarker + '{3,}?([^=]+?)={3,}/g');
-        this.regExp.comments.replacer = function (captureGroups) {
-            return '/*' + captureGroups[0] + '*/';
+        //============================
+        // general
+        //============================
+
+        this.settings.splitterSequence = settings.splitterSequence ? settings.splitterSequence : 'ůíá';
+
+        this.indent = function (spaces, string) {
+            return ' '.repeat(spaces) + string;
         };
 
-        this.textBodyProcessor2 = function (textBody, indentation) {
+        this.escapeChar = function (character) {
+            return '\\' + character;
+        }
 
-            var splitterSequence = "|";
+        this.textBodyProcessor = function (textBody, indentation) {
 
-            var markedTextBody = textBody.replace(/([@^])/g, splitterSequence + "$1");
+            var markedTextBody = textBody.replace(/([@^])/g, this.settings.splitterSequence + "$1");
             
-            var splitTokens = markedTextBody.split(splitterSequence);
+            var splitTokens = markedTextBody.split(this.settings.splitterSequence);
 
             var bodyObject = new Object();
 
             //index 0 is always question text
             for (let index = 1; index < splitTokens.length; index++) {
-                //console.log(splitTokens[index]);
 
-                splitTokens[index].replace(/(.)(.*)/, function (matches, variableIdentifier, variableText) {
+                splitTokens[index].replace(/(.)(.*)/, function (fullMatch, variableIdentifier, variableText) {
                     
                     var recognizedVariable = null;
 
                     switch (variableIdentifier) {
                         case '@':
-                            recognizedVariable = 'vHint';
+                            recognizedVariable = 'vH';
                             break;
                         case '^':
-                            recognizedVariable = 'iHint';
+                            recognizedVariable = 'iH';
                             break;
                         default:
                             recognizedVariable = variableIdentifier;
@@ -64,77 +68,123 @@ var Convertor = function (settings) {
             }
 
             //console.log(bodyObject);
-            return '';
-        }
 
-        //process text and hints from question and answer body
-        this.textBodyProcessor = function (textBody, indentation) {
-            
-            var bodyArray = textBody.split(/[@^]/);
+            var returnArray = new Array();
+            var returnString = null;
 
-            if (bodyArray.length === 1)
-            {
-                return textBody;
-            }
-            else //length 2 or 3
-            {
-                var visibleHintIndex = textBody.indexOf('@');
-                var invisibleHintIndex = textBody.indexOf('^');
+            returnArray.push(this.indent(indentation, '"text":"' + splitTokens[0].trim() + '",'));
 
-                var returnString = null;
+            for (var property in bodyObject) {
 
-                //joins into string later
-                var returnArray = null;
+                var propertyString = '"' + property + '":"' + bodyObject[property] + '",';
 
-                if (bodyArray.length === 2)
-                {
-                    //visible hint is present
-                    if (visibleHintIndex > invisibleHintIndex)
-                    {
-                        returnArray = ['"text":"', bodyArray[0].trim(), '",\n"vHint":"', bodyArray[1].trim(), '"'];
-                    }
-                    //invisible hint is present
-                    else
-                    {
-                        returnArray = ['"text":"', bodyArray[0].trim(), '",\n"iHint":"', bodyArray[1].trim(), '"'];
-                    }
-                }
-                else //length === 3
-                {
-                    //visible hint is frist
-                    if (visibleHintIndex < invisibleHintIndex)
-                    {
-                        returnArray = ['"text":"', bodyArray[0].trim(), '",\n"vHint":"', bodyArray[1].trim(), '",\n"iHint":"', bodyArray[2].trim() + '"'];
-                    }
-                    //invisible hint is first
-                    else
-                    {
-                        returnArray = ['"text":"', bodyArray[0].trim(), '",\n"vHint":"', bodyArray[2].trim(), '",\n"iHint":"', bodyArray[1].trim() + '"'];
-                    }
-                }
-
-                returnString = returnArray.join('');
+                returnArray.push(this.indent(indentation, propertyString));
             }
 
-            //! remove
-            //console.log(JSON.parse('{' + returnString + '}'));
+            returnString = returnArray.join('\n');
+
             return returnString;
-
         }
 
-        //questions
+        //============================
+        // commenting
+        //============================
+
+        this.settings.commentsMarker = settings.commentsMarker ? settings.commentsMarker : '=';
+        this.blocks.comments = new Object();
+        this.blocks.comments.highlightBody = '//' + this.settings.commentsMarker.repeat(30) + "\n";
+        this.regExp.comments = new Object();
+        this.regExp.comments.pattern =
+        new RegExp(
+            //match at least 3 comment chars
+            this.escapeChar(this.settings.commentsMarker) + '{3,}?'
+            +
+            //match anything with at least 1 char, but without comment char
+            '([^' + this.escapeChar(this.settings.commentsMarker) + ']+?)'
+            +
+            //match at least 3 comment chars
+            this.escapeChar(this.settings.commentsMarker) + '{3,}',
+        'g');
+        this.regExp.comments.replacer = function (captureGroups) {
+
+            var commentBody = this.blocks.comments.highlightBody + '// ' + captureGroups[0] + "\n" + this.blocks.comments.highlightBody;
+            return commentBody;
+            
+        }.bind(this);
+
+        //============================
+        // questions
+        //============================
+
         this.settings.questionIdStart = settings.question_identificator_start ? settings.question_identificator_start : '(';
         this.settings.questionIdEnd = settings.question_identificator_end ? settings.question_identificator_end : ')';
+        this.settings.questionEnd = settings.question_end ? settings.question_end : ':';
+        this.blocks.questions = new Object();
+        //ends answer array, ends question object, starts another question object
+        this.blocks.questions.upperBody = this.indent(8, ']') + "\n" + this.indent(2, '}') + ",\n" + this.indent(2, '{');
+        //starts answer array
+        this.blocks.questions.lowerBody = this.indent(5, '"answers":') + "\n" + this.indent(8, '[') + "\n";
         this.regExp.questions = new Object();
-        this.regExp.questions.pattern = new RegExp(/\(([^\(\):]+?)\)\s?([^:]+):/g);
+        this.regExp.questions.pattern = new RegExp(
+            //from question id start char..
+            this.escapeChar(this.settings.questionIdStart)
+            +
+            //..match & capture everything, except..
+            '([^'
+            +
+            //..except question id brackets () and except..
+            this.escapeChar(this.settings.questionIdStart) + this.escapeChar(this.settings.questionIdEnd)
+            +
+            //..except question end char..
+            ':'
+            +
+            //..if it has at least 1 character..
+            ']+?)'
+            +
+            //..until question id end char..
+            this.escapeChar(this.settings.questionIdEnd)
+            +
+            //..followed by up to 2 spaces..
+            '\s{0,2}'
+            +
+            //..and capture everything, which is not question end char..
+            '([^' + this.escapeChar(this.settings.questionEnd) + ':]+)'
+            +
+            //..until question end char
+            this.escapeChar(this.settings.questionEnd),
+        'g');
+
         this.regExp.questions.replacer = function (captureGroups) {
             
             var identificator = captureGroups[0];
             var textBody = captureGroups[1];
 
-            var bodyReplacement = this.textBodyProcessor2(textBody);
+            var bodyReplacement = this.textBodyProcessor(textBody, 5);
 
-            return '"identificator":"' + identificator + '",\n' + bodyReplacement + "'";
+            var questionProperties = this.indent(5, '"id":"' + identificator + '",\n') + bodyReplacement;
+
+            var final = this.blocks.questions.upperBody + "\n" + questionProperties + "\n" + this.blocks.questions.lowerBody;
+
+            //console.log(final)
+
+            return final;
+
+        }.bind(this);
+
+        //============================
+        // answers
+        //============================
+
+        this.settings.answerStart = '[TX]';
+        this.settings.answerEnd = '';
+        this.blocks.answers = new Object();
+        this.regExp.answers = new Object();
+        this.regExp.answers.pattern = new RegExp(
+            '',
+        'g');
+
+        this.regExp.answers.replacer = function (captureGroups) {
+            
 
         }.bind(this);
 
@@ -175,8 +225,6 @@ var Convertor = function (settings) {
 
         if (isCaptured) {
             this.errorText = this.errorText.replace(regExp, '');
-        } else {
-            this.isError = true;
         }
 
     }.bind(this);
@@ -188,6 +236,10 @@ var Convertor = function (settings) {
 
     this.processQuestionNames = function () {
         this.applyRegExp(this.regExp.questions.pattern, this.regExp.questions.replacer);
+    }
+
+    this.processAnswers = function () {
+        this.applyRegExp(this.regExp.answers.pattern, this.regExp.answers.replacer);
     }
 
     this.convert = function () {
@@ -208,8 +260,10 @@ var Convertor = function (settings) {
         var timer = new Date();
         var startTime = timer.getTime();
         var t0 = performance.now();
+
         //this.processComments();
-        this.processQuestionNames();
+        //this.processQuestionNames();
+        this.processAnswers();
 
         //console.log(this.outputText)
         //console.log(this.errorText)
