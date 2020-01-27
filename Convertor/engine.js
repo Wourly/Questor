@@ -123,7 +123,7 @@ var Convertor = function (settings) {
         //ends answer array, ends question object, starts another question object
         this.blocks.questions.upperBody = this.indent(8, ']') + "\n" + this.indent(2, '}') + ",\n" + this.indent(2, '{');
         //starts answer array
-        this.blocks.questions.lowerBody = this.indent(5, '"answers":') + "\n" + this.indent(8, '[') + "\n";
+        this.blocks.questions.lowerBody = this.indent(5, '"answers":') + "\n" + this.indent(8, '[');
         this.regExp.questions = new Object();
         this.regExp.questions.pattern = new RegExp(
             //from question id start char..
@@ -175,16 +175,29 @@ var Convertor = function (settings) {
         // answers
         //============================
 
-        this.settings.answerStart = '[TX]';
-        this.settings.answerEnd = '';
-        this.blocks.answers = new Object();
+        this.settings.answerCorrect = settings.correct_answer_identificator ? settings.correct_answer_identificator : 'T';
+        this.settings.answerWrong = settings.wrong_answer_identificator ? settings.wrong_answer_identificator : 'X';
+        this.settings.answerStart = '[' + this.escapeChar(this.settings.answerCorrect) + this.escapeChar(this.settings.answerWrong) + ']';
+        this.settings.answerEnd = settings.answer_end ? settings.answer_end : "\n";
         this.regExp.answers = new Object();
         this.regExp.answers.pattern = new RegExp(
-            '',
-        'g');
+            //match any number of spaces excluding new lines (including tabs)
+            '^[^\\S\\n]*'
+            +
+            //match answer validity
+            '(' + this.settings.answerStart + ')'
+            +
+            //match any separator character
+            '\\s*'
+            +
+            //until answerd end char
+            '([^' + this.escapeChar(this.settings.answerEnd) + ']*)',
+        'gm');
 
         this.regExp.answers.replacer = function (captureGroups) {
             
+
+            return (captureGroups[1])
 
         }.bind(this);
 
@@ -217,7 +230,7 @@ var Convertor = function (settings) {
 
             var captureGroups = [a, b, c, d, e, f];
 
-            //captureGroups = this.filterValidCaptureGroups(captureGroups);
+            captureGroups = this.filterValidCaptureGroups(captureGroups);
 
             return substitutioner(captureGroups);
 
@@ -248,8 +261,11 @@ var Convertor = function (settings) {
         this.error[this.errorContentAccessor] = '';
 
         var inputText = this.input.value;
+        inputText = inputText.replace(/\\/g, '\\\\')
         //JSON bug prevention - adding just one escape character \ before "
         inputText = inputText.replace(/\\*"/g, '\\"');
+        //remove empty lines
+        inputText = inputText.replace(/^\s*$\n/gm, '');
         
         this.outputText = inputText;
         this.errorText = inputText;
@@ -261,10 +277,10 @@ var Convertor = function (settings) {
         var startTime = timer.getTime();
         var t0 = performance.now();
 
-        //this.processComments();
-        //this.processQuestionNames();
+        this.processComments();
+        this.processQuestionNames();
         this.processAnswers();
-
+        
         //console.log(this.outputText)
         //console.log(this.errorText)
 
