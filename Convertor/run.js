@@ -1,9 +1,9 @@
-var convertor = null;
+var c = null;
 Object.freeze(SETTINGS);
 
 window.addEventListener('load', function () {
-    convertor = new Convertor(SETTINGS);
-    console.log(convertor);
-    convertor.start();
-    convertor.convert();
+    c = new Convertor(SETTINGS);
+    console.log(c);
+    c.start();
+    c.convert();
 })

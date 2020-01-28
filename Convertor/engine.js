@@ -32,28 +32,34 @@ var Convertor = function (settings) {
 
         //!hint separator must not be more than single char
 
-        this.indentation.questionCurlyBrackets = 2;
-        this.indentation.questionProperties = 5;
-        this.indentation.answersSquareBrackets = 8;
-        this.indentation.answerCurlyBrackets = 11;
+        this.indentation.questionCurlyBrackets = 0;
+        this.indentation.questionProperties = 3;
+        this.indentation.answersSquareBrackets = 6;
+        this.indentation.answerCurlyBrackets = 9;
 
-        this.indent = function (spaces, string) {
-            return ' '.repeat(spaces) + string;
+        this.indent = function (spaces) {
+            return ' '.repeat(spaces);
         };
 
         //-------------------
         // structure of JSON
         //-------------------
             //ends answer array, ends question object, starts another question object
-            this.blocks.questionUpperBody = this.indent(this.indentation.answersSquareBrackets, ']') + "\n" + this.indent(this.indentation.questionCurlyBrackets, '}') + ",\n" + this.indent(this.indentation.questionCurlyBrackets, '{') + "\n";
+            //end is put first and it's first occurence is sliced off
+            this.blocks.questionEnd = this.indent(this.indentation.answersSquareBrackets) + "]\n" + ' '.repeat(this.indentation.questionCurlyBrackets) + '}';
+            this.blocks.questionStart = ",\n" + this.indent(this.indentation.questionCurlyBrackets);
+            this.settings.sliceStartIndex = this.blocks.questionEnd.length + this.blocks.questionStart.length;
+            this.blocks.repetitiveQuestionUpperBody = this.blocks.questionEnd + this.blocks.questionStart + '{' + "\n";
             //starts answer array
-            this.blocks.questionLowerBody = "\n" + this.indent(this.indentation.questionProperties, '"answers":') + "\n" + this.indent(this.indentation.answersSquareBrackets, '[');
-            this.blocks.questionEnd = "\n" + this.indent(this.indentation.answersSquareBrackets) + "]\n" + ' '.repeat(this.indentation.questionCurlyBrackets);
+            this.blocks.repetitiveQuestionLowerBody = "\n" + this.indent(this.indentation.questionProperties) + '"answers":' + "\n" + this.indent(this.indentation.answersSquareBrackets) + '[';
+            
             this.regExp.removeCommaAfterLastArrayItem = new RegExp(',(\\n\\s{' + String(this.indentation.answersSquareBrackets) + ',' + String(this.indentation.answersSquareBrackets) + '}])', 'g');
             this.regExp.sliceFirstQuestionUpperBody = new RegExp('^\\s{' + String(this.indentation.answersSquareBrackets) + ',' + String(this.indentation.answersSquareBrackets) + '}\\]\\n^\\s{' + String(this.indentation.questionCurlyBrackets) + ',' + String(this.indentation.questionCurlyBrackets) + '}},\\n^', 'm');
         //-------------------
         // /structure of JSON
         //-------------------
+
+        this.cleanLinePattern = '^[^\\S\\n]*'
 
         this.settings.visibleHintIdentificator = settings.visible_hint_identificator ? settings.visible_hint_identificator : '@';
         this.settings.invisibleHintIdentificator = settings.invisible_hint_identificator ? settings.invisible_hint_identificator : '^';
@@ -127,7 +133,8 @@ var Convertor = function (settings) {
         this.regExp.comments.replacer = function (captureGroups) {
 
             var commentBody = this.blocks.comments.highlightBody + '// ' + captureGroups[0] + "\n" + this.blocks.comments.highlightBody;
-            return commentBody;
+            //return commentBody;
+            return '';
             
         }.bind(this);
 
@@ -140,6 +147,9 @@ var Convertor = function (settings) {
         this.settings.questionEnd = settings.question_end ? settings.question_end : ':';
         this.regExp.questions = new Object();
         this.regExp.questions.pattern = new RegExp(
+            //non capture (erase) any spaces before question
+            this.cleanLinePattern
+            +
             //from question id start char..
             this.escapeChar(this.settings.questionIdStart)
             +
@@ -166,7 +176,7 @@ var Convertor = function (settings) {
             +
             //..until question end char
             this.escapeChar(this.settings.questionEnd),
-        'g');
+        'gm');
 
         this.regExp.questions.replacer = function (captureGroups) {
             
@@ -183,14 +193,14 @@ var Convertor = function (settings) {
 
                 var propertyString = '"' + property + '":"' + bodyObject[property] + '",';
 
-                bodyArray.push(this.indent(this.indentation.questionProperties, propertyString));
+                bodyArray.push(this.indent(this.indentation.questionProperties) + propertyString);
             }
 
             var bodyString = bodyArray.join('\n');
 
-            var questionProperties = this.indent(this.indentation.questionProperties, '"id":"' + identificator + "\",\n") + bodyString;
+            var questionProperties = this.indent(this.indentation.questionProperties) + '"id":"' + identificator + "\",\n" + bodyString;
 
-            var finalString = this.blocks.questionUpperBody + questionProperties + this.blocks.questionLowerBody;
+            var finalString = this.blocks.repetitiveQuestionUpperBody + questionProperties + this.blocks.repetitiveQuestionLowerBody;
 
             return finalString;
 
@@ -207,7 +217,7 @@ var Convertor = function (settings) {
         this.regExp.answers = new Object();
         this.regExp.answers.pattern = new RegExp(
             //match any number of spaces excluding new lines (including tabs)
-            '^[^\\S\\n]*'
+            this.cleanLinePattern
             +
             //match answer validity
             '(' + this.settings.answerStart + ')'
@@ -215,7 +225,7 @@ var Convertor = function (settings) {
             //match any separator character
             '\\s*'
             +
-            //until answerd end char
+            //until answer end char
             '([^' + this.escapeChar(this.settings.answerEnd) + ']*)',
         'gm');
 
@@ -249,13 +259,17 @@ var Convertor = function (settings) {
             })();
 
             
-            var final = this.indent(this.indentation.answerCurlyBrackets, '{"valid":' + validity + ',' + bodyArray.join(''));
+            var final = this.indent(this.indentation.answerCurlyBrackets) + '{"valid":' + validity + ',' + bodyArray.join('');
 
-            console.log(final);
+            //console.log(final);
 
             return final;
 
         }.bind(this);
+
+    //============================
+    // runtime
+    //============================
 
     this.errorText = null;
     this.outputText = null;
@@ -313,14 +327,47 @@ var Convertor = function (settings) {
 
     this.amendOutputText = function () {
 
+        (function slice () {
+            var lastChar = this.outputText.lastIndexOf(',');
+            this.outputText = this.outputText.slice(this.settings.sliceStartIndex, lastChar);
+        }.bind(this))();
+
+        this.outputText += "\n" + this.blocks.questionEnd + '];';
+
         this.outputText = this.outputText.replace(this.regExp.removeCommaAfterLastArrayItem, "$1");
-        this.outputText = this.outputText.replace(this.regExp.sliceFirstQuestionUpperBody, '');
-
         
-
+        this.outputText = "var QUEST = \n[" + this.outputText + "";
+        
     }
 
+    //this.findBug
+
+    /*
+
+`
+ 
+
+
+
+cožeto ty wado
+
+
+cožeto ty wado
+
+
+        
+        
+        
+         
+                 
+           
+`.slice(0, 6).match(/\n/g).length
+5
+    */
+
     this.convert = function () {
+
+        var t0 = performance.now();
 
         this.output[this.outputContentAccessor] = '';
         this.error[this.errorContentAccessor] = '';
@@ -334,18 +381,16 @@ var Convertor = function (settings) {
         // ] could break JSON in very rare scenario, when removing last answer array comma
         inputText = inputText.replace(/\\*(["])/g, "\\$1");
 
-        //remove empty lines
-        inputText = inputText.replace(/^\s*$\n/gm, '');
-
         this.outputText = inputText;
         this.errorText = inputText;
+
+        //remove empty lines
+        this.outputText = this.outputText.replace(/^\s*$\n/gm, '');
+        //remove input indentation
+        this.outputText = this.outputText.replace(/^[^\S]*/gm, '');
         
         this.isError = false;
         this.errorContainer.removeAttribute('data-error');
-
-        var timer = new Date();
-        var startTime = timer.getTime();
-        var t0 = performance.now();
 
         this.processComments();
         this.processQuestionNames();
@@ -353,20 +398,12 @@ var Convertor = function (settings) {
 
         this.amendOutputText();
 
-        
-        
-        //console.log(this.outputText)
-        //console.log(this.errorText)
-
-        var endTime = timer.getTime();
-        var timeLength = endTime - startTime;
+        console.log(this.errorText)
 
 
 
 
 
-var t1 = performance.now();
-//console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.");
 
         //console.log('Conversion took', timeLength, 'miliseconds');
 
@@ -378,6 +415,9 @@ var t1 = performance.now();
             this.error[this.errorContentAccessor] = this.errorText.trim();
         }
         
+        var t1 = performance.now();
+        console.log(t1 - t0);
+
     }.bind(this);
 
     this.start = function () {
