@@ -37,17 +37,29 @@ var Convertor = function (settings) {
         this.indentation.answersSquareBrackets = 8;
         this.indentation.answerCurlyBrackets = 11;
 
-        this.regExp.removeCommaAfterLastArrayItem = new RegExp(',(\\n\\s{' + String(this.indentation.answersSquareBrackets) + ',' + String(this.indentation.answersSquareBrackets) + '})', 'g');
+        this.indent = function (spaces, string) {
+            return ' '.repeat(spaces) + string;
+        };
+
+        //-------------------
+        // structure of JSON
+        //-------------------
+            //ends answer array, ends question object, starts another question object
+            this.blocks.questionUpperBody = this.indent(this.indentation.answersSquareBrackets, ']') + "\n" + this.indent(this.indentation.questionCurlyBrackets, '}') + ",\n" + this.indent(this.indentation.questionCurlyBrackets, '{') + "\n";
+            //starts answer array
+            this.blocks.questionLowerBody = "\n" + this.indent(this.indentation.questionProperties, '"answers":') + "\n" + this.indent(this.indentation.answersSquareBrackets, '[');
+            this.blocks.questionEnd = "\n" + this.indent(this.indentation.answersSquareBrackets) + "]\n" + ' '.repeat(this.indentation.questionCurlyBrackets);
+            this.regExp.removeCommaAfterLastArrayItem = new RegExp(',(\\n\\s{' + String(this.indentation.answersSquareBrackets) + ',' + String(this.indentation.answersSquareBrackets) + '}])', 'g');
+            this.regExp.sliceFirstQuestionUpperBody = new RegExp('^\\s{' + String(this.indentation.answersSquareBrackets) + ',' + String(this.indentation.answersSquareBrackets) + '}\\]\\n^\\s{' + String(this.indentation.questionCurlyBrackets) + ',' + String(this.indentation.questionCurlyBrackets) + '}},\\n^', 'm');
+        //-------------------
+        // /structure of JSON
+        //-------------------
 
         this.settings.visibleHintIdentificator = settings.visible_hint_identificator ? settings.visible_hint_identificator : '@';
         this.settings.invisibleHintIdentificator = settings.invisible_hint_identificator ? settings.invisible_hint_identificator : '^';
 
         this.regExp.captureHintIdentificators = new RegExp('([' + this.settings.visibleHintIdentificator + this.settings.invisibleHintIdentificator + '])', 'g');
         this.settings.splitterSequence = settings.splitter_sequence ? settings.splitter_sequence : 'ůíá';
-
-        this.indent = function (spaces, string) {
-            return ' '.repeat(spaces) + string;
-        };
 
         this.escapeChar = function (character) {
             return '\\' + character;
@@ -91,7 +103,7 @@ var Convertor = function (settings) {
 
             return bodyObject;
 
-        }.bind(this);
+        };
 
         //============================
         // commenting
@@ -126,11 +138,6 @@ var Convertor = function (settings) {
         this.settings.questionIdStart = settings.question_identificator_start ? settings.question_identificator_start : '(';
         this.settings.questionIdEnd = settings.question_identificator_end ? settings.question_identificator_end : ')';
         this.settings.questionEnd = settings.question_end ? settings.question_end : ':';
-        this.blocks.questions = new Object();
-        //ends answer array, ends question object, starts another question object
-        this.blocks.questions.upperBody = this.indent(this.indentation.answersSquareBrackets, ']') + "\n" + this.indent(this.indentation.questionCurlyBrackets, '}') + ",\n" + this.indent(this.indentation.questionCurlyBrackets, '{') + "\n";
-        //starts answer array
-        this.blocks.questions.lowerBody = "\n" + this.indent(this.indentation.questionProperties, '"answers":') + "\n" + this.indent(this.indentation.answersSquareBrackets, '[');
         this.regExp.questions = new Object();
         this.regExp.questions.pattern = new RegExp(
             //from question id start char..
@@ -183,11 +190,11 @@ var Convertor = function (settings) {
 
             var questionProperties = this.indent(this.indentation.questionProperties, '"id":"' + identificator + "\",\n") + bodyString;
 
-            var finalString = this.blocks.questions.upperBody + questionProperties + this.blocks.questions.lowerBody;
+            var finalString = this.blocks.questionUpperBody + questionProperties + this.blocks.questionLowerBody;
 
             return finalString;
 
-        }.bind(this);
+        }.bind(this)
 
         //============================
         // answers
@@ -230,7 +237,7 @@ var Convertor = function (settings) {
 
                     var propertyString = '"' + property + '":"' + bodyObject[property] + '"';
 
-                    if (propertyIndex != bodyObjectLastPropertyIndex) {
+                    if (propertyIndex !== bodyObjectLastPropertyIndex) {
                         propertyString += ',';
                     } else {
                         propertyString += '},';
@@ -241,9 +248,10 @@ var Convertor = function (settings) {
                 }
             })();
 
-            var final = this.indent(this.indentation.answerCurlyBrackets, '{"validity":' + validity + ',' + bodyArray.join(''));
+            
+            var final = this.indent(this.indentation.answerCurlyBrackets, '{"valid":' + validity + ',' + bodyArray.join(''));
 
-            //console.log(final);
+            console.log(final);
 
             return final;
 
@@ -288,12 +296,12 @@ var Convertor = function (settings) {
             this.errorText = this.errorText.replace(regExp, '');
         }
 
-    }.bind(this);
+    };
 
     //processors
     this.processComments = function () {
         this.applyRegExp(this.regExp.comments.pattern, this.regExp.comments.replacer);
-    }.bind(this);
+    }
 
     this.processQuestionNames = function () {
         this.applyRegExp(this.regExp.questions.pattern, this.regExp.questions.replacer);
@@ -301,6 +309,15 @@ var Convertor = function (settings) {
 
     this.processAnswers = function () {
         this.applyRegExp(this.regExp.answers.pattern, this.regExp.answers.replacer);
+    }
+
+    this.amendOutputText = function () {
+
+        this.outputText = this.outputText.replace(this.regExp.removeCommaAfterLastArrayItem, "$1");
+        this.outputText = this.outputText.replace(this.regExp.sliceFirstQuestionUpperBody, '');
+
+        
+
     }
 
     this.convert = function () {
@@ -334,7 +351,7 @@ var Convertor = function (settings) {
         this.processQuestionNames();
         this.processAnswers();
 
-        this.outputText = this.outputText.replace(this.regExp.removeCommaAfterLastArrayItem, "$1");
+        this.amendOutputText();
 
         
         
