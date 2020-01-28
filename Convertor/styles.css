@@ -66,6 +66,7 @@ textarea, .textarea {
 
 .textarea {
     word-wrap: break-word;
+    overflow: auto;
 }
 
 #input {
