@@ -15,7 +15,7 @@ var SETTINGS = {
     correct_answer_identificator: 'T',
     wrong_answer_identificator: 'X',
 
-    answer_end: '\n',
+    answer_end: '\\n',
 
     //advanced
     splitter_sequence: '<Ç•'
