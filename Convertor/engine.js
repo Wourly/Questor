@@ -123,13 +123,23 @@ var Convertor = function (settings) {
         //============================
 
         this.settings.commentsMarker = settings.commentsMarker ? settings.commentsMarker : '=';
-        this.blocks.comments = new Object();
-        this.blocks.comments.highlightBody = '//' + this.settings.commentsMarker.repeat(30) + "\n";
+        //this.blocks.comments = new Object();
+        //this.blocks.comments.highlightBody = '//' + this.settings.commentsMarker.repeat(30) + "\n";
         this.regExp.comments = new Object();
-        //!
         this.regExp.comments.pattern =
         new RegExp(
-            '^={3}([^=]+)={3}$',
+            '^'
+            +
+            //comment marker at least 3 times
+            this.settings.commentsMarker + '{3,}'
+            +
+            //anything, but not comment marker at least once
+            '([^' + this.settings.commentsMarker + ']+)'
+            +
+            //comment marker at least 3 times
+            this.settings.commentsMarker + '{3,}'
+            +
+            '$',
         'gm');
 
         this.regExp.comments.replacer = function (captureGroups) {
@@ -149,20 +159,22 @@ var Convertor = function (settings) {
         this.settings.questionEnd = settings.question_end ? settings.question_end : ':';
         this.regExp.questions = new Object();
         this.regExp.questions.pattern = new RegExp(
-            //non capture (erase) any spaces before question
-            this.cleanLinePattern
+            '^'
             +
             //from question id start char..
             this.escapeChar(this.settings.questionIdStart)
             +
-            //..match & capture everything, except..
+            //..match & capture everything
             '([^'
             +
-            //..except question id brackets () and except..
+            //..except question id brackets ()
             this.escapeChar(this.settings.questionIdStart) + this.escapeChar(this.settings.questionIdEnd)
             +
-            //..except question end char..
+            //..except question end char
             this.escapeChar(this.settings.questionEnd)
+            +
+            //..except new line char..
+            "\\n"
             +
             //..if it has at least 1 character..
             ']+?)'
@@ -170,14 +182,13 @@ var Convertor = function (settings) {
             //..until question id end char..
             this.escapeChar(this.settings.questionIdEnd)
             +
-            //..followed by up to 3 spaces..
-            '\s{0,3}'
-            +
-            //..and capture everything, which is not question end char..
-            '([^' + this.escapeChar(this.settings.questionEnd) + ']+)'
+            //..and capture everything, which is not question end char or new line..
+            '([^' + this.escapeChar(this.settings.questionEnd) + "\\n" + ']+)'
             +
             //..until question end char
-            this.escapeChar(this.settings.questionEnd),
+            this.escapeChar(this.settings.questionEnd)
+            +
+            '$',
         'gm');
 
         this.regExp.questions.replacer = function (captureGroups) {
@@ -218,17 +229,15 @@ var Convertor = function (settings) {
         this.settings.answerEnd = settings.answer_end ? settings.answer_end : "\\n";
         this.regExp.answers = new Object();
         this.regExp.answers.pattern = new RegExp(
-            //match any number of spaces excluding new lines (including tabs)
-            this.cleanLinePattern
+            '^'
             +
-            //match answer validity
+            //match validity character
             '(' + this.settings.answerStart + ')'
             +
-            //match any separator character
-            '[^\\S\\n' + this.escapeChar(this.settings.answerEnd) +']'
+            //match content
+            '([^\\n' + this.escapeChar(this.settings.answerEnd) + ']*)'
             +
-            //until answer end char
-            '([^' + this.escapeChar(this.settings.answerEnd) + ']*)',
+            '$',
         'gm');
 
         this.regExp.answers.replacer = function (captureGroups) {
@@ -427,7 +436,7 @@ cožeto ty wado
         this.errorContainer.removeAttribute('data-error');
 
         this.processComments();
-        //remove empty lines
+        //remove empty lines - only in output, so it is possible to find on which line error (non-recognised text) resides
         this.outputText = this.outputText.replace(/^\s*$\n/gm, '');
         this.checkError();
         this.processQuestionNames();
