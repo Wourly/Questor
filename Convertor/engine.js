@@ -1,29 +1,74 @@
 var Convertor = function (settings) {
 
-    this.input = document.querySelector('#input');
-    this.output = document.querySelector('#output');
-    this.error = document.querySelector('#error');
-    this.errorContainer = document.querySelector('#errorContainer');
-    this.errorGuide = null; //document.querySelector();
+    //established variables to connect convertor to DOM
+    this.connectDOM = function (containerObject, identificatorsArray) {
 
-    this.setContentAccessor = function (element) {
-        if (element instanceof HTMLTextAreaElement || element instanceof HTMLInputElement) {
-            return 'value';
+        var error = false;
+
+        for (const index in identificatorsArray) {
+            const id = identificatorsArray[index];
+
+            const element = document.querySelector('#' + id);
+
+            if (!element) {
+                console.warn(id + ' element not present in DOM');
+                error = true;
+                break;
+            }
+
+            let accessor = null;
+
+            if (id !== 'errorGuide') {
+                if (element instanceof HTMLTextAreaElement || element instanceof HTMLInputElement) {
+                    accessor = 'value';
+                } else {
+                    accessor = 'innerText';
+                }
+    
+                if (!accessor) {
+                    console.warn(id + '\'s content cannot be accessed')
+                    error = true;
+                    break;
+                }
+            }
+            else
+            {
+                accessor = 'innerHTML';
+            }
+
+            
+
+            containerObject[id] = new Object();
+            containerObject[id].element = element;
+            containerObject[id].accessor = accessor;
+        }
+
+        if (error) {
+            return false;
         } else {
-            return 'innerText';
+            return true;
         }
     }
 
-    this.inputContentAccessor = this.setContentAccessor(this.input);
-    this.outputContentAccessor = this.setContentAccessor(this.output);
-    this.errorContentAccessor = this.setContentAccessor(this.error);
-    this.errorGuideAccessor = this.setContentAccessor(this.errorGuide)
+    this.DOM = new Object();
+
+    {
+        const desiredIdentificators = ['input', 'output', 'errorContainer', 'errorLabel', 'errorContent', 'errorGuide'];
+
+        if (!this.connectDOM(this.DOM, desiredIdentificators)) {
+            console.error('Failed to connect to DOM');
+            return null;
+        }
+    }
+
+    Object.freeze(this.DOM);
 
     //resources
     this.settings = new Object();
     this.indentation = new Object();
     this.blocks = new Object();
     this.regExp = new Object();
+    this.miscellaneous = new Object();
     
 
         //============================
@@ -48,12 +93,10 @@ var Convertor = function (settings) {
             //end is put first and it's first occurence is sliced off
             this.blocks.questionEnd = this.indent(this.indentation.answersSquareBrackets) + "]\n" + ' '.repeat(this.indentation.questionCurlyBrackets) + '}';
             this.blocks.questionStart = ",\n" + this.indent(this.indentation.questionCurlyBrackets);
-            this.settings.sliceStartIndex = this.blocks.questionEnd.length + this.blocks.questionStart.length;
             this.blocks.repetitiveQuestionUpperBody = this.blocks.questionEnd + this.blocks.questionStart + '{' + "\n";
             //starts answer array
             this.blocks.repetitiveQuestionLowerBody = "\n" + this.indent(this.indentation.questionProperties) + '"answers":' + "\n" + this.indent(this.indentation.answersSquareBrackets) + '[';
-            
-            this.regExp.removeCommaAfterLastArrayItem = new RegExp(',[\\n]*(\\s{' + String(this.indentation.answersSquareBrackets) + ',' + String(this.indentation.answersSquareBrackets) + '}])', 'g');
+            this.regExp.removeCommaAfterLastArrayItem = new RegExp(',[\\n](\\s{' + String(this.indentation.answersSquareBrackets) + ',' + String(this.indentation.answersSquareBrackets) + '}])', 'g');
             this.regExp.sliceFirstQuestionUpperBody = new RegExp('^\\s{' + String(this.indentation.answersSquareBrackets) + ',' + String(this.indentation.answersSquareBrackets) + '}\\]\\n^\\s{' + String(this.indentation.questionCurlyBrackets) + ',' + String(this.indentation.questionCurlyBrackets) + '}},\\n^', 'm');
         //-------------------
         // /structure of JSON
@@ -66,7 +109,7 @@ var Convertor = function (settings) {
         this.settings.invisibleHintIdentificator = settings.invisible_hint_identificator ? settings.invisible_hint_identificator : '^';
 
         this.regExp.captureHintIdentificators = new RegExp('([' + this.settings.visibleHintIdentificator + this.settings.invisibleHintIdentificator + '])', 'g');
-        this.settings.splitterSequence = settings.splitter_sequence ? settings.splitter_sequence : 'ůíá';
+        this.miscellaneous.splitterSequence = settings.splitter_sequence ? settings.splitter_sequence : 'ůíá';
 
         this.escapeChar = function (character) {
 
@@ -82,9 +125,9 @@ var Convertor = function (settings) {
         //these properties are mostly 'hints'
         this.bodyTextProcessor = function (textBody) {
 
-            var markedTextBody = textBody.replace(this.regExp.captureHintIdentificators, this.settings.splitterSequence + "$1");
+            var markedTextBody = textBody.replace(this.regExp.captureHintIdentificators, this.miscellaneous.splitterSequence + "$1");
             
-            var splitTokens = markedTextBody.split(this.settings.splitterSequence);
+            var splitTokens = markedTextBody.split(this.miscellaneous.splitterSequence);
 
             var bodyObject = new Object();
             bodyObject.text = splitTokens[0].trim();
@@ -122,22 +165,22 @@ var Convertor = function (settings) {
         // commenting
         //============================
 
-        this.settings.commentsMarker = settings.commentsMarker ? settings.commentsMarker : '=';
+        this.miscellaneous.commentsMarker = settings.commentsMarker ? settings.commentsMarker : '=';
         //this.blocks.comments = new Object();
-        //this.blocks.comments.highlightBody = '//' + this.settings.commentsMarker.repeat(30) + "\n";
+        //this.blocks.comments.highlightBody = '//' + this.miscellaneous.commentsMarker.repeat(30) + "\n";
         this.regExp.comments = new Object();
         this.regExp.comments.pattern =
         new RegExp(
             '^'
             +
             //comment marker at least 3 times
-            this.settings.commentsMarker + '{3,}'
+            this.miscellaneous.commentsMarker + '{3,}'
             +
             //anything, but not comment marker at least once
-            '([^' + this.settings.commentsMarker + ']+)'
+            '([^' + this.miscellaneous.commentsMarker + ']+)'
             +
             //comment marker at least 3 times
-            this.settings.commentsMarker + '{3,}'
+            this.miscellaneous.commentsMarker + '{3,}'
             +
             '$',
         'gm');
@@ -225,14 +268,14 @@ var Convertor = function (settings) {
 
         this.settings.answerCorrect = settings.correct_answer_identificator ? settings.correct_answer_identificator : 'T';
         this.settings.answerWrong = settings.wrong_answer_identificator ? settings.wrong_answer_identificator : 'X';
-        this.settings.answerStart = '[' + this.escapeChar(this.settings.answerCorrect) + this.escapeChar(this.settings.answerWrong) + ']';
+        this.miscellaneous.answerStart = '[' + this.escapeChar(this.settings.answerCorrect) + this.escapeChar(this.settings.answerWrong) + ']';
         this.settings.answerEnd = settings.answer_end ? settings.answer_end : "\\n";
         this.regExp.answers = new Object();
         this.regExp.answers.pattern = new RegExp(
             '^'
             +
             //match validity character
-            '(' + this.settings.answerStart + ')'
+            '(' + this.miscellaneous.answerStart + ')'
             +
             //match content
             '([^\\n' + this.escapeChar(this.settings.answerEnd) + ']*)'
@@ -282,10 +325,11 @@ var Convertor = function (settings) {
     // runtime
     //============================
 
-    this.errorText = null;
+    this.preformatedInputText = null;
     this.outputText = null;
+    this.errorText = null;
 
-    this.isErrorType = null;
+    this.conversionStatus = new Object();
 
     //only keeps array from capture groups
     this.filterValidCaptureGroups = function (captureGroups) {
@@ -301,11 +345,11 @@ var Convertor = function (settings) {
         return captureGroups.slice(0, sliceEndIndex);
     };
 
-    this.applyRegExp = function (operationName, oversee, regExp, substitutioner) {
+    this.applyRegExp = function (operationLabel, outputText, errorText, regExp, substitutioner) {
 
         var isCaptured = false;
 
-        this.outputText = this.outputText.replace(regExp, function (fullMatch, a, b, c, d, e, f) {
+        this[outputText] = this[outputText].replace(regExp, function (fullMatch, a, b, c, d, e, f) {
 
             isCaptured = true;
 
@@ -316,152 +360,296 @@ var Convertor = function (settings) {
             return substitutioner(captureGroups);
 
         }.bind(this));
-
         
         if (isCaptured) {
-            this.errorText = this.errorText.replace(regExp, '');
+            this[errorText] = this[errorText].replace(regExp, '');
+            return true;
         } else {
-            if (oversee) {
-                this.isErrorType = operationName;
-            }
+            return false;
         }
-        
         
     };
 
-    this.processComments = function () {
-        this.applyRegExp('comments', false, this.regExp.comments.pattern, this.regExp.comments.replacer);
+    //------------
+    //preformating
+    //------------
+    this.escapeEscapeChars = function (property) {
+
+        // \ => \\ 
+        this[property] = this[property].replace(/\\/g, '\\\\')
     }
 
+    this.escapeDoubleQuotes = function (property) {
+
+        // " => \"
+        this[property] = this[property].replace(/\\*(["])/g, "\\$1");
+    }
+
+    //remove indentation and space leftovers after text on each line
+    this.trimEachRow = function (property) {
+        
+        //trim spaces on each row
+        this[property] = this[property].replace(/^[^\S\n]*/gm, '');
+        this[property] = this[property].replace(/[^\S\n]*$/gm, '');
+    }
+
+    //----------
     //processors
-    this.processQuestionNames = function () {
-        this.applyRegExp('questions', true, this.regExp.questions.pattern, this.regExp.questions.replacer);
+    //----------
+    this.removeComments = function (outputText, errorText) {
+        this.applyRegExp('comments', outputText, errorText, this.regExp.comments.pattern, this.regExp.comments.replacer);
     }
 
-    this.processAnswers = function () {
-        this.applyRegExp('answers', true, this.regExp.answers.pattern, this.regExp.answers.replacer);
+    this.removeEmptyLines = function (property) {
+        this[property] = this[property].replace(/^\s*$\n/gm, '');
+    }
+    
+    this.processQuestions = function (outputText, errorText) {
+        this.conversionStatus.questions = this.applyRegExp('questions', outputText, errorText, this.regExp.questions.pattern, this.regExp.questions.replacer);
     }
 
-    this.amendOutputText = function () {
+    this.processAnswers = function (outputText, errorText) {
+        this.conversionStatus.answers = this.applyRegExp('answers', outputText, errorText, this.regExp.answers.pattern, this.regExp.answers.replacer);
+    }
 
-        (function slice () {
-            var lastChar = this.outputText.lastIndexOf(','); //!!slices too much, if no answers added - looks confusing - cuts before answer's {}, which may also be in previous question, if last question does not have answers
-            this.outputText = this.outputText.slice(this.settings.sliceStartIndex, this.outputText.length);
-        }.bind(this))();
-
-
-
+    this.isProcessingSuccessful = function (property) {
         
-        this.outputText += this.blocks.questionEnd + '];';
+        if (this.conversionStatus[property]) {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
-        this.outputText = this.outputText.replace(this.regExp.removeCommaAfterLastArrayItem, "\n$1");
+    this.writeError = function (severity, label, content, guide) {
 
+        this.accessDOM('errorContainer', function (element) {element.setAttribute('data-error', severity)});
+        this.accessDOM('errorLabel', function (element, accessor) {element[accessor] = label});
+        this.accessDOM('errorContent', function (element, accessor) {element[accessor] = content});
+        this.accessDOM('errorGuide', function (element, accessor) {element.appendChild(guide)});
+    }
 
+    this.fullExample = (function generateQuestionGuide () {
 
+        const textArray = [
+            'This is full example of how questions and answers should look like:',
+            '<span class="highlight">',
+            ':',
+            '</span>'
+        ];
+
+    })();
+
+    this.settingsTokens = (function () {
+
+        const tokens = new Array();
+
+        for (let token in this.settings) {
+            tokens.push(this.settings[token]);
+        }
+
+        return tokens;
+
+    }.bind(this))();
+
+    this.regExp.finalizeExample = (function () {
+
+        const escapedTokens = new Array();
+
+        //'mappping'
+        for (let index in this.settingsTokens) {
+            escapedTokens.push(this.escapeChar(this.settingsTokens[index]));
+        }
+
+        return new RegExp('([\\' + escapedTokens + ']|[^' + escapedTokens + ']+)', 'g');
         
-        this.outputText = "var QUEST = \n[" + this.outputText + "";
-        
+    }.bind(this))();
 
+    this.finalizeExample = function (inputText) {  
 
+        const cellFragment = new DocumentFragment();
 
+        inputText.replace(this.regExp.finalizeExample, function (fullMatch, token) {
 
+            const cell = document.createElement('td');
+            let highlighted = false;
+            
+            for (let index = 0; index < this.settingsTokens.length; index++) {
+                if (this.settingsTokens[index] === token) {
+                    cell.classList.add('highlight');
+                    highlighted = true;
+                }
+            }
 
+            if (!highlighted)
+                cell.classList.add('text');
 
+            cell.innerText = token;
 
+            cellFragment.appendChild(cell);
+
+            return null;
+        }.bind(this));
+
+        const exampleTable = document.createElement('table');
+        exampleTable.classList.add('example');
+        const row = document.createElement('tr');
+        exampleTable.appendChild(row);
+        row.appendChild(cellFragment);
+
+        return exampleTable;
+    }
 
     
+
+    this.questionsGuide = (function generateQuestionGuide () {
+
+        const guideFragment = new DocumentFragment();
+
+        const headline1 = document.createElement('p');
+        headline1.classList.add('headline');
+        headline1.innerText = 'Questions should have the following format:';
+
+        const example1 = this.finalizeExample('(identificator) question text:');
+
+        const headline2 = document.createElement('p');
+        headline2.classList.add('headline');
+        headline2.innerText = 'Real example for both question and answers:';
+
+        const example2 = this.finalizeExample('(squid123) Select true facts about squids:');
+
+        guideFragment.appendChild(headline1);
+        guideFragment.appendChild(example1);
+        guideFragment.appendChild(headline2);
+        guideFragment.appendChild(example2);
+
+
+        //const final = textArray.join('');
+        //console.log(final);
+        //return final;
+
+        return guideFragment;
+
+    }.bind(this))();
+
+    this.reportError = function (errorLabel) {
+
+        switch (errorLabel) {
+            case 'questions':
+                {
+                    this.writeError('mild', 'No questions in input:', '', this.questionsGuide);
+                    break;
+                }
+
+                
+            default:
+                break;
+        }
+
+    } 
+
+    this.finalizeJsonArray = function (property) {
+
+        //remove blocks added from first question, these blocks does not have
+        {
+            let answersClosingBracketIndex = this[property].indexOf(']');
+            let firstQuestionStartingBracketIndex = this[property].indexOf('{', answersClosingBracketIndex);
+    
+            this[property] = this[property].slice(firstQuestionStartingBracketIndex, this[property].length);
+        }
+        
+        //finish answers array ] and last question object }
+        this[property] = '[' + this[property] + this.blocks.questionEnd + ']';
+        
+        //remove last comma, in answers array
+        this[property] = this[property].replace(this.regExp.removeCommaAfterLastArrayItem, "\n$1");
     }
 
-    //this.findBug
+    this.accessDOM = function (identificator, closure) {
 
-    /*
+        const pair = this.DOM[identificator];
+        return closure(pair.element, pair.accessor);
 
-`
- 
+    }
 
+    this.clearOutputElement = function () {
+        this.accessDOM('output', function (element, accessor) {element[accessor] = ''})
+    }
 
+    this.clearErrorElements = function () {
 
-cožeto ty wado
+        this.accessDOM('errorContainer', function (element) {element.removeAttribute('data-error')});
+        this.accessDOM('errorLabel', function (element, accessor) {element[accessor] = ''})
+        this.accessDOM('errorContent', function (element, accessor) {element[accessor] = ''})
+        this.accessDOM('errorGuide', function (element, accessor) {element[accessor] = ''})
+    }
 
+    this.copyInput = function () {
+        return this.accessDOM('input', function (element, accessor) {return element[accessor]});
+    }
 
-cožeto ty wado
+    this.insertOutputText = function () {
 
-
-        
-        
-        
-         
-                 
-           
-`.slice(0, 6).match(/\n/g).length
-5
-    */
-
-    this.checkError = function () {
-
-        if (this.isErrorType) {
-            console.log(this.isErrorType);
-        }
+        this.accessDOM('output', function (element, accessor) {
+            element[accessor] = this.outputText;
+        }.bind(this))
     }
 
     this.convert = function () {
 
-        this.isErrorType = null;
-
         var t0 = performance.now();
 
-        this.output[this.outputContentAccessor] = '';
-        this.error[this.errorContentAccessor] = '';
+        this.clearOutputElement();
+        this.clearErrorElements();
 
-        var inputText = this.input.value;
+        this.preformatedInputText = this.copyInput();
+        this.outputText = '';
+        this.errorText = '';
 
-        //JSON bug prevention:
-        // \ => \\ 
-        inputText = inputText.replace(/\\/g, '\\\\')
-        // " => \", ] => \]
-        // ] could break JSON in very rare scenario, when removing last answer array comma
-        inputText = inputText.replace(/\\*(["])/g, "\\$1");
+        //JSON bug prevention
+        this.escapeEscapeChars('preformatedInputText');
+        this.escapeDoubleQuotes('preformatedInputText');
 
-        //trim spaces on each row
-        inputText = inputText.replace(/^[^\S\n]*/gm, '');
-        inputText = inputText.replace(/[^\S\n]*$/gm, '');
+        this.trimEachRow('preformatedInputText');
+
+        this.outputText = this.preformatedInputText;
+        this.errorText = this.preformatedInputText;
+        this.preformatedInputText = null;
+
+        this.removeComments('outputText', 'errorText');
+        this.removeEmptyLines('outputText');
+
+        //processing questions
+        this.processQuestions('outputText', 'errorText');
+        if (!this.isProcessingSuccessful('questions')) {
+            this.reportError('questions');
+            return;
+        }
 
 
-        this.outputText = inputText;
-        this.errorText = inputText;
-
+        this.processAnswers('outputText', 'errorText');
         
-        
-        
-        this.errorContainer.removeAttribute('data-error');
 
-        this.processComments();
-        //remove empty lines - only in output, so it is possible to find on which line error (non-recognised text) resides
-        this.outputText = this.outputText.replace(/^\s*$\n/gm, '');
-        this.checkError();
-        this.processQuestionNames();
-        this.checkError();
-        this.processAnswers();
-        this.checkError();
+        this.finalizeJsonArray('outputText');
 
-        this.amendOutputText();
-
-        this.output[this.outputContentAccessor] = this.outputText;
+        this.insertOutputText();
 
 
 
-
+        //!! 
 
 
         //console.log('Conversion took', timeLength, 'miliseconds');
 
         
-
+/*
         //must also work when errorText has length (.trim()?)
-        if (this.isErrorType || this.errorText.trim() !== '') {
+        if (this.errorText.trim() !== '') {
             this.errorContainer.setAttribute('data-error', 'true');
-            this.error[this.errorContentAccessor] = this.errorText.trim();
-        }
+            this.errorContent[this.errorContentAccessor] = this.errorText.trim();
+        }*/
         
         var t1 = performance.now();
         console.log(t1 - t0);
@@ -469,6 +657,6 @@ cožeto ty wado
     }.bind(this);
 
     this.start = function () {
-        this.input.addEventListener('input', this.convert)
+        this.DOM.input.element.addEventListener('input', this.convert)
     }.bind(this);
 }
