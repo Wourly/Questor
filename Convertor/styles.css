@@ -48,6 +48,10 @@ main {
     clear: both;
 }
 
+.noSelect, #errorGuide [class*=headline] {
+    user-select: none;
+}
+
 /*TEXT AREAS*/
 
 textarea, .textarea {
@@ -100,6 +104,7 @@ textarea, .textarea {
 }
 
 #errorContainer[data-error=severe] {
+    color: #800;
     border-color: #F55;
 }
 
@@ -107,33 +112,39 @@ textarea, .textarea {
     font-size: 16px;
 }
 
-#errorGuide .example {
+#errorGuide {
     max-height: 100%;
-    white-space: nowrap;
 
 }
 
 #errorGuide .headline {
     font-size: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#errorGuide [class*=headline] {
+    color: #080;
 }
 
 #errorGuide .highlight {
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 20px;
     font-weight: 900;
     color: orangered;
 }
 
 #errorGuide .text {
-    font-size: 20px;
-    line-height: 20px;
+    font-size: 16px;
+    letter-spacing: -0.8px;
     color: black;
 }
 
 #output, #errorContainer {
     left: 50%;
+}
+
+#output {
+    border: solid 3px #0C0;
 }
 
 @media only screen and (max-width: 600px) {

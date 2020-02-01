@@ -199,7 +199,6 @@ var Convertor = function (settings) {
 
         this.settings.questionIdStart = settings.question_identificator_start ? settings.question_identificator_start : '(';
         this.settings.questionIdEnd = settings.question_identificator_end ? settings.question_identificator_end : ')';
-        this.settings.questionEnd = settings.question_end ? settings.question_end : ':';
         this.regExp.questions = new Object();
         this.regExp.questions.pattern = new RegExp(
             '^'
@@ -213,25 +212,14 @@ var Convertor = function (settings) {
             //..except question id brackets ()
             this.escapeChar(this.settings.questionIdStart) + this.escapeChar(this.settings.questionIdEnd)
             +
-            //..except question end char
-            this.escapeChar(this.settings.questionEnd)
-            +
             //..except new line char..
-            "\\n"
+            "\\n]+?)"
             +
-            //..if it has at least 1 character..
-            ']+?)'
-            +
-            //..until question id end char..
+            //..to question id end char..
             this.escapeChar(this.settings.questionIdEnd)
             +
-            //..and capture everything, which is not question end char or new line..
-            '([^' + this.escapeChar(this.settings.questionEnd) + "\\n" + ']+)'
-            +
-            //..until question end char
-            this.escapeChar(this.settings.questionEnd)
-            +
-            '$',
+            //..and capture everything until the end of line
+            "([^\\n]+)$",
         'gm');
 
         this.regExp.questions.replacer = function (captureGroups) {
@@ -405,11 +393,11 @@ var Convertor = function (settings) {
     }
     
     this.processQuestions = function (outputText, errorText) {
-        this.conversionStatus.questions = this.applyRegExp('questions', outputText, errorText, this.regExp.questions.pattern, this.regExp.questions.replacer);
+        return this.conversionStatus.questions = this.applyRegExp('questions', outputText, errorText, this.regExp.questions.pattern, this.regExp.questions.replacer);
     }
 
     this.processAnswers = function (outputText, errorText) {
-        this.conversionStatus.answers = this.applyRegExp('answers', outputText, errorText, this.regExp.answers.pattern, this.regExp.answers.replacer);
+        return this.applyRegExp('answers', outputText, errorText, this.regExp.answers.pattern, this.regExp.answers.replacer);
     }
 
     this.isProcessingSuccessful = function (property) {
@@ -423,24 +411,19 @@ var Convertor = function (settings) {
         }
     }
 
+    //severity describes how bad error is
+    //label is main headline for error message
+    //content is error output
+    //guide is documentFragment, where description of error is
     this.writeError = function (severity, label, content, guide) {
 
         this.accessDOM('errorContainer', function (element) {element.setAttribute('data-error', severity)});
+
         this.accessDOM('errorLabel', function (element, accessor) {element[accessor] = label});
         this.accessDOM('errorContent', function (element, accessor) {element[accessor] = content});
-        this.accessDOM('errorGuide', function (element, accessor) {element.appendChild(guide)});
+
+        this.accessDOM('errorGuide', function (element) {element.appendChild(guide)});
     }
-
-    this.fullExample = (function generateQuestionGuide () {
-
-        const textArray = [
-            'This is full example of how questions and answers should look like:',
-            '<span class="highlight">',
-            ':',
-            '</span>'
-        ];
-
-    })();
 
     this.settingsTokens = (function () {
 
@@ -452,97 +435,194 @@ var Convertor = function (settings) {
 
         return tokens;
 
-    }.bind(this))();
+    }.bind(this))();  
 
-    this.regExp.finalizeExample = (function () {
+    this.finalizeExample = function (inputArray) {  
 
-        const escapedTokens = new Array();
+        const container = document.createElement('div');
+        container.classList.add('example');
 
-        //'mappping'
-        for (let index in this.settingsTokens) {
-            escapedTokens.push(this.escapeChar(this.settingsTokens[index]));
-        }
+        const inputArrayMaxIndex = String(inputArray.length - 1);
 
-        return new RegExp('([\\' + escapedTokens + ']|[^' + escapedTokens + ']+)', 'g');
-        
-    }.bind(this))();
-
-    this.finalizeExample = function (inputText) {  
-
-        const cellFragment = new DocumentFragment();
-
-        inputText.replace(this.regExp.finalizeExample, function (fullMatch, token) {
-
-            const cell = document.createElement('td');
-            let highlighted = false;
+        for (let index in inputArray) {
             
-            for (let index = 0; index < this.settingsTokens.length; index++) {
-                if (this.settingsTokens[index] === token) {
-                    cell.classList.add('highlight');
-                    highlighted = true;
-                }
+            const span = document.createElement('span');
+
+            if (index % 2 === 0)
+            {
+                span.classList.add('highlight');
+            }
+            else
+            {
+                span.classList.add('text');
             }
 
-            if (!highlighted)
-                cell.classList.add('text');
+            span.innerText = inputArray[index];
 
-            cell.innerText = token;
+            if (index === inputArrayMaxIndex)
+                span.classList.add('noSelect');
 
-            cellFragment.appendChild(cell);
+            container.appendChild(span);
+        }
 
-            return null;
-        }.bind(this));
-
-        const exampleTable = document.createElement('table');
-        exampleTable.classList.add('example');
-        const row = document.createElement('tr');
-        exampleTable.appendChild(row);
-        row.appendChild(cellFragment);
-
-        return exampleTable;
+        return container;
     }
 
-    
+    this.fullExample = (function () {
 
-    this.questionsGuide = (function generateQuestionGuide () {
+        const container = document.createElement('div');
 
-        const guideFragment = new DocumentFragment();
+        const headline1 = document.createElement('p');
+            headline1.classList.add('headline');
+            headline1.innerText = 'Real example for question and answers:';
+
+        const question1 = this.finalizeExample(['(', 'squid123', ')', ' Select true facts about squids', '\\n'])
+        const answer11 = this.finalizeExample(['T', ' they live in the sea', '\\n']);
+        const answer12 = this.finalizeExample(['X', ' they desire human meat', '\\n']);
+        const answer13 = this.finalizeExample(['T', ' they have 3 hearts', '\\n']);
+        const answer14 = this.finalizeExample(['X', ' they are ancient alien race', '\\n']);
+
+        container.appendChild(headline1);
+        container.appendChild(question1);
+        container.appendChild(answer11);
+        container.appendChild(answer12);
+        container.appendChild(answer13);
+        container.appendChild(answer14);
+
+        const headline2 = document.createElement('p');
+            headline2.classList.add('headline');
+            headline2.innerText = 'Real example using hints:';
+
+        const question2 = this.finalizeExample(['(', 'squid123', ')', ' Select true facts about squids', '\\n'])
+        const answer21 = this.finalizeExample(['T', ' they live in the sea', '\\n']);
+        const headlineForVisibleHint = document.createElement('p');
+            headlineForVisibleHint.classList.add('semi-headline');
+            headlineForVisibleHint.innerText = 'Hint visible during test:'; 
+        const answer22 = this.finalizeExample(['X', ' they eat human meat ', '@', ' considered wrong, but technically possible', '\\n']);
+        const headlineForInvisibleHint = document.createElement('p');
+            headlineForInvisibleHint.classList.add('semi-headline');
+            headlineForInvisibleHint.innerText = 'Hint visible at the end of test:'; 
+        const answer23 = this.finalizeExample(['T', ' they have more than 1 heart ', '^', ' 3 hearts actually', '\\n']);
+        const answer24 = this.finalizeExample(['X', ' they are ancient alien race', '\\n']);
+
+        container.appendChild(headline2);
+        container.appendChild(question2);
+        container.appendChild(answer21);
+        container.appendChild(headlineForVisibleHint);
+        container.appendChild(answer22);
+        container.appendChild(headlineForInvisibleHint);
+        container.appendChild(answer23);
+        container.appendChild(answer24);
+
+        const headline3 = document.createElement('p');
+            headline3.classList.add('semi-headline');
+            headline3.innerText = 'You can combine both hints freely and it is also possible to use them for questions.';
+
+        container.appendChild(headline3);
+
+        return container;
+
+    }.bind(this))();
+
+    this.questionsGuideElement = (function generateQuestionGuide () {
+
+        const container = document.createElement('div');
 
         const headline1 = document.createElement('p');
         headline1.classList.add('headline');
         headline1.innerText = 'Questions should have the following format:';
 
-        const example1 = this.finalizeExample('(identificator) question text:');
+        const example1 = this.finalizeExample(['(', 'identificator', ')', ' question text', '\\n']);
 
         const headline2 = document.createElement('p');
         headline2.classList.add('headline');
-        headline2.innerText = 'Real example for both question and answers:';
+        headline2.innerText = 'Real question example:';
 
-        const example2 = this.finalizeExample('(squid123) Select true facts about squids:');
+        const example2 = this.finalizeExample(['(', 'squid123', ')', ' Select true facts about squids', '\\n']);
 
-        guideFragment.appendChild(headline1);
-        guideFragment.appendChild(example1);
-        guideFragment.appendChild(headline2);
-        guideFragment.appendChild(example2);
+        container.appendChild(headline1);
+        container.appendChild(example1);
+        container.appendChild(headline2);
+        container.appendChild(example2);
+        container.appendChild(this.fullExample);
 
-
-        //const final = textArray.join('');
-        //console.log(final);
-        //return final;
-
-        return guideFragment;
+        return container;
 
     }.bind(this))();
+
+    this.answersGuideElement = (function generateQuestionGuide () {
+
+        const container = document.createElement('div');
+
+        const headline1 = document.createElement('p');
+        headline1.classList.add('headline');
+        headline1.innerText = 'Answers should have the following format:';
+
+        const example1T = this.finalizeExample(['T', ' correct answer text', '\\n']);
+        const example1W = this.finalizeExample(['X', ' wrong answer text', '\\n']);
+
+        const headline2 = document.createElement('p');
+        headline2.classList.add('headline');
+        headline2.innerText = 'Real answer example:';
+
+        const example2T = this.finalizeExample(['T', ' beer is good', '\\n']);
+        const example2W = this.finalizeExample(['X', ' monkeys evolved from humans', '\\n']);
+
+        container.appendChild(headline1);
+        container.appendChild(example1T);
+        container.appendChild(example1W);
+        container.appendChild(headline2);
+        container.appendChild(example2T);
+        container.appendChild(example2W);
+        container.appendChild(this.fullExample);
+
+        return container;
+
+    }.bind(this))();
+
+    this.leftoversGuideElement = (function () {
+
+        const container = document.createElement('div');
+        container.innerHTML = 'Leftovers are bits of text, that are not recognized by convertor and they would lead into breaking of converted JSON format, which would further result in non-functioning quiz. There may be more leftovers along the way, line number is meant to be the line in your input code.';
+
+        return container;
+        
+    })();
 
     this.reportError = function (errorLabel) {
 
         switch (errorLabel) {
             case 'questions':
                 {
-                    this.writeError('mild', 'No questions in input:', '', this.questionsGuide);
+                    this.writeError('mild', 'No questions in input!', '', this.questionsGuideElement);
                     break;
                 }
+            case 'answers':
+                {
+                    this.writeError('mild', 'No answers in input!', '', this.answersGuideElement);
+                    break;
+                }
+            case 'leftovers':
+                {
+                    const leftover = new Object();
 
+                    {
+                        let locator = new RegExp('^([\\S]+)$', 'm');
+
+                        this.errorText.replace(locator, function (fullMatch, capturedLeftover) {
+
+                            leftover.text = capturedLeftover;
+                        });
+
+                        leftover.line = String(this.errorText.indexOf(leftover.text) + 1);
+                    }
+
+                    this.writeError('severe', 'Leftovers found!',
+                    'Line: ' + leftover.line + '\n'
+                    +
+                    'Text: ' + leftover.text
+                    , this.leftoversGuideElement);
+                }
                 
             default:
                 break;
@@ -556,12 +636,13 @@ var Convertor = function (settings) {
         {
             let answersClosingBracketIndex = this[property].indexOf(']');
             let firstQuestionStartingBracketIndex = this[property].indexOf('{', answersClosingBracketIndex);
+            let lastCharacter = 1 + Math.max(this[property].lastIndexOf('['), this[property].lastIndexOf(','));
     
-            this[property] = this[property].slice(firstQuestionStartingBracketIndex, this[property].length);
+            this[property] = this[property].slice(firstQuestionStartingBracketIndex, lastCharacter);
         }
         
         //finish answers array ] and last question object }
-        this[property] = '[' + this[property] + this.blocks.questionEnd + ']';
+        this[property] = '[' + this[property] + "\n" + this.blocks.questionEnd + ']';
         
         //remove last comma, in answers array
         this[property] = this[property].replace(this.regExp.removeCommaAfterLastArrayItem, "\n$1");
@@ -597,9 +678,17 @@ var Convertor = function (settings) {
         }.bind(this))
     }
 
+    this.detectTextLeftovers = function (errorText) {
+
+        return !(this[errorText].match(/^[\S]/m) instanceof Object);
+    };
+
     this.convert = function () {
 
         var t0 = performance.now();
+
+        //stores, which steps were completed, so it may clarify, where code is stuck
+        this.conversionStatus = new Object();
 
         this.clearOutputElement();
         this.clearErrorElements();
@@ -622,15 +711,23 @@ var Convertor = function (settings) {
         this.removeEmptyLines('outputText');
 
         //processing questions
-        this.processQuestions('outputText', 'errorText');
+        this.conversionStatus.questions = this.processQuestions('outputText', 'errorText');
         if (!this.isProcessingSuccessful('questions')) {
             this.reportError('questions');
             return;
         }
 
+        this.conversionStatus.answers = this.processAnswers('outputText', 'errorText');
+        if (!this.isProcessingSuccessful('answers')) {
+            this.reportError('answers');
+            return;
+        }
 
-        this.processAnswers('outputText', 'errorText');
-        
+        this.conversionStatus.leftovers = this.detectTextLeftovers('errorText');
+        if (!this.isProcessingSuccessful('leftovers')) {
+            this.reportError('leftovers');
+            return;
+        }
 
         this.finalizeJsonArray('outputText');
 
