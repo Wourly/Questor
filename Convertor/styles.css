@@ -160,9 +160,15 @@ textarea, .textarea {
     }
   }
 
+.tiny {
+    color: gray;
+    font-size: 14px;
+}
+
 .reportList {
     list-style-type: none;;
     padding-inline-start: 0;
+    padding-left: 0;
 }
 
 .reportList li {
@@ -172,6 +178,7 @@ textarea, .textarea {
 .reportList .lineNumber {
     position: absolute;
     text-align: right;
+    user-select: none;
 }
 
 .reportList .text {
@@ -185,7 +192,7 @@ textarea, .textarea {
 }
 
 .reportList .leftover::after {
-    content: '  <-- DELETE THIS';
+    content: '  <-- NOT RECOGNIZED';
     color: #080;
 }
 .reportList[data-lineDigits="1"] .lineNumber {
