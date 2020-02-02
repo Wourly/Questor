@@ -16,6 +16,8 @@ html, body {
 }
 
 h1, p {
+    margin-top: 0;
+    margin-bottom: 0;
     margin-block-start: 0;
     margin-block-end: 0;
 }
@@ -157,3 +159,73 @@ textarea, .textarea {
         left: 0;
     }
   }
+
+.reportList {
+    list-style-type: none;;
+    padding-inline-start: 0;
+}
+
+.reportList li {
+    position: relative;
+}
+
+.reportList .lineNumber {
+    position: absolute;
+    text-align: right;
+}
+
+.reportList .text {
+    color: blue;
+    display: inline-block;
+}
+
+.reportList .leftover {
+    color: orangered;
+    font-weight: 900;
+}
+
+.reportList .leftover::after {
+    content: '  <-- DELETE THIS';
+    color: #080;
+}
+.reportList[data-lineDigits="1"] .lineNumber {
+    width: 15px;
+}
+.reportList[data-lineDigits="1"] .text {
+    padding-left: 25px;
+}
+
+.reportList[data-lineDigits="2"] .lineNumber {
+    width: 25px;
+}
+.reportList[data-lineDigits="2"] .text {
+    padding-left: 35px;
+}
+
+.reportList[data-lineDigits="3"] .lineNumber {
+    width: 35px;
+}
+.reportList[data-lineDigits="3"] .text {
+    padding-left: 45px;
+}
+
+.reportList[data-lineDigits="4"] .lineNumber {
+    width: 45px;
+}
+.reportList[data-lineDigits="4"] .text {
+    padding-left: 55px;
+}
+
+.reportList[data-lineDigits="5"] .lineNumber {
+    width: 55px;
+}
+.reportList[data-lineDigits="5"] .text {
+    padding-left: 65px;
+}
+
+.reportList[data-lineDigits="6"] .lineNumber {
+    width: 65px;
+}
+.reportList[data-lineDigits="6"] .text {
+    padding-left: 75px;
+}

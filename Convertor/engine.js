@@ -105,7 +105,7 @@ var Convertor = function (settings) {
         //even that all lines have indentation removed, it is needed for errorText
         this.cleanLinePattern = '^[^\\S\\n]*'
 
-        this.settings.visibleHintIdentificator = settings.visible_hint_identificator ? settings.visible_hint_identificator : '@';
+        this.settings.visibleHintIdentificator = settings.visible_hint_identificator || '@';
         this.settings.invisibleHintIdentificator = settings.invisible_hint_identificator ? settings.invisible_hint_identificator : '^';
 
         this.regExp.captureHintIdentificators = new RegExp('([' + this.settings.visibleHintIdentificator + this.settings.invisibleHintIdentificator + '])', 'g');
@@ -374,11 +374,13 @@ var Convertor = function (settings) {
     }
 
     //remove indentation and space leftovers after text on each line
-    this.trimEachRow = function (property) {
+    this.trimEachRow = function (string) {
         
         //trim spaces on each row
-        this[property] = this[property].replace(/^[^\S\n]*/gm, '');
-        this[property] = this[property].replace(/[^\S\n]*$/gm, '');
+        string = string.replace(/^[^\S\n]*/gm, '');
+        string = string.replace(/[^\S\n]*$/gm, '');
+
+        return string;
     }
 
     //----------
@@ -420,7 +422,13 @@ var Convertor = function (settings) {
         this.accessDOM('errorContainer', function (element) {element.setAttribute('data-error', severity)});
 
         this.accessDOM('errorLabel', function (element, accessor) {element[accessor] = label});
-        this.accessDOM('errorContent', function (element, accessor) {element[accessor] = content});
+        this.accessDOM('errorContent', function (element, accessor) {
+
+            if (content instanceof HTMLElement)
+                element.appendChild(content);
+            else
+                element[accessor] = content
+        });
 
         this.accessDOM('errorGuide', function (element) {element.appendChild(guide)});
     }
@@ -468,6 +476,7 @@ var Convertor = function (settings) {
         return container;
     }
 
+    //used in question guide
     this.fullExample = (function () {
 
         const container = document.createElement('div');
@@ -544,7 +553,6 @@ var Convertor = function (settings) {
         container.appendChild(example1);
         container.appendChild(headline2);
         container.appendChild(example2);
-        container.appendChild(this.fullExample);
 
         return container;
 
@@ -583,45 +591,163 @@ var Convertor = function (settings) {
     this.leftoversGuideElement = (function () {
 
         const container = document.createElement('div');
-        container.innerHTML = 'Leftovers are bits of text, that are not recognized by convertor and they would lead into breaking of converted JSON format, which would further result in non-functioning quiz. There may be more leftovers along the way, line number is meant to be the line in your input code.';
+
+        const headline1 = document.createElement('p');
+            headline1.classList.add('headline');
+            headline1.innerText = 'What are leftovers?';
+        const text1 = document.createTextNode('Leftovers are bits of text, that are not recognized by convertor.');
+        container.appendChild(headline1);
+        container.appendChild(text1);
+
+        const headline2 = document.createElement('p');
+            headline2.classList.add('headline');
+            headline2.innerText = 'Why do you need to delete them?';
+        const text2 = document.createTextNode('These bits of text do not fit into JSON (converted format) and make it impossible for computer to understand it.');
+        container.appendChild(headline2);
+        container.appendChild(text2);
+
+        const headline3 = document.createElement('p');
+            headline3.classList.add('headline');
+            headline3.innerText = 'How do I find them?';
+        const text3 = document.createTextNode('If you are not usinng any formatting program (eg. MS Word), you should find it just by it\'s line number (Notepad) - but be careful, if you paste text from notepad to word, you will lose all formatting. You can also search for nearby texts.');
+        container.appendChild(headline3);
+        container.appendChild(text3);
 
         return container;
         
     })();
+
+
+    this.regExp.findLeftover = new RegExp('^([\\S]+)$', 'm');
+    this.findLeftover = function (showLinesBefore, showLinesAfter) {
+
+        showLinesBefore = showLinesBefore || 10;
+        showLinesAfter = showLinesAfter || 10;
+
+        const input = this.preformatedInputText;
+
+        const leftover = new Object();
+
+        this.errorText.replace(this.regExp.findLeftover, function (fullMatch, capturedLeftover) {
+
+            leftover.text = capturedLeftover;
+        });
+
+        leftover.line = this.errorText.indexOf(leftover.text) + 1;
+
+        const minLine = leftover.line - showLinesBefore - 2;
+        const maxLine = leftover.line + showLinesAfter - 2;
+
+        var minIndex = null;
+        var maxIndex = null;
+        
+        {
+            let newLineCount = 0;
+
+            //try offers quitting global replacement, when throwing
+            try {
+                input.replace(/\n/g, function (fullMatch, offSet) {
+                    
+                    if (minLine === newLineCount) {
+                        minIndex = offSet;
+                    }
+
+                    if (maxLine === newLineCount) {
+                        maxIndex = offSet;
+                        throw 'Break loop';
+                    }
+                    
+
+                    newLineCount++;
+                    return '\n';
+                })
+            } catch (error){};
+        }
+
+        //when input is short and there is not enough of lines around left over, get it all
+        minIndex = minIndex || 0;
+        maxIndex = maxIndex || input.length;
+        
+        leftover.surroundingText = input.slice(minIndex, maxIndex);
+
+        return leftover;
+    };
+
+    this.createLeftoverListElement = function (leftover) {
+
+        const leftoverLines = leftover.surroundingText.split('\n');
+        const leftoverLinesLength = leftoverLines.length;
+        
+        const leftoverIndex = (function findIndex () {
+
+            for (let index = 0; index < leftoverLinesLength; index++) {
+
+                if (leftoverLines[index] === leftover.text)
+                {
+                    return index;
+                }
+            }
+
+        })();
+
+        const startLineIndex = leftover.line - leftoverIndex;
+ 
+        const reportListElement = (function () {
+
+            const list = document.createElement('ul');
+            list.classList.add('reportList');
+
+            for (let index = 0; index < leftoverLinesLength; index++) {
+
+                const listItemElement = document.createElement('li');
+                list.appendChild(listItemElement);
+
+                const lineNumber = startLineIndex + index;
+                const lineText = leftoverLines[index];
+                
+                const listItemLineNumberElement = document.createElement('span');
+                listItemLineNumberElement.classList.add('lineNumber');
+                listItemLineNumberElement.innerText = String(lineNumber);
+                listItemElement.appendChild(listItemLineNumberElement);
+
+                const listItemTextElement = document.createElement('span');
+                listItemTextElement.classList.add('text');
+                listItemTextElement.innerText = lineText;
+                listItemElement.appendChild(listItemTextElement);
+
+                if (lineNumber === leftover.line) {
+                    listItemTextElement.classList.add('leftover')
+                }
+            }
+
+            const lineNumberLength = list.querySelector('li:last-child span.lineNumber').innerText.trim().length;
+            list.setAttribute('data-lineDigits', lineNumberLength)
+
+            return list;
+        })();
+
+        return reportListElement;
+    }
 
     this.reportError = function (errorLabel) {
 
         switch (errorLabel) {
             case 'questions':
                 {
-                    this.writeError('mild', 'No questions in input!', '', this.questionsGuideElement);
+                    this.writeError('mild', 'No questions in input!', null, this.questionsGuideElement);
                     break;
                 }
             case 'answers':
                 {
-                    this.writeError('mild', 'No answers in input!', '', this.answersGuideElement);
+                    this.writeError('mild', 'No answers in input!', null, this.answersGuideElement);
                     break;
                 }
             case 'leftovers':
                 {
-                    const leftover = new Object();
+                    const leftover = this.findLeftover();
+                    const leftoverDataElement = this.createLeftoverListElement(leftover);
 
-                    {
-                        let locator = new RegExp('^([\\S]+)$', 'm');
-
-                        this.errorText.replace(locator, function (fullMatch, capturedLeftover) {
-
-                            leftover.text = capturedLeftover;
-                        });
-
-                        leftover.line = String(this.errorText.indexOf(leftover.text) + 1);
-                    }
-
-                    this.writeError('severe', 'Leftovers found!',
-                    'Line: ' + leftover.line + '\n'
-                    +
-                    'Text: ' + leftover.text
-                    , this.leftoversGuideElement);
+                    this.writeError('severe', 'Leftovers found!', leftoverDataElement, this.leftoversGuideElement);
                 }
                 
             default:
@@ -701,11 +827,10 @@ var Convertor = function (settings) {
         this.escapeEscapeChars('preformatedInputText');
         this.escapeDoubleQuotes('preformatedInputText');
 
-        this.trimEachRow('preformatedInputText');
+        this.preformatedInputText = this.trimEachRow(this.preformatedInputText);
 
         this.outputText = this.preformatedInputText;
         this.errorText = this.preformatedInputText;
-        this.preformatedInputText = null;
 
         this.removeComments('outputText', 'errorText');
         this.removeEmptyLines('outputText');
