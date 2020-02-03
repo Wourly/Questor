@@ -8,8 +8,10 @@ var SETTINGS = {
     question_identificator_start: '(',
     question_identificator_end: ')',
 
-    visible_hint_identificator: '@',
+    visible_hint_identificator: '~',
     invisible_hint_identificator: '^',
+    tags_identificator: '#',
+    tag_splitter: '|',
 
     correct_answer_identificator: 'T',
     wrong_answer_identificator: 'X',
