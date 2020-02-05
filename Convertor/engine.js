@@ -433,7 +433,7 @@ var Convertor = function (settings) {
     }.bind(this);
 
     //========================
-    //  ERROR HANDLING
+    // ERROR HANDLING
     //========================
 
     this.errorHandlers.isProcessingSuccessful = function (property) {
@@ -465,7 +465,13 @@ var Convertor = function (settings) {
                 element[accessor] = content
         });
 
-        this.accessDOM('errorGuide', function (element) {element.appendChild(guide)});
+        this.accessDOM('errorGuide', function (element, accessor) {
+
+            if (guide instanceof HTMLElement)
+                element.appendChild(guide);
+            else
+                element[accessor] = guide
+        });
 
     }.bind(this);
 
@@ -514,7 +520,6 @@ var Convertor = function (settings) {
                         maxIndex = offSet;
                         throw 'Break loop';
                     }
-                    
 
                     newLineCount++;
                     return '\n';
@@ -531,7 +536,7 @@ var Convertor = function (settings) {
         return leftover;
     }.bind(this);
 
-    this.errorHandlers.createLeftoverListElement = function (leftover) {
+    this.errorHandlers.createLeftoverElement = function (leftover) {
 
         const leftoverLines = leftover.surroundingText.split('\n');
         const leftoverLinesLength = leftoverLines.length;
@@ -587,22 +592,110 @@ var Convertor = function (settings) {
         return reportListElement;
     }
 
-    this.miscellaneous.hints = ['vH', 'iH', 'tags'];
+    this.miscellaneous.properties = ['answers', 'vH', 'iH', 'tags'];
 
-    this.errorHandlers.checkHints = function (reportObject, block, index) {
-       
-        if (index === 1) {
-            const hints = new Array();
+    this.errorHandlers.checkHints = function (item, reportObject) {
 
-            for (let hintIndex = 0; hintIndex < this.miscellaneous.hints.length; hintIndex++) {
-                const hint = this.miscellaneous.hints[hintIndex];
+        let correct = true;
 
-                console.log(hint);
+        if ('vH' in item && item.vH.length === 0)
+        {
+            reportObject.vH = false;
+            correct = false;
+        }
+
+        if ('iH' in item && item.iH.length === 0)
+        {
+            reportObject.iH = false;
+            correct = false;
+        }
+
+        return correct;
+
+    }
+
+    //checks integritiy of each question in JSON arra, some properties should not be present in some cases
+    this.errorHandlers.checkProperties = function (question, index) {
+
+        const report = new Object();
+        let correct = true;
+
+        if (question.answers.length === 0)
+        {
+            report.answers = false;
+            correct = false;
+        }
+        else
+        {
+            const answersLength = question.answers.length;
+            const answersReport = new Array();
+
+            for (let answerIndex = 0; answerIndex < answersLength; answerIndex++)
+            {
+
+                //if (answerIndex === 0)
+                {
+                    const answer = question.answers[answerIndex];
+                    const answerReport = new Object();
+                    let correctAnswer = true;
+
+                    if (answer.text.length === 0)
+                    {
+                        answerReport.text = false;
+                        correctAnswer = false;
+                    }
+
+                    if (!this.errorHandlers.checkHints(answer, answerReport))
+                    {
+                        correctAnswer = false;
+                    }
+
+                    //answers should not have tags
+                    if (answer.tags)
+                    {
+                        answerReport.tags = true;
+                        correctAnswer = false;
+                    }
+
+                    if (!correctAnswer)
+                    {
+                        answerReport.index = answerIndex;
+                        answersReport.push(answerReport)
+                    }
+                }
             }
 
-            console.log(block)
+            if (answersReport.length !== 0)
+            {
+                report.answers = answersReport;
+                correct = false;
+            }
         }
-        
+
+        if (!this.errorHandlers.checkHints(question, report))
+        {
+            correct = false;
+        }
+
+        //do not allow empty tags
+        if (question.tags)
+        {
+            const tagLenght = question.tags.length;
+
+            for (let tagIndex = 0; tagIndex < tagLenght; tagIndex++)
+            {
+                if (question.tags[tagIndex].length === 0) {
+                    report.tags = false;
+                    correct = false;
+                }
+            }
+        }
+
+        if (!correct) {
+            return report;
+        } else {
+            return true;
+        }
 
     }.bind(this);
 
@@ -615,71 +708,123 @@ var Convertor = function (settings) {
         const flawedQuestions = new Array();
 
         //detecting flaws through all questions
-        /*for (let index = 0; index < questionsLength; index++) {
+        for (let index = 0; index < questionsLength; index++) {
 
-            if (index === 2) {
+            //if (index === 0)
+            {
                 const question = questions[index];
-                const answers = question.answers;
-                const answersLength = answers.length;
 
-                console.log(question);
+                const report = this.errorHandlers.checkProperties(question, index);
 
-                let report = new Object();
-                let isFlawed = false;
-
-                
-    //!!!!!
-                report.answers = Boolean(answersLength);
-
-                if (report.answers) {
-                    
-                    for (let answerIndex = 0; answerIndex < answersLength; answerIndex++) {
-
-                        const answer = answers[answerIndex];
-
-                        this.errorHandlers.checkHints(report, answer, answerIndex);
-                    }
+                if (report !== true) {
+                    report.id = question.id;
+                    report.index = index;
+                    flawedQuestions.push(report);
                 }
-
-                this.errorHandlers.check
-
-                console.log(report)
             }
-            
-
-            
         }
 
-        //console.log(flawedQuestions);*/
+        if (flawedQuestions.length > 0) {
+            this.errorHandlers.reportError('JSONanalysis', flawedQuestions);
+        }
 
 
     }.bind(this);
 
-    this.errorHandlers.reportError = function (errorLabel) {
+    this.errorHandlers.errorContentToggler = function () {
+
+        this.accessDOM('errorContainer', function (element) {
+
+            element.classList.toggle('contentClosed');
+        });
+
+
+    }.bind(this);
+
+    this.errorHandlers.attachQuestionWarning = function (element, text) {
+
+        const warningLine = document.createElement('span');
+        warningLine.classList.add('warningLine');
+        warningLine.innerText = text;
+
+        element.appendChild(warningLine);
+
+    }
+
+    this.errorHandlers.createFlawedQuestionsListElement = function (flawedQuestions) {
+
+        const container = document.createElement('ul');
+        container.classList.add('reportList')
+
+        const flawedQuestionsLength = flawedQuestions.length;
+
+        for (let index = 0; index < flawedQuestionsLength; index++)
+        {
+
+            //if (index === 0)
+            {
+                const questionReport = flawedQuestions[index];
+                console.log(questionReport);
+    
+                const questionItem = document.createElement('li');
+                container.appendChild(questionItem);
+    
+                const questionId = document.createElement('span');
+                questionId.classList.add('questionId');
+                questionId.innerText = this.settings.questionIdStart + questionReport.id + this.settings.questionIdEnd;
+                questionItem.appendChild(questionId);
+
+                if (questionReport.vH === false)
+                {
+                    this.errorHandlers.attachQuestionWarning(questionItem, '..has ^, but no content for it');
+                }
+    
+            }
+        }
+
+        return container;
+
+    }.bind(this);
+
+    this.errorHandlers.reportError = function (errorLabel, data) {
 
         switch (errorLabel) {
             case 'questions':
                 {
-                    this.errorHandlers.writeError('mild', 'No questions in input!', null, this.guides.questionsElement);
+                    this.errorHandlers.writeError('medium', 'No questions in input!', '', this.guides.questionsElement);
                     break;
                 }
             case 'answers':
                 {
-                    this.errorHandlers.writeError('mild', 'No answers in input!', null, this.guides.answersElement);
+                    this.errorHandlers.writeError('medium', 'No answers in input!', '', this.guides.answersElement);
                     break;
                 }
             case 'leftovers':
                 {
                     const leftover = this.errorHandlers.findLeftover(10, 10);
                     
-                    const leftoverDataElement = this.errorHandlers.createLeftoverListElement(leftover);
+                    const leftoverDataElement = this.errorHandlers.createLeftoverElement(leftover);
 
                     this.errorHandlers.writeError('severe', 'Leftovers found!', leftoverDataElement, this.guides.leftoversElement);
+                    break;
                 }
             case 'JSONparse':
                 {
                     //this error type should not be possible
-                    //!I shall make AJAX call to send me email with input text
+                    //!Shall I make AJAX call to send me email with input text
+
+                    this.errorHandlers.writeError('fatal', 'Fatal error!', '', 'Could not create output because of internal error! Please copy your current input data (left side) and send it to me on uropsilus@gmail.com, you can also contact me on facebook.com/Wourly');
+                    break;
+                }
+            case 'JSONanalysis':
+                {
+
+                    const flawedQuestions = data;
+
+                    const flawedQuestionsElement = this.errorHandlers.createFlawedQuestionsListElement(flawedQuestions);
+
+                    this.errorHandlers.writeError('soft', 'Almost there!', flawedQuestionsElement, 'Format of your data is already working, but for better future maintenance and to avoid confusion, it is necessary to amend cases above. (double-click to expand)');
+                    break;
                 }
                 
             default:
@@ -689,7 +834,7 @@ var Convertor = function (settings) {
     }.bind(this);
 
     //========================
-    //  GUIDES
+    // GUIDES
     //========================
 
     this.guides.finalizeExample = function (inputArray) {  
@@ -913,14 +1058,11 @@ var Convertor = function (settings) {
             }.bind(this));
         }
 
-        console.log(bodyObject);
         return bodyObject;
 
     }.bind(this);
 
     this.miscellaneous.processTags = function (tagsString) {
-
-        console.log(tagsString);
 
         const tagArray = tagsString.split(this.settings.tagSplitter);
         const tagArrayLength = tagArray.length;
@@ -931,7 +1073,6 @@ var Convertor = function (settings) {
             const tag = tagArray[index].trim();
 
             preStringArray.push('"' + tag + '"');
-
         }
 
         const final = '[' + preStringArray.join(',') + ']';
@@ -1012,6 +1153,7 @@ var Convertor = function (settings) {
 
     this.convert = function () {
 
+        console.clear();
         var performanceStart = performance.now();
 
         //stores, which steps were completed, so it may clarify, where code is stuck
@@ -1088,6 +1230,7 @@ var Convertor = function (settings) {
     //========================
 
     this.start = function () {
-        this.DOM.input.element.addEventListener('input', this.convert)
+        this.DOM.input.element.addEventListener('input', this.convert);
+        this.DOM.errorContent.element.addEventListener('dblclick', this.errorHandlers.errorContentToggler);
     }.bind(this);
 }

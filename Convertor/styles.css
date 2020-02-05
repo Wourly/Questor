@@ -100,7 +100,18 @@ textarea, .textarea {
     font-weight: 900;
 }
 
-#errorContainer[data-error=mild] {
+#errorContainer[data-error=soft] {
+    color: rgb(11, 78, 2);
+    border-color: rgb(181, 255, 85);
+    background-color: #AAA;
+}
+
+#errorContainer[data-error=soft].contentClosed #errorContent {
+    max-height: 75px;
+    color: red;
+}
+
+#errorContainer[data-error=medium] {
     color: #880;
     border-color: #FF5;
 }
@@ -108,6 +119,26 @@ textarea, .textarea {
 #errorContainer[data-error=severe] {
     color: #800;
     border-color: #F55;
+}
+
+#errorContainer[data-error=fatal] {
+    color: #000;
+    border-color: #800;
+    background-color: #800;
+}
+
+#errorContent {
+    cursor: pointer;
+    overflow: hidden;
+}
+
+#errorContent .questionId {
+    display: block;
+}
+
+#errorContent .warningLine {
+    font-size: 16px;
+    color: orangered;
 }
 
 #errorGuide {
