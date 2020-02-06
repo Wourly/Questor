@@ -106,9 +106,17 @@ textarea, .textarea {
     background-color: #AAA;
 }
 
-#errorContainer[data-error=soft].contentClosed #errorContent {
-    max-height: 75px;
-    color: red;
+#errorContainer[data-error=soft] #errorContent {
+    max-height: 100px;
+}
+
+#errorContainer[data-error=soft]:not(.contentOpened) #errorContent:hover {
+    background-color: rgba(100, 100, 100, 0.3);
+    transition: background-color 0.1s linear;
+}
+
+#errorContainer[data-error=soft].contentOpened #errorContent {
+    max-height: initial;
 }
 
 #errorContainer[data-error=medium] {
@@ -134,11 +142,18 @@ textarea, .textarea {
 
 #errorContent .questionId {
     display: block;
+    font-weight: 900;
 }
 
 #errorContent .warningLine {
     font-size: 16px;
+    display:block;
     color: orangered;
+}
+
+#errorContent .answer {
+    font-weight: 900;
+    color: navy;
 }
 
 #errorGuide {
@@ -200,6 +215,8 @@ textarea, .textarea {
     list-style-type: none;;
     padding-inline-start: 0;
     padding-left: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 .reportList li {

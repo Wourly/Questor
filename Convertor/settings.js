@@ -12,7 +12,7 @@ var SETTINGS = {
     visible_hint_identificator: '~',
     invisible_hint_identificator: '^',
     tags_identificator: '#',
-    tag_splitter: '|',
+    property_splitter: '|',
 
     correct_answer_identificator: 'T',
     wrong_answer_identificator: 'X',

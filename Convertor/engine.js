@@ -77,17 +77,17 @@ var Convertor = function (settings) {
     //string blocks to be used in RegExp pattern substitution
     this.blocks = new Object();
     //stores main RegExp pattens and main RegExp substitution functions
-    this.regExp = new Object();
+    this.regExp =  new Object();
     //functions, that prepare input for conversion
-    this.preformators = new Object();
+    this.preformators = null;
     //functions directly converting text
-    this.convertors = new Object();
+    this.convertors = null;
     //functions involved in output checking
-    this.errorHandlers = new Object();
+    this.errorHandlers = null;
     //when errors occur, guides describe how to keep input correct
-    this.guides = new Object();
+    this.guides = null;
     //hardly sortable
-    this.miscellaneous = new Object();
+    this.miscellaneous =  new Object();
     
         //============================
         // General
@@ -98,6 +98,7 @@ var Convertor = function (settings) {
         this.errorText = null;
         this.outputArray = null;
         this.tags = new Object();
+        this.allIdentificators = new Array();
     
         this.conversionStatus = new Object();
 
@@ -155,7 +156,7 @@ var Convertor = function (settings) {
         this.settings.visibleHintIdentificator = settings.visible_hint_identificator || '~';
         this.settings.invisibleHintIdentificator = settings.invisible_hint_identificator || '^';
         this.settings.tagIdentificator = settings.tags_identificator || '#';
-        this.settings.tagSplitter = settings.tag_splitter || '|';
+        this.settings.propertySplitter = settings.tag_splitter || '|';
 
         this.miscellaneous.escapeChar = function (character) {
 
@@ -169,10 +170,6 @@ var Convertor = function (settings) {
 
         this.regExp.captureHintIdentificators = new RegExp('([' + this.miscellaneous.escapeChar(this.settings.visibleHintIdentificator) + this.miscellaneous.escapeChar(this.settings.invisibleHintIdentificator) + this.miscellaneous.escapeChar(this.settings.tagIdentificator) + '])', 'g');
         this.miscellaneous.splitterSequence = settings.splitter_sequence || 'ůíá';
-
-
-
-        
 
         //============================
         // commenting
@@ -343,27 +340,36 @@ var Convertor = function (settings) {
     //========================
     //  PREFORMATORS
     //========================
-    this.preformators.escapeDoubleQuotes = function (property) {
 
-        // \ => \\ 
-        this[property] = this[property].replace(/\\/g, '\\\\')
-    }.bind(this);
+    this.preformators = (function () {
 
-    this.preformators.escapeDoubleQuotes = function (property) {
+        const preformators = new Object();
 
-        // " => \"
-        this[property] = this[property].replace(/\\*(["])/g, "\\$1");
-    }.bind(this);
+        preformators.escapeDoubleQuotes = function (property) {
 
-    //remove indentation and space leftovers after text on each line
-    this.preformators.trimEachRow = function (string) {
-        
-        //trim spaces on each row
-        string = string.replace(/^[^\S\n]*/gm, '');
-        string = string.replace(/[^\S\n]*$/gm, '');
+            // \ => \\ 
+            this[property] = this[property].replace(/\\/g, '\\\\')
+        }.bind(this);
+    
+        preformators.escapeDoubleQuotes = function (property) {
+    
+            // " => \"
+            this[property] = this[property].replace(/\\*(["])/g, "\\$1");
+        }.bind(this);
+    
+        //remove indentation and space leftovers after text on each line
+        preformators.trimEachRow = function (string) {
+            
+            //trim spaces on each row
+            string = string.replace(/^[^\S\n]*/gm, '');
+            string = string.replace(/[^\S\n]*$/gm, '');
+    
+            return string;
+        }.bind(this);
 
-        return string;
-    }.bind(this);
+        return preformators;
+
+    }.bind(this))();
 
     //========================
     //  CONVERTORS
@@ -373,649 +379,778 @@ var Convertor = function (settings) {
     //their reason is clarity, as they need to be passed in this.convert function
     //they highlight, what properties are going to be affected
 
-    this.convertors.applyRegExp = function (operationLabel, outputText, errorText, regExp, substitutioner) {
+    this.convertors = (function () {
 
-        var isCaptured = false;
+        const convertors = new Object();
 
-        this[outputText] = this[outputText].replace(regExp, function (fullMatch, a, b, c, d, e, f) {
+        convertors.applyRegExp = function (operationLabel, outputText, errorText, regExp, substitutioner) {
 
-            isCaptured = true;
+            var isCaptured = false;
 
-            var captureGroups = [a, b, c, d, e, f];
+            this[outputText] = this[outputText].replace(regExp, function (fullMatch, a, b, c, d, e, f) {
 
-            //captureGroups = this.miscellaneous.filterValidCaptureGroups(captureGroups);
+                isCaptured = true;
 
-            return substitutioner(captureGroups);
+                var captureGroups = [a, b, c, d, e, f];
 
-        }.bind(this));
+                //captureGroups = this.miscellaneous.filterValidCaptureGroups(captureGroups);
+
+                return substitutioner(captureGroups);
+
+            }.bind(this));
+            
+            if (isCaptured) {
+                this[errorText] = this[errorText].replace(regExp, '');
+                return true;
+            } else {
+                return false;
+            }
+            
+        }.bind(this);
+
+        convertors.removeComments = function (outputText, errorText) {
+            this.convertors.applyRegExp('comments', outputText, errorText, this.regExp.comments.pattern, this.regExp.comments.replacer);
+        }.bind(this);
+
+        convertors.removeEmptyLines = function (property) {
+            this[property] = this[property].replace(/^\s*$\n/gm, '');
+        }.bind(this);
         
-        if (isCaptured) {
-            this[errorText] = this[errorText].replace(regExp, '');
-            return true;
-        } else {
-            return false;
-        }
+        convertors.processQuestions = function (outputText, errorText) {
+            return this.conversionStatus.questions = this.convertors.applyRegExp('questions', outputText, errorText, this.regExp.questions.pattern, this.regExp.questions.replacer);
+        }.bind(this);
+
+        convertors.processAnswers = function (outputText, errorText) {
+            return this.convertors.applyRegExp('answers', outputText, errorText, this.regExp.answers.pattern, this.regExp.answers.replacer);
+        }.bind(this);
+
+        convertors.finalizePreJsonString = function (property) {
+
+            //remove blocks added from first question, these blocks does not have
+            {
+                const answersClosingBracketIndex = this[property].indexOf(']');
+                const firstCharacter = this[property].indexOf('{', answersClosingBracketIndex);
+                const lastCharacter = 1 + Math.max(this[property].lastIndexOf('['), this[property].lastIndexOf(','));
         
-    }.bind(this);
+                this[property] = this[property].slice(firstCharacter, lastCharacter);
+            }
+            
+            //finish answers array ] and last question object }
+            this[property] = '[' + this[property] + "\n" + this.blocks.questionEnd + ']';
+            
+            //remove last comma, in answers array
+            this[property] = this[property].replace(this.regExp.removeCommaAfterLastArrayItem, "\n$1");
+        }.bind(this);
 
-    this.convertors.removeComments = function (outputText, errorText) {
-        this.convertors.applyRegExp('comments', outputText, errorText, this.regExp.comments.pattern, this.regExp.comments.replacer);
-    }.bind(this);
+        convertors.JSONparser = function (outputText, outputArray) {
 
-    this.convertors.removeEmptyLines = function (property) {
-        this[property] = this[property].replace(/^\s*$\n/gm, '');
-    }.bind(this);
-    
-    this.convertors.processQuestions = function (outputText, errorText) {
-        return this.conversionStatus.questions = this.convertors.applyRegExp('questions', outputText, errorText, this.regExp.questions.pattern, this.regExp.questions.replacer);
-    }.bind(this);
+            try {
+                this[outputArray] = JSON.parse(this[outputText]);
+                //throw new Error('');
+                return true;
+            }
+            catch (error) {
+                return false;
+            }
+            
+        }.bind(this);
 
-    this.convertors.processAnswers = function (outputText, errorText) {
-        return this.convertors.applyRegExp('answers', outputText, errorText, this.regExp.answers.pattern, this.regExp.answers.replacer);
-    }.bind(this);
+        return convertors;
 
-    this.convertors.finalizePreJsonString = function (property) {
-
-        //remove blocks added from first question, these blocks does not have
-        {
-            const answersClosingBracketIndex = this[property].indexOf(']');
-            const firstCharacter = this[property].indexOf('{', answersClosingBracketIndex);
-            const lastCharacter = 1 + Math.max(this[property].lastIndexOf('['), this[property].lastIndexOf(','));
-    
-            this[property] = this[property].slice(firstCharacter, lastCharacter);
-        }
-        
-        //finish answers array ] and last question object }
-        this[property] = '[' + this[property] + "\n" + this.blocks.questionEnd + ']';
-        
-        //remove last comma, in answers array
-        this[property] = this[property].replace(this.regExp.removeCommaAfterLastArrayItem, "\n$1");
-    }.bind(this);
+    }.bind(this))();
 
     //========================
     // ERROR HANDLING
     //========================
-
-    this.errorHandlers.isProcessingSuccessful = function (property) {
-        
-        if (this.conversionStatus[property])
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }.bind(this);
-
-    //severity describes how bad error is
-    //label is main headline for error message
-    //content is error output
-    //guide is documentFragment, where description of error is
-    this.errorHandlers.writeError = function (severity, label, content, guide) {
-
-        this.accessDOM('errorContainer', function (element) {element.setAttribute('data-error', severity)});
-        this.accessDOM('errorLabel', function (element, accessor) {element[accessor] = label});
-
-        this.accessDOM('errorContent', function (element, accessor) {
-
-            if (content instanceof HTMLElement)
-                element.appendChild(content);
-            else
-                element[accessor] = content
-        });
-
-        this.accessDOM('errorGuide', function (element, accessor) {
-
-            if (guide instanceof HTMLElement)
-                element.appendChild(guide);
-            else
-                element[accessor] = guide
-        });
-
-    }.bind(this);
-
-    //checks if there is any other character than space in this.errorText
-    this.errorHandlers.detectTextLeftovers = function (errorText) {
-
-        return !(this[errorText].match(/^[\S]/m) instanceof Object);
-    }.bind(this);
-
     this.regExp.findLeftover = new RegExp('^(.+)$', 'm');
+    this.errorHandlers = (function createErrorHandlers () {
 
-    this.errorHandlers.findLeftover = function (showLinesBefore, showLinesAfter) {
+        const errorHandlers = new Object();
 
-        showLinesBefore = showLinesBefore || 10;
-        showLinesAfter = showLinesAfter || 10;
-
-        const input = this.preformatedInputText;
-
-        const leftover = new Object();
-
-        this.errorText.replace(this.regExp.findLeftover, function (fullMatch, capturedLeftover) {
-
-            leftover.text = capturedLeftover;
-        });
-
-        leftover.line = this.errorText.indexOf(leftover.text) + 1;
-
-        const minLine = leftover.line - showLinesBefore - 2;
-        const maxLine = leftover.line + showLinesAfter - 2;
-
-        var minIndex = null;
-        var maxIndex = null;
+        errorHandlers.isProcessingSuccessful = function (property) {
         
-        {
-            let newLineCount = 0;
-
-            //try enables quitting global replacement by throwing exception
-            try {
-                input.replace(/\n/g, function (fullMatch, offSet) {
+            if (this.conversionStatus[property])
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }.bind(this);
+    
+        //severity describes how bad error is
+        //label is main headline for error message
+        //content is error output
+        //guide is documentFragment, where description of error is
+        errorHandlers.writeError = function (severity, label, content, guide) {
+    
+            this.accessDOM('errorContainer', function (element) {element.setAttribute('data-error', severity)});
+            this.accessDOM('errorLabel', function (element, accessor) {element[accessor] = label});
+    
+            this.accessDOM('errorContent', function (element, accessor) {
+    
+                if (content instanceof HTMLElement)
+                    element.appendChild(content);
+                else
+                    element[accessor] = content
+            });
+    
+            this.accessDOM('errorGuide', function (element, accessor) {
+    
+                if (guide instanceof HTMLElement)
+                    element.appendChild(guide);
+                else
+                    element[accessor] = guide
+            });
+    
+        }.bind(this);
+    
+        //checks if there is any other character than space in this.errorText
+        errorHandlers.detectTextLeftovers = function (errorText) {
+    
+            return !(this[errorText].match(/^[\S]/m) instanceof Object);
+        }.bind(this);
+    
+        
+    
+        errorHandlers.findLeftover = function (showLinesBefore, showLinesAfter) {
+    
+            showLinesBefore = showLinesBefore || 10;
+            showLinesAfter = showLinesAfter || 10;
+    
+            const input = this.preformatedInputText;
+    
+            const leftover = new Object();
+    
+            this.errorText.replace(this.regExp.findLeftover, function (fullMatch, capturedLeftover) {
+    
+                leftover.text = capturedLeftover;
+            });
+    
+            leftover.line = this.errorText.indexOf(leftover.text) + 1;
+    
+            const minLine = leftover.line - showLinesBefore - 2;
+            const maxLine = leftover.line + showLinesAfter - 2;
+    
+            var minIndex = null;
+            var maxIndex = null;
+            
+            {
+                let newLineCount = 0;
+    
+                //try enables quitting global replacement by throwing exception
+                try {
+                    input.replace(/\n/g, function (fullMatch, offSet) {
+                        
+                        if (minLine === newLineCount) {
+                            minIndex = offSet;
+                        }
+    
+                        if (maxLine === newLineCount) {
+                            maxIndex = offSet;
+                            throw 'Break loop';
+                        }
+    
+                        newLineCount++;
+                        return '\n';
+                    })
+                } catch (error){};
+            }
+    
+            //when input is short and there is not enough of lines around left over, get it all
+            minIndex = minIndex || 0;
+            maxIndex = maxIndex || input.length;
+            
+            leftover.surroundingText = input.slice(minIndex, maxIndex);
+    
+            return leftover;
+        }.bind(this);
+    
+        errorHandlers.createLeftoverElement = function (leftover) {
+    
+            const leftoverLines = leftover.surroundingText.split('\n');
+            const leftoverLinesLength = leftoverLines.length;
+            
+            const leftoverIndex = (function findIndex () {
+    
+                for (let index = 0; index < leftoverLinesLength; index++) {
+    
+                    if (leftoverLines[index] === leftover.text)
+                    {
+                        return index;
+                    }
+                }
+    
+            })();
+    
+            const startLineIndex = leftover.line - leftoverIndex;
+     
+            const reportListElement = (function () {
+    
+                const list = document.createElement('ul');
+                list.classList.add('reportList');
+    
+                for (let index = 0; index < leftoverLinesLength; index++) {
+    
+                    const listItemElement = document.createElement('li');
+                    list.appendChild(listItemElement);
+    
+                    const lineNumber = startLineIndex + index;
+                    const lineText = leftoverLines[index];
                     
-                    if (minLine === newLineCount) {
-                        minIndex = offSet;
+                    const listItemLineNumberElement = document.createElement('span');
+                    listItemLineNumberElement.classList.add('lineNumber');
+                    listItemLineNumberElement.innerText = String(lineNumber);
+                    listItemElement.appendChild(listItemLineNumberElement);
+    
+                    const listItemTextElement = document.createElement('span');
+                    listItemTextElement.classList.add('text');
+                    listItemTextElement.innerText = lineText;
+                    listItemElement.appendChild(listItemTextElement);
+    
+                    if (lineNumber === leftover.line) {
+                        listItemTextElement.classList.add('leftover')
                     }
-
-                    if (maxLine === newLineCount) {
-                        maxIndex = offSet;
-                        throw 'Break loop';
-                    }
-
-                    newLineCount++;
-                    return '\n';
-                })
-            } catch (error){};
-        }
-
-        //when input is short and there is not enough of lines around left over, get it all
-        minIndex = minIndex || 0;
-        maxIndex = maxIndex || input.length;
-        
-        leftover.surroundingText = input.slice(minIndex, maxIndex);
-
-        return leftover;
-    }.bind(this);
-
-    this.errorHandlers.createLeftoverElement = function (leftover) {
-
-        const leftoverLines = leftover.surroundingText.split('\n');
-        const leftoverLinesLength = leftoverLines.length;
-        
-        const leftoverIndex = (function findIndex () {
-
-            for (let index = 0; index < leftoverLinesLength; index++) {
-
-                if (leftoverLines[index] === leftover.text)
-                {
-                    return index;
                 }
-            }
-
-        })();
-
-        const startLineIndex = leftover.line - leftoverIndex;
- 
-        const reportListElement = (function () {
-
-            const list = document.createElement('ul');
-            list.classList.add('reportList');
-
-            for (let index = 0; index < leftoverLinesLength; index++) {
-
-                const listItemElement = document.createElement('li');
-                list.appendChild(listItemElement);
-
-                const lineNumber = startLineIndex + index;
-                const lineText = leftoverLines[index];
-                
-                const listItemLineNumberElement = document.createElement('span');
-                listItemLineNumberElement.classList.add('lineNumber');
-                listItemLineNumberElement.innerText = String(lineNumber);
-                listItemElement.appendChild(listItemLineNumberElement);
-
-                const listItemTextElement = document.createElement('span');
-                listItemTextElement.classList.add('text');
-                listItemTextElement.innerText = lineText;
-                listItemElement.appendChild(listItemTextElement);
-
-                if (lineNumber === leftover.line) {
-                    listItemTextElement.classList.add('leftover')
-                }
-            }
-
-            const lineNumberLength = list.querySelector('li:last-child span.lineNumber').innerText.trim().length;
-            list.setAttribute('data-lineDigits', lineNumberLength)
-
-            return list;
-        })();
-
-        return reportListElement;
-    }
-
-    this.miscellaneous.properties = ['answers', 'vH', 'iH', 'tags'];
-
-    this.errorHandlers.checkHints = function (item, reportObject) {
-
-        let correct = true;
-
-        if ('vH' in item && item.vH.length === 0)
-        {
-            reportObject.vH = false;
-            correct = false;
+    
+                const lineNumberLength = list.querySelector('li:last-child span.lineNumber').innerText.trim().length;
+                list.setAttribute('data-lineDigits', lineNumberLength)
+    
+                return list;
+            })();
+    
+            return reportListElement;
         }
 
-        if ('iH' in item && item.iH.length === 0)
-        {
-            reportObject.iH = false;
-            correct = false;
-        }
+        errorHandlers.checkHints = function (item, reportObject) {
 
-        return correct;
-
-    }
-
-    //checks integritiy of each question in JSON arra, some properties should not be present in some cases
-    this.errorHandlers.checkProperties = function (question, index) {
-
-        const report = new Object();
-        let correct = true;
-
-        if (question.answers.length === 0)
-        {
-            report.answers = false;
-            correct = false;
-        }
-        else
-        {
-            const answersLength = question.answers.length;
-            const answersReport = new Array();
-
-            for (let answerIndex = 0; answerIndex < answersLength; answerIndex++)
+            let correct = true;
+    
+            if ('vH' in item && item.vH.length === 0)
             {
-
-                //if (answerIndex === 0)
-                {
-                    const answer = question.answers[answerIndex];
-                    const answerReport = new Object();
-                    let correctAnswer = true;
-
-                    if (answer.text.length === 0)
-                    {
-                        answerReport.text = false;
-                        correctAnswer = false;
-                    }
-
-                    if (!this.errorHandlers.checkHints(answer, answerReport))
-                    {
-                        correctAnswer = false;
-                    }
-
-                    //answers should not have tags
-                    if (answer.tags)
-                    {
-                        answerReport.tags = true;
-                        correctAnswer = false;
-                    }
-
-                    if (!correctAnswer)
-                    {
-                        answerReport.index = answerIndex;
-                        answersReport.push(answerReport)
-                    }
-                }
-            }
-
-            if (answersReport.length !== 0)
-            {
-                report.answers = answersReport;
+                reportObject.vH = false;
                 correct = false;
             }
-        }
-
-        if (!this.errorHandlers.checkHints(question, report))
-        {
-            correct = false;
-        }
-
-        //do not allow empty tags
-        if (question.tags)
-        {
-            const tagLenght = question.tags.length;
-
-            for (let tagIndex = 0; tagIndex < tagLenght; tagIndex++)
+    
+            if ('iH' in item && item.iH.length === 0)
             {
-                if (question.tags[tagIndex].length === 0) {
-                    report.tags = false;
+                reportObject.iH = false;
+                correct = false;
+            }
+    
+            return correct;
+    
+        }
+    
+        //checks integritiy of each question in JSON arra, some properties should not be present in some cases
+        errorHandlers.checkProperties = function (question, index) {
+    
+            const report = new Object();
+            let correct = true;
+    
+            if (question.answers.length === 0)
+            {
+                report.answers = false;
+                correct = false;
+            }
+            else
+            {
+                const answersLength = question.answers.length;
+                const answersReport = new Array();
+    
+                for (let answerIndex = 0; answerIndex < answersLength; answerIndex++)
+                {
+    
+                    //if (answerIndex === 0)
+                    {
+                        const answer = question.answers[answerIndex];
+                        const answerReport = new Object();
+                        let correctAnswer = true;
+    
+                        if (answer.text.length === 0)
+                        {
+                            answerReport.text = false;
+                            correctAnswer = false;
+                        }
+    
+                        if (!this.errorHandlers.checkHints(answer, answerReport))
+                        {
+                            correctAnswer = false;
+                        }
+    
+                        //answers should not have tags
+                        if (answer.tags)
+                        {
+                            answerReport.tags = true;
+                            correctAnswer = false;
+                        }
+    
+                        if (!correctAnswer)
+                        {
+                            answerReport.index = answerIndex;
+                            answersReport.push(answerReport)
+                        }
+                    }
+                }
+    
+                if (answersReport.length !== 0)
+                {
+                    report.answers = answersReport;
                     correct = false;
                 }
             }
-        }
+    
+            if (!this.errorHandlers.checkHints(question, report))
+            {
+                correct = false;
+            }
+    
+            //do not allow empty tags
+            if (question.tags)
+            {
+                const tagLenght = question.tags.length;
+    
+                for (let tagIndex = 0; tagIndex < tagLenght; tagIndex++)
+                {
+                    if (question.tags[tagIndex].length === 0) {
+                        report.tags = false;
+                        correct = false;
+                    }
+                }
+            }
+    
+            if (!correct) {
+                report.succeeded = false;
+                return report;
+            } else {
+                report.succeeded = true;
+                return report;
+            }
+    
+        }.bind(this);
 
-        if (!correct) {
-            return report;
-        } else {
+        errorHandlers.isIdUnique = function isIdUnique (array, id) {
+
+            const arrayLength = array.length;
+
+            for (let index = 0; index < arrayLength; index++) {
+                if (id === array[index])
+                    return false;
+            }
+
+            array.push(id);
+
             return true;
+
         }
+    
+        //search for empty or unsound properties in JSON array
+        errorHandlers.analyseJSON = function analyzeJSON (outputArray) {
+    
+            const questions = this[outputArray];
+            const questionsLength = questions.length;
+    
+            const flawedQuestions = new Array();
 
-    }.bind(this);
+            const uniqueIdentificators = new Array();
+    
+            //detecting flaws through all questions
+            for (let index = 0; index < questionsLength; index++) {
+    
+                //if (index === 0)
+                {
+                    const question = questions[index];
+    
+                    const report = this.errorHandlers.checkProperties(question, index);
 
-    //search for empty or unsound properties in JSON array
-    this.errorHandlers.analyseJSON = function (outputArray) {
+                    let duplicateId = this.errorHandlers.isIdUnique(uniqueIdentificators, question.id);
+    
+                    if (!duplicateId) {
+                        report.succeeded = false;
+                        report.duplicateId = true;
+                    }
+                        
 
-        const questions = this[outputArray];
-        const questionsLength = questions.length;
-
-        const flawedQuestions = new Array();
-
-        //detecting flaws through all questions
-        for (let index = 0; index < questionsLength; index++) {
-
-            //if (index === 0)
-            {
-                const question = questions[index];
-
-                const report = this.errorHandlers.checkProperties(question, index);
-
-                if (report !== true) {
-                    report.id = question.id;
-                    report.index = index;
-                    flawedQuestions.push(report);
+                    if (!report.succeeded) {
+                        report.id = question.id;
+                        uniqueIdentificators.push(question.id);
+                        report.index = index;
+                        flawedQuestions.push(report);
+                    }
                 }
             }
-        }
-
-        if (flawedQuestions.length > 0) {
-            this.errorHandlers.reportError('JSONanalysis', flawedQuestions);
-        }
-
-
-    }.bind(this);
-
-    this.errorHandlers.errorContentToggler = function () {
-
-        this.accessDOM('errorContainer', function (element) {
-
-            element.classList.toggle('contentClosed');
-        });
-
-
-    }.bind(this);
-
-    this.errorHandlers.attachQuestionWarning = function (element, text) {
-
-        const warningLine = document.createElement('span');
-        warningLine.classList.add('warningLine');
-        warningLine.innerText = text;
-
-        element.appendChild(warningLine);
-
-    }
-
-    this.errorHandlers.createFlawedQuestionsListElement = function (flawedQuestions) {
-
-        const container = document.createElement('ul');
-        container.classList.add('reportList')
-
-        const flawedQuestionsLength = flawedQuestions.length;
-
-        for (let index = 0; index < flawedQuestionsLength; index++)
-        {
-
-            //if (index === 0)
-            {
-                const questionReport = flawedQuestions[index];
-                console.log(questionReport);
     
-                const questionItem = document.createElement('li');
-                container.appendChild(questionItem);
-    
-                const questionId = document.createElement('span');
-                questionId.classList.add('questionId');
-                questionId.innerText = this.settings.questionIdStart + questionReport.id + this.settings.questionIdEnd;
-                questionItem.appendChild(questionId);
-
-                if (questionReport.vH === false)
-                {
-                    this.errorHandlers.attachQuestionWarning(questionItem, '..has ^, but no content for it');
-                }
-    
+            if (flawedQuestions.length > 0) {
+                this.errorHandlers.reportError('JSONanalysis', flawedQuestions);
             }
+
+            //this.verifyQuestionIdentificators
+    
+    
+        }.bind(this);
+    
+        errorHandlers.errorContentToggler = function () {
+    
+            this.accessDOM('errorContainer', function (element) {
+    
+                element.classList.toggle('contentOpened');
+            });
+    
+    
+        }.bind(this);
+    
+        errorHandlers.createWarningLine = function createWarningLine (text, indentation) {
+    
+            indentation = indentation || 0;
+
+            const warningLine = document.createElement('span');
+            warningLine.classList.add('warningLine');
+            warningLine.innerHTML = '&nbsp;'.repeat(indentation) + text;
+
+            return warningLine;
+    
         }
 
-        return container;
-
-    }.bind(this);
-
-    this.errorHandlers.reportError = function (errorLabel, data) {
-
-        switch (errorLabel) {
-            case 'questions':
+        this.miscellaneous.errorVisibleHintLine = '..has ' + this.settings.visibleHintIdentificator + ', but no content for it';
+        this.miscellaneous.errorInvisibleHintLine = '..has ' + this.settings.invisibleHintIdentificator + ', but no content for it';
+        this.miscellaneous.errorQuestionTags = '..has ' + this.settings.tagIdentificator + ', but at least 1 tag is empty';
+        this.miscellaneous.errorAnswerTags = '..has ' + this.settings.tagIdentificator + ', but answers should not have tags';
+    
+        errorHandlers.createFlawedQuestionsListElement = function createFlawedQuestionsListElement (flawedQuestions) {
+    
+            const container = document.createElement('ul');
+            container.classList.add('reportList')
+    
+            const flawedQuestionsLength = flawedQuestions.length;
+    
+            for (let index = 0; index < flawedQuestionsLength; index++)
+            {
+    
+                //if (index === 0)
                 {
-                    this.errorHandlers.writeError('medium', 'No questions in input!', '', this.guides.questionsElement);
-                    break;
+                    const questionReport = flawedQuestions[index];
+                    console.log(questionReport);
+        
+                    const questionItem = document.createElement('li');
+                    container.appendChild(questionItem);
+        
+                    const questionId = document.createElement('span');
+                    questionId.classList.add('questionId');
+                    questionId.innerText = this.settings.questionIdStart + questionReport.id + this.settings.questionIdEnd;
+                    questionItem.appendChild(questionId);
+
+                    if (questionReport.duplicateId === true)
+                    {
+                        const warningLine = errorHandlers.createWarningLine('..identificator is duplicate');
+                        questionItem.appendChild(warningLine);
+                    }
+    
+                    if (questionReport.vH === false)
+                    {
+                        const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorVisibleHintLine);
+                        questionItem.appendChild(warningLine);
+                    }
+
+                    if (questionReport.iH === false)
+                    {
+                        const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorInvisibleHintLine);
+                        questionItem.appendChild(warningLine);
+                    }
+
+                    if (questionReport.tags === false)
+                    {
+                        const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorInvisibleHintLine);
+                        questionItem.appendChild(warningLine);
+                    }
+
+                    if (questionReport.answers === false)
+                    {
+                        const warningLine = errorHandlers.createWarningLine('..has no answers');
+                        questionItem.appendChild(warningLine);
+    
+                    }
+                    else if (questionReport.answers instanceof Array && questionReport.answers.length > 0)
+                    {
+                        const answersLength = questionReport.answers.length;
+
+                        for (let answerIndex = 0; answerIndex < answersLength; answerIndex++)
+                        {
+                            const answer = questionReport.answers[answerIndex];
+                            const warningLine = errorHandlers.createWarningLine('..answer ' + (answer.index + 1));
+                            warningLine.classList.add('answer');
+                            questionItem.appendChild(warningLine);
+
+                            if (answer.vH === false)
+                            {
+                                const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorVisibleHintLine, 2);
+                                questionItem.appendChild(warningLine);
+                            }
+
+                            if (answer.iH === false)
+                            {
+                                const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorInvisibleHintLine, 2);
+                                questionItem.appendChild(warningLine);
+                            }
+
+                            if (answer.tags === true)
+                            {
+                                const warningLine = errorHandlers.createWarningLine('..answers are not allowed to have tags', 2);
+                                questionItem.appendChild(warningLine);
+                            }
+                        }
+                    }
                 }
-            case 'answers':
-                {
-                    this.errorHandlers.writeError('medium', 'No answers in input!', '', this.guides.answersElement);
-                    break;
-                }
-            case 'leftovers':
-                {
-                    const leftover = this.errorHandlers.findLeftover(10, 10);
+            }
+    
+            return container;
+    
+        }.bind(this);
+    
+        errorHandlers.reportError = function reportError (errorLabel, data) {
+    
+            switch (errorLabel) {
+                case 'questions':
+                    {
+                        this.errorHandlers.writeError('medium', 'No questions in input!', '', this.guides.questionsElement);
+                        break;
+                    }
+                case 'answers':
+                    {
+                        this.errorHandlers.writeError('medium', 'No answers in input!', '', this.guides.answersElement);
+                        break;
+                    }
+                case 'leftovers':
+                    {
+                        const leftover = this.errorHandlers.findLeftover(10, 10);
+                        
+                        const leftoverDataElement = this.errorHandlers.createLeftoverElement(leftover);
+    
+                        this.errorHandlers.writeError('severe', 'Leftovers found!', leftoverDataElement, this.guides.leftoversElement);
+                        break;
+                    }
+                case 'JSONparse':
+                    {
+                        //this error type should not be possible
+                        //!Shall I make AJAX call to send me email with input text
+    
+                        this.errorHandlers.writeError('fatal', 'Fatal error!', '', 'Could not create output because of internal error! Please copy your current input data (left side) and send it to me on uropsilus@gmail.com, you can also contact me on facebook.com/Wourly');
+                        break;
+                    }
+                case 'JSONanalysis':
+                    {
+                        const flawedQuestions = data;
+    
+                        const flawedQuestionsElement = this.errorHandlers.createFlawedQuestionsListElement(flawedQuestions);
+    
+                        this.errorHandlers.writeError('soft', 'Almost there!', flawedQuestionsElement, 'Format of your data is already working, but for better future maintenance and to avoid confusion, it is necessary to amend cases above. (double-click to expand)');
+                        break;
+                    }
                     
-                    const leftoverDataElement = this.errorHandlers.createLeftoverElement(leftover);
-
-                    this.errorHandlers.writeError('severe', 'Leftovers found!', leftoverDataElement, this.guides.leftoversElement);
+                default:
                     break;
-                }
-            case 'JSONparse':
-                {
-                    //this error type should not be possible
-                    //!Shall I make AJAX call to send me email with input text
+            }
+    
+        }.bind(this);
 
-                    this.errorHandlers.writeError('fatal', 'Fatal error!', '', 'Could not create output because of internal error! Please copy your current input data (left side) and send it to me on uropsilus@gmail.com, you can also contact me on facebook.com/Wourly');
-                    break;
-                }
-            case 'JSONanalysis':
-                {
+        return errorHandlers;
 
-                    const flawedQuestions = data;
-
-                    const flawedQuestionsElement = this.errorHandlers.createFlawedQuestionsListElement(flawedQuestions);
-
-                    this.errorHandlers.writeError('soft', 'Almost there!', flawedQuestionsElement, 'Format of your data is already working, but for better future maintenance and to avoid confusion, it is necessary to amend cases above. (double-click to expand)');
-                    break;
-                }
-                
-            default:
-                break;
-        }
-
-    }.bind(this);
+    }.bind(this))();
 
     //========================
     // GUIDES
     //========================
 
-    this.guides.finalizeExample = function (inputArray) {  
+    this.guides = (function () {
 
-        const container = document.createElement('div');
-        container.classList.add('example');
+        const guides = new Object();
 
-        const inputArrayMaxIndex = String(inputArray.length - 1);
+        guides.finalizeExample = function (inputArray) {  
 
-        for (let index in inputArray) {
+            const container = document.createElement('div');
+            container.classList.add('example');
+    
+            const inputArrayMaxIndex = String(inputArray.length - 1);
+    
+            for (let index in inputArray) {
+                
+                const span = document.createElement('span');
+    
+                if (index % 2 === 0)
+                {
+                    span.classList.add('highlight');
+                }
+                else
+                {
+                    span.classList.add('text');
+                }
+    
+                span.innerText = inputArray[index];
+    
+                if (index === inputArrayMaxIndex)
+                    span.classList.add('noSelect');
+    
+                container.appendChild(span);
+            }
+    
+            return container;
+
+        }.bind(this);
+    
+        //used in question guide
+        guides.fullExample = (function () {
+    
+            const container = document.createElement('div');
+    
+            const headline1 = document.createElement('p');
+                headline1.classList.add('headline');
+                headline1.innerText = 'Real example for question and answers:';
+    
+            const question1 = guides.finalizeExample(['(', 'squid123', ')', ' Select true facts about squids', '\\n'])
+            const answer11 = guides.finalizeExample(['T', ' they live in the sea', '\\n']);
+            const answer12 = guides.finalizeExample(['X', ' they desire human meat', '\\n']);
+            const answer13 = guides.finalizeExample(['T', ' they have 3 hearts', '\\n']);
+            const answer14 = guides.finalizeExample(['X', ' they are ancient alien race', '\\n']);
+    
+            container.appendChild(headline1);
+            container.appendChild(question1);
+            container.appendChild(answer11);
+            container.appendChild(answer12);
+            container.appendChild(answer13);
+            container.appendChild(answer14);
+    
+            const headline2 = document.createElement('p');
+                headline2.classList.add('headline');
+                headline2.innerText = 'Real example using hints:';
+    
+            const question2 = guides.finalizeExample(['(', 'squid123', ')', ' Select true facts about squids', '\\n'])
+            const answer21 = guides.finalizeExample(['T', ' they live in the sea', '\\n']);
+            const headlineForVisibleHint = document.createElement('p');
+                headlineForVisibleHint.classList.add('semi-headline');
+                headlineForVisibleHint.innerText = 'Hint visible during test:'; 
+            const answer22 = guides.finalizeExample(['X', ' they eat human meat ', '@', ' considered wrong, but technically possible', '\\n']);
+            const headlineForInvisibleHint = document.createElement('p');
+                headlineForInvisibleHint.classList.add('semi-headline');
+                headlineForInvisibleHint.innerText = 'Hint visible at the end of test:'; 
+            const answer23 = guides.finalizeExample(['T', ' they have more than 1 heart ', '^', ' 3 hearts actually', '\\n']);
+            const answer24 = guides.finalizeExample(['X', ' they are ancient alien race', '\\n']);
+    
+            container.appendChild(headline2);
+            container.appendChild(question2);
+            container.appendChild(answer21);
+            container.appendChild(headlineForVisibleHint);
+            container.appendChild(answer22);
+            container.appendChild(headlineForInvisibleHint);
+            container.appendChild(answer23);
+            container.appendChild(answer24);
+    
+            const headline3 = document.createElement('p');
+                headline3.classList.add('semi-headline');
+                headline3.innerText = 'You can combine both hints freely and it is also possible to use them for questions.';
+    
+            container.appendChild(headline3);
+    
+            return container;
+    
+        }.bind(this))();
+    
+        guides.questionsElement = (function generateQuestionGuide () {
+    
+            const container = document.createElement('div');
+    
+            const headline1 = document.createElement('p');
+            headline1.classList.add('headline');
+            headline1.innerText = 'Questions should have the following format:';
+    
+            const example1 = guides.finalizeExample(['(', 'identificator', ')', ' question text', '\\n']);
+    
+            const headline2 = document.createElement('p');
+            headline2.classList.add('headline');
+            headline2.innerText = 'Real question example:';
+    
+            const example2 = guides.finalizeExample(['(', 'squid123', ')', ' Select true facts about squids', '\\n']);
+    
+            container.appendChild(headline1);
+            container.appendChild(example1);
+            container.appendChild(headline2);
+            container.appendChild(example2);
+    
+            return container;
+    
+        }.bind(this))();
+    
+        guides.answersElement = (function generateQuestionGuide () {
+    
+            const container = document.createElement('div');
+    
+            const headline1 = document.createElement('p');
+            headline1.classList.add('headline');
+            headline1.innerText = 'Answers should have the following format:';
+    
+            const example1T = guides.finalizeExample(['T', ' correct answer text', '\\n']);
+            const example1W = guides.finalizeExample(['X', ' wrong answer text', '\\n']);
+    
+            const headline2 = document.createElement('p');
+            headline2.classList.add('headline');
+            headline2.innerText = 'Real answer example:';
+    
+            const example2T = guides.finalizeExample(['T', ' beer is good', '\\n']);
+            const example2W = guides.finalizeExample(['X', ' monkeys evolved from humans', '\\n']);
+    
+            container.appendChild(headline1);
+            container.appendChild(example1T);
+            container.appendChild(example1W);
+            container.appendChild(headline2);
+            container.appendChild(example2T);
+            container.appendChild(example2W);
+            container.appendChild(guides.fullExample);
+    
+            return container;
+    
+        }.bind(this))();
+    
+        guides.leftoversElement = (function () {
+    
+            const container = document.createElement('div');
+    
+            const headline1 = document.createElement('p');
+                headline1.classList.add('headline');
+                headline1.innerText = 'What are leftovers?';
+            const text1 = document.createTextNode('Leftovers are bits of text, that are not recognized by convertor. Leftovers may also be unfinished questions - if it is so, finish question by it\'s pattern.');
+            container.appendChild(headline1);
+            container.appendChild(text1);
+    
+            const headline2 = document.createElement('p');
+                headline2.classList.add('headline');
+                headline2.innerText = 'Why do you need to delete them?';
+            const text2 = document.createTextNode('These bits of text do not fit into JSON (converted format) and make it impossible for computer to understand it.');
+            container.appendChild(headline2);
+            container.appendChild(text2);
+    
+            const headline3 = document.createElement('p');
+                headline3.classList.add('headline');
+                headline3.innerText = 'How do I find them?';
+            const text3 = document.createTextNode('You can find them by checking line number. You can also search for nearby texts.');
+            const subtext3 = document.createElement('p');
+                subtext3.classList.add('tiny');
+                subtext3.innerText = 'Note: Some text editors (eg. Microsoft Word use different line numbering), they show line number just according to how you currently see the document, while those line numbers were calculated by using "\\n" character, which is usually generated by pressing enter. For this purpose you can just use Notepad (find it from Start search if you have windows). But be careful, as copying text to notepad will remove all formatting - so do not copy it back.'
+            container.appendChild(headline3);
+            container.appendChild(text3);
+            container.appendChild(subtext3);
+    
+            return container;
             
-            const span = document.createElement('span');
+        })();
 
-            if (index % 2 === 0)
-            {
-                span.classList.add('highlight');
-            }
-            else
-            {
-                span.classList.add('text');
-            }
-
-            span.innerText = inputArray[index];
-
-            if (index === inputArrayMaxIndex)
-                span.classList.add('noSelect');
-
-            container.appendChild(span);
-        }
-
-        return container;
-    }
-
-    //used in question guide
-    this.guides.fullExample = (function () {
-
-        const container = document.createElement('div');
-
-        const headline1 = document.createElement('p');
-            headline1.classList.add('headline');
-            headline1.innerText = 'Real example for question and answers:';
-
-        const question1 = this.guides.finalizeExample(['(', 'squid123', ')', ' Select true facts about squids', '\\n'])
-        const answer11 = this.guides.finalizeExample(['T', ' they live in the sea', '\\n']);
-        const answer12 = this.guides.finalizeExample(['X', ' they desire human meat', '\\n']);
-        const answer13 = this.guides.finalizeExample(['T', ' they have 3 hearts', '\\n']);
-        const answer14 = this.guides.finalizeExample(['X', ' they are ancient alien race', '\\n']);
-
-        container.appendChild(headline1);
-        container.appendChild(question1);
-        container.appendChild(answer11);
-        container.appendChild(answer12);
-        container.appendChild(answer13);
-        container.appendChild(answer14);
-
-        const headline2 = document.createElement('p');
-            headline2.classList.add('headline');
-            headline2.innerText = 'Real example using hints:';
-
-        const question2 = this.guides.finalizeExample(['(', 'squid123', ')', ' Select true facts about squids', '\\n'])
-        const answer21 = this.guides.finalizeExample(['T', ' they live in the sea', '\\n']);
-        const headlineForVisibleHint = document.createElement('p');
-            headlineForVisibleHint.classList.add('semi-headline');
-            headlineForVisibleHint.innerText = 'Hint visible during test:'; 
-        const answer22 = this.guides.finalizeExample(['X', ' they eat human meat ', '@', ' considered wrong, but technically possible', '\\n']);
-        const headlineForInvisibleHint = document.createElement('p');
-            headlineForInvisibleHint.classList.add('semi-headline');
-            headlineForInvisibleHint.innerText = 'Hint visible at the end of test:'; 
-        const answer23 = this.guides.finalizeExample(['T', ' they have more than 1 heart ', '^', ' 3 hearts actually', '\\n']);
-        const answer24 = this.guides.finalizeExample(['X', ' they are ancient alien race', '\\n']);
-
-        container.appendChild(headline2);
-        container.appendChild(question2);
-        container.appendChild(answer21);
-        container.appendChild(headlineForVisibleHint);
-        container.appendChild(answer22);
-        container.appendChild(headlineForInvisibleHint);
-        container.appendChild(answer23);
-        container.appendChild(answer24);
-
-        const headline3 = document.createElement('p');
-            headline3.classList.add('semi-headline');
-            headline3.innerText = 'You can combine both hints freely and it is also possible to use them for questions.';
-
-        container.appendChild(headline3);
-
-        return container;
+        return guides;
 
     }.bind(this))();
-
-    this.guides.questionsElement = (function generateQuestionGuide () {
-
-        const container = document.createElement('div');
-
-        const headline1 = document.createElement('p');
-        headline1.classList.add('headline');
-        headline1.innerText = 'Questions should have the following format:';
-
-        const example1 = this.guides.finalizeExample(['(', 'identificator', ')', ' question text', '\\n']);
-
-        const headline2 = document.createElement('p');
-        headline2.classList.add('headline');
-        headline2.innerText = 'Real question example:';
-
-        const example2 = this.guides.finalizeExample(['(', 'squid123', ')', ' Select true facts about squids', '\\n']);
-
-        container.appendChild(headline1);
-        container.appendChild(example1);
-        container.appendChild(headline2);
-        container.appendChild(example2);
-
-        return container;
-
-    }.bind(this))();
-
-    this.guides.answersElement = (function generateQuestionGuide () {
-
-        const container = document.createElement('div');
-
-        const headline1 = document.createElement('p');
-        headline1.classList.add('headline');
-        headline1.innerText = 'Answers should have the following format:';
-
-        const example1T = this.guides.finalizeExample(['T', ' correct answer text', '\\n']);
-        const example1W = this.guides.finalizeExample(['X', ' wrong answer text', '\\n']);
-
-        const headline2 = document.createElement('p');
-        headline2.classList.add('headline');
-        headline2.innerText = 'Real answer example:';
-
-        const example2T = this.guides.finalizeExample(['T', ' beer is good', '\\n']);
-        const example2W = this.guides.finalizeExample(['X', ' monkeys evolved from humans', '\\n']);
-
-        container.appendChild(headline1);
-        container.appendChild(example1T);
-        container.appendChild(example1W);
-        container.appendChild(headline2);
-        container.appendChild(example2T);
-        container.appendChild(example2W);
-        container.appendChild(this.guides.fullExample);
-
-        return container;
-
-    }.bind(this))();
-
-    this.guides.leftoversElement = (function () {
-
-        const container = document.createElement('div');
-
-        const headline1 = document.createElement('p');
-            headline1.classList.add('headline');
-            headline1.innerText = 'What are leftovers?';
-        const text1 = document.createTextNode('Leftovers are bits of text, that are not recognized by convertor. Leftovers may also be unfinished questions - if it is so, finish question by it\'s pattern.');
-        container.appendChild(headline1);
-        container.appendChild(text1);
-
-        const headline2 = document.createElement('p');
-            headline2.classList.add('headline');
-            headline2.innerText = 'Why do you need to delete them?';
-        const text2 = document.createTextNode('These bits of text do not fit into JSON (converted format) and make it impossible for computer to understand it.');
-        container.appendChild(headline2);
-        container.appendChild(text2);
-
-        const headline3 = document.createElement('p');
-            headline3.classList.add('headline');
-            headline3.innerText = 'How do I find them?';
-        const text3 = document.createTextNode('You can find them by checking line number. You can also search for nearby texts.');
-        const subtext3 = document.createElement('p');
-            subtext3.classList.add('tiny');
-            subtext3.innerText = 'Note: Some text editors (eg. Microsoft Word use different line numbering), they show line number just according to how you currently see the document, while those line numbers were calculated by using "\\n" character, which is usually generated by pressing enter. For this purpose you can just use Notepad (find it from Start search if you have windows). But be careful, as copying text to notepad will remove all formatting - so do not copy it back.'
-        container.appendChild(headline3);
-        container.appendChild(text3);
-        container.appendChild(subtext3);
-
-        return container;
-        
-    })();
-
+    
     //========================
     //  MISCELLANEOUS
     //========================
+
+    this.miscellaneous.properties = ['answers', 'vH', 'iH', 'tags'];
 
     //return bodyObject, which contains text and properties separated by symbols
     //these properties are mostly 'hints'
@@ -1064,7 +1199,7 @@ var Convertor = function (settings) {
 
     this.miscellaneous.processTags = function (tagsString) {
 
-        const tagArray = tagsString.split(this.settings.tagSplitter);
+        const tagArray = tagsString.split(this.settings.propertySplitter);
         const tagArrayLength = tagArray.length;
 
         const preStringArray = new Array();
@@ -1132,32 +1267,18 @@ var Convertor = function (settings) {
         }.bind(this))
     }.bind(this);
 
-
-    /////////////oierhgierg iůergů ebogbe irgb eir g
-    this.convertors.JSONparser = function (outputText, outputArray) {
-
-        try {
-            this[outputArray] = JSON.parse(this[outputText]);
-            //throw new Error('');
-            return true;
-        }
-        catch (error) {
-            return false;
-        }
-        
-    }.bind(this);
-
     //========================
     // MAIN FUNCTION
     //========================
 
-    this.convert = function () {
+    this.convert = function mainConversionFunction () {
 
         console.clear();
         var performanceStart = performance.now();
 
         //stores, which steps were completed, so it may clarify, where code is stuck
         this.conversionStatus = new Object();
+        this.allIdentificators = new Array();
 
         this.miscellaneous.clearOutputElement();
         this.miscellaneous.clearErrorElements();
