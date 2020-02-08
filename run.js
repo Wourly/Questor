@@ -1,54 +1,49 @@
-var questionsFragment = new DocumentFragment();
+var q = null;
 
-const readQuestionsIndexLimit = QUEST.length;
+window.addEventListener('load', function pageLoad () {
 
-for (let i = 0; i < readQuestionsIndexLimit; i++) {
-    questionsFragment.appendChild(createQuestionBlock(i))
-}
+    const URLVARS = getUrlVariables();
+    deepFreeze(URLVARS);
 
-questionsElement.appendChild(questionsFragment);
-
-readButton.addEventListener('click', function () {
-    questionsElement.classList.toggle('hidden');
-})
-
-startButton.addEventListener('click', function () {
-
-    let indexInputValue = indexInput.value.trim();
-
-    //classic min to max input
-    if (indexInputValue.length <= 0) {
-
-        let input = validateFormData();
-        
-        if (input.status === 'valid') {
-            startTest(input);
-        }
-    }
-    //input from exact indexes
-    else
+    if (URLVARS && URLVARS.test)
     {
-        //should be called identificators later
-        const inputIndexes = indexInputValue.split('^');
+        const selectedTest = URLVARS.test;
+        //===================
+        // RUN
+        //===================
+        if (selectedTest !== 'convertor')
+        {
+            const selectedFolder = './Tests/' + selectedTest + '/';
 
-        const questionSyntacticalIndexes = new Array();
+            questionScript = document.createElement('script');
+            questionScript.src = selectedFolder + 'questions.js';
+            
+            questionScript.addEventListener('load', function questionScriptLoaded () {
 
-        //filtering desired indexes
-        for (let i = 0; i < inputIndexes.length; i++) {
+                q = new Questor(QUESTIONS, TAGS);
+                console.log(q);
+            });
 
-            for (let j = 0; j < limitQuestions; j++) {
+            questionScript.addEventListener('error', function questionScriptMissing () {
 
-                if (QUEST[j].index === inputIndexes[i]) {
-                    questionSyntacticalIndexes.push(j);
-                }
+                writeGuidePage('Could not find test: ' + selectedTest);
+
+            });
+
+            document.head.appendChild(questionScript);
+            //playground
+            {
 
             }
         }
 
-        startTest(questionSyntacticalIndexes);
-
+        //===================
+        // /RUN
+        //===================
+    }
+    else
+    {
+        createGuidePage();
     }
 
 });
-
-endButton.addEventListener('click', endTest);

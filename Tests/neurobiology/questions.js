@@ -1,8 +1,7 @@
-var QUEST = 
-[
-{
+const QUESTIONS = 
+[{
    "id":"147",
-   "text":"Molekulární motory",
+   "text":"Molekulární motory:",
    "answers":
       [
          {"valid":true,"text":"Využívají ATP"},
@@ -13,7 +12,7 @@ var QUEST =
 },
 {
    "id":"148",
-   "text":"Iontové kanály",
+   "text":"Iontové kanály:",
    "answers":
       [
          {"valid":false,"text":"Jsou naplněné vodou","iH":"pouze iontové kanály stále otevřené"},
@@ -24,7 +23,7 @@ var QUEST =
 },
 {
    "id":"149",
-   "text":"Fúzi váčku napomáhá",
+   "text":"Fúzi váčku napomáhá:",
    "answers":
       [
          {"valid":false,"text":"Zinek nebo lithium"},
@@ -35,7 +34,7 @@ var QUEST =
 },
 {
    "id":"150",
-   "text":"Kanály jsou charakterizované",
+   "text":"Kanály jsou charakterizované:",
    "answers":
       [
          {"valid":false,"text":"Unknown"},
@@ -46,7 +45,7 @@ var QUEST =
 },
 {
    "id":"151",
-   "text":"Klidový membránový potenciál",
+   "text":"Klidový membránový potenciál:",
    "answers":
       [
          {"valid":true,"text":"Je v záporných hodnotách (např. -70mV)","iH":"-50mV až -90mV"},
@@ -57,7 +56,7 @@ var QUEST =
 },
 {
    "id":"152",
-   "text":"Proteosyntéza v neuronu",
+   "text":"Proteosyntéza v neuronu:",
    "answers":
       [
          {"valid":true,"text":"Probíhá v těle"},
@@ -68,7 +67,7 @@ var QUEST =
 },
 {
    "id":"153",
-   "text":"Cytokiny",
+   "text":"Cytokiny:",
    "answers":
       [
          {"valid":true,"text":"Lymfokin","iH":"produkce lymfocytů, aktivace makrofágů"},
@@ -79,7 +78,7 @@ var QUEST =
 },
 {
    "id":"154",
-   "text":"Mezi inhibiční NT nepatří",
+   "text":"Mezi inhibiční NT nepatří:",
    "answers":
       [
          {"valid":true,"text":"Kyselina asparagová","iH":"jedná se o excitační neurotransmiter mozku a míchy (s glutamétem)"},
@@ -90,7 +89,7 @@ var QUEST =
 },
 {
    "id":"155",
-   "text":"Proteosyntéza",
+   "text":"Proteosyntéza:",
    "answers":
       [
          {"valid":true,"text":"Ve výběžcích neuronu (axonu a dendritech)"},
@@ -101,19 +100,18 @@ var QUEST =
 },
 {
    "id":"156",
-   "text":"Periferní nervový systém",
+   "text":"Periferní nervový systém:",
    "answers":
       [
          {"valid":true,"text":"Vývoj z nervové lišty"},
          {"valid":true,"text":"Zahrnuje ganglia"},
          {"valid":true,"text":"Zahrnuje Schwannovy buňky"},
-         {"valid":false,"text":"Unknown"},
-
+         {"valid":false,"text":"Unknown"}
       ]
 },
 {
    "id":"168",
-   "text":"Postsynaptická membrána, jejíž klidový membránový potenciál je -70mV obsahuje receptory pro neuropřenašeč GABA, jehož působením se v membráně otevírají kanly pro chloridové ionty. Po aktivaci GABA receptorů",
+   "text":"Postsynaptická membrána, jejíž klidový membránový potenciál je -70mV obsahuje receptory pro neuropřenašeč GABA, jehož působením se v membráně otevírají kanly pro chloridové ionty. Po aktivaci GABA receptorů:",
    "answers":
       [
          {"valid":true,"text":"se potenciál postsynaptické membrány nezmění, je-li Ecl = -70mV"},
@@ -124,7 +122,7 @@ var QUEST =
 },
 {
    "id":"169",
-   "text":"Pro pasivní (elektronické) šíření elektrického signálu v membráně platí, že hodnota dělkové konstanty &lambda;",
+   "text":"Pro pasivní (elektronické) šíření elektrického signálu v membráně platí, že hodnota dělkové konstanty &lambda;:",
    "answers":
       [
          {"valid":false,"text":"je úměrná celkové délce axonu"},
@@ -135,7 +133,7 @@ var QUEST =
 },
 {
    "id":"170",
-   "text":"Nemyelinizovaný axon o průměru 16&mu;m vede vzruchy rychlostí asi 4m/s. Jakou rychlost vedení bude mít myelinizovaný axon o stejném vnějším průměru (včetně myelinové pochvy)?",
+   "text":"Nemyelinizovaný axon o průměru 16&mu;m vede vzruchy rychlostí asi 4m/s. Jakou rychlost vedení bude mít myelinizovaný axon o stejném vnějším průměru (včetně myelinové pochvy)?:",
    "answers":
       [
          {"valid":false,"text":"48m/s"},
@@ -146,7 +144,7 @@ var QUEST =
 },
 {
    "id":"171",
-   "text":"Myelinizovaný axon, která vede vzruchy rychlostí 90m/s má průměr (včetně myelinové pochvy) přibližně",
+   "text":"Myelinizovaný axon, která vede vzruchy rychlostí 90m/s má průměr (včetně myelinové pochvy) přibližně:",
    "answers":
       [
          {"valid":false,"text":"10&mu;m"},
@@ -157,19 +155,18 @@ var QUEST =
 },
 {
    "id":"172",
-   "text":"Iontové kanály některých ionotropních receptorů se otevírají jen po depolarizaci postsynaptické membrány asi o 20 mV. Jde o ionotropní receptory",
+   "text":"Iontové kanály některých ionotropních receptorů se otevírají jen po depolarizaci postsynaptické membrány asi o 20 mV. Jde o ionotropní receptory:",
    "answers":
       [
          {"valid":false,"text":"acetylcholinové nikotinového typu"},
          {"valid":false,"text":"acetylcholinové muskarinového typu"},
          {"valid":true,"text":"glutamátové NMDA"},
-         {"valid":false,"text":"glutamátové non-NMDA"},
-
+         {"valid":false,"text":"glutamátové non-NMDA"}
       ]
 },
 {
    "id":"32",
-   "text":"NMDA receptor",
+   "text":"NMDA receptor:",
    "answers":
       [
          {"valid":true,"text":"je ligandem ovládaný a napětově senzitivní kanál zároveň"},
@@ -180,7 +177,7 @@ var QUEST =
 },
 {
    "id":"33",
-   "text":"Rychlý retrográdní transport",
+   "text":"Rychlý retrográdní transport:",
    "answers":
       [
          {"valid":false,"text":"dopravuje použité neuropeptidy do těla neuronu k jejich recyklaci"},
@@ -191,7 +188,7 @@ var QUEST =
 },
 {
    "id":"34",
-   "text":"Hlavním neuropřenašečem uvolňovaným na zakončeních parasympatiku je",
+   "text":"Hlavním neuropřenašečem uvolňovaným na zakončeních parasympatiku je:",
    "answers":
       [
          {"valid":false,"text":"noradrenalin","iH":"ze sympatiku"},
@@ -202,7 +199,7 @@ var QUEST =
 },
 {
    "id":"35",
-   "text":"Neuron pracuje jako analogo-digitální převodník, což znamená, že",
+   "text":"Neuron pracuje jako analogo-digitální převodník, což znamená, že:",
    "answers":
       [
          {"valid":true,"text":"reaguje odpovědí ‚vše nebo nic‘","iH":"otevírání iontových kanálů"},
@@ -213,7 +210,7 @@ var QUEST =
 },
 {
    "id":"36",
-   "text":"Gliové buňky",
+   "text":"Gliové buňky:",
    "answers":
       [
          {"valid":true,"text":"zajišťují iontovou a objemovou homeostázu v CNS"},
@@ -224,7 +221,7 @@ var QUEST =
 },
 {
    "id":"37",
-   "text":"Jak dochází k uvolnění neurotransmiterů na synapsi",
+   "text":"Jak dochází k uvolnění neurotransmiterů na synapsi:",
    "answers":
       [
          {"valid":false,"text":"exocytózou z povrchu dendritických trnových výběžků","iH":"vylučují se z axonu"},
@@ -235,19 +232,18 @@ var QUEST =
 },
 {
    "id":"38",
-   "text":"Mezi druhé posly nepatří",
+   "text":"Mezi druhé posly nepatří:",
    "answers":
       [
          {"valid":false,"text":"IP3"},
          {"valid":true,"text":"PKA"},
          {"valid":false,"text":"cAMP"},
-         {"valid":false,"text":"DAG"},
-
+         {"valid":false,"text":"DAG"}
       ]
 },
 {
    "id":"139",
-   "text":"Když se zvýší extracelulární koncentrace Na+, tak dojde k",
+   "text":"Když se zvýší extracelulární koncentrace Na+, tak dojde k:",
    "answers":
       [
          {"valid":true,"text":"zvýšení klidového membránového potenciálu"},
@@ -258,7 +254,7 @@ var QUEST =
 },
 {
    "id":"140",
-   "text":"Zvýšením propustnosti membrány pro nějaký iont se KMP",
+   "text":"Zvýšením propustnosti membrány pro nějaký iont se KMP:",
    "answers":
       [
          {"valid":false,"text":"nezmění"},
@@ -269,7 +265,7 @@ var QUEST =
 },
 {
    "id":"141",
-   "text":"Goldman-Hodgkin-Katzova rovnice",
+   "text":"Goldman-Hodgkin-Katzova rovnice:",
    "answers":
       [
          {"valid":true,"text":"formálně odpovídá Nernstově rovnici"},
@@ -280,7 +276,7 @@ var QUEST =
 },
 {
    "id":"142",
-   "text":"Kvantový výlev váčku je závislý na",
+   "text":"Kvantový výlev váčku je závislý na:",
    "answers":
       [
          {"valid":false,"text":"vstupu draslíku do synapse"},
@@ -291,7 +287,7 @@ var QUEST =
 },
 {
    "id":"143",
-   "text":"Napětově ovládané kanály pro draselné ionty, které se uplatňují při akčním potenciálu",
+   "text":"Napětově ovládané kanály pro draselné ionty, které se uplatňují při akčním potenciálu:",
    "answers":
       [
          {"valid":false,"text":"jsou otevřeny, dokud trvá depolarizace membrány, jsou hlavní pro repolarizaci"},
@@ -302,7 +298,7 @@ var QUEST =
 },
 {
    "id":"144",
-   "text":"Draslíková depolarizace buňky je děj, k němuž dochází",
+   "text":"Draslíková depolarizace buňky je děj, k němuž dochází:",
    "answers":
       [
          {"valid":false,"text":"zvýšením toku draselných iontů do buňky"},
@@ -313,7 +309,7 @@ var QUEST =
 },
 {
    "id":"145",
-   "text":"Oligodendrocyty se liší od Schwannových buněk",
+   "text":"Oligodendrocyty se liší od Schwannových buněk:",
    "answers":
       [
          {"valid":true,"text":"tvorbou internodálních úseků myelinové pochvy kolem několika desítek axonů"},
@@ -324,19 +320,18 @@ var QUEST =
 },
 {
    "id":"146",
-   "text":"V endocytóze klatrinových váčků mají roli mj. tyto proteiny",
+   "text":"V endocytóze klatrinových váčků mají roli mj. tyto proteiny:",
    "answers":
       [
          {"valid":true,"text":"kalmodulin a kalcineurin","iH":"aktivace tvorby kostry"},
          {"valid":true,"text":"dynamin","iH":"odškrcením váčku (GTPasa)"},
          {"valid":true,"text":"defosfiny"},
-         {"valid":false,"text":"protein dynamitin s GTPasovou aktivitou","iH":"dynamitin je podjednotka dyneinu – transport organel k – konci mikrotubulů"},
-
+         {"valid":false,"text":"protein dynamitin s GTPasovou aktivitou","iH":"dynamitin je podjednotka dyneinu – transport organel k – konci mikrotubulů"}
       ]
 },
 {
    "id":"111",
-   "text":"Funkce botulotoxinu",
+   "text":"Funkce botulotoxinu:",
    "answers":
       [
          {"valid":true,"text":"blokuje vylití acetylcholinu","iH":"po podráždění neuronu (rozkládají složky SNARE-komplxu) cíleně se váže na synopoprotein"},
@@ -347,7 +342,7 @@ var QUEST =
 },
 {
    "id":"112",
-   "text":"Z ektodermu vzniká",
+   "text":"Z ektodermu vzniká:",
    "answers":
       [
          {"valid":true,"text":"neurální ploténka","iH":"buňky nediferencovaných nervových progenitorových buněk"},
@@ -358,7 +353,7 @@ var QUEST =
 },
 {
    "id":"113",
-   "text":"Mezi neurotrofiny nepatří",
+   "text":"Mezi neurotrofiny nepatří:",
    "answers":
       [
          {"valid":true,"text":"neurexiny","iH":"presynaptický protein umožňující spojení neuronů na synapsi"},
@@ -369,7 +364,7 @@ var QUEST =
 },
 {
    "id":"114",
-   "text":"Ephriny",
+   "text":"Ephriny:",
    "answers":
       [
          {"valid":false,"text":"alkaloidy"},
@@ -380,7 +375,7 @@ var QUEST =
 },
 {
    "id":"115",
-   "text":"Centrální nervový systém",
+   "text":"Centrální nervový systém:",
    "answers":
       [
          {"valid":true,"text":"se skládá z mozku a spinální míchy"},
@@ -391,7 +386,7 @@ var QUEST =
 },
 {
    "id":"116",
-   "text":"Z neurální lišty se vyvíjejí",
+   "text":"Z neurální lišty se vyvíjejí:",
    "answers":
       [
          {"valid":true,"text":"nervové buňky ganglií sympatiku a parasympatiku"},
@@ -402,7 +397,7 @@ var QUEST =
 },
 {
    "id":"117",
-   "text":"Z nervové trubice se vyvíjejí",
+   "text":"Z nervové trubice se vyvíjejí:",
    "answers":
       [
          {"valid":true,"text":"astrocyty a oligodendrocyty"},
@@ -413,19 +408,18 @@ var QUEST =
 },
 {
    "id":"118",
-   "text":"Z nervové trubice vzniká",
+   "text":"Z nervové trubice vzniká:",
    "answers":
       [
          {"valid":false,"text":"páteř"},
          {"valid":true,"text":"centrální nervová soustava"},
          {"valid":true,"text":"mozkové komory","iH":"zbytněním centrální dutiny neurální trubice"},
-         {"valid":false,"text":"kůra nadledvin"},
-
+         {"valid":false,"text":"kůra nadledvin"}
       ]
 },
 {
    "id":"39",
-   "text":"Oligodendrocyt CNS",
+   "text":"Oligodendrocyt CNS:",
    "answers":
       [
          {"valid":true,"text":"obaluje myelinovou pochvou až desítky axonů neuronů","iH":"10 až 50"},
@@ -436,7 +430,7 @@ var QUEST =
 },
 {
    "id":"40",
-   "text":"Kde jsou skladovány neurotransmitery v neuronech?",
+   "text":"Kde jsou skladovány neurotransmitery v neuronech?:",
    "answers":
       [
          {"valid":false,"text":"v synaptických granulích"},
@@ -447,7 +441,7 @@ var QUEST =
 },
 {
    "id":"41",
-   "text":"Naváděcí buňky slouží jako",
+   "text":"Naváděcí buňky slouží jako:",
    "answers":
       [
          {"valid":true,"text":"přechodné cíle rostoucího axonu"},
@@ -458,7 +452,7 @@ var QUEST =
 },
 {
    "id":"42",
-   "text":"Membrány buněk vzrušivých tkání",
+   "text":"Membrány buněk vzrušivých tkání:",
    "answers":
       [
          {"valid":true,"text":"se liší oproti ostatním tkáním hlavně přítomností napěťově ovládaných sodíkových kanálů"},
@@ -469,7 +463,7 @@ var QUEST =
 },
 {
    "id":"43",
-   "text":"Pro gliové buňky koncového mozku platí, že",
+   "text":"Pro gliové buňky koncového mozku platí, že:",
    "answers":
       [
          {"valid":false,"text":"je jich méně než neuronů"},
@@ -480,7 +474,7 @@ var QUEST =
 },
 {
    "id":"44",
-   "text":"Jaké účinky mohou mít neurotransmitery na různé neuroefektorové buňky?",
+   "text":"Jaké účinky mohou mít neurotransmitery na různé neuroefektorové buňky?:",
    "answers":
       [
          {"valid":true,"text":"excitační nebo inhibiční"},
@@ -491,19 +485,18 @@ var QUEST =
 },
 {
    "id":"45",
-   "text":"Hematoencefalická bariéra (blood-brain barrier)",
+   "text":"Hematoencefalická bariéra (blood-brain barrier):",
    "answers":
       [
          {"valid":false,"text":"je volně propustná pro všechna antibiotika a ostatní léky","iH":"jen pokud se aplikují do mozkomíšního moku – jinak účinkují jen na periferní tkáně)"},
          {"valid":false,"text":"je tvořena jen jednou vrstvou buněk (endotel), které jsou v přímém kontaktu s neurony"},
          {"valid":true,"text":"je podmíněna existencí tzv. těsných spojů (tight junctions)"},
-         {"valid":false,"text":"je nepropustná pro glukózu"},
-
+         {"valid":false,"text":"je nepropustná pro glukózu"}
       ]
 },
 {
    "id":"132",
-   "text":"Astrocyty zajišťují",
+   "text":"Astrocyty zajišťují:",
    "answers":
       [
          {"valid":false,"text":"produkci ATP pro aktivní neurony ve svém okolí"},
@@ -514,7 +507,7 @@ var QUEST =
 },
 {
    "id":"133",
-   "text":"Astrocyty",
+   "text":"Astrocyty:",
    "answers":
       [
          {"valid":true,"text":"reagují na aktivitu neuronů ve svém okolí depolarizací"},
@@ -525,7 +518,7 @@ var QUEST =
 },
 {
    "id":"134",
-   "text":"RNA granule obsahují",
+   "text":"RNA granule obsahují:",
    "answers":
       [
          {"valid":false,"text":"mRNA, histony a transportní proteiny"},
@@ -536,7 +529,7 @@ var QUEST =
 },
 {
    "id":"135",
-   "text":"Pomalý axonální transport",
+   "text":"Pomalý axonální transport:",
    "answers":
       [
          {"valid":false,"text":"dopravuje všechny proteiny stejnou rychlostí"},
@@ -547,7 +540,7 @@ var QUEST =
 },
 {
    "id":"136",
-   "text":"Rychlý axonální transport",
+   "text":"Rychlý axonální transport:",
    "answers":
       [
          {"valid":false,"text":"probíhá vždy retrográdním směrem"},
@@ -558,7 +551,7 @@ var QUEST =
 },
 {
    "id":"137",
-   "text":"Imunitní systém ovlivňuje nervový systém produkcí",
+   "text":"Imunitní systém ovlivňuje nervový systém produkcí:",
    "answers":
       [
          {"valid":false,"text":"ACTH"},
@@ -569,30 +562,29 @@ var QUEST =
 },
 {
    "id":"138",
-   "text":"Napěťově ovládané kanály můžou být také aktivovány chemicky",
+   "text":"Napěťově ovládané kanály můžou být také aktivovány chemicky:",
    "answers":
       [
          {"valid":true,"text":"neuropřenašečem"},
          {"valid":true,"text":"fosforylací"},
          {"valid":true,"text":"Ca<sup>2+</sup> ionty"},
-         {"valid":false,"text":"unknown"},
-
+         {"valid":false,"text":"unknown"}
       ]
 },
 {
    "id":"71",
-   "text":"Vyberte pravdivá tvrzení týkající se &gamma;-aminomáselné kyseliny (GABA)",
+   "text":"Vyberte pravdivá tvrzení týkající se &gamma;-aminomáselné kyseliny (GABA):",
    "answers":
       [
          {"valid":true,"text":"v CNS obratlovců je koncentrace GABA větší než koncentrace acetylcholinu a noradrenalinu"},
          {"valid":true,"text":"vzniká dekarboxylací glutamátu"},
          {"valid":false,"text":"je z většiny degradována přímo v synaptické štěrbině","iH":"děje se tak v mitochondriích glií"},
-         {"valid":false,"text":"primárním prekursorem její biosyntézy je kyselina &beta;-aminomáselná","iH":""}
+         {"valid":false,"text":"primárním prekursorem její biosyntézy je kyselina &beta;-aminomáselná"}
       ]
 },
 {
    "id":"72",
-   "text":"Vyberte <u>nepravdivá tvrzení</u> týkající se &gamma;-aminomáselné kyseliny (GABA)",
+   "text":"Vyberte <u>nepravdivá tvrzení</u> týkající se &gamma;-aminomáselné kyseliny (GABA):",
    "answers":
       [
          {"valid":true,"text":"v CNS obratlovců je GABA méně rozšířený inhibiční receptor než glycin"},
@@ -603,7 +595,7 @@ var QUEST =
 },
 {
    "id":"73",
-   "text":"Vyberte <u>nepravdivá tvrzení</u> týkající se &gamma;-aminomáselné kyseliny (GABA)",
+   "text":"Vyberte <u>nepravdivá tvrzení</u> týkající se &gamma;-aminomáselné kyseliny (GABA):",
    "answers":
       [
          {"valid":true,"text":"v CNS obratlovců je GABA méně rozšířený inhibiční neuropřenašeč než glycin"},
@@ -614,7 +606,7 @@ var QUEST =
 },
 {
    "id":"74",
-   "text":"Receptory spřažené s G-proteiny jsou",
+   "text":"Receptory spřažené s G-proteiny jsou:",
    "answers":
       [
          {"valid":true,"text":"mj. adrenergní receptory"},
@@ -625,7 +617,7 @@ var QUEST =
 },
 {
    "id":"75",
-   "text":"Chemicky ovládané kanály mohou být aktivovány",
+   "text":"Chemicky ovládané kanály mohou být aktivovány:",
    "answers":
       [
          {"valid":false,"text":"zvýšením extracelulární koncentrace sodných iontů"},
@@ -636,7 +628,7 @@ var QUEST =
 },
 {
    "id":"76",
-   "text":"Endokrinní funkce nervového systému spočívající v produkci a uvolňování hormonů přímo z nervových buněk zahrnují",
+   "text":"Endokrinní funkce nervového systému spočívající v produkci a uvolňování hormonů přímo z nervových buněk zahrnují:",
    "answers":
       [
          {"valid":true,"text":"neuromodulátory, tj. lokální hormony CNS (např. opioidní peptidy)"},
@@ -647,19 +639,18 @@ var QUEST =
 },
 {
    "id":"77",
-   "text":"Endokrinní funkce nervového systému spočívající v produkci a uvolňování hormonů přímo z nervových buněk zahrnují",
+   "text":"Endokrinní funkce nervového systému spočívající v produkci a uvolňování hormonů přímo z nervových buněk zahrnují:",
    "answers":
       [
          {"valid":false,"text":"ocytocin z adenohypofýzy","iH":"je z hypotalamu"},
          {"valid":true,"text":"liberiny a statiny z hypotalamu"},
          {"valid":true,"text":"tropní hormony (například ACTH) z předního laloku hypofýzy","iH":"přímo z adenohypofýzy"},
-         {"valid":true,"text":"melatonin z epifýzy"},
-
+         {"valid":true,"text":"melatonin z epifýzy"}
       ]
 },
 {
    "id":"119",
-   "text":"Neurální ploténka vzniká z",
+   "text":"Neurální ploténka vzniká z:",
    "answers":
       [
          {"valid":true,"text":"ektodermu"},
@@ -670,7 +661,7 @@ var QUEST =
 },
 {
    "id":"120",
-   "text":"„Bone morphogenetic protein“ indukuje",
+   "text":"„Bone morphogenetic protein“ indukuje:",
    "answers":
       [
          {"valid":true,"text":"tvorbu epidermis z ektodermu","iH":"BMP na receptorové proteinkinázy -> spuštění kaskády událostí vedoucích k fosforylaci (aktivaci) SMAD1 – komplex s jinými proteiny -> vstup do jádra jako transkripční faktory -> tvorba epidermis"},
@@ -681,7 +672,7 @@ var QUEST =
 },
 {
    "id":"121",
-   "text":"Sonic the Hedgehog",
+   "text":"Sonic the Hedgehog:",
    "answers":
       [
          {"valid":true,"text":"determinuje indentitu neuronů při dorso-ventrální diferenciaci nervové trubice","iH":"míchy i mozku"},
@@ -692,7 +683,7 @@ var QUEST =
 },
 {
    "id":"122",
-   "text":"Neuromery",
+   "text":"Neuromery:",
    "answers":
       [
          {"valid":true,"text":"vznikají při rostro-kaudální diferenciaci","iH":"GDF11 – neuromery vznikají při diferenciaci předozadní pozici v zadním mozku embrya"},
@@ -703,7 +694,7 @@ var QUEST =
 },
 {
    "id":"123",
-   "text":"Mezi neurotrofiny patří",
+   "text":"Mezi neurotrofiny patří:",
    "answers":
       [
          {"valid":true,"text":"netrin","iH":"chemoatraktant spodinové ploténky"},
@@ -714,7 +705,7 @@ var QUEST =
 },
 {
    "id":"124",
-   "text":"Na směřování růstového kužele axonu se podílí",
+   "text":"Na směřování růstového kužele axonu se podílí:",
    "answers":
       [
          {"valid":true,"text":"adhezní molekuly extracelulární matrix","iH":"fibronektin, laminin – rozpoznávané integrinem"},
@@ -725,19 +716,18 @@ var QUEST =
 },
 {
    "id":"125",
-   "text":"Hlavové nervy mají jádra v",
+   "text":"Hlavové nervy mají jádra v:",
    "answers":
       [
          {"valid":false,"text":"mozečku"},
          {"valid":false,"text":"hypotalamu"},
          {"valid":true,"text":"mozkovém kmeni"},
-         {"valid":false,"text":"talamu"},
-
+         {"valid":false,"text":"talamu"}
       ]
 },
 {
    "id":"85",
-   "text":"K vylití NT dojde",
+   "text":"K vylití NT dojde:",
    "answers":
       [
          {"valid":true,"text":"vždy po fúzi s presynaptickou membránou"},
@@ -747,7 +737,7 @@ var QUEST =
 },
 {
    "id":"86",
-   "text":"Myelinizace",
+   "text":"Myelinizace:",
    "answers":
       [
          {"valid":false,"text":"tepelná izolace neuronů"},
@@ -758,7 +748,7 @@ var QUEST =
 },
 {
    "id":"87",
-   "text":"Evoluční význam myelinizace",
+   "text":"Evoluční význam myelinizace:",
    "answers":
       [
          {"valid":true,"text":"menší spotřeba ATP"},
@@ -769,7 +759,7 @@ var QUEST =
 },
 {
    "id":"88",
-   "text":"Mezi glie PNS nepatří",
+   "text":"Mezi glie PNS nepatří:",
    "answers":
       [
          {"valid":true,"text":"mikroglie"},
@@ -780,7 +770,7 @@ var QUEST =
 },
 {
    "id":"89",
-   "text":"Vtok K <u>do buňky</u> způsobuje",
+   "text":"Vtok K <u>do buňky</u> způsobuje:",
    "answers":
       [
          {"valid":true,"text":"hyperpolarizaci membrány"},
@@ -791,19 +781,18 @@ var QUEST =
 },
 {
    "id":"90",
-   "text":"Synaptotagmin (možná synaptobrevin)",
+   "text":"Synaptotagmin (možná synaptobrevin):",
    "answers":
       [
          {"valid":true,"text":"jeho kinázová aktivita nukleuje endocytózu"},
          {"valid":true,"text":"váže se na SNAP a syntaxin"},
          {"valid":true,"text":"je to v-SNARE"},
-         {"valid":false,"text":"je to t-SNARE"},
-
+         {"valid":false,"text":"je to t-SNARE"}
       ]
 },
 {
    "id":"100",
-   "text":"G-proteiny mohou v důsledku své aktivace",
+   "text":"G-proteiny mohou v důsledku své aktivace:",
    "answers":
       [
          {"valid":true,"text":"zvyšovat hladinu cytoplazmatického cAMP"},
@@ -814,19 +803,18 @@ var QUEST =
 },
 {
    "id":"101",
-   "text":"Který neurotransmiter byl objeven jako první",
+   "text":"Který neurotransmiter byl objeven jako první:",
    "answers":
       [
          {"valid":true,"text":"acetylcholin"},
          {"valid":false,"text":"kyselina &gamma;-amino máselná"},
          {"valid":false,"text":"glutamát"},
-         {"valid":false,"text":"dopamin"},
-
+         {"valid":false,"text":"dopamin"}
       ]
 },
 {
    "id":"17",
-   "text":"Syntaxin",
+   "text":"Syntaxin:",
    "answers":
       [
          {"valid":false,"text":"je to v-SNARE"},
@@ -837,7 +825,7 @@ var QUEST =
 },
 {
    "id":"18",
-   "text":"Purinergní receptory",
+   "text":"Purinergní receptory:",
    "answers":
       [
          {"valid":true,"text":"se nacházejí v CNS","iH":"jsou ve většině lidského těla"},
@@ -848,7 +836,7 @@ var QUEST =
 },
 {
    "id":"19",
-   "text":"Synaptotagmin",
+   "text":"Synaptotagmin:",
    "answers":
       [
          {"valid":false,"text":"patří mezi v-SNARE"},
@@ -858,7 +846,7 @@ var QUEST =
 },
 {
    "id":"20",
-   "text":"Které glie se nacházejí v CNS",
+   "text":"Které glie se nacházejí v CNS:",
    "answers":
       [
          {"valid":true,"text":"astrocyty"},
@@ -869,7 +857,7 @@ var QUEST =
 },
 {
    "id":"22",
-   "text":"Mezi tvz. pasivní elektrické charakteristiky membrány vzrušivých tkání patří",
+   "text":"Mezi tvz. pasivní elektrické charakteristiky membrány vzrušivých tkání patří:",
    "answers":
       [
          {"valid":false,"text":"vodivost napěťově ovládaných sodíkových kanálů"},
@@ -880,7 +868,7 @@ var QUEST =
 },
 {
    "id":"23",
-   "text":"Katecholaminy",
+   "text":"Katecholaminy:",
    "answers":
       [
          {"valid":true,"text":"jsou ze synaptické štěrbiny účinně vychytávány"},
@@ -890,19 +878,18 @@ var QUEST =
 },
 {
    "id":"24",
-   "text":"Nikotinový acetylcholinový receptor",
+   "text":"Nikotinový acetylcholinový receptor:",
    "answers":
       [
          {"valid":true,"text":"váže dvě molekuly acetylcholinu"},
          {"valid":true,"text":"je ionotropní"},
          {"valid":true,"text":"je to heteropentamer"},
-         {"valid":false,"text":"je to monopentamer"},
-
+         {"valid":false,"text":"je to monopentamer"}
       ]
 },
 {
    "id":"25",
-   "text":"Když se membránový potenciál rovná rovnovážnému potenciálu pro některý iont",
+   "text":"Když se membránový potenciál rovná rovnovážnému potenciálu pro některý iont:",
    "answers":
       [
          {"valid":false,"text":"iont přechází přes membránu po elektrickém gradientu"},
@@ -913,7 +900,7 @@ var QUEST =
 },
 {
    "id":"26",
-   "text":"Na synapsích parasympatiku je vylučován",
+   "text":"Na synapsích parasympatiku je vylučován:",
    "answers":
       [
          {"valid":false,"text":"adrenalin"},
@@ -924,7 +911,7 @@ var QUEST =
 },
 {
    "id":"27",
-   "text":"Plnění váčků neurotransmitery",
+   "text":"Plnění váčků neurotransmitery:",
    "answers":
       [
          {"valid":false,"text":"se děje difúzí"},
@@ -935,7 +922,7 @@ var QUEST =
 },
 {
    "id":"28",
-   "text":"Buňky schopné fagocytózy",
+   "text":"Buňky schopné fagocytózy:",
    "answers":
       [
          {"valid":true,"text":"Schwanovy buňky"},
@@ -946,7 +933,7 @@ var QUEST =
 },
 {
    "id":"29",
-   "text":"Maturované iontové kanály v plazmatické membráně vzrušivých tkání",
+   "text":"Maturované iontové kanály v plazmatické membráně vzrušivých tkání:",
    "answers":
       [
          {"valid":false,"text":"propouští vždy jen jediný typ iontu"},
@@ -957,7 +944,7 @@ var QUEST =
 },
 {
    "id":"30",
-   "text":"Jestliže je v neuronu rovnovážný potenciál pro sodné ionty +55mV, pro draselné -80mV a klidový membránový potenciál je -70mV, pak",
+   "text":"Jestliže je v neuronu rovnovážný potenciál pro sodné ionty +55mV, pro draselné -80mV a klidový membránový potenciál je -70mV, pak:",
    "answers":
       [
          {"valid":false,"text":"v tomto neuronu je draslíková propustnost nižší než sodíková"},
@@ -968,19 +955,18 @@ var QUEST =
 },
 {
    "id":"31",
-   "text":"Pro výlev váčku na synapsi jsou podstatné",
+   "text":"Pro výlev váčku na synapsi jsou podstatné:",
    "answers":
       [
          {"valid":false,"text":"ionty Li<sup>+</sup>"},
          {"valid":true,"text":"ionty Ca<sup> 2+</sup>"},
          {"valid":true,"text":"v-SNARE proteiny"},
-         {"valid":false,"text":"m-SNARE proteiny"},
-
+         {"valid":false,"text":"m-SNARE proteiny"}
       ]
 },
 {
    "id":"78",
-   "text":"Nervový systém řídí produkci a uvolňování hormonů v endokrinních žlázách",
+   "text":"Nervový systém řídí produkci a uvolňování hormonů v endokrinních žlázách:",
    "answers":
       [
          {"valid":true,"text":"nepřímo prostřednictvím tropních hormonů adenohypofýzy"},
@@ -991,7 +977,7 @@ var QUEST =
 },
 {
    "id":"79",
-   "text":"Endokrinní žlázy mohou ovlivnit činnost nervového systému",
+   "text":"Endokrinní žlázy mohou ovlivnit činnost nervového systému:",
    "answers":
       [
          {"valid":true,"text":"působením hormonů na specifické receptory v hypotalamu"},
@@ -1002,7 +988,7 @@ var QUEST =
 },
 {
    "id":"80",
-   "text":"Neuroendokrinní systém ovlivňuje systém imunitní",
+   "text":"Neuroendokrinní systém ovlivňuje systém imunitní:",
    "answers":
       [
          {"valid":true,"text":"přímo prostřednictvím sympatické inervace lymfoidních tkání"},
@@ -1013,7 +999,7 @@ var QUEST =
 },
 {
    "id":"81",
-   "text":"Ovlivnění činnosti imunitních buněk nervovým systémem se projevuje",
+   "text":"Ovlivnění činnosti imunitních buněk nervovým systémem se projevuje:",
    "answers":
       [
          {"valid":true,"text":"v potlačení buněčné imunity prostřednictvím katecholaminů z nervových zakončení sympatiku v lymfoidních tkáních"},
@@ -1024,7 +1010,7 @@ var QUEST =
 },
 {
    "id":"82",
-   "text":"Excitotoxická smrt neuronu může být způsobena",
+   "text":"Excitotoxická smrt neuronu může být způsobena:",
    "answers":
       [
          {"valid":true,"text":"nadměrnou aktivací glutamátových receptorů v postsynaptických membránách neuronu"},
@@ -1035,7 +1021,7 @@ var QUEST =
 },
 {
    "id":"83",
-   "text":"Kritická perioda ve vývoji nervové soustavy znamená",
+   "text":"Kritická perioda ve vývoji nervové soustavy znamená:",
    "answers":
       [
          {"valid":true,"text":"časově omezené období citlivosti nervové soustavy ke stimulům z vnějšího prostředí, které způsobuje nevratné funkční a morfologické změny v cílových strukturách"},
@@ -1046,18 +1032,17 @@ var QUEST =
 },
 {
    "id":"84",
-   "text":"Klidový membránový potenciál",
+   "text":"Klidový membránový potenciál:",
    "answers":
       [
          {"valid":true,"text":"uvnitř záporný (cca -70mV)"},
          {"valid":false,"text":"jen u vzrušivých buněk","iH":"u všech buněk"},
-         {"valid":false,"text":"u všech tkání stejný"},
-
+         {"valid":false,"text":"u všech tkání stejný"}
       ]
 },
 {
    "id":"53",
-   "text":"Rychlost vedení vzruchu axonem",
+   "text":"Rychlost vedení vzruchu axonem:",
    "answers":
       [
          {"valid":true,"text":"klesá při vzrůstu časové konstanty &tau;"},
@@ -1068,7 +1053,7 @@ var QUEST =
 },
 {
    "id":"54",
-   "text":"Při zablokování části Na/K-ATPázy (např. srdečními glykosidy) dojde následně k určité hyperpolarizaci membrány kardiomyocytu díky stimulaci nezablokované Na/K-ATPázy vyvolané",
+   "text":"Při zablokování části Na/K-ATPázy (např. srdečními glykosidy) dojde následně k určité hyperpolarizaci membrány kardiomyocytu díky stimulaci nezablokované Na/K-ATPázy vyvolané:",
    "answers":
       [
          {"valid":false,"text":"poklesem extracelulární koncentrace K<sup>+</sup>"},
@@ -1079,7 +1064,7 @@ var QUEST =
 },
 {
    "id":"55",
-   "text":"Neuron, z jehož zakončení se uvolňuje neuropřenašeč GABA, jehož působením se v postsynaptické membráně otvírají kanálky pro chloridové ionty, vytváří inhibiční synapse",
+   "text":"Neuron, z jehož zakončení se uvolňuje neuropřenašeč GABA, jehož působením se v postsynaptické membráně otvírají kanálky pro chloridové ionty, vytváří inhibiční synapse:",
    "answers":
       [
          {"valid":true,"text":"když otevřením chloridových kanálů dojde k hyperpolarizaci postsynaptické membrány"},
@@ -1090,7 +1075,7 @@ var QUEST =
 },
 {
    "id":"56",
-   "text":"Pro pasivní (elektrotonické) šíření elektrického signálu v membráně platí, že hodnota časové konstanty &tau;",
+   "text":"Pro pasivní (elektrotonické) šíření elektrického signálu v membráně platí, že hodnota časové konstanty &tau;:",
    "answers":
       [
          {"valid":false,"text":"udává dobu, která uplyne mezi podrážděním dvou sousedních Ranvierových zářezů"},
@@ -1101,19 +1086,18 @@ var QUEST =
 },
 {
    "id":"57",
-   "text":"Pro pasivní (elektrotonické) šíření elektrického signálu v membráně platí, že hodnota časové konstanty &tau;",
+   "text":"Pro pasivní (elektrotonické) šíření elektrického signálu v membráně platí, že hodnota časové konstanty &tau;:",
    "answers":
       [
          {"valid":false,"text":"je vyšší v membránách s vyšší koncentrací „trvale“ otevřených kanálů"},
          {"valid":true,"text":"ovlivňuje rychlost, respektive frekvenci, s jakou mohou v membráně vznika vzruchy na daný podnět"},
          {"valid":true,"text":"udává dobu, za kterou dosáhne změna membránového potenciálu, vyvolaná určitým podnětem, 63% konečné hodnoty"},
-         {"valid":false,"text":"udává dobu, za kterou dosáhne změna membránového potenciálu, vyvolána určitým podnětem, 37% konečné hodnoty"},
-
+         {"valid":false,"text":"udává dobu, za kterou dosáhne změna membránového potenciálu, vyvolána určitým podnětem, 37% konečné hodnoty"}
       ]
 },
 {
    "id":"126",
-   "text":"Thalamus je zásadní",
+   "text":"Thalamus je zásadní:",
    "answers":
       [
          {"valid":false,"text":"koordinaci volních pohybů","iH":"to dělají bazální ganglia"},
@@ -1124,7 +1108,7 @@ var QUEST =
 },
 {
    "id":"127",
-   "text":"K tvorbě myelinové pochvy Schwannovými buňkami nebo oligodendrocyty dochází",
+   "text":"K tvorbě myelinové pochvy Schwannovými buňkami nebo oligodendrocyty dochází:",
    "answers":
       [
          {"valid":false,"text":"vždy po vzájemné interakci axonu s příslušnou gliovou buňkou","iH":"není to vždy, existují i nemyelinizované axony"},
@@ -1135,7 +1119,7 @@ var QUEST =
 },
 {
    "id":"128",
-   "text":"Schwannovy buňky se liší od oligodendrocytů tím, že",
+   "text":"Schwannovy buňky se liší od oligodendrocytů tím, že:",
    "answers":
       [
          {"valid":true,"text":"vytvářejí myelinovou pochvu jen v periferních axonech"},
@@ -1146,7 +1130,7 @@ var QUEST =
 },
 {
    "id":"129",
-   "text":"Hlavní mechanismus hematoencefalické bariéry tvoří",
+   "text":"Hlavní mechanismus hematoencefalické bariéry tvoří:",
    "answers":
       [
          {"valid":false,"text":"tři pleny obalující CNS"},
@@ -1157,7 +1141,7 @@ var QUEST =
 },
 {
    "id":"130",
-   "text":"Astrocyty podporují vznik a udržování hematoencefalické bariéry hlavně tím, že",
+   "text":"Astrocyty podporují vznik a udržování hematoencefalické bariéry hlavně tím, že:",
    "answers":
       [
          {"valid":true,"text":"regulují průtok krve krevními kapilárami v CNS","iH":"perivaskulární astrocyty"},
@@ -1168,19 +1152,18 @@ var QUEST =
 },
 {
    "id":"131",
-   "text":"Astrocyty",
+   "text":"Astrocyty:",
    "answers":
       [
          {"valid":true,"text":"přispívají k udržování stálého iontového složení extracelulární tekutiny v CNS","iH":"pomocí kanálů"},
          {"valid":true,"text":"podporují vznik hematoencefalické bariéry"},
          {"valid":false,"text":"mohou generovat akční potenciály","iH":"i přes přítomnost ionotropních receptorů přenašeče a iontových kanálů na membránách"},
-         {"valid":true,"text":"poskytují laktát jako energetický substrát pro aktivní neurony"},
-
+         {"valid":true,"text":"poskytují laktát jako energetický substrát pro aktivní neurony"}
       ]
 },
 {
    "id":"46",
-   "text":"Synaptické váčky",
+   "text":"Synaptické váčky:",
    "answers":
       [
          {"valid":false,"text":"jeden neuron má vždy pouze jeden typ synaptických váčků"},
@@ -1191,7 +1174,7 @@ var QUEST =
 },
 {
    "id":"47",
-   "text":"Glycinový receptor",
+   "text":"Glycinový receptor:",
    "answers":
       [
          {"valid":false,"text":"propouští monovalentní kationty","iH":"propouští anionty"},
@@ -1202,7 +1185,7 @@ var QUEST =
 },
 {
    "id":"48",
-   "text":"Evoluční význam myelinizace spočívá",
+   "text":"Evoluční význam myelinizace spočívá:",
    "answers":
       [
          {"valid":true,"text":"ve zvýšení rychlosti vedení vzruchu"},
@@ -1213,7 +1196,7 @@ var QUEST =
 },
 {
    "id":"49",
-   "text":"Klidová propustnost membrán buněk vzrušivých tkání",
+   "text":"Klidová propustnost membrán buněk vzrušivých tkání:",
    "answers":
       [
          {"valid":false,"text":"je nejvyšší pro ionty sodíku"},
@@ -1224,32 +1207,29 @@ var QUEST =
 },
 {
    "id":"50",
-   "text":"Speamannův organizátor",
+   "text":"Speamannův organizátor:",
    "answers":
       [
          {"valid":true,"text":"vylučuje proneurální morfogeny"},
          {"valid":true,"text":"je dorzální okraj blastoporu mesodermálního původu"},
          {"valid":false,"text":"vytváří se z něho nervová trubice"},
-         {"valid":true,"text":"vytváří se z něho struna hřbetní (synonyma: notochord, chorda dorsalis)"},
-
+         {"valid":true,"text":"vytváří se z něho struna hřbetní (synonyma: notochord, chorda dorsalis)"}
       ]
 },
 {
    "id":"52",
-   "text":"Délková konstanta &lambda;",
+   "text":"Délková konstanta &lambda;:",
    "answers":
       [
          {"valid":false,"text":"závisí na kapacitě membrány"},
          {"valid":false,"text":"se snižuje s rostoucím odporem membrány","iH":"zvyšuje se"},
          {"valid":true,"text":"se zvyšuje s rostoucím průměrem axonu"},
-         {"valid":false,"text":"je důležitá pro časovou sumaci"},
-
-
+         {"valid":false,"text":"je důležitá pro časovou sumaci"}
       ]
 },
 {
    "id":"9",
-   "text":"Efektorovými molekulami G-proteinů jsou",
+   "text":"Efektorovými molekulami G-proteinů jsou:",
    "answers":
       [
          {"valid":true,"text":"cyklázy"},
@@ -1260,7 +1240,7 @@ var QUEST =
 },
 {
    "id":"10",
-   "text":"Rychlý axonální transport",
+   "text":"Rychlý axonální transport:",
    "answers":
       [
          {"valid":true,"text":"retrográdní i anterográdní"},
@@ -1271,7 +1251,7 @@ var QUEST =
 },
 {
    "id":"11",
-   "text":"Mikrotubuly",
+   "text":"Mikrotubuly:",
    "answers":
       [
          {"valid":false,"text":"transport kinesinu retrográdně","iH":"anterográdně"},
@@ -1282,7 +1262,7 @@ var QUEST =
 },
 {
    "id":"12",
-   "text":"G-proteiny",
+   "text":"G-proteiny:",
    "answers":
       [
          {"valid":false,"text":"zapnutí hydrolýzou GTP na GDP"},
@@ -1294,18 +1274,17 @@ var QUEST =
 },
 {
    "id":"13",
-   "text":"Čeho je prekurzorem Tyrosin?",
+   "text":"Čeho je prekurzorem Tyrosin?:",
    "answers":
       [
          {"valid":true,"text":"katecholamů (adrenalin, noradrenalin, dopamin)"},
          {"valid":true,"text":"dopamin"},
-         {"valid":false,"text":"serotonin"},
-
+         {"valid":false,"text":"serotonin"}
       ]
 },
 {
    "id":"15",
-   "text":"Ca<sup>2+</sup>",
+   "text":"Ca<sup>2+</sup>:",
    "answers":
       [
          {"valid":true,"text":"je skladován v endoplazmatickém retikulu"},
@@ -1314,17 +1293,16 @@ var QUEST =
 },
 {
    "id":"16",
-   "text":"Botulotoxin",
+   "text":"Botulotoxin:",
    "answers":
       [
          {"valid":true,"text":"ovlivňuje SNARE komplex"},
-         {"valid":false,"text":"blokuje acetylcholinový receptor"},
-
+         {"valid":false,"text":"blokuje acetylcholinový receptor"}
       ]
 },
 {
    "id":"173",
-   "text":"Mezi faktory ovlivňující synaptický přenos na chemické synapsi nepatří",
+   "text":"Mezi faktory ovlivňující synaptický přenos na chemické synapsi nepatří:",
    "answers":
       [
          {"valid":false,"text":"počet a typ Ca<sup>2+</sup> kanálů přítomných na presynaptické membráně"},
@@ -1335,7 +1313,7 @@ var QUEST =
 },
 {
    "id":"174",
-   "text":"Chemická synapse",
+   "text":"Chemická synapse:",
    "answers":
       [
          {"valid":true,"text":"má presynaptický a postsynaptický element od sebe cca 10x vzdálenější než synapse elektrická","iH":"20-30nm"},
@@ -1346,7 +1324,7 @@ var QUEST =
 },
 {
    "id":"175",
-   "text":"Mezi nízkomolekulární neuropřenašeče nepatří",
+   "text":"Mezi nízkomolekulární neuropřenašeče nepatří:",
    "answers":
       [
          {"valid":false,"text":"dopamin","iH":"M153"},
@@ -1357,7 +1335,7 @@ var QUEST =
 },
 {
    "id":"176",
-   "text":"Nikotinové acetylcholinové receptory",
+   "text":"Nikotinové acetylcholinové receptory:",
    "answers":
       [
          {"valid":false,"text":"mají dvě vazebná místa pro molekuly acetylcholinu"},
@@ -1368,19 +1346,18 @@ var QUEST =
 },
 {
    "id":"177",
-   "text":"Vyberte správná tvrzení týkající se peptidických neuropřenašečů a neuromodulátorů",
+   "text":"Vyberte správná tvrzení týkající se peptidických neuropřenašečů a neuromodulátorů:",
    "answers":
       [
          {"valid":true,"text":"mezi jejich receptory patří tzv. opioidní receptory, což jsou receptory metabotropní"},
          {"valid":false,"text":"mezi jejich receptory patří tzv. opioidní receptory, což jsou receptory ionotropní"},
          {"valid":false,"text":"mezi tyto přenašeče nepatří tzv. substance P","iH":"patří tam"},
-         {"valid":true,"text":"mezi tyto přenašeče nepatří tzv. melanopsin"},
-
+         {"valid":true,"text":"mezi tyto přenašeče nepatří tzv. melanopsin"}
       ]
 },
 {
    "id":"163",
-   "text":"Napěťově ovládané kanály pro sodné ionty",
+   "text":"Napěťově ovládané kanály pro sodné ionty:",
    "answers":
       [
          {"valid":true,"text":"se otevírají při depolarizaci membrány a během přibližně milisekundy se spontánně zavírají"},
@@ -1391,7 +1368,7 @@ var QUEST =
 },
 {
    "id":"164",
-   "text":"Napěťově ovládané kanály pro sodné ionty",
+   "text":"Napěťově ovládané kanály pro sodné ionty:",
    "answers":
       [
          {"valid":true,"text":"se uplatňují v depolarizační fázi akčního potenciálu"},
@@ -1402,7 +1379,7 @@ var QUEST =
 },
 {
    "id":"165",
-   "text":"Napěťově ovládané kanály pro draselné ionty, které se uplatňují při akčním potenciálu",
+   "text":"Napěťově ovládané kanály pro draselné ionty, které se uplatňují při akčním potenciálu:",
    "answers":
       [
          {"valid":false,"text":"jsou otevřeny, dokud trvá depolarizace membrány"},
@@ -1413,7 +1390,7 @@ var QUEST =
 },
 {
    "id":"166",
-   "text":"V průběhu akčního potenciálu (AP)",
+   "text":"V průběhu akčního potenciálu (AP):",
    "answers":
       [
          {"valid":true,"text":"se membránový potenciál blíží rovnovážnému potenciálu pro sodné ionty"},
@@ -1424,31 +1401,28 @@ var QUEST =
 },
 {
    "id":"167",
-   "text":"Během repolarizační fáze akčního potenciálu a během následné hyperpolarizace (podšvihu)",
+   "text":"Během repolarizační fáze akčního potenciálu a během následné hyperpolarizace (podšvihu):",
    "answers":
       [
          {"valid":false,"text":"se membránový potenciál vzdaluje od rovnovážného potenciálu pro draselné ionty"},
          {"valid":false,"text":"draslíkové kanály jsou uzavřeny"},
          {"valid":true,"text":"sodné kanály se postupně vrací do stavu zavřený aktivovatelný"},
-         {"valid":true,"text":"draslíkové kanály se postupně uzavírají"},
-
-
+         {"valid":true,"text":"draslíkové kanály se postupně uzavírají"}
       ]
 },
 {
    "id":"103",
-   "text":"Syntaxin",
+   "text":"Syntaxin:",
    "answers":
       [
          {"valid":true,"text":"součást t-SNARE"},
          {"valid":true,"text":"tvoří komplex snare s brevinem (V-SNARE)"},
-         {"valid":false,"text":"unknown"},
-
+         {"valid":false,"text":"unknown"}
       ]
 },
 {
    "id":"106",
-   "text":"Heterotrimerní G-protein",
+   "text":"Heterotrimerní G-protein:",
    "answers":
       [
          {"valid":false,"text":"je ze 4 podjednotek","iH":"&alpha;, &beta;, &gamma;"},
@@ -1458,19 +1432,18 @@ var QUEST =
 },
 {
    "id":"110",
-   "text":"Neokortex je uspořádán do",
+   "text":"Neokortex je uspořádán do:",
    "answers":
       [
          {"valid":true,"text":"šesti vrstev, které se liší propojením s korovými i podkorovými oblastmi mozku a mnoha sloupců, které fungují jako funkční jednotky"},
          {"valid":false,"text":"šesti sloupců, které se liší propojením s korovými i podkorovými oblastmi mozku a mnoha sloupců, které fungují jako funkční jednotky"},
          {"valid":false,"text":"tří vrstev, které se liší podle funkce každé části kortexu"},
-         {"valid":false,"text":"sloupců, které mění svojí velikost podle aktivity (zvýšené například tréninkem) příslušné části kortexu"},
-
+         {"valid":false,"text":"sloupců, které mění svojí velikost podle aktivity (zvýšené například tréninkem) příslušné části kortexu"}
       ]
 },
 {
    "id":"58",
-   "text":"Iontovým kanálem mohou ionty procházet",
+   "text":"Iontovým kanálem mohou ionty procházet:",
    "answers":
       [
          {"valid":true,"text":"difúzí"},
@@ -1481,7 +1454,7 @@ var QUEST =
 },
 {
    "id":"59",
-   "text":"Iontové kanály „trvale otevřené“",
+   "text":"Iontové kanály „trvale otevřené“:",
    "answers":
       [
          {"valid":false,"text":"nemají bránu omezující tok iontů"},
@@ -1492,7 +1465,7 @@ var QUEST =
 },
 {
    "id":"60",
-   "text":"Časová kosntanta &tau;",
+   "text":"Časová kosntanta &tau;:",
    "answers":
       [
          {"valid":true,"text":"představuje dobu, za kterou dosáhne aplikovaný napěťový puls 63% své maximální hodnoty"},
@@ -1503,7 +1476,7 @@ var QUEST =
 },
 {
    "id":"61",
-   "text":"Elektrické synapse (gab junctions) byste v dospělém savčím organismu nalezli zejména",
+   "text":"Elektrické synapse (gab junctions) byste v dospělém savčím organismu nalezli zejména:",
    "answers":
       [
          {"valid":true,"text":"mezi gliovými buňkami a také mezi vlákny srdeční svaloviny"},
@@ -1514,7 +1487,7 @@ var QUEST =
 },
 {
    "id":"62",
-   "text":"K vylití váčku může dojít, když je",
+   "text":"K vylití váčku může dojít, když je:",
    "answers":
       [
          {"valid":true,"text":"váček přemístěn do blízkosti aktivní zóny"},
@@ -1525,19 +1498,18 @@ var QUEST =
 },
 {
    "id":"63",
-   "text":"Fúze synaptického váčku s plazmatickou membránou",
+   "text":"Fúze synaptického váčku s plazmatickou membránou:",
    "answers":
       [
          {"valid":true,"text":"je spuštěna zvýšením koncetrace Ca<sup>2+</sup> iontů v aktivní zóně presynaptického knoflíku"},
          {"valid":false,"text":"je prvním krokem při recyklaci neurotransmiterů a neuropeptidů"},
          {"valid":true,"text":"závisí na přítomnosti a funkci SNARE proteinů"},
-         {"valid":true,"text":"dochází k ní pouze při změně membránového potenciálu"},
-
+         {"valid":true,"text":"dochází k ní pouze při změně membránového potenciálu"}
       ]
 },
 {
    "id":"178",
-   "text":"Myelizovaný axon o průměru 16&mu; vede vzruchy rychlostí 96m/s. Jakou rychlostí povede vzruch nemyelizovaným axonem o stejném průměru?",
+   "text":"Myelizovaný axon o průměru 16&mu; vede vzruchy rychlostí 96m/s. Jakou rychlostí povede vzruch nemyelizovaným axonem o stejném průměru?:",
    "answers":
       [
          {"valid":false,"text":"12m/s"},
@@ -1548,7 +1520,7 @@ var QUEST =
 },
 {
    "id":"179",
-   "text":"Molekulární motory",
+   "text":"Molekulární motory:",
    "answers":
       [
          {"valid":false,"text":"dyneiny a myosiny vždy směřují k – konci mikrotubulů"},
@@ -1558,7 +1530,7 @@ var QUEST =
 },
 {
    "id":"180",
-   "text":"Mikrofilamenta",
+   "text":"Mikrofilamenta:",
    "answers":
       [
          {"valid":true,"text":"jsou tvořeny z dvojšroubovice aktinu"},
@@ -1568,7 +1540,7 @@ var QUEST =
 },
 {
    "id":"181",
-   "text":"Nízkomolekulární látky",
+   "text":"Nízkomolekulární látky:",
    "answers":
       [
          {"valid":true,"text":"jsou syntetizovány přímo na nervovém zakončení"},
@@ -1579,7 +1551,7 @@ var QUEST =
 },
 {
    "id":"182",
-   "text":"Klidový membránonvý potenciál membrány vzrušivé buňky je -75mV. Rovnovážný potenciál pro chloridové ionty je také -75mV. Vylije se GABA a způsobí otevření chloridových kanálů, co můžeme díky uvedeným věcem tvrdit?",
+   "text":"Klidový membránonvý potenciál membrány vzrušivé buňky je -75mV. Rovnovážný potenciál pro chloridové ionty je také -75mV. Vylije se GABA a způsobí otevření chloridových kanálů, co můžeme díky uvedeným věcem tvrdit?:",
    "answers":
       [
          {"valid":false,"text":"je to inhibiční synapse"},
@@ -1590,18 +1562,17 @@ var QUEST =
 },
 {
    "id":"183",
-   "text":"Proteosyntéza v axonu a dendritech",
+   "text":"Proteosyntéza v axonu a dendritech:",
    "answers":
       [
          {"valid":false,"text":"vůbec neprobíhá"},
          {"valid":false,"text":"probíhá jen při vývoji"},
-         {"valid":true,"text":"probíhá po celý život"},
-
+         {"valid":true,"text":"probíhá po celý život"}
       ]
 },
 {
    "id":"1",
-   "text":"Neurofilamenta",
+   "text":"Neurofilamenta:",
    "answers":
       [
          {"valid":false,"text":"jsou nezbytná pro pohyb dyneinu retrográdním směrem","iH":"nemají molekulární motory"},
@@ -1612,7 +1583,7 @@ var QUEST =
 },
 {
    "id":"2",
-   "text":"Mikrotubuly",
+   "text":"Mikrotubuly:",
    "answers":
       [
          {"valid":false,"text":"jsou nezbytné pro pohyb myosinu retrográdním směrem"},
@@ -1623,7 +1594,7 @@ var QUEST =
 },
 {
    "id":"3",
-   "text":"Během akčního potenciálu je vzrůst membránového potenciálu ke kladným hodnotám (až k tzv. ‚přestřelení‘) způsobem",
+   "text":"Během akčního potenciálu je vzrůst membránového potenciálu ke kladným hodnotám (až k tzv. ‚přestřelení‘) způsobem:",
    "answers":
       [
          {"valid":false,"text":"dočasně zvýšenou propustností membrány pro ionty draslíku"},
@@ -1634,7 +1605,7 @@ var QUEST =
 },
 {
    "id":"4",
-   "text":"Pro délkovou konstantu &lambda; platí, že",
+   "text":"Pro délkovou konstantu &lambda; platí, že:",
    "answers":
       [
          {"valid":true,"text":"její hodnota se typicky pohybuje v mezi 0.1 až 1.0mm"},
@@ -1645,7 +1616,7 @@ var QUEST =
 },
 {
    "id":"5",
-   "text":"Dospělé (maturované) a nezralé iontové kanály (např. například nikotinické acetylcholinové receptory) se mohou lišit",
+   "text":"Dospělé (maturované) a nezralé iontové kanály (např. například nikotinické acetylcholinové receptory) se mohou lišit:",
    "answers":
       [
          {"valid":true,"text":"dobou otevření"},
@@ -1656,7 +1627,7 @@ var QUEST =
 },
 {
    "id":"6",
-   "text":"Nejrychleji vedoucí nervová vlákna v savčím nervu",
+   "text":"Nejrychleji vedoucí nervová vlákna v savčím nervu:",
    "answers":
       [
          {"valid":false,"text":"mají nocicepční funkci (aferentní dráhy bolesti)","iH":"jsou propriorecepční (zajišťují polohovou stabilitu organismu)"},
@@ -1667,19 +1638,18 @@ var QUEST =
 },
 {
    "id":"7",
-   "text":"Receptory acetylcholinu, vyvolávající depolarizaci membrány, jsou",
+   "text":"Receptory acetylcholinu, vyvolávající depolarizaci membrány, jsou:",
    "answers":
       [
          {"valid":false,"text":"glutamát-senzitivní acetylcholinový receptor"},
          {"valid":false,"text":"muskarinový acetylcholinový receptor","iH":"vyvolává hyperpolarizaci"},
          {"valid":true,"text":"nikotinový acetylcholinový receptor"},
-         {"valid":false,"text":"glycin-senzitivní acetylcholinový receptor"},
-
+         {"valid":false,"text":"glycin-senzitivní acetylcholinový receptor"}
       ]
 },
 {
    "id":"64",
-   "text":"Ve váčcích připravených k výlevu na synapsi",
+   "text":"Ve váčcích připravených k výlevu na synapsi:",
    "answers":
       [
          {"valid":false,"text":"bývá vždy jen jediný neuropřenašeč"},
@@ -1690,7 +1660,7 @@ var QUEST =
 },
 {
    "id":"65",
-   "text":"Enkefaliny",
+   "text":"Enkefaliny:",
    "answers":
       [
          {"valid":true,"text":"jsou krátké peptidické neuropřenašeče"},
@@ -1701,7 +1671,7 @@ var QUEST =
 },
 {
    "id":"66",
-   "text":"Dopamin",
+   "text":"Dopamin:",
    "answers":
       [
          {"valid":false,"text":"nepatří mezi katecholaminy"},
@@ -1712,7 +1682,7 @@ var QUEST =
 },
 {
    "id":"67",
-   "text":"Jako neuropřenašeče působí také",
+   "text":"Jako neuropřenašeče působí také:",
    "answers":
       [
          {"valid":true,"text":"puriny"},
@@ -1723,7 +1693,7 @@ var QUEST =
 },
 {
    "id":"68",
-   "text":"Jako neuropřenašeče také působí",
+   "text":"Jako neuropřenašeče také působí:",
    "answers":
       [
          {"valid":true,"text":"puriny"},
@@ -1734,7 +1704,7 @@ var QUEST =
 },
 {
    "id":"69",
-   "text":"Synaptické váčky se podle toho, jaký neuropřenašeč dominantně obsahují, liší",
+   "text":"Synaptické váčky se podle toho, jaký neuropřenašeč dominantně obsahují, liší:",
    "answers":
       [
          {"valid":true,"text":"velikostí"},
@@ -1745,19 +1715,18 @@ var QUEST =
 },
 {
    "id":"70",
-   "text":"GABA<sub>A</sub> receptory jsou v CNS lokalizovány zejména",
+   "text":"GABA<sub>A</sub> receptory jsou v CNS lokalizovány zejména:",
    "answers":
       [
          {"valid":true,"text":"postsynapticky"},
          {"valid":false,"text":"presynapticky"},
          {"valid":false,"text":"jsou rozloženy presynapticky i postsynapticky"},
-         {"valid":false,"text":"jsou jen na tělech neuronů"},
-
+         {"valid":false,"text":"jsou jen na tělech neuronů"}
       ]
 },
 {
    "id":"157",
-   "text":"Katecholaminy",
+   "text":"Katecholaminy:",
    "answers":
       [
          {"valid":true,"text":"odbourávání MAO"},
@@ -1768,7 +1737,7 @@ var QUEST =
 },
 {
    "id":"158",
-   "text":"Dospělé (maturované) napěťově ovládané sodíkové kanály",
+   "text":"Dospělé (maturované) napěťově ovládané sodíkové kanály:",
    "answers":
       [
          {"valid":false,"text":"se zkládají z pěti podjednotek","iH":"jen ze 4"},
@@ -1779,7 +1748,7 @@ var QUEST =
 },
 {
    "id":"159",
-   "text":"Dospělé (maturované) napěťově ovládané sodíkové kanály",
+   "text":"Dospělé (maturované) napěťově ovládané sodíkové kanály:",
    "answers":
       [
          {"valid":false,"text":"nejsou důležité pro nástup akčního potenciálu"},
@@ -1790,7 +1759,7 @@ var QUEST =
 },
 {
    "id":"160",
-   "text":"Dospělé (maturované) napěťově ovládané sodíkové kanály",
+   "text":"Dospělé (maturované) napěťově ovládané sodíkové kanály:",
    "answers":
       [
          {"valid":true,"text":"jsou citlivé na tetrodotoxin"},
@@ -1801,7 +1770,7 @@ var QUEST =
 },
 {
    "id":"161",
-   "text":"Iontové kanály jsou transmembránové proteinové struktury, jsou tvořené",
+   "text":"Iontové kanály jsou transmembránové proteinové struktury, jsou tvořené:",
    "answers":
       [
          {"valid":true,"text":"podjednotkami, které jsou buď částí jedné proteinové molekuly, anebo každou podjednotku tvoří jiná molekula proteinu"},
@@ -1812,19 +1781,18 @@ var QUEST =
 },
 {
    "id":"162",
-   "text":"Iontový kanál je charakterizován",
+   "text":"Iontový kanál je charakterizován:",
    "answers":
       [
          {"valid":true,"text":"selektivitou"},
          {"valid":true,"text":"permeabilitou"},
          {"valid":true,"text":"počtem a vlastnostmi podjednotek"},
-         {"valid":true,"text":"způsobem aktivace (ovládáním)"},
-
+         {"valid":true,"text":"způsobem aktivace (ovládáním)"}
       ]
 },
 {
    "id":"184",
-   "text":"Katecholaminy",
+   "text":"Katecholaminy:",
    "answers":
       [
          {"valid":true,"text":"jsou vychytávány ze štěrbiny"},
@@ -1835,7 +1803,7 @@ var QUEST =
 },
 {
    "id":"185",
-   "text":"Při fúzi váčku je potřeba",
+   "text":"Při fúzi váčku je potřeba:",
    "answers":
       [
          {"valid":true,"text":"přiblížení váčku do tzv. aktivní zóny"},
@@ -1844,7 +1812,7 @@ var QUEST =
 },
 {
    "id":"186",
-   "text":"Vodivost kanálu pro daný iont závisí na",
+   "text":"Vodivost kanálu pro daný iont závisí na:",
    "answers":
       [
          {"valid":true,"text":"permeabilitě kanálu pro daný ion"},
@@ -1855,7 +1823,7 @@ var QUEST =
 },
 {
    "id":"187",
-   "text":"Ca<sup>2+</sup>",
+   "text":"Ca<sup>2+</sup>:",
    "answers":
       [
          {"valid":true,"text":"může být skladován v endoplazmatickém retikulu"},
@@ -1865,7 +1833,7 @@ var QUEST =
 },
 {
    "id":"188",
-   "text":"V rámci heterotrimerické molekuly G-proteinu má guaninové vazebné místo",
+   "text":"V rámci heterotrimerické molekuly G-proteinu má guaninové vazebné místo:",
    "answers":
       [
          {"valid":false,"text":"&beta;-podjednotka"},
@@ -1876,7 +1844,7 @@ var QUEST =
 },
 {
    "id":"189",
-   "text":"V hypotalamu se nenachází",
+   "text":"V hypotalamu se nenachází:",
    "answers":
       [
          {"valid":false,"text":"unknown"},
@@ -1885,3 +1853,4 @@ var QUEST =
          {"valid":true,"text":"amygdala"}
       ]
 }];
+const TAGS = {};

@@ -1,38 +1,128 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Neurobiologie</title>
-    <link rel="stylesheet" type="text/css" href="css.css">
+
+    <title></title>
     <meta charset="utf-8">
-</head>
-<body>
 
-    <div id="menu">
-        <h1>Neurobiology</h1>
-        <p>Questions</p>
-        <input id="min" placeholder="from" value="0"> <input id="max" placeholder="to">
-        <br>
-        <input id="indexes" placeholder="indexes" value="">
-        <br><br>
-        <span id="limit"></span>
-        <br><br>
-        <span id="wrongIndexes"></span>
-        <br><br>
-        <div id="readButton" class="button">Read questions</div>
-        <div id="startButton" class="button">Start test</div>
-    </div>
-    <div id="questions" class="hidden">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="test_navigation.css">
+    <link rel="stylesheet" type="text/css" href="questions.css">
 
-    </div>
-    <div id="test">
-
-    </div>
-    <div id="endButton" class="button hidden">End test</div>
-
-    <script src="valid_questions.js"></script>
-    <script src="initialization.js"></script>
+    <script src="library.js"></script>
+    <script src="settings.js"></script>
     <script src="engine.js"></script>
     <script src="run.js"></script>
+    
+</head>
+<body>
+    <header>
+        Fyziologie živočichů a člověka
+    </header>
+    <main id='main'>
 
+            <test-start>
+                <test-info class="left-block-clear">There are currently X questions for this test.</test-info>
+                <test-options class="left-block-clear">
+                    <test-option class='button' selected>Custom test</test-option>
+                    <test-option class='button'>Real test</test-option>
+                </test-options>
+                <custom-inputs class="left-block-clear">
+                    <flat-input>
+                        <input-caption>
+                            Select questions by their index:
+                        </input-caption>
+                        <input-container one>
+                            <label>from</label>
+                            <input id="iputMinIndex">
+                        </input-container>
+                        <input-container two>
+                        <label>to</label>
+                            <input id="inputMaxIndex">
+                        </input-container>
+                    </flat-input>
+                    <index-input>
+                        <input-caption>
+                            Select questions by their identificators:
+                        </input-caption>
+                        <input-container>
+                            <label>identificators</label>
+                            <input id="indexArray">
+                        </input-container>
+                    </index-input>
+                    <tags-input>
+                        <input-caption>
+                            Select questions by their tags:
+                        </input-caption>
+                        <label>tags</label>
+                        <tags-array>
+                            <tag-container class="button">
+                                <tag-name>Plíce</tag-name><tag-count>15</tag-count>
+                            </tag-container>
+                            <tag-container class="button" selected>
+                                <tag-name>Srdce</tag-name><tag-count>12</tag-count>
+                            </tag-container>
+                            <tag-container class="button">
+                                <tag-name>Mozek</tag-name><tag-count>560</tag-count>
+                            </tag-container>
+                        </tags-array>
+                    </tags-input>
+                </custom-inputs>
+                <test-buttons class="left-block-clear">
+                    <test-button class="main-button">
+                        Read questions
+                    </test-button>
+                    <test-button class="main-button">
+                        Start test
+                    </test-button>
+                </test-buttons>
+            </test-start>
+
+
+        <test-end>
+
+        </test-end>
+
+        <!--
+        <question-block>
+            <question-upper>
+                <question-title>Molekulární motory</question-title>
+                <identificator-container>
+                    <question-identificator>147</question-identificator>
+                </identificator-container>
+            </question-upper>
+            <question-lower>
+                <question-answers>
+                    <answer-block selected>
+                        <answer-text>T Využívají ATP</answer-text>
+                        <hint-visible></hint-visible>
+                        <hint-invisible></hint-invisible>
+                    </answer-block>
+                    <answer-block>
+                        <answer-text>Pohyb vždy procesivní</answer-text>
+                        <hint-visible></hint-visible>
+                        <hint-invisible></hint-invisible>
+                    </answer-block>
+                    <answer-block>
+                        <answer-text>Unknown</answer-text>
+                        <hint-visible></hint-visible>
+                        <hint-invisible></hint-invisible>
+                    </answer-block>
+                    <answer-block>
+                        <answer-text>Transportují RNA, endosomy</answer-text>
+                        <hint-visible></hint-visible>
+                        <hint-invisible>netransportují RNA</hint-invisible>
+                    </answer-block>
+                    X 
+                    X 
+                    X  ^ 
+                </question-answers>
+            </question-lower>
+        </question-block>-->
+    </main>
+    <footer id="inventory">
+        <footer-toggler></footer-toggler>
+    </footer>
 </body>
 </html>
+

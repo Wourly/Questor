@@ -195,7 +195,7 @@ var Convertor = function (settings) {
             '$',
         'gm');
 
-        this.regExp.comments.replacer = function (captureGroups) {
+        this.regExp.comments.replacer = function commentsReplacer (captureGroups) {
             
             let innerNewLines = captureGroups[0].split("\n").length;
             
@@ -232,7 +232,7 @@ var Convertor = function (settings) {
             "([^\\n]+)$",
         'gm');
 
-        this.regExp.questions.replacer = function (captureGroups) {
+        this.regExp.questions.replacer = function questionsReplacer (captureGroups) {
             
             const identificator = captureGroups[0];
             const bodyText = captureGroups[1];
@@ -292,7 +292,7 @@ var Convertor = function (settings) {
             '$',
         'gm');
 
-        this.regExp.answers.replacer = function (captureGroups) {
+        this.regExp.answers.replacer = function answersReplacer (captureGroups) {
             
             const validity = captureGroups[0] === 'T' ? true : false;
             const bodyText = captureGroups[1];
@@ -341,7 +341,7 @@ var Convertor = function (settings) {
     //  PREFORMATORS
     //========================
 
-    this.preformators = (function () {
+    this.preformators = (function createPreformators() {
 
         const preformators = new Object();
 
@@ -379,15 +379,15 @@ var Convertor = function (settings) {
     //their reason is clarity, as they need to be passed in this.convert function
     //they highlight, what properties are going to be affected
 
-    this.convertors = (function () {
+    this.convertors = (function createConvertors () {
 
         const convertors = new Object();
 
-        convertors.applyRegExp = function (operationLabel, outputText, errorText, regExp, substitutioner) {
+        convertors.applyRegExp = function applyRegExp (operationLabel, outputText, errorText, regExp, substitutioner) {
 
             var isCaptured = false;
 
-            this[outputText] = this[outputText].replace(regExp, function (fullMatch, a, b, c, d, e, f) {
+            this[outputText] = this[outputText].replace(regExp, function applyReplacer (fullMatch, a, b, c, d, e, f) {
 
                 isCaptured = true;
 
@@ -408,23 +408,23 @@ var Convertor = function (settings) {
             
         }.bind(this);
 
-        convertors.removeComments = function (outputText, errorText) {
+        convertors.removeComments = function removeComments (outputText, errorText) {
             this.convertors.applyRegExp('comments', outputText, errorText, this.regExp.comments.pattern, this.regExp.comments.replacer);
         }.bind(this);
 
-        convertors.removeEmptyLines = function (property) {
+        convertors.removeEmptyLines = function removeEmptyLines (property) {
             this[property] = this[property].replace(/^\s*$\n/gm, '');
         }.bind(this);
         
-        convertors.processQuestions = function (outputText, errorText) {
+        convertors.processQuestions = function processQuestions (outputText, errorText) {
             return this.conversionStatus.questions = this.convertors.applyRegExp('questions', outputText, errorText, this.regExp.questions.pattern, this.regExp.questions.replacer);
         }.bind(this);
 
-        convertors.processAnswers = function (outputText, errorText) {
+        convertors.processAnswers = function processAnswers (outputText, errorText) {
             return this.convertors.applyRegExp('answers', outputText, errorText, this.regExp.answers.pattern, this.regExp.answers.replacer);
         }.bind(this);
 
-        convertors.finalizePreJsonString = function (property) {
+        convertors.finalizePreJsonString = function finalizePreJsonString (property) {
 
             //remove blocks added from first question, these blocks does not have
             {
@@ -442,7 +442,7 @@ var Convertor = function (settings) {
             this[property] = this[property].replace(this.regExp.removeCommaAfterLastArrayItem, "\n$1");
         }.bind(this);
 
-        convertors.JSONparser = function (outputText, outputArray) {
+        convertors.JSONparser = function JSONparser (outputText, outputArray) {
 
             try {
                 this[outputArray] = JSON.parse(this[outputText]);
@@ -454,6 +454,8 @@ var Convertor = function (settings) {
             }
             
         }.bind(this);
+
+        Object.freeze(convertors);
 
         return convertors;
 
@@ -730,18 +732,18 @@ var Convertor = function (settings) {
     
         }.bind(this);
 
-        errorHandlers.isIdUnique = function isIdUnique (array, id) {
+        errorHandlers.isIdDuplicate = function isIdDuplicate (array, id) {
 
             const arrayLength = array.length;
 
             for (let index = 0; index < arrayLength; index++) {
                 if (id === array[index])
-                    return false;
+                    return true;
             }
 
             array.push(id);
 
-            return true;
+            return false;
 
         }
     
@@ -764,13 +766,12 @@ var Convertor = function (settings) {
     
                     const report = this.errorHandlers.checkProperties(question, index);
 
-                    let duplicateId = this.errorHandlers.isIdUnique(uniqueIdentificators, question.id);
-    
-                    if (!duplicateId) {
+                    let isIdDuplicate = this.errorHandlers.isIdDuplicate(uniqueIdentificators, question.id);
+                    
+                    if (isIdDuplicate) {
                         report.succeeded = false;
                         report.duplicateId = true;
                     }
-                        
 
                     if (!report.succeeded) {
                         report.id = question.id;
@@ -786,7 +787,7 @@ var Convertor = function (settings) {
             }
 
             //this.verifyQuestionIdentificators
-    
+            return true;
     
         }.bind(this);
     
@@ -830,7 +831,6 @@ var Convertor = function (settings) {
                 //if (index === 0)
                 {
                     const questionReport = flawedQuestions[index];
-                    console.log(questionReport);
         
                     const questionItem = document.createElement('li');
                     container.appendChild(questionItem);
@@ -860,7 +860,7 @@ var Convertor = function (settings) {
 
                     if (questionReport.tags === false)
                     {
-                        const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorInvisibleHintLine);
+                        const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorQuestionTags);
                         questionItem.appendChild(warningLine);
                     }
 
@@ -952,6 +952,8 @@ var Convertor = function (settings) {
             }
     
         }.bind(this);
+
+        Object.freeze(errorHandlers);
 
         return errorHandlers;
 
@@ -1142,6 +1144,8 @@ var Convertor = function (settings) {
             
         })();
 
+        Object.freeze(guides);
+
         return guides;
 
     }.bind(this))();
@@ -1154,7 +1158,7 @@ var Convertor = function (settings) {
 
     //return bodyObject, which contains text and properties separated by symbols
     //these properties are mostly 'hints'
-    this.miscellaneous.bodyTextProcessor = function (textBody) {
+    this.miscellaneous.bodyTextProcessor = function bodyTextProcessor (textBody) {
 
         const markedTextBody = textBody.replace(this.regExp.captureHintIdentificators, this.miscellaneous.splitterSequence + "$1");
         
@@ -1166,7 +1170,7 @@ var Convertor = function (settings) {
         //index 0 is always question text
         for (let index = 1; index < splitTokens.length; index++) {
 
-            splitTokens[index].replace(/(.)(.*)/, function (fullMatch, variableIdentifier, variableText) {
+            splitTokens[index].replace(/(.)(.*)/, function processProperties (fullMatch, variableIdentifier, variableText) {
                 
                 var recognizedVariable = null;
                 
@@ -1179,7 +1183,7 @@ var Convertor = function (settings) {
                         break;
                     case this.settings.tagIdentificator:
                         recognizedVariable = 'tags'
-
+                        
                         variableText = this.miscellaneous.processTags(variableText);
 
                         break;
@@ -1189,7 +1193,7 @@ var Convertor = function (settings) {
                 }
 
                 bodyObject[recognizedVariable] = variableText.trim();
-
+                
             }.bind(this));
         }
 
@@ -1267,6 +1271,40 @@ var Convertor = function (settings) {
         }.bind(this))
     }.bind(this);
 
+    this.miscellaneous.countTags = function countTags (outputArray, tagsContainer) {
+        
+        const questions = this[outputArray];
+        const questionsLength = questions.length;
+
+        const tagsObject = this[tagsContainer];
+
+        for (let index = 0; index < questionsLength; index++) {
+
+            if (questions[index].tags)
+            {
+                const tags = questions[index].tags;
+                const tagLenght = tags.length;
+
+                for (let tagIndex = 0; tagIndex < tagLenght; tagIndex++)
+                {
+                    const tag = tags[tagIndex];
+
+                    if (!tagsObject[tag])
+                        tagsObject[tag] = 1;
+                    else
+                        tagsObject[tag]++;
+                }
+            }
+        }
+
+    }.bind(this);
+
+    this.miscellaneous.finalizeOutputText = function finalizeOutputText (outputText, tagsContainer) {
+
+        this[outputText] = "const QUESTIONS = \n" + this[outputText] + ';' + "\n" + 'const TAGS = ' + JSON.stringify(this[tagsContainer]) + ';';
+        
+    }.bind(this);
+
     //========================
     // MAIN FUNCTION
     //========================
@@ -1291,7 +1329,6 @@ var Convertor = function (settings) {
 
         //JSON bug prevention
         this.preformators.escapeDoubleQuotes('preformatedInputText');
-        this.preformators.escapeDoubleQuotes('preformatedInputText');
 
         this.preformatedInputText = this.preformators.trimEachRow(this.preformatedInputText);
 
@@ -1307,6 +1344,7 @@ var Convertor = function (settings) {
             this.errorHandlers.reportError('questions');
             return;
         }
+        console.log(performance.now() - performanceStart, 'questions converted');
 
         //processing answers
         this.conversionStatus.answers = this.convertors.processAnswers('outputText', 'errorText');
@@ -1314,6 +1352,7 @@ var Convertor = function (settings) {
             this.errorHandlers.reportError('answers');
             return;
         }
+        console.log(performance.now() - performanceStart, 'answers converted');
 
         //checking for unprocessed code
         this.conversionStatus.leftovers = this.errorHandlers.detectTextLeftovers('errorText');
@@ -1321,26 +1360,31 @@ var Convertor = function (settings) {
             this.errorHandlers.reportError('leftovers');
             return;
         }
+        console.log(performance.now() - performanceStart, 'leftovers resolved');
 
         this.convertors.finalizePreJsonString('outputText');
+        console.log(performance.now() - performanceStart, 'text for JSON parse');
 
+        //this.outputText = 'tak tohle nepůjde, kámo';
         this.conversionStatus.JSONparse = this.convertors.JSONparser('outputText', 'outputArray');
         if (!this.errorHandlers.isProcessingSuccessful('JSONparse')) {
             this.errorHandlers.reportError('JSONparse');
             return;
         }
+        console.log(performance.now() - performanceStart, 'JSONparsed');
+
+        //already contains errorHandling, but it does not affect structural changes of JSON
+        this.conversionStatus.JSONanalysis = this.errorHandlers.analyseJSON('outputArray');
+        console.log(performance.now() - performanceStart, 'JSONanalyzed');
+
+        this.miscellaneous.countTags('outputArray', 'tags');
+        console.log(performance.now() - performanceStart, 'tags created');
+
+        this.miscellaneous.finalizeOutputText('outputText', 'tags');
+        console.log(performance.now() - performanceStart, 'text finalized');
 
         this.miscellaneous.fillOutputTextarea('outputText');
-
-        //already contains errorHandling
-        this.conversionStatus.JSONanalysis = this.errorHandlers.analyseJSON('outputArray');
-        if (!this.errorHandlers.isProcessingSuccessful('JSONanalysis')) {
-            
-            this.miscellaneous.fillOutputTextarea('outputText');
-        }
-        
-        var performanceEnd = performance.now();
-        console.log(performanceEnd - performanceStart);
+        console.log(performance.now() - performanceStart, 'finished');
 
         return true;
 
