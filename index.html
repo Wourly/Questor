@@ -16,46 +16,47 @@
     
 </head>
 <body>
-    <header>
-        Fyziologie živočichů a člověka
-    </header>
-    <main id='main'>
+    <header>Fyziologie živočichů a člověka</header>
+    <test-main id="main" menu-type="custom">
 
-            <test-start>
+            <test-menu id="menu">
                 <test-info class="left-block-clear">There are currently X questions for this test.</test-info>
-                <test-options class="left-block-clear">
-                    <test-option class='button' selected>Custom test</test-option>
-                    <test-option class='button'>Real test</test-option>
-                </test-options>
-                <custom-inputs class="left-block-clear">
-                    <flat-input>
-                        <input-caption>
+
+                <test-option id="option-custom" data-value="custom" class='button togglable left-block-clear' selected>Custom test</test-option>
+                <test-option id="option-real" data-value="real" class='button togglable left-block'>Real test</test-option>
+                
+                <custom-inputs id="custom-inputs" class="clear">
+
+                    <flat-input disabled id="flat-input" data-value="flat" class="left-block">
+                        <input-caption class="block">
                             Select questions by their index:
                         </input-caption>
-                        <input-container one>
-                            <label>from</label>
-                            <input id="iputMinIndex">
+                        <input-container one class="left-block">
+                            <label class="block">from</label>
+                            <input id="flatInputMin" value="0">
                         </input-container>
-                        <input-container two>
-                        <label>to</label>
-                            <input id="inputMaxIndex">
+                        <input-container two class="left-block">
+                        <label class="block">to</label>
+                            <input id="flatInputMax" value="15">
                         </input-container>
                     </flat-input>
-                    <index-input>
-                        <input-caption>
+
+                    <index-input selected id="index-input" data-value="index" class="left-block">
+                        <input-caption class="block">
                             Select questions by their identificators:
                         </input-caption>
-                        <input-container>
-                            <label>identificators</label>
-                            <input id="indexArray">
+                        <input-container class="left-block">
+                            <label class="block">identificators</label>
+                            <input id="index-array" value='"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"'>
                         </input-container>
                     </index-input>
-                    <tags-input>
-                        <input-caption>
+
+                    <tags-input disabled id="tags-input" data-value="tags" class="left-block-clear">
+                        <input-caption class="block">
                             Select questions by their tags:
                         </input-caption>
-                        <label>tags</label>
-                        <tags-array>
+                        <label class="block">tags</label>
+                        <tags-array id="tags-array" class="block">
                             <tag-container class="button">
                                 <tag-name>Plíce</tag-name><tag-count>15</tag-count>
                             </tag-container>
@@ -67,34 +68,38 @@
                             </tag-container>
                         </tags-array>
                     </tags-input>
+
                 </custom-inputs>
                 <test-buttons class="left-block-clear">
-                    <test-button class="main-button">
+                    <test-button id="read-button" class="main-button left-block">
                         Read questions
                     </test-button>
-                    <test-button class="main-button">
+                    <test-button id="start-button" class="main-button left-block">
                         Start test
                     </test-button>
                 </test-buttons>
-            </test-start>
+            </test-menu>
 
 
-        <test-end>
+        <!--Container for questions-->
+        <test-content id="content" class="left-block-clear">
 
-        </test-end>
 
-        <!--
+
+
+<!--
         <question-block>
             <question-upper>
                 <question-title>Molekulární motory</question-title>
                 <identificator-container>
                     <question-identificator>147</question-identificator>
+                    <question-tags>Mozek</question-tags>
                 </identificator-container>
             </question-upper>
             <question-lower>
                 <question-answers>
                     <answer-block selected>
-                        <answer-text>T Využívají ATP</answer-text>
+                        <answer-text>Využívají ATP</answer-text>
                         <hint-visible></hint-visible>
                         <hint-invisible></hint-invisible>
                     </answer-block>
@@ -118,10 +123,24 @@
                     X  ^ 
                 </question-answers>
             </question-lower>
-        </question-block>-->
-    </main>
+        </question-block>
+
+
+-->
+
+
+        </test-content>
+
+        
+    </test-main>
     <footer id="inventory">
         <footer-toggler></footer-toggler>
+        <arrow-container id="arrow-left" class="left-block">
+            <arrow-left class="button">&laquo;&nbsp;back</arrow-left>
+        </arrow-container>
+        <arrow-container id="arrow-right"  class="right-block">
+            <arrow-right class="button">next&nbsp;&raquo;</arrow-right>
+        </arrow-container>
     </footer>
 </body>
 </html>

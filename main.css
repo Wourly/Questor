@@ -1,3 +1,17 @@
+/*open up custom input menu, when 'Custom test' button is selected*/
+test-option#option-custom[selected] ~ custom-inputs {
+    display: block;
+}
+
+test-main[active] test-menu{
+    display: none;
+}
+
+custom-inputs {
+    display: none;
+    max-width: 700px;
+}
+
 *
 {
     box-sizing: border-box;
@@ -56,14 +70,22 @@ header
     height: 50px;
 }
 
-main
+test-main
 {
-    min-height: 100vh;
-    padding: 15px;
-    padding-top: 62px; /*! calculate from header height//this can wait for mobile css handling*/
-    padding-bottom: 65px;
+    display: block;
     overflow: hidden;
+
+    min-height: 100vh;
+
+    padding-top: 62px; /*! calculate from header height//this can wait for mobile css handling*/
+    padding-bottom: 55px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+
 }
+
+
 
 footer
 {

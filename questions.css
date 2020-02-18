@@ -1,20 +1,29 @@
+question-page[active] {
+    display: block;
+}
 
+question-page:not([active]) {
+    display: none;
+}
 
+question-block {
+    display: block;
+    margin-bottom: 10px;
+}
 
 question-upper {
     display: block;
     margin-bottom: 5px;
 }
 
-input-caption {
-    display: block;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 question-title {
     display: block;
-    font-size: 20px;
+
+    margin-bottom: 6px;
+
+    cursor: alias;
+
+    font-size: 22px;
     line-height: 22px;
 }
 
@@ -44,20 +53,24 @@ question-title:hover ~ identificator-container {
     display: block;
 }
 
-answer-block {
+answer-container {
     display: block;
+    cursor: pointer;
+
+    margin-top: 2px;
+
+    font-size: 17px;
 }
 
-answer-text {
+answer-text, answer-alpha {
     color: #42809b;
-    cursor: pointer;
     transition: color 0.4s;
 }
 
-answer-text:hover {
+answer-container:hover answer-text, answer-container:hover answer-alpha {
     color: #62b9df;
 }
 
-answer-block[selected] answer-text {
-    color: rgb(186, 233, 33);
+answer-container[selected] answer-text {
+    color: #7FFF00;
 }

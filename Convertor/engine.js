@@ -70,35 +70,37 @@ var Convertor = function (settings) {
     // Resources
     //============================
 
+    //public
     //stores characters used as identificators for RegExp
     this.settings = new Object();
     //stores information for JSON indentation
     this.indentation = new Object();
-    //string blocks to be used in RegExp pattern substitution
-    this.blocks = new Object();
     //stores main RegExp pattens and main RegExp substitution functions
     this.regExp =  new Object();
+
+    this.preformatedInputText = null;
+    this.outputText = null;
+    this.errorText = null;
+    this.outputArray = null;
+    this.tags = new Object();
+
+    //private
+    //string blocks to be used in RegExp pattern substitution
+    var blocks = new Object();
     //functions, that prepare input for conversion
-    this.preformators = null;
+    var preformators = null;
     //functions directly converting text
-    this.convertors = null;
+    var convertors = null;
     //functions involved in output checking
-    this.errorHandlers = null;
+    var errorHandlers = null;
     //when errors occur, guides describe how to keep input correct
-    this.guides = null;
+    var guides = null;
     //hardly sortable
-    this.miscellaneous =  new Object();
+    var miscellaneous =  new Object();
     
         //============================
         // General
         //============================
-
-        this.preformatedInputText = null;
-        this.outputText = null;
-        this.errorText = null;
-        this.outputArray = null;
-        this.tags = new Object();
-        this.allIdentificators = new Array();
     
         this.conversionStatus = new Object();
 
@@ -112,7 +114,7 @@ var Convertor = function (settings) {
         //-------------------
             //ends answer array, ends question object, starts another question object
             //end is put first and it's first occurence is sliced off
-            this.blocks.questionEnd = (function generateQuestionEnd () {
+            blocks.questionEnd = (function generateQuestionEnd () {
 
                 const body = [
                     ' '.repeat(this.indentation.answersSquareBrackets) + "]\n",
@@ -123,7 +125,7 @@ var Convertor = function (settings) {
 
             }.bind(this))();
 
-            this.blocks.questionStart = (function generateQuestionStart () {
+            blocks.questionStart = (function generateQuestionStart () {
 
                 const body = [
                     ",\n",
@@ -134,9 +136,9 @@ var Convertor = function (settings) {
 
             }.bind(this))();
 
-            this.blocks.repetitiveQuestionUpperBody = this.blocks.questionEnd + this.blocks.questionStart + '{' + "\n";
+            blocks.repetitiveQuestionUpperBody = blocks.questionEnd + blocks.questionStart + '{' + "\n";
             //starts answer array
-            this.blocks.repetitiveQuestionLowerBody = (function generateQuestionRepetitiveLowerbody () {
+            blocks.repetitiveQuestionLowerBody = (function generateQuestionRepetitiveLowerbody () {
 
                 const body = [
                     "\n" + ' '.repeat(this.indentation.questionProperties) + '"answers":' + "\n",
@@ -158,7 +160,7 @@ var Convertor = function (settings) {
         this.settings.tagIdentificator = settings.tags_identificator || '#';
         this.settings.propertySplitter = settings.tag_splitter || '|';
 
-        this.miscellaneous.escapeChar = function (character) {
+        miscellaneous.escapeChar = function (character) {
 
             //character is already escaped
             if (character[0] === '\\' && character[1])
@@ -168,29 +170,29 @@ var Convertor = function (settings) {
             return '\\' + character;
         };
 
-        this.regExp.captureHintIdentificators = new RegExp('([' + this.miscellaneous.escapeChar(this.settings.visibleHintIdentificator) + this.miscellaneous.escapeChar(this.settings.invisibleHintIdentificator) + this.miscellaneous.escapeChar(this.settings.tagIdentificator) + '])', 'g');
-        this.miscellaneous.splitterSequence = settings.splitter_sequence || 'ůíá';
+        this.regExp.captureHintIdentificators = new RegExp('([' + miscellaneous.escapeChar(this.settings.visibleHintIdentificator) + miscellaneous.escapeChar(this.settings.invisibleHintIdentificator) + miscellaneous.escapeChar(this.settings.tagIdentificator) + '])', 'g');
+        miscellaneous.splitterSequence = settings.splitter_sequence || 'ůíá';
 
         //============================
         // commenting
         //============================
 
-        this.miscellaneous.commentsMarker = settings.commentsMarker || '=';
-        //this.blocks.comments = new Object();
-        //this.blocks.comments.highlightBody = '//' + this.miscellaneous.commentsMarker.repeat(30) + "\n";
+        miscellaneous.commentsMarker = settings.commentsMarker || '=';
+        //blocks.comments = new Object();
+        //blocks.comments.highlightBody = '//' + miscellaneous.commentsMarker.repeat(30) + "\n";
         this.regExp.comments = new Object();
         this.regExp.comments.pattern =
         new RegExp(
             '^'
             +
             //comment marker at least 3 times
-            this.miscellaneous.commentsMarker + '{3,}'
+            miscellaneous.commentsMarker + '{3,}'
             +
             //anything, but not comment marker at least once
-            '([^' + this.miscellaneous.commentsMarker + ']+)'
+            '([^' + miscellaneous.commentsMarker + ']+)'
             +
             //comment marker at least 3 times
-            this.miscellaneous.commentsMarker + '{3,}'
+            miscellaneous.commentsMarker + '{3,}'
             +
             '$',
         'gm');
@@ -214,19 +216,19 @@ var Convertor = function (settings) {
             '^'
             +
             //from question id start char..
-            this.miscellaneous.escapeChar(this.settings.questionIdStart)
+            miscellaneous.escapeChar(this.settings.questionIdStart)
             +
             //..match & capture everything
             '([^'
             +
             //..except question id brackets ()
-            this.miscellaneous.escapeChar(this.settings.questionIdStart) + this.miscellaneous.escapeChar(this.settings.questionIdEnd)
+            miscellaneous.escapeChar(this.settings.questionIdStart) + miscellaneous.escapeChar(this.settings.questionIdEnd)
             +
             //..except new line char..
             "\\n]+?)"
             +
             //..to question id end char..
-            this.miscellaneous.escapeChar(this.settings.questionIdEnd)
+            miscellaneous.escapeChar(this.settings.questionIdEnd)
             +
             //..and capture everything until the end of line
             "([^\\n]+)$",
@@ -238,7 +240,7 @@ var Convertor = function (settings) {
             const bodyText = captureGroups[1];
 
             //contains text, hints
-            const bodyObject = this.miscellaneous.bodyTextProcessor(bodyText);
+            const bodyObject = miscellaneous.bodyTextProcessor(bodyText);
             //stores individual property lines
             const bodyArray = new Array();
 
@@ -265,7 +267,7 @@ var Convertor = function (settings) {
 
             const questionProperties = ' '.repeat(this.indentation.questionProperties) + '"id":"' + identificator + "\",\n" + bodyString;
 
-            const finalString = this.blocks.repetitiveQuestionUpperBody + questionProperties + this.blocks.repetitiveQuestionLowerBody;
+            const finalString = blocks.repetitiveQuestionUpperBody + questionProperties + blocks.repetitiveQuestionLowerBody;
 
             return finalString;
 
@@ -277,17 +279,17 @@ var Convertor = function (settings) {
 
         this.settings.answerCorrect = settings.correct_answer_identificator || 'T';
         this.settings.answerWrong = settings.wrong_answer_identificator || 'X';
-        this.miscellaneous.answerStart = '[' + this.miscellaneous.escapeChar(this.settings.answerCorrect) + this.miscellaneous.escapeChar(this.settings.answerWrong) + ']';
+        miscellaneous.answerStart = '[' + miscellaneous.escapeChar(this.settings.answerCorrect) + miscellaneous.escapeChar(this.settings.answerWrong) + ']';
         this.settings.answerEnd = settings.answer_end || "\\n";
         this.regExp.answers = new Object();
         this.regExp.answers.pattern = new RegExp(
             '^'
             +
             //match validity character
-            '(' + this.miscellaneous.answerStart + ')'
+            '(' + miscellaneous.answerStart + ')'
             +
             //match content
-            '([^\\n' + this.miscellaneous.escapeChar(this.settings.answerEnd) + ']*)'
+            '([^\\n' + miscellaneous.escapeChar(this.settings.answerEnd) + ']*)'
             +
             '$',
         'gm');
@@ -297,7 +299,7 @@ var Convertor = function (settings) {
             const validity = captureGroups[0] === 'T' ? true : false;
             const bodyText = captureGroups[1];
 
-            const bodyObject = this.miscellaneous.bodyTextProcessor(bodyText);
+            const bodyObject = miscellaneous.bodyTextProcessor(bodyText);
             const bodyArray = new Array();
 
             //bodyObject => bodyArray
@@ -341,7 +343,7 @@ var Convertor = function (settings) {
     //  PREFORMATORS
     //========================
 
-    this.preformators = (function createPreformators() {
+    preformators = (function createPreformators() {
 
         const preformators = new Object();
 
@@ -379,7 +381,7 @@ var Convertor = function (settings) {
     //their reason is clarity, as they need to be passed in this.convert function
     //they highlight, what properties are going to be affected
 
-    this.convertors = (function createConvertors () {
+    convertors = (function createConvertors () {
 
         const convertors = new Object();
 
@@ -393,7 +395,7 @@ var Convertor = function (settings) {
 
                 var captureGroups = [a, b, c, d, e, f];
 
-                //captureGroups = this.miscellaneous.filterValidCaptureGroups(captureGroups);
+                //captureGroups = miscellaneous.filterValidCaptureGroups(captureGroups);
 
                 return substitutioner(captureGroups);
 
@@ -409,7 +411,7 @@ var Convertor = function (settings) {
         }.bind(this);
 
         convertors.removeComments = function removeComments (outputText, errorText) {
-            this.convertors.applyRegExp('comments', outputText, errorText, this.regExp.comments.pattern, this.regExp.comments.replacer);
+            convertors.applyRegExp('comments', outputText, errorText, this.regExp.comments.pattern, this.regExp.comments.replacer);
         }.bind(this);
 
         convertors.removeEmptyLines = function removeEmptyLines (property) {
@@ -417,11 +419,11 @@ var Convertor = function (settings) {
         }.bind(this);
         
         convertors.processQuestions = function processQuestions (outputText, errorText) {
-            return this.conversionStatus.questions = this.convertors.applyRegExp('questions', outputText, errorText, this.regExp.questions.pattern, this.regExp.questions.replacer);
+            return this.conversionStatus.questions = convertors.applyRegExp('questions', outputText, errorText, this.regExp.questions.pattern, this.regExp.questions.replacer);
         }.bind(this);
 
         convertors.processAnswers = function processAnswers (outputText, errorText) {
-            return this.convertors.applyRegExp('answers', outputText, errorText, this.regExp.answers.pattern, this.regExp.answers.replacer);
+            return convertors.applyRegExp('answers', outputText, errorText, this.regExp.answers.pattern, this.regExp.answers.replacer);
         }.bind(this);
 
         convertors.finalizePreJsonString = function finalizePreJsonString (property) {
@@ -436,7 +438,7 @@ var Convertor = function (settings) {
             }
             
             //finish answers array ] and last question object }
-            this[property] = '[' + this[property] + "\n" + this.blocks.questionEnd + ']';
+            this[property] = '[' + this[property] + "\n" + blocks.questionEnd + ']';
             
             //remove last comma, in answers array
             this[property] = this[property].replace(this.regExp.removeCommaAfterLastArrayItem, "\n$1");
@@ -465,7 +467,7 @@ var Convertor = function (settings) {
     // ERROR HANDLING
     //========================
     this.regExp.findLeftover = new RegExp('^(.+)$', 'm');
-    this.errorHandlers = (function createErrorHandlers () {
+    errorHandlers = (function createErrorHandlers () {
 
         const errorHandlers = new Object();
 
@@ -676,7 +678,7 @@ var Convertor = function (settings) {
                             correctAnswer = false;
                         }
     
-                        if (!this.errorHandlers.checkHints(answer, answerReport))
+                        if (!errorHandlers.checkHints(answer, answerReport))
                         {
                             correctAnswer = false;
                         }
@@ -703,7 +705,7 @@ var Convertor = function (settings) {
                 }
             }
     
-            if (!this.errorHandlers.checkHints(question, report))
+            if (!errorHandlers.checkHints(question, report))
             {
                 correct = false;
             }
@@ -764,9 +766,9 @@ var Convertor = function (settings) {
                 {
                     const question = questions[index];
     
-                    const report = this.errorHandlers.checkProperties(question, index);
+                    const report = errorHandlers.checkProperties(question, index);
 
-                    let isIdDuplicate = this.errorHandlers.isIdDuplicate(uniqueIdentificators, question.id);
+                    let isIdDuplicate = errorHandlers.isIdDuplicate(uniqueIdentificators, question.id);
                     
                     if (isIdDuplicate) {
                         report.succeeded = false;
@@ -783,7 +785,7 @@ var Convertor = function (settings) {
             }
     
             if (flawedQuestions.length > 0) {
-                this.errorHandlers.reportError('JSONanalysis', flawedQuestions);
+                errorHandlers.reportError('JSONanalysis', flawedQuestions);
             }
 
             //this.verifyQuestionIdentificators
@@ -813,10 +815,10 @@ var Convertor = function (settings) {
     
         }
 
-        this.miscellaneous.errorVisibleHintLine = '..has ' + this.settings.visibleHintIdentificator + ', but no content for it';
-        this.miscellaneous.errorInvisibleHintLine = '..has ' + this.settings.invisibleHintIdentificator + ', but no content for it';
-        this.miscellaneous.errorQuestionTags = '..has ' + this.settings.tagIdentificator + ', but at least 1 tag is empty';
-        this.miscellaneous.errorAnswerTags = '..has ' + this.settings.tagIdentificator + ', but answers should not have tags';
+        miscellaneous.errorVisibleHintLine = '..has ' + this.settings.visibleHintIdentificator + ', but no content for it';
+        miscellaneous.errorInvisibleHintLine = '..has ' + this.settings.invisibleHintIdentificator + ', but no content for it';
+        miscellaneous.errorQuestionTags = '..has ' + this.settings.tagIdentificator + ', but at least 1 tag is empty';
+        miscellaneous.errorAnswerTags = '..has ' + this.settings.tagIdentificator + ', but answers should not have tags';
     
         errorHandlers.createFlawedQuestionsListElement = function createFlawedQuestionsListElement (flawedQuestions) {
     
@@ -848,19 +850,19 @@ var Convertor = function (settings) {
     
                     if (questionReport.vH === false)
                     {
-                        const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorVisibleHintLine);
+                        const warningLine = errorHandlers.createWarningLine(miscellaneous.errorVisibleHintLine);
                         questionItem.appendChild(warningLine);
                     }
 
                     if (questionReport.iH === false)
                     {
-                        const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorInvisibleHintLine);
+                        const warningLine = errorHandlers.createWarningLine(miscellaneous.errorInvisibleHintLine);
                         questionItem.appendChild(warningLine);
                     }
 
                     if (questionReport.tags === false)
                     {
-                        const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorQuestionTags);
+                        const warningLine = errorHandlers.createWarningLine(miscellaneous.errorQuestionTags);
                         questionItem.appendChild(warningLine);
                     }
 
@@ -883,13 +885,13 @@ var Convertor = function (settings) {
 
                             if (answer.vH === false)
                             {
-                                const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorVisibleHintLine, 2);
+                                const warningLine = errorHandlers.createWarningLine(miscellaneous.errorVisibleHintLine, 2);
                                 questionItem.appendChild(warningLine);
                             }
 
                             if (answer.iH === false)
                             {
-                                const warningLine = errorHandlers.createWarningLine(this.miscellaneous.errorInvisibleHintLine, 2);
+                                const warningLine = errorHandlers.createWarningLine(miscellaneous.errorInvisibleHintLine, 2);
                                 questionItem.appendChild(warningLine);
                             }
 
@@ -912,21 +914,21 @@ var Convertor = function (settings) {
             switch (errorLabel) {
                 case 'questions':
                     {
-                        this.errorHandlers.writeError('medium', 'No questions in input!', '', this.guides.questionsElement);
+                        errorHandlers.writeError('medium', 'No questions in input!', '', guides.questionsElement);
                         break;
                     }
                 case 'answers':
                     {
-                        this.errorHandlers.writeError('medium', 'No answers in input!', '', this.guides.answersElement);
+                        errorHandlers.writeError('medium', 'No answers in input!', '', guides.answersElement);
                         break;
                     }
                 case 'leftovers':
                     {
-                        const leftover = this.errorHandlers.findLeftover(10, 10);
+                        const leftover = errorHandlers.findLeftover(10, 10);
                         
-                        const leftoverDataElement = this.errorHandlers.createLeftoverElement(leftover);
+                        const leftoverDataElement = errorHandlers.createLeftoverElement(leftover);
     
-                        this.errorHandlers.writeError('severe', 'Leftovers found!', leftoverDataElement, this.guides.leftoversElement);
+                        errorHandlers.writeError('severe', 'Leftovers found!', leftoverDataElement, guides.leftoversElement);
                         break;
                     }
                 case 'JSONparse':
@@ -934,16 +936,16 @@ var Convertor = function (settings) {
                         //this error type should not be possible
                         //!Shall I make AJAX call to send me email with input text
     
-                        this.errorHandlers.writeError('fatal', 'Fatal error!', '', 'Could not create output because of internal error! Please copy your current input data (left side) and send it to me on uropsilus@gmail.com, you can also contact me on facebook.com/Wourly');
+                        errorHandlers.writeError('fatal', 'Fatal error!', '', 'Could not create output because of internal error! Please copy your current input data (left side) and send it to me on uropsilus@gmail.com, you can also contact me on facebook.com/Wourly');
                         break;
                     }
                 case 'JSONanalysis':
                     {
                         const flawedQuestions = data;
     
-                        const flawedQuestionsElement = this.errorHandlers.createFlawedQuestionsListElement(flawedQuestions);
+                        const flawedQuestionsElement = errorHandlers.createFlawedQuestionsListElement(flawedQuestions);
     
-                        this.errorHandlers.writeError('soft', 'Almost there!', flawedQuestionsElement, 'Format of your data is already working, but for better future maintenance and to avoid confusion, it is necessary to amend cases above. (double-click to expand)');
+                        errorHandlers.writeError('soft', 'Almost there!', flawedQuestionsElement, 'Format of your data is already working, but for better future maintenance and to avoid confusion, it is necessary to amend cases above. (double-click to expand)');
                         break;
                     }
                     
@@ -963,7 +965,7 @@ var Convertor = function (settings) {
     // GUIDES
     //========================
 
-    this.guides = (function () {
+    guides = (function () {
 
         const guides = new Object();
 
@@ -1154,15 +1156,15 @@ var Convertor = function (settings) {
     //  MISCELLANEOUS
     //========================
 
-    this.miscellaneous.properties = ['answers', 'vH', 'iH', 'tags'];
+    miscellaneous.properties = ['answers', 'vH', 'iH', 'tags'];
 
     //return bodyObject, which contains text and properties separated by symbols
     //these properties are mostly 'hints'
-    this.miscellaneous.bodyTextProcessor = function bodyTextProcessor (textBody) {
+    miscellaneous.bodyTextProcessor = function bodyTextProcessor (textBody) {
 
-        const markedTextBody = textBody.replace(this.regExp.captureHintIdentificators, this.miscellaneous.splitterSequence + "$1");
+        const markedTextBody = textBody.replace(this.regExp.captureHintIdentificators, miscellaneous.splitterSequence + "$1");
         
-        const splitTokens = markedTextBody.split(this.miscellaneous.splitterSequence);
+        const splitTokens = markedTextBody.split(miscellaneous.splitterSequence);
 
         const bodyObject = new Object();
         bodyObject.text = splitTokens[0].trim();
@@ -1184,7 +1186,7 @@ var Convertor = function (settings) {
                     case this.settings.tagIdentificator:
                         recognizedVariable = 'tags'
                         
-                        variableText = this.miscellaneous.processTags(variableText);
+                        variableText = miscellaneous.processTags(variableText);
 
                         break;
                     default:
@@ -1201,7 +1203,7 @@ var Convertor = function (settings) {
 
     }.bind(this);
 
-    this.miscellaneous.processTags = function (tagsString) {
+    miscellaneous.processTags = function (tagsString) {
 
         const tagArray = tagsString.split(this.settings.propertySplitter);
         const tagArrayLength = tagArray.length;
@@ -1222,7 +1224,7 @@ var Convertor = function (settings) {
 
     //only effective for debugging purposes
     //only keeps array from capture groups
-    this.miscellaneous.filterValidCaptureGroups = function (captureGroups) {
+    miscellaneous.filterValidCaptureGroups = function (captureGroups) {
 
         var sliceEndIndex = null;
 
@@ -1236,7 +1238,7 @@ var Convertor = function (settings) {
     };
 
     //never used now, had meaning before
-    this.miscellaneous.settingsTokens = (function () {
+    miscellaneous.settingsTokens = (function () {
 
         const tokens = new Array();
 
@@ -1248,11 +1250,11 @@ var Convertor = function (settings) {
 
     }.bind(this))();
 
-    this.miscellaneous.clearOutputElement = function () {
+    miscellaneous.clearOutputElement = function () {
         this.accessDOM('output', function (element, accessor) {element[accessor] = ''})
     }.bind(this);
 
-    this.miscellaneous.clearErrorElements = function () {
+    miscellaneous.clearErrorElements = function () {
 
         this.accessDOM('errorContainer', function (element) {element.removeAttribute('data-error')});
         this.accessDOM('errorLabel', function (element, accessor) {element[accessor] = ''})
@@ -1261,17 +1263,17 @@ var Convertor = function (settings) {
         
     }.bind(this);
 
-    this.miscellaneous.copyInput = function () {
+    miscellaneous.copyInput = function () {
         return this.accessDOM('input', function (element, accessor) {return element[accessor]});
     }.bind(this);
 
-    this.miscellaneous.fillOutputTextarea = function (outputText) {
+    miscellaneous.fillOutputTextarea = function (outputText) {
         this.accessDOM('output', function (element, accessor) {
             element[accessor] = this[outputText];
         }.bind(this))
     }.bind(this);
 
-    this.miscellaneous.countTags = function countTags (outputArray, tagsContainer) {
+    miscellaneous.countTags = function countTags (outputArray, tagsContainer) {
         
         const questions = this[outputArray];
         const questionsLength = questions.length;
@@ -1299,7 +1301,7 @@ var Convertor = function (settings) {
 
     }.bind(this);
 
-    this.miscellaneous.finalizeOutputText = function finalizeOutputText (outputText, tagsContainer) {
+    miscellaneous.finalizeOutputText = function finalizeOutputText (outputText, tagsContainer) {
 
         this[outputText] = "const QUESTIONS = \n" + this[outputText] + ';' + "\n" + 'const TAGS = ' + JSON.stringify(this[tagsContainer]) + ';';
         
@@ -1316,74 +1318,73 @@ var Convertor = function (settings) {
 
         //stores, which steps were completed, so it may clarify, where code is stuck
         this.conversionStatus = new Object();
-        this.allIdentificators = new Array();
 
-        this.miscellaneous.clearOutputElement();
-        this.miscellaneous.clearErrorElements();
+        miscellaneous.clearOutputElement();
+        miscellaneous.clearErrorElements();
 
-        this.preformatedInputText = this.miscellaneous.copyInput();
+        this.preformatedInputText = miscellaneous.copyInput();
         this.outputText = null;
         this.errorText = null;
         this.outputArray = null;
         this.tags = new Object();
 
         //JSON bug prevention
-        this.preformators.escapeDoubleQuotes('preformatedInputText');
+        preformators.escapeDoubleQuotes('preformatedInputText');
 
-        this.preformatedInputText = this.preformators.trimEachRow(this.preformatedInputText);
+        this.preformatedInputText = preformators.trimEachRow(this.preformatedInputText);
 
         this.outputText = this.preformatedInputText;
         this.errorText = this.preformatedInputText;
 
-        this.convertors.removeComments('outputText', 'errorText');
-        this.convertors.removeEmptyLines('outputText');
+        convertors.removeComments('outputText', 'errorText');
+        convertors.removeEmptyLines('outputText');
 
         //processing questions
-        this.conversionStatus.questions = this.convertors.processQuestions('outputText', 'errorText');
-        if (!this.errorHandlers.isProcessingSuccessful('questions')) {
-            this.errorHandlers.reportError('questions');
+        this.conversionStatus.questions = convertors.processQuestions('outputText', 'errorText');
+        if (!errorHandlers.isProcessingSuccessful('questions')) {
+            errorHandlers.reportError('questions');
             return;
         }
         console.log(performance.now() - performanceStart, 'questions converted');
 
         //processing answers
-        this.conversionStatus.answers = this.convertors.processAnswers('outputText', 'errorText');
-        if (!this.errorHandlers.isProcessingSuccessful('answers')) {
-            this.errorHandlers.reportError('answers');
+        this.conversionStatus.answers = convertors.processAnswers('outputText', 'errorText');
+        if (!errorHandlers.isProcessingSuccessful('answers')) {
+            errorHandlers.reportError('answers');
             return;
         }
         console.log(performance.now() - performanceStart, 'answers converted');
 
         //checking for unprocessed code
-        this.conversionStatus.leftovers = this.errorHandlers.detectTextLeftovers('errorText');
-        if (!this.errorHandlers.isProcessingSuccessful('leftovers')) {
-            this.errorHandlers.reportError('leftovers');
+        this.conversionStatus.leftovers = errorHandlers.detectTextLeftovers('errorText');
+        if (!errorHandlers.isProcessingSuccessful('leftovers')) {
+            errorHandlers.reportError('leftovers');
             return;
         }
         console.log(performance.now() - performanceStart, 'leftovers resolved');
 
-        this.convertors.finalizePreJsonString('outputText');
+        convertors.finalizePreJsonString('outputText');
         console.log(performance.now() - performanceStart, 'text for JSON parse');
 
         //this.outputText = 'tak tohle nepůjde, kámo';
-        this.conversionStatus.JSONparse = this.convertors.JSONparser('outputText', 'outputArray');
-        if (!this.errorHandlers.isProcessingSuccessful('JSONparse')) {
-            this.errorHandlers.reportError('JSONparse');
+        this.conversionStatus.JSONparse = convertors.JSONparser('outputText', 'outputArray');
+        if (!errorHandlers.isProcessingSuccessful('JSONparse')) {
+            errorHandlers.reportError('JSONparse');
             return;
         }
         console.log(performance.now() - performanceStart, 'JSONparsed');
 
         //already contains errorHandling, but it does not affect structural changes of JSON
-        this.conversionStatus.JSONanalysis = this.errorHandlers.analyseJSON('outputArray');
+        this.conversionStatus.JSONanalysis = errorHandlers.analyseJSON('outputArray');
         console.log(performance.now() - performanceStart, 'JSONanalyzed');
 
-        this.miscellaneous.countTags('outputArray', 'tags');
+        miscellaneous.countTags('outputArray', 'tags');
         console.log(performance.now() - performanceStart, 'tags created');
 
-        this.miscellaneous.finalizeOutputText('outputText', 'tags');
+        miscellaneous.finalizeOutputText('outputText', 'tags');
         console.log(performance.now() - performanceStart, 'text finalized');
 
-        this.miscellaneous.fillOutputTextarea('outputText');
+        miscellaneous.fillOutputTextarea('outputText');
         console.log(performance.now() - performanceStart, 'finished');
 
         return true;
@@ -1394,8 +1395,8 @@ var Convertor = function (settings) {
     // ATTACHEMENT
     //========================
 
-    this.start = function () {
+    this.attach = function () {
         this.DOM.input.element.addEventListener('input', this.convert);
-        this.DOM.errorContent.element.addEventListener('dblclick', this.errorHandlers.errorContentToggler);
+        this.DOM.errorContent.element.addEventListener('dblclick', errorHandlers.errorContentToggler);
     }.bind(this);
 }

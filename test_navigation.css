@@ -1,9 +1,11 @@
-test-options {
-    display: block;
+custom-inputs {
+    margin-top: 5px;
     float: left;
+    display: none;
 }
 
-[class*=-block] {
+
+[class=block], [class*=-block], [class*=block-] {
     display: block;
 }
 
@@ -12,99 +14,39 @@ test-options {
     float: left;
 }
 
+[class*=right-block]
+{
+    float: right;
+}
+
 [class*=block-clear] {
     clear: both;
 }
 
-test-info {
-    color: #42809b;
-    font-size: 13px;
-    margin-bottom: 10px;
-}
-
-input-container {
-    display: block;
-    float: left;
-}
-
-flat-input, index-input {
-    display: block;
-    float: left;
-}
-
-input {
-    display: block;
-    font-weight: bold;
-    height: 25px;
-    border: 1px solid orangered;
-    padding: 5px;
-}
-
-index-input input {
-    border-radius: 6px;
-    width: 270px;
-}
-
-flat-input {
-    margin-right: 50px;
-}
-
-flat-input input {
-    width: 110px;
-}
-
-flat-input input-container[one] input {
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-}
-
-flat-input input-container[two] input {
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-}
-
-input-container label, tags-input label {
-    display: block;
-    font-size: 18px;
-    margin-bottom: 5px;
-    color: rgb(255, 208, 0);
-}
-
-input-container[two] label {
-    text-align: right;
-}
-
-input-container[two] input {
-    text-align: right;
-}
-
-tags-input {
-    display: block;
+[class~=clear] {
     clear: both;
-    float: left;
-}
-
-tags-array {
-    display: block;
 }
 
 [class*=button] {
+    display: block;
     position: relative;
     background-color: #42809b;
     color: #000;
-    display: block;
-    float: left;
+
     cursor: pointer;
     min-width: 50px;
     transition: background-color 0.2s;
 }
 
-/*excludes dash*/
-[class=button] {
-    margin-top: 5px;
+tag-container {
+    float: left;
+}
+
+/*default button, excludes dash*/
+[class~=button], tag-container {
+
     padding-left: 10px;
     padding-right: 10px;
-    margin-right: 15px;
 
     height: 30px;
     line-height: 30px;
@@ -112,19 +54,15 @@ tags-array {
     border-radius: 25px;
 }
 
-tag-container {
-    padding-right: 35px !important;
-}
-
 [class*=button]:not([selected]):hover {
     background-color: rgb(255, 165, 0);
 }
 
 [class*=button][selected] {
-    background-color: chartreuse;
+    background-color: #7FFF00;
 }
 
-.main-button {
+[class~=main-button] {
 
     box-sizing: content-box;
 
@@ -145,23 +83,118 @@ tag-container {
     transition: border-color 0.5s;
 }
 
-.main-button:hover {
-    border-color: chartreuse;
+[class~=main-button]:hover {
+    border-color: #7FFF00;
+}
+
+arrow-container arrow-left:hover {
+    box-shadow: #42809b;
+}
+
+test-option:not(:first-child) {
+    margin-left: 10px;
+}
+
+arrow-button[class=button]:hover {
+    background-color: red;
+}
+
+input, tag-count {
+    background-color: lightblue;
+}
+
+input {
+    display: block;
+    font-weight: bold;
+    height: 25px;
+    border: 1px solid orangered;
+    padding: 5px;
 }
 
 tag-count {
     display: block;
     position: absolute;
+
+    opacity: inherit;
+
     right:0;
     top: 0;
-    background-color: pink;
     border-radius: 25px;
     text-align: center;
     width: 30px;
 }
 
+
+
+[disabled] input, [disabled] [class*=button] {
+    opacity: 0.2;
+    background-color: #1b5a74;
+    user-select: none;
+}
+
+/*first line of test menu*/
+test-info {
+    color: #42809b;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+input-caption {
+    margin-top: 10px;
+}
+
+index-input input {
+    border-radius: 6px;
+    width: 270px;
+}
+
+flat-input {
+    margin-right: 25px;
+}
+
+flat-input input {
+    width: 110px;
+}
+
+flat-input input-container[one] input {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+flat-input input-container[two] input {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+test-menu label {
+    display: block;
+    font-size: 17px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: rgb(255, 208, 0);
+}
+
+input-container[two] label {
+    text-align: right;
+}
+
+input-container[two] input {
+    text-align: right;
+}
+
+tag-container {
+    padding-right: 35px !important;
+    margin-bottom: 10px;
+}
+
+tag-container:not(:last-child) {
+    margin-right: 10px;
+}
+
+
+
 test-buttons {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 /*test-button {
@@ -181,9 +214,45 @@ test-buttons {
 }
 
 test-button:hover {
-    color: chartreuse;
+    color: #7FFF00;
     border-color: #62b9df;
 }*/
+
+arrow-container
+{
+    height: inherit;
+    width: 100px;
+}
+
+arrow-left, arrow-right {
+
+    top: 50%;
+    transform:translateY(-50%);
+    border-color: #7FFF00;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 15px;
+    background-color: orangered;
+
+    user-select: none;
+
+    font-size: 20px !important;
+    font-weight: 900 !important;
+}
+
+arrow-left {
+
+    float: left;
+    margin-left: 18px;
+    box-shadow: -5px 0px 0 0 #7FFF00;
+  }
+  
+arrow-right {
+    float: right;
+    margin-right: 18px;
+    box-shadow: 5px 0px 0 0 #7FFF00;
+  }
+
 
 @media screen and (max-width:600px) {
 
