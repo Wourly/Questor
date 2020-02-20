@@ -16,18 +16,31 @@
     
 </head>
 <body>
-    <header>Fyziologie živočichů a člověka</header>
-    <test-main id="main" menu-type="custom">
+    <header id="inventory">
+        <subject-name id="subject-name" class="left-block"></subject-name>
+        <inventory-container>
+            <test-summary id="test-summary">
+                <score-element id="total-questions"></score-element>
+                <score-element id="correct-questions"></score-element>
+                <score-element id="total-questions"></score-element>
+                <score-element id="total-questions"></score-element>
+                <score-element id="total-questions"></score-element>
+            </test-summary>
+            <incorrect-indexes id="incorrect-indexes"></incorrect-indexes>
+            <saved-indexes id="saved-indexes"></saved-indexes>
+        </inventory-container>
+    </header>
+    <test-main id="test-main" menu-type="custom">
 
             <test-menu id="menu">
-                <test-info class="left-block-clear">There are currently X questions for this test.</test-info>
+                <test-info class="left-block-clear">There are currently <question-number id="question-number">X</question-number> questions for this test.</test-info>
 
-                <test-option id="option-custom" data-value="custom" class='button togglable left-block-clear' selected>Custom test</test-option>
+                <test-option selected id="option-custom" data-value="custom" class='button togglable left-block-clear'>Custom test</test-option>
                 <test-option id="option-real" data-value="real" class='button togglable left-block'>Real test</test-option>
                 
                 <custom-inputs id="custom-inputs" class="clear">
 
-                    <flat-input disabled id="flat-input" data-value="flat" class="left-block">
+                    <flat-input selected id="flat-input" data-value="flat" class="left-block">
                         <input-caption class="block">
                             Select questions by their index:
                         </input-caption>
@@ -37,36 +50,29 @@
                         </input-container>
                         <input-container two class="left-block">
                         <label class="block">to</label>
-                            <input id="flatInputMax" value="15">
+                            <input id="flatInputMax" value="2">
                         </input-container>
                     </flat-input>
 
-                    <index-input selected id="index-input" data-value="index" class="left-block">
+                    <index-input id="index-input" data-value="index" class="left-block">
                         <input-caption class="block">
                             Select questions by their identificators:
                         </input-caption>
                         <input-container class="left-block">
                             <label class="block">identificators</label>
-                            <input id="index-array" value='"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"'>
+                            <input id="index-array">
                         </input-container>
                     </index-input>
 
-                    <tags-input disabled id="tags-input" data-value="tags" class="left-block-clear">
+                    <tags-input id="tags-input" data-value="tags" class="left-block-clear">
                         <input-caption class="block">
                             Select questions by their tags:
                         </input-caption>
                         <label class="block">tags</label>
                         <tags-array id="tags-array" class="block">
-                            <tag-container class="button">
-                                <tag-name>Plíce</tag-name><tag-count>15</tag-count>
-                            </tag-container>
-                            <tag-container class="button" selected>
-                                <tag-name>Srdce</tag-name><tag-count>12</tag-count>
-                            </tag-container>
-                            <tag-container class="button">
-                                <tag-name>Mozek</tag-name><tag-count>560</tag-count>
-                            </tag-container>
-                        </tags-array>
+                            <tags-array id="tags-array" class="block"><tag-container class="button togglable"><tag-name>Regulace</tag-name>
+                                <!--will be filled by tag containers-->
+                            </tags-array>
                     </tags-input>
 
                 </custom-inputs>
@@ -81,60 +87,21 @@
             </test-menu>
 
 
-        <!--Container for questions-->
+        
         <test-content id="content" class="left-block-clear">
 
-
-
-
-<!--
-        <question-block>
-            <question-upper>
-                <question-title>Molekulární motory</question-title>
-                <identificator-container>
-                    <question-identificator>147</question-identificator>
-                    <question-tags>Mozek</question-tags>
-                </identificator-container>
-            </question-upper>
-            <question-lower>
-                <question-answers>
-                    <answer-block selected>
-                        <answer-text>Využívají ATP</answer-text>
-                        <hint-visible></hint-visible>
-                        <hint-invisible></hint-invisible>
-                    </answer-block>
-                    <answer-block>
-                        <answer-text>Pohyb vždy procesivní</answer-text>
-                        <hint-visible></hint-visible>
-                        <hint-invisible></hint-invisible>
-                    </answer-block>
-                    <answer-block>
-                        <answer-text>Unknown</answer-text>
-                        <hint-visible></hint-visible>
-                        <hint-invisible></hint-invisible>
-                    </answer-block>
-                    <answer-block>
-                        <answer-text>Transportují RNA, endosomy</answer-text>
-                        <hint-visible></hint-visible>
-                        <hint-invisible>netransportují RNA</hint-invisible>
-                    </answer-block>
-                    X 
-                    X 
-                    X  ^ 
-                </question-answers>
-            </question-lower>
-        </question-block>
-
-
--->
-
+            <!--will be filled by tag questions-->
 
         </test-content>
 
-        
+        <test-end class="left-block-clear">
+            <finish-test id="finish-button" class="main-button left-block">
+                Finish test
+            </finish-test>
+        </test-end>
     </test-main>
-    <footer id="inventory">
-        <footer-toggler></footer-toggler>
+    <footer id="footer">
+        <question-position id="question-position"></question-position>
         <arrow-container id="arrow-left" class="left-block">
             <arrow-left class="button">&laquo;&nbsp;back</arrow-left>
         </arrow-container>

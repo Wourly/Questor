@@ -99,6 +99,24 @@ arrow-button[class=button]:hover {
     background-color: red;
 }
 
+footer[data-page="0"] arrow-container#arrow-left
+{
+    display: none;
+}
+
+footer[data-page="max"] arrow-container#arrow-right
+{
+    display: none;
+}
+
+footer[data-page="only"] arrow-container {
+    display: none;
+}
+
+finish-test {
+    margin-bottom: 10px;
+}
+
 input, tag-count {
     background-color: lightblue;
 }
@@ -221,7 +239,7 @@ test-button:hover {
 arrow-container
 {
     height: inherit;
-    width: 100px;
+    width: 150px;
 }
 
 arrow-left, arrow-right {

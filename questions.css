@@ -36,23 +36,6 @@ question-identificator::before {
     content: 'id: ';
 }
 
-identificator-container {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    right: 0;
-    bottom: 0;
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid #f09308;
-    border-radius: 3px;
-    background: linear-gradient(60deg, rgb(29, 42, 51), rgb(30, 51, 65));
-}
-
-question-title:hover ~ identificator-container {
-    display: block;
-}
-
 answer-container {
     display: block;
     cursor: pointer;
@@ -60,17 +43,24 @@ answer-container {
     margin-top: 2px;
 
     font-size: 17px;
-}
 
-answer-text, answer-alpha {
     color: #42809b;
     transition: color 0.4s;
 }
 
-answer-container:hover answer-text, answer-container:hover answer-alpha {
+answer-container:hover {
     color: #62b9df;
 }
 
-answer-container[selected] answer-text {
+answer-container[selected] {
     color: #7FFF00;
+}
+
+/*just for clarity*/
+answer-container[selected][incorrect] {
+    color: #F00;
+}
+
+answer-container[incorrect] {
+    color: #FF0;
 }

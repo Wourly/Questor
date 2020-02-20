@@ -97,7 +97,7 @@ const QUESTIONS =
 },
 {
    "id":"9",
-   "text":"v buňce se uplaťnují síly",
+   "text":"V buňce se uplaťnují síly",
    "tags":["Regulace"],
    "answers":
       [
@@ -109,7 +109,7 @@ const QUESTIONS =
 },
 {
    "id":"10",
-   "text":"tíha",
+   "text":"Tíha",
    "tags":["Regulace"],
    "answers":
       [
@@ -121,7 +121,7 @@ const QUESTIONS =
 },
 {
    "id":"11",
-   "text":"hmota má tyto obecné vlastnosti",
+   "text":"Hmota má tyto obecné vlastnosti",
    "tags":["Regulace"],
    "answers":
       [
@@ -133,7 +133,7 @@ const QUESTIONS =
 },
 {
    "id":"12",
-   "text":"potenciální energie U",
+   "text":"Potenciální energie U",
    "tags":["Regulace"],
    "answers":
       [
@@ -277,7 +277,7 @@ const QUESTIONS =
 },
 {
    "id":"24",
-   "text":"teplota je",
+   "text":"Teplota je",
    "tags":["Regulace"],
    "answers":
       [
@@ -445,7 +445,7 @@ const QUESTIONS =
 },
 {
    "id":"38",
-   "text":"k fosforylaci bílkovin a tím k regulaci jejich  funkce dochází především na aminokyselinových zbytcích",
+   "text":"K fosforylaci bílkovin a tím k regulaci jejich  funkce dochází především na aminokyselinových zbytcích",
    "tags":["Regulace"],
    "answers":
       [
@@ -457,7 +457,7 @@ const QUESTIONS =
 },
 {
    "id":"39",
-   "text":"k fosforylaci bílkovin a tím k regulaci jejich  funkce dochází především na aminokyselinových zbytcích",
+   "text":"K fosforylaci bílkovin a tím k regulaci jejich  funkce dochází především na aminokyselinových zbytcích",
    "tags":["Regulace"],
    "answers":
       [
@@ -469,7 +469,7 @@ const QUESTIONS =
 },
 {
    "id":"40",
-   "text":"k fosforylaci bílkovin a tím k regulaci jejich  funkce dochází činností",
+   "text":"K fosforylaci bílkovin a tím k regulaci jejich  funkce dochází činností",
    "tags":["Regulace"],
    "answers":
       [
@@ -481,7 +481,7 @@ const QUESTIONS =
 },
 {
    "id":"41",
-   "text":"k defosforylaci bílkovin a tím k regulaci jejich  funkce dochází činností",
+   "text":"K defosforylaci bílkovin a tím k regulaci jejich  funkce dochází činností",
    "tags":["Regulace"],
    "answers":
       [
@@ -493,7 +493,7 @@ const QUESTIONS =
 },
 {
    "id":"42",
-   "text":"translokační mechanismus přenosu aminokyselin zabezpečuje u savců",
+   "text":"Translokační mechanismus přenosu aminokyselin zabezpečuje u savců",
    "tags":["Regulace"],
    "answers":
       [
@@ -505,7 +505,7 @@ const QUESTIONS =
 },
 {
    "id":"43",
-   "text":"sekundární transport",
+   "text":"Sekundární transport",
    "tags":["Regulace"],
    "answers":
       [
@@ -589,7 +589,7 @@ const QUESTIONS =
 },
 {
    "id":"50",
-   "text":"metabotropní membránové receptory jsou ty, které",
+   "text":"Metabotropní membránové receptory jsou ty, které",
    "tags":["Regulace"],
    "answers":
       [
@@ -601,7 +601,7 @@ const QUESTIONS =
 },
 {
    "id":"51",
-   "text":"metabotropní membránové receptory jsou ty, které",
+   "text":"Metabotropní membránové receptory jsou ty, které",
    "tags":["Regulace"],
    "answers":
       [
@@ -613,7 +613,7 @@ const QUESTIONS =
 },
 {
    "id":"52",
-   "text":"napěťově řízené ionotropní kanály",
+   "text":"Napěťově řízené ionotropní kanály",
    "tags":["Regulace"],
    "answers":
       [
@@ -625,7 +625,7 @@ const QUESTIONS =
 },
 {
    "id":"53",
-   "text":"reaktivita a biologická účinnost volných radikálů je dána",
+   "text":"Reaktivita a biologická účinnost volných radikálů je dána",
    "tags":["Regulace"],
    "answers":
       [
@@ -637,7 +637,7 @@ const QUESTIONS =
 },
 {
    "id":"54",
-   "text":"transducin je",
+   "text":"Transducin je",
    "tags":["Regulace"],
    "answers":
       [
@@ -661,7 +661,7 @@ const QUESTIONS =
 },
 {
    "id":"56",
-   "text":"na primárním poškození gamma zářením se podílí",
+   "text":"Na primárním poškození gamma zářením se podílí",
    "tags":["Regulace"],
    "answers":
       [
@@ -673,7 +673,7 @@ const QUESTIONS =
 },
 {
    "id":"57",
-   "text":"oxidativní vzplanutí fagocytů zahrnuje",
+   "text":"Oxidativní vzplanutí fagocytů zahrnuje",
    "tags":["Regulace"],
    "answers":
       [
@@ -697,7 +697,7 @@ const QUESTIONS =
 },
 {
    "id":"59",
-   "text":"volné radikály se mohou spolupodílet na vzniku",
+   "text":"Volné radikály se mohou spolupodílet na vzniku",
    "tags":["Regulace"],
    "answers":
       [
@@ -709,7 +709,7 @@ const QUESTIONS =
 },
 {
    "id":"60",
-   "text":"k fosforylaci bílkovin a tím k regulaci jejich funkce dochází především na aminokyselinových zbytcích",
+   "text":"K fosforylaci bílkovin a tím k regulaci jejich funkce dochází především na aminokyselinových zbytcích",
    "tags":["Regulace"],
    "answers":
       [
@@ -721,7 +721,7 @@ const QUESTIONS =
 },
 {
    "id":"61",
-   "text":"k fosforylaci bílkovin a tím k regulaci jejich funkce dochází především na aminokyselinových zbytcích",
+   "text":"K fosforylaci bílkovin a tím k regulaci jejich funkce dochází především na aminokyselinových zbytcích",
    "tags":["Regulace"],
    "answers":
       [
@@ -733,7 +733,7 @@ const QUESTIONS =
 },
 {
    "id":"62",
-   "text":"k fosforylaci bílkovin a tím k regulaci jejich funkce dochází činností",
+   "text":"K fosforylaci bílkovin a tím k regulaci jejich funkce dochází činností",
    "tags":["Regulace"],
    "answers":
       [
@@ -745,7 +745,7 @@ const QUESTIONS =
 },
 {
    "id":"63",
-   "text":"k defosforylaci bílkovin a tím k regulaci jejich funkce dochází činností",
+   "text":"K defosforylaci bílkovin a tím k regulaci jejich funkce dochází činností",
    "tags":["Regulace"],
    "answers":
       [
@@ -757,7 +757,7 @@ const QUESTIONS =
 },
 {
    "id":"64",
-   "text":"translokační mechanismus přenosu anminokyselin zabezpečuje u savců",
+   "text":"Translokační mechanismus přenosu anminokyselin zabezpečuje u savců",
    "tags":["Regulace"],
    "answers":
       [
@@ -769,7 +769,7 @@ const QUESTIONS =
 },
 {
    "id":"65",
-   "text":"sekundární transport",
+   "text":"Sekundární transport",
    "tags":["Regulace"],
    "answers":
       [
@@ -829,7 +829,7 @@ const QUESTIONS =
 },
 {
    "id":"70",
-   "text":"je pravda, že iontové kanály",
+   "text":"Je pravda, že iontové kanály",
    "tags":["Regulace"],
    "answers":
       [
@@ -841,7 +841,7 @@ const QUESTIONS =
 },
 {
    "id":"71",
-   "text":"metabotropní membránové receptory jsou ty, kde",
+   "text":"Metabotropní membránové receptory jsou ty, kde",
    "tags":["Regulace"],
    "answers":
       [
@@ -853,7 +853,7 @@ const QUESTIONS =
 },
 {
    "id":"72",
-   "text":"metabotropní membránové receptory jsou ty, které",
+   "text":"Metabotropní membránové receptory jsou ty, které",
    "tags":["Regulace"],
    "answers":
       [
@@ -865,7 +865,7 @@ const QUESTIONS =
 },
 {
    "id":"73",
-   "text":"napěťovým hradlem řízené ionotropní kanály",
+   "text":"Napěťovým hradlem řízené ionotropní kanály",
    "tags":["Regulace"],
    "answers":
       [
@@ -877,7 +877,7 @@ const QUESTIONS =
 },
 {
    "id":"74",
-   "text":"reaktivita a biologická účinnost volných kyslíkových radikálů je dána",
+   "text":"Reaktivita a biologická účinnost volných kyslíkových radikálů je dána",
    "tags":["Regulace"],
    "answers":
       [
@@ -889,7 +889,7 @@ const QUESTIONS =
 },
 {
    "id":"75",
-   "text":"transducin je",
+   "text":"Transducin je",
    "tags":["Regulace"],
    "answers":
       [
@@ -913,7 +913,7 @@ const QUESTIONS =
 },
 {
    "id":"77",
-   "text":"na primárním poškození gamma zářením se podílí",
+   "text":"Na primárním poškození gamma zářením se podílí",
    "tags":["Regulace"],
    "answers":
       [
@@ -925,7 +925,7 @@ const QUESTIONS =
 },
 {
    "id":"78",
-   "text":"oxidativní vzplanutí fagocytů zahrnuje",
+   "text":"Oxidativní vzplanutí fagocytů zahrnuje",
    "tags":["Regulace"],
    "answers":
       [
@@ -949,7 +949,7 @@ const QUESTIONS =
 },
 {
    "id":"80",
-   "text":"volné radikály se mohou spolupodílet na vzniku",
+   "text":"Volné radikály se mohou spolupodílet na vzniku",
    "tags":["Regulace"],
    "answers":
       [
@@ -1045,7 +1045,7 @@ const QUESTIONS =
 },
 {
    "id":"88",
-   "text":"acetylcholinový receptor nikotinového typu",
+   "text":"Acetylcholinový receptor nikotinového typu",
    "tags":["Regulace"],
    "answers":
       [
@@ -1057,7 +1057,7 @@ const QUESTIONS =
 },
 {
    "id":"89",
-   "text":"acetylcholinový receptor nikotinového typu",
+   "text":"Acetylcholinový receptor nikotinového typu",
    "tags":["Regulace"],
    "answers":
       [
@@ -1069,7 +1069,7 @@ const QUESTIONS =
 },
 {
    "id":"90",
-   "text":"membránová NA-K-ATPáza",
+   "text":"Membránová NA-K-ATPáza",
    "tags":["Regulace"],
    "answers":
       [
@@ -1081,7 +1081,7 @@ const QUESTIONS =
 },
 {
    "id":"91",
-   "text":"membránová Na-K-ATPáza",
+   "text":"Membránová Na-K-ATPáza",
    "tags":["Regulace"],
    "answers":
       [
@@ -1105,7 +1105,7 @@ const QUESTIONS =
 },
 {
    "id":"93",
-   "text":"napěťově i ligandem řízené ionotropní kanály",
+   "text":"Napěťově i ligandem řízené ionotropní kanály",
    "tags":["Regulace"],
    "answers":
       [
@@ -1117,7 +1117,7 @@ const QUESTIONS =
 },
 {
    "id":"94",
-   "text":"iontové kanály (ionotropní)",
+   "text":"Iontové kanály (ionotropní)",
    "tags":["Regulace"],
    "answers":
       [
@@ -1129,7 +1129,7 @@ const QUESTIONS =
 },
 {
    "id":"95",
-   "text":"index hydropatie u integrálních (transmembránových) proteinů znamená",
+   "text":"Index hydropatie u integrálních (transmembránových) proteinů znamená",
    "tags":["Regulace"],
    "answers":
       [
@@ -1141,7 +1141,7 @@ const QUESTIONS =
 },
 {
    "id":"96",
-   "text":"mezi hydrofobní(lipofilní) aminokyseliny nepatří",
+   "text":"Mezi hydrofobní(lipofilní) aminokyseliny nepatří",
    "tags":["Regulace"],
    "answers":
       [
@@ -1153,7 +1153,7 @@ const QUESTIONS =
 },
 {
    "id":"97",
-   "text":"acetylcholinový receptor nikotinového typu",
+   "text":"Acetylcholinový receptor nikotinového typu",
    "tags":["Regulace"],
    "answers":
       [
@@ -1188,7 +1188,7 @@ const QUESTIONS =
 },
 {
    "id":"100",
-   "text":"laterální difúze proteinů v membráně",
+   "text":"Laterální difúze proteinů v membráně",
    "tags":["Regulace"],
    "answers":
       [
@@ -1212,7 +1212,7 @@ const QUESTIONS =
 },
 {
    "id":"102",
-   "text":"selektivní (výběrová) permeabilita membránových kanálů pro kationty nebo anionty je dána také",
+   "text":"Selektivní (výběrová) permeabilita membránových kanálů pro kationty nebo anionty je dána také",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1824,7 +1824,7 @@ const QUESTIONS =
 },
 {
    "id":"153",
-   "text":"vlákna koster.svalu",
+   "text":"Vlákna koster.svalu",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1836,7 +1836,7 @@ const QUESTIONS =
 },
 {
    "id":"154",
-   "text":"sarkomera má střední délku v mikrometrech",
+   "text":"Sarkomera má střední délku v mikrometrech",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1848,7 +1848,7 @@ const QUESTIONS =
 },
 {
    "id":"155",
-   "text":"spojení excitace a kontrakce u vlákna  kosterního svalu má tyto fáze:",
+   "text":"Spojení excitace a kontrakce u vlákna  kosterního svalu má tyto fáze:",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1860,7 +1860,7 @@ const QUESTIONS =
 },
 {
    "id":"156",
-   "text":"v sarkomeře příčně pruhovaného koster.svalu  jsou",
+   "text":"V sarkomeře příčně pruhovaného koster.svalu  jsou",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1872,7 +1872,7 @@ const QUESTIONS =
 },
 {
    "id":"157",
-   "text":"elektromyografie snímá elektr.projevy",
+   "text":"Elektromyografie snímá elektr.projevy",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1908,7 +1908,7 @@ const QUESTIONS =
 },
 {
    "id":"160",
-   "text":"kontrakce svalu isotonická je",
+   "text":"Kontrakce svalu isotonická je",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1920,7 +1920,7 @@ const QUESTIONS =
 },
 {
    "id":"161",
-   "text":"kontrakce svalu isometrická je",
+   "text":"Kontrakce svalu isometrická je",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1944,7 +1944,7 @@ const QUESTIONS =
 },
 {
    "id":"163",
-   "text":"sarkomery a celkově svaly mají mechanickou účinnost",
+   "text":"Sarkomery a celkově svaly mají mechanickou účinnost",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1956,7 +1956,7 @@ const QUESTIONS =
 },
 {
    "id":"164",
-   "text":"sval vydává",
+   "text":"Sval vydává",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1968,7 +1968,7 @@ const QUESTIONS =
 },
 {
    "id":"165",
-   "text":"zdroje energie pro sval",
+   "text":"Zdroje energie pro sval",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1980,7 +1980,7 @@ const QUESTIONS =
 },
 {
    "id":"166",
-   "text":"laktát vzniká při usilovné práci",
+   "text":"Laktát vzniká při usilovné práci",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -1992,7 +1992,7 @@ const QUESTIONS =
 },
 {
    "id":"167",
-   "text":"při štěpení ATP se uvolňuje",
+   "text":"Při štěpení ATP se uvolňuje",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2004,7 +2004,7 @@ const QUESTIONS =
 },
 {
    "id":"168",
-   "text":"v glykolýze je čistý výtěžek",
+   "text":"V glykolýze je čistý výtěžek",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2016,7 +2016,7 @@ const QUESTIONS =
 },
 {
    "id":"169",
-   "text":"celkový čistý výtěžek glykolýzy a následující oxidace pyruvátu je",
+   "text":"Celkový čistý výtěžek glykolýzy a následující oxidace pyruvátu je",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2028,7 +2028,7 @@ const QUESTIONS =
 },
 {
    "id":"170",
-   "text":"celkový výtěžek cyklu kyseliny citronové a dýchacího řetězce je",
+   "text":"Celkový výtěžek cyklu kyseliny citronové a dýchacího řetězce je",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2040,7 +2040,7 @@ const QUESTIONS =
 },
 {
    "id":"171",
-   "text":"vápník při stahu",
+   "text":"Vápník při stahu",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2052,7 +2052,7 @@ const QUESTIONS =
 },
 {
    "id":"172",
-   "text":"fáze interakce aktinu a myosinu jsou",
+   "text":"Fáze interakce aktinu a myosinu jsou",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2064,7 +2064,7 @@ const QUESTIONS =
 },
 {
    "id":"173",
-   "text":"aktinové vlákno je",
+   "text":"Aktinové vlákno je",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2076,7 +2076,7 @@ const QUESTIONS =
 },
 {
    "id":"174",
-   "text":"vlákno hladké svaloviny",
+   "text":"Vlákno hladké svaloviny",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2088,7 +2088,7 @@ const QUESTIONS =
 },
 {
    "id":"175",
-   "text":"hladké svalové vlákno",
+   "text":"Hladké svalové vlákno",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2100,7 +2100,7 @@ const QUESTIONS =
 },
 {
    "id":"176",
-   "text":"u hladkého svalového vlákna",
+   "text":"U hladkého svalového vlákna",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2112,7 +2112,7 @@ const QUESTIONS =
 },
 {
    "id":"177",
-   "text":"hladká svalovina",
+   "text":"Hladká svalovina",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2124,7 +2124,7 @@ const QUESTIONS =
 },
 {
    "id":"178",
-   "text":"sumace EPSP (excitačního postsynaptického potenciálu)",
+   "text":"Sumace EPSP (excitačního postsynaptického potenciálu)",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2136,7 +2136,7 @@ const QUESTIONS =
 },
 {
    "id":"179",
-   "text":"změnu volné energie delta G lze vypočítat",
+   "text":"Změnu volné energie delta G lze vypočítat",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2148,7 +2148,7 @@ const QUESTIONS =
 },
 {
    "id":"180",
-   "text":"na spálení jednoho molu glukozy je třeba",
+   "text":"Na spálení jednoho molu glukozy je třeba",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2160,7 +2160,7 @@ const QUESTIONS =
 },
 {
    "id":"181",
-   "text":"velikost kyslíkového dluhu, (tj. množství kyslíku, nutného pro doplnění ATP a kreatinfosfátu, vyčerpaného krátkodobou intensivní prací, jako je běh na krátké tratě či do schodů)  se uvádí zpravidla",
+   "text":"Velikost kyslíkového dluhu, (tj. množství kyslíku, nutného pro doplnění ATP a kreatinfosfátu, vyčerpaného krátkodobou intensivní prací, jako je běh na krátké tratě či do schodů)  se uvádí zpravidla",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2172,7 +2172,7 @@ const QUESTIONS =
 },
 {
    "id":"182",
-   "text":"twitch je anglický název pro",
+   "text":"Twitch je anglický název pro",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2196,7 +2196,7 @@ const QUESTIONS =
 },
 {
    "id":"184",
-   "text":"receptorový potenciál",
+   "text":"Receptorový potenciál",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2208,7 +2208,7 @@ const QUESTIONS =
 },
 {
    "id":"185",
-   "text":"reciproční inhibice antagonistických svalů je",
+   "text":"Reciproční inhibice antagonistických svalů je",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2220,7 +2220,7 @@ const QUESTIONS =
 },
 {
    "id":"186",
-   "text":"gamma klička",
+   "text":"Gamma klička",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2232,7 +2232,7 @@ const QUESTIONS =
 },
 {
    "id":"187",
-   "text":"hladký tetanus je",
+   "text":"Hladký tetanus je",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2281,7 +2281,7 @@ const QUESTIONS =
 },
 {
    "id":"191",
-   "text":"pacemaker je",
+   "text":"Pacemaker je",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2293,7 +2293,7 @@ const QUESTIONS =
 },
 {
    "id":"192",
-   "text":"v nervových varikozitách hladkých svalů",
+   "text":"V nervových varikozitách hladkých svalů",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2317,7 +2317,7 @@ const QUESTIONS =
 },
 {
    "id":"194",
-   "text":"sinoatriální uzel srdce",
+   "text":"Sinoatriální uzel srdce",
    "tags":["Srdce"],
    "answers":
       [
@@ -2329,7 +2329,7 @@ const QUESTIONS =
 },
 {
    "id":"195",
-   "text":"která z následujících vzrušivých drah není v srdci?",
+   "text":"Která z následujících vzrušivých drah není v srdci?",
    "tags":["Srdce"],
    "answers":
       [
@@ -2341,7 +2341,7 @@ const QUESTIONS =
 },
 {
    "id":"196",
-   "text":"standardní končetinové svody EKG jsou",
+   "text":"Standardní končetinové svody EKG jsou",
    "tags":["Srdce"],
    "answers":
       [
@@ -2353,7 +2353,7 @@ const QUESTIONS =
 },
 {
    "id":"197",
-   "text":"srdcem ryb protéká",
+   "text":"Srdcem ryb protéká",
    "tags":["Srdce"],
    "answers":
       [
@@ -2365,7 +2365,7 @@ const QUESTIONS =
 },
 {
    "id":"198",
-   "text":"srdce amfibií",
+   "text":"Srdce amfibií",
    "tags":["Srdce"],
    "answers":
       [
@@ -2377,7 +2377,7 @@ const QUESTIONS =
 },
 {
    "id":"199",
-   "text":"určete správnou odpověď: u většiny savců a člověka",
+   "text":"Určete správnou odpověď: u většiny savců a člověka",
    "tags":["Srdce"],
    "answers":
       [
@@ -2389,7 +2389,7 @@ const QUESTIONS =
 },
 {
    "id":"200",
-   "text":"dráždivost nervu charakterizuje",
+   "text":"Dráždivost nervu charakterizuje",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2401,7 +2401,7 @@ const QUESTIONS =
 },
 {
    "id":"201",
-   "text":"vztah mezi reobází (r.) a chronaxií (ch.):",
+   "text":"Vztah mezi reobází (r.) a chronaxií (ch.):",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2413,7 +2413,7 @@ const QUESTIONS =
 },
 {
    "id":"202",
-   "text":"synaptické zdržení je",
+   "text":"Synaptické zdržení je",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -2461,7 +2461,7 @@ const QUESTIONS =
 },
 {
    "id":"206",
-   "text":"žaberní srdce",
+   "text":"Žaberní srdce",
    "tags":["Srdce"],
    "answers":
       [
@@ -2497,7 +2497,7 @@ const QUESTIONS =
 },
 {
    "id":"209",
-   "text":"atrioventrikulární uzel",
+   "text":"Atrioventrikulární uzel",
    "tags":["Srdce"],
    "answers":
       [
@@ -2509,7 +2509,7 @@ const QUESTIONS =
 },
 {
    "id":"210",
-   "text":"acetylcholin v srdci",
+   "text":"Acetylcholin v srdci",
    "tags":["Srdce"],
    "answers":
       [
@@ -2521,7 +2521,7 @@ const QUESTIONS =
 },
 {
    "id":"211",
-   "text":"jediné vodivé místo mezi síněmí a komorami lidského srdce, kde přechází vzruch na komory, je",
+   "text":"Jediné vodivé místo mezi síněmí a komorami lidského srdce, kde přechází vzruch na komory, je",
    "tags":["Srdce"],
    "answers":
       [
@@ -2533,7 +2533,7 @@ const QUESTIONS =
 },
 {
    "id":"212",
-   "text":"parasympatikus (vagus) působí na srdce",
+   "text":"Parasympatikus (vagus) působí na srdce",
    "tags":["Srdce"],
    "answers":
       [
@@ -2545,7 +2545,7 @@ const QUESTIONS =
 },
 {
    "id":"213",
-   "text":"sympatikus působí na srdce",
+   "text":"Sympatikus působí na srdce",
    "tags":["Srdce"],
    "answers":
       [
@@ -2557,7 +2557,7 @@ const QUESTIONS =
 },
 {
    "id":"214",
-   "text":"v srdci jsou receptory",
+   "text":"V srdci jsou receptory",
    "tags":["Srdce"],
    "answers":
       [
@@ -2569,7 +2569,7 @@ const QUESTIONS =
 },
 {
    "id":"215",
-   "text":"minutový objem (výdej)srdeční",
+   "text":"Minutový objem (výdej)srdeční",
    "tags":["Srdce"],
    "answers":
       [
@@ -2617,7 +2617,7 @@ const QUESTIONS =
 },
 {
    "id":"219",
-   "text":"adrenerní receptory cévní hladké svaloviny",
+   "text":"Adrenerní receptory cévní hladké svaloviny",
    "tags":["Srdce"],
    "answers":
       [
@@ -2965,7 +2965,7 @@ const QUESTIONS =
 },
 {
    "id":"248",
-   "text":"otrava vodou",
+   "text":"Otrava vodou",
    "tags":["Ledviny a homeostáza"],
    "answers":
       [
@@ -3013,7 +3013,7 @@ const QUESTIONS =
 },
 {
    "id":"252",
-   "text":"na pH krve se vůbec nepodílí:",
+   "text":"Na pH krve se vůbec nepodílí:",
    "tags":["Ledviny a homeostáza"],
    "answers":
       [
@@ -3025,7 +3025,7 @@ const QUESTIONS =
 },
 {
    "id":"253",
-   "text":"v intersticiální tekutině není příliš významný následující pufrační (nárazníkový, ústojný) systém",
+   "text":"V intersticiální tekutině není příliš významný následující pufrační (nárazníkový, ústojný) systém",
    "tags":["Ledviny a homeostáza"],
    "answers":
       [
@@ -3085,7 +3085,7 @@ const QUESTIONS =
 },
 {
    "id":"258",
-   "text":"epitelová buňka má většinou?",
+   "text":"Epitelová buňka má většinou?",
    "tags":["Epitely"],
    "answers":
       [
@@ -3121,7 +3121,7 @@ const QUESTIONS =
 },
 {
    "id":"261",
-   "text":"mezi buněčné adhesivní molekuly nepatří?",
+   "text":"Mezi buněčné adhesivní molekuly nepatří?",
    "tags":["Epitely"],
    "answers":
       [
@@ -3145,7 +3145,7 @@ const QUESTIONS =
 },
 {
    "id":"263",
-   "text":"transportní tok solutu je dán třemi možnými mechanismy, mezi které nepatří:",
+   "text":"Transportní tok solutu je dán třemi možnými mechanismy, mezi které nepatří:",
    "tags":["Epitely"],
    "answers":
       [
@@ -3157,7 +3157,7 @@ const QUESTIONS =
 },
 {
    "id":"264",
-   "text":"somatomediny",
+   "text":"Somatomediny",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3169,7 +3169,7 @@ const QUESTIONS =
 },
 {
    "id":"265",
-   "text":"transportní tok solutu je dán  třemi možnými mechanismy, mezi které patří:",
+   "text":"Transportní tok solutu je dán  třemi možnými mechanismy, mezi které patří:",
    "tags":["Epitely"],
    "answers":
       [
@@ -3181,7 +3181,7 @@ const QUESTIONS =
 },
 {
    "id":"266",
-   "text":"aktivní transport dělíme na podskupiny, kam nepatří?",
+   "text":"Aktivní transport dělíme na podskupiny, kam nepatří?",
    "tags":["Epitely"],
    "answers":
       [
@@ -3193,7 +3193,7 @@ const QUESTIONS =
 },
 {
    "id":"267",
-   "text":"zácpa",
+   "text":"Zácpa",
    "tags":["Epitely"],
    "answers":
       [
@@ -3205,7 +3205,7 @@ const QUESTIONS =
 },
 {
    "id":"268",
-   "text":"při choleře dochází k průjmu",
+   "text":"Při choleře dochází k průjmu",
    "tags":["Epitely"],
    "answers":
       [
@@ -3217,7 +3217,7 @@ const QUESTIONS =
 },
 {
    "id":"269",
-   "text":"kroužkovci mají neurosekreční buňky",
+   "text":"Kroužkovci mají neurosekreční buňky",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3229,7 +3229,7 @@ const QUESTIONS =
 },
 {
    "id":"270",
-   "text":"hmyz",
+   "text":"Hmyz",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3241,7 +3241,7 @@ const QUESTIONS =
 },
 {
    "id":"271",
-   "text":"v prothorakální žláze hmyzu se produkuje",
+   "text":"V prothorakální žláze hmyzu se produkuje",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3253,7 +3253,7 @@ const QUESTIONS =
 },
 {
    "id":"272",
-   "text":"mozkový aktivační hormón",
+   "text":"Mozkový aktivační hormón",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3265,7 +3265,7 @@ const QUESTIONS =
 },
 {
    "id":"273",
-   "text":"vztahy mezi nervovou a humurální regulací",
+   "text":"Vztahy mezi nervovou a humurální regulací",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3349,7 +3349,7 @@ const QUESTIONS =
 },
 {
    "id":"280",
-   "text":"regulace produkce aldosteronu v zóně glomerulose kůry nadledvin",
+   "text":"Regulace produkce aldosteronu v zóně glomerulose kůry nadledvin",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3457,7 +3457,7 @@ const QUESTIONS =
 },
 {
    "id":"289",
-   "text":"podle chemic. složení můžeme dělit hormony na",
+   "text":"Podle chemic. složení můžeme dělit hormony na",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3481,7 +3481,7 @@ const QUESTIONS =
 },
 {
    "id":"291",
-   "text":"diabetes mellitus lze zjednodušeně vysvětlit",
+   "text":"Diabetes mellitus lze zjednodušeně vysvětlit",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3493,7 +3493,7 @@ const QUESTIONS =
 },
 {
    "id":"292",
-   "text":"na jádro mohou působit hormony",
+   "text":"Na jádro mohou působit hormony",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3517,7 +3517,7 @@ const QUESTIONS =
 },
 {
    "id":"294",
-   "text":"glukagon a somatostatin",
+   "text":"Glukagon a somatostatin",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3529,7 +3529,7 @@ const QUESTIONS =
 },
 {
    "id":"295",
-   "text":"hlavním projevem nedostatku parathormonu",
+   "text":"Hlavním projevem nedostatku parathormonu",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3541,7 +3541,7 @@ const QUESTIONS =
 },
 {
    "id":"296",
-   "text":"gastriny",
+   "text":"Gastriny",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3553,7 +3553,7 @@ const QUESTIONS =
 },
 {
    "id":"297",
-   "text":"kontrakce žlučníku a sekreci pankreatické šťávy  vyvolává",
+   "text":"Kontrakce žlučníku a sekreci pankreatické šťávy  vyvolává",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3565,7 +3565,7 @@ const QUESTIONS =
 },
 {
    "id":"298",
-   "text":"sekretin",
+   "text":"Sekretin",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3577,7 +3577,7 @@ const QUESTIONS =
 },
 {
    "id":"299",
-   "text":"somatostatin",
+   "text":"Somatostatin",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3589,7 +3589,7 @@ const QUESTIONS =
 },
 {
    "id":"300",
-   "text":"noradrenalin (norepinefrin)",
+   "text":"Noradrenalin (norepinefrin)",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3601,7 +3601,7 @@ const QUESTIONS =
 },
 {
    "id":"301",
-   "text":"erytropoetin",
+   "text":"Erytropoetin",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3625,7 +3625,7 @@ const QUESTIONS =
 },
 {
    "id":"303",
-   "text":"substance P",
+   "text":"Substance P",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3637,7 +3637,7 @@ const QUESTIONS =
 },
 {
    "id":"304",
-   "text":"bombesin",
+   "text":"Bombesin",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3649,7 +3649,7 @@ const QUESTIONS =
 },
 {
    "id":"305",
-   "text":"somatomediny",
+   "text":"Somatomediny",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3661,7 +3661,7 @@ const QUESTIONS =
 },
 {
    "id":"306",
-   "text":"mezi cévní hormony nepatří",
+   "text":"Mezi cévní hormony nepatří",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3673,7 +3673,7 @@ const QUESTIONS =
 },
 {
    "id":"307",
-   "text":"adrenokortikální steroidní (z cholesterolu)  hormony člověka jsou",
+   "text":"Adrenokortikální steroidní (z cholesterolu)  hormony člověka jsou",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3685,7 +3685,7 @@ const QUESTIONS =
 },
 {
    "id":"308",
-   "text":"v plasmě je kortisol vázán",
+   "text":"V plasmě je kortisol vázán",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3697,7 +3697,7 @@ const QUESTIONS =
 },
 {
    "id":"309",
-   "text":"farmakologické účinky glukokortikoidů:",
+   "text":"Farmakologické účinky glukokortikoidů:",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3709,7 +3709,7 @@ const QUESTIONS =
 },
 {
    "id":"310",
-   "text":"účinky mineralokortikoidů:",
+   "text":"Účinky mineralokortikoidů:",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3721,7 +3721,7 @@ const QUESTIONS =
 },
 {
    "id":"311",
-   "text":"účinek chronobiologického hormonu melatoninu:",
+   "text":"Účinek chronobiologického hormonu melatoninu:",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3733,7 +3733,7 @@ const QUESTIONS =
 },
 {
    "id":"312",
-   "text":"u člověka je hlavním představitelem",
+   "text":"U člověka je hlavním představitelem",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3745,7 +3745,7 @@ const QUESTIONS =
 },
 {
    "id":"313",
-   "text":"vitálně důležitá",
+   "text":"Vitálně důležitá",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3757,7 +3757,7 @@ const QUESTIONS =
 },
 {
    "id":"314",
-   "text":"zvýšení či silné kolísání krevní glukózy při  diabetu je zdravotním rizikem, protože",
+   "text":"Zvýšení či silné kolísání krevní glukózy při  diabetu je zdravotním rizikem, protože",
    "tags":["Endokrinologie"],
    "answers":
       [
@@ -3769,7 +3769,7 @@ const QUESTIONS =
 },
 {
    "id":"315",
-   "text":"hematokrit je",
+   "text":"Hematokrit je",
    "tags":["Krev"],
    "answers":
       [
@@ -3781,7 +3781,7 @@ const QUESTIONS =
 },
 {
    "id":"316",
-   "text":"onkotický tlak plasmy je",
+   "text":"Onkotický tlak plasmy je",
    "tags":["Krev"],
    "answers":
       [
@@ -3793,7 +3793,7 @@ const QUESTIONS =
 },
 {
    "id":"317",
-   "text":"plazmatické bílkoviny dělíme na",
+   "text":"Plazmatické bílkoviny dělíme na",
    "tags":["Krev"],
    "answers":
       [
@@ -3805,7 +3805,7 @@ const QUESTIONS =
 },
 {
    "id":"318",
-   "text":"vyberte správné(á) tvrzení",
+   "text":"Vyberte správné(á) tvrzení",
    "tags":["Krev"],
    "answers":
       [
@@ -3817,7 +3817,7 @@ const QUESTIONS =
 },
 {
    "id":"319",
-   "text":"bilirubin (žlučové barvivo) je",
+   "text":"Bilirubin (žlučové barvivo) je",
    "tags":["Krev"],
    "answers":
       [
@@ -3829,7 +3829,7 @@ const QUESTIONS =
 },
 {
    "id":"320",
-   "text":"pH krve",
+   "text":"PH krve",
    "tags":["Krev"],
    "answers":
       [
@@ -3841,7 +3841,7 @@ const QUESTIONS =
 },
 {
    "id":"321",
-   "text":"hydrogenuhličitanový systém",
+   "text":"Hydrogenuhličitanový systém",
    "tags":["Krev"],
    "answers":
       [
@@ -3853,7 +3853,7 @@ const QUESTIONS =
 },
 {
    "id":"322",
-   "text":"erytrocyt je bezjaderná buňka, která",
+   "text":"Erytrocyt je bezjaderná buňka, která",
    "tags":["Krev"],
    "answers":
       [
@@ -3865,7 +3865,7 @@ const QUESTIONS =
 },
 {
    "id":"323",
-   "text":"k erytrocytární hemolýze dochází",
+   "text":"K erytrocytární hemolýze dochází",
    "tags":["Krev"],
    "answers":
       [
@@ -3877,7 +3877,7 @@ const QUESTIONS =
 },
 {
    "id":"324",
-   "text":"hemoglobin",
+   "text":"Hemoglobin",
    "tags":["Krev"],
    "answers":
       [
@@ -3889,7 +3889,7 @@ const QUESTIONS =
 },
 {
    "id":"325",
-   "text":"retikulocyty",
+   "text":"Retikulocyty",
    "tags":["Krev"],
    "answers":
       [
@@ -3901,7 +3901,7 @@ const QUESTIONS =
 },
 {
    "id":"326",
-   "text":"feritin",
+   "text":"Feritin",
    "tags":["Krev"],
    "answers":
       [
@@ -3913,7 +3913,7 @@ const QUESTIONS =
 },
 {
    "id":"327",
-   "text":"erytropoetin",
+   "text":"Erytropoetin",
    "tags":["Krev"],
    "answers":
       [
@@ -3925,7 +3925,7 @@ const QUESTIONS =
 },
 {
    "id":"328",
-   "text":"metoda Fahreus-Westergrenova",
+   "text":"Metoda Fahreus-Westergrenova",
    "tags":["Krev"],
    "answers":
       [
@@ -3949,7 +3949,7 @@ const QUESTIONS =
 },
 {
    "id":"330",
-   "text":"hemofilie A vzniká důsledkem",
+   "text":"Hemofilie A vzniká důsledkem",
    "tags":["Krev"],
    "answers":
       [
@@ -3961,7 +3961,7 @@ const QUESTIONS =
 },
 {
    "id":"331",
-   "text":"vyberte správné(á) tvrzení o hemokoagulaci",
+   "text":"Vyberte správné(á) tvrzení o hemokoagulaci",
    "tags":["Krev"],
    "answers":
       [
@@ -3973,7 +3973,7 @@ const QUESTIONS =
 },
 {
    "id":"332",
-   "text":"heparin je",
+   "text":"Heparin je",
    "tags":["Krev"],
    "answers":
       [
@@ -3985,7 +3985,7 @@ const QUESTIONS =
 },
 {
    "id":"333",
-   "text":"určete, zda pro krevní skupiny platí",
+   "text":"Určete, zda pro krevní skupiny platí",
    "tags":["Krev"],
    "answers":
       [
@@ -3997,7 +3997,7 @@ const QUESTIONS =
 },
 {
    "id":"334",
-   "text":"k tvorbě protilátek vedoucí k inkompatibilitě v systému Rh mezi  matkou a plodem může dojít",
+   "text":"K tvorbě protilátek vedoucí k inkompatibilitě v systému Rh mezi  matkou a plodem může dojít",
    "tags":["Krev"],
    "answers":
       [
@@ -4009,7 +4009,7 @@ const QUESTIONS =
 },
 {
    "id":"335",
-   "text":"křížová zkouška",
+   "text":"Křížová zkouška",
    "tags":["Krev"],
    "answers":
       [
@@ -4021,7 +4021,7 @@ const QUESTIONS =
 },
 {
    "id":"336",
-   "text":"slezina",
+   "text":"Slezina",
    "tags":["Krev"],
    "answers":
       [
@@ -4033,7 +4033,7 @@ const QUESTIONS =
 },
 {
    "id":"337",
-   "text":"slezina",
+   "text":"Slezina",
    "tags":["Krev"],
    "answers":
       [
@@ -4045,7 +4045,7 @@ const QUESTIONS =
 },
 {
    "id":"338",
-   "text":"srážení krve lze uměle podpořit",
+   "text":"Srážení krve lze uměle podpořit",
    "tags":["Krev"],
    "answers":
       [
@@ -4057,7 +4057,7 @@ const QUESTIONS =
 },
 {
    "id":"339",
-   "text":"erytrocyty obsahují",
+   "text":"Erytrocyty obsahují",
    "tags":["Krev"],
    "answers":
       [
@@ -4069,7 +4069,7 @@ const QUESTIONS =
 },
 {
    "id":"340",
-   "text":"který prvek v lidském organismu lze charakterizovat těmito  hodnotami: 3,5 - 4 g v celém těle, 4 % obsahují svaly, 1 %  enzymy, 15 - 30 % je ho ve formě zásob a 65 - 70 % koluje v krvi",
+   "text":"Který prvek v lidském organismu lze charakterizovat těmito  hodnotami: 3,5 - 4 g v celém těle, 4 % obsahují svaly, 1 %  enzymy, 15 - 30 % je ho ve formě zásob a 65 - 70 % koluje v krvi",
    "tags":["Krev"],
    "answers":
       [
@@ -4081,7 +4081,7 @@ const QUESTIONS =
 },
 {
    "id":"341",
-   "text":"plazmin",
+   "text":"Plazmin",
    "tags":["Krev"],
    "answers":
       [
@@ -4105,7 +4105,7 @@ const QUESTIONS =
 },
 {
    "id":"343",
-   "text":"acidózou nazýváme",
+   "text":"Acidózou nazýváme",
    "tags":["Krev"],
    "answers":
       [
@@ -4117,7 +4117,7 @@ const QUESTIONS =
 },
 {
    "id":"344",
-   "text":"alkalóza je",
+   "text":"Alkalóza je",
    "tags":["Krev"],
    "answers":
       [
@@ -4129,7 +4129,7 @@ const QUESTIONS =
 },
 {
    "id":"345",
-   "text":"o globulinech platí",
+   "text":"O globulinech platí",
    "tags":["Krev"],
    "answers":
       [
@@ -4141,7 +4141,7 @@ const QUESTIONS =
 },
 {
    "id":"346",
-   "text":"dekalcifikace",
+   "text":"Dekalcifikace",
    "tags":["Krev"],
    "answers":
       [
@@ -4153,7 +4153,7 @@ const QUESTIONS =
 },
 {
    "id":"347",
-   "text":"sedimentační rychlost erytrocytů je",
+   "text":"Sedimentační rychlost erytrocytů je",
    "tags":["Krev"],
    "answers":
       [
@@ -4165,7 +4165,7 @@ const QUESTIONS =
 },
 {
    "id":"348",
-   "text":"pronormoblast",
+   "text":"Pronormoblast",
    "tags":["Krev"],
    "answers":
       [
@@ -4177,7 +4177,7 @@ const QUESTIONS =
 },
 {
    "id":"349",
-   "text":"krvetvorná kmenová buňka je",
+   "text":"Krvetvorná kmenová buňka je",
    "tags":["Krev"],
    "answers":
       [
@@ -4189,7 +4189,7 @@ const QUESTIONS =
 },
 {
    "id":"350",
-   "text":"progenitorové buňky jsou",
+   "text":"Progenitorové buňky jsou",
    "tags":["Krev"],
    "answers":
       [
@@ -4201,7 +4201,7 @@ const QUESTIONS =
 },
 {
    "id":"351",
-   "text":"vitamin B12",
+   "text":"Vitamin B12",
    "tags":["Krev"],
    "answers":
       [
@@ -4213,7 +4213,7 @@ const QUESTIONS =
 },
 {
    "id":"352",
-   "text":"která čísla týkající se erytrocytů jsou správná ?",
+   "text":"Která čísla týkající se erytrocytů jsou správná ?",
    "tags":["Krev"],
    "answers":
       [
@@ -4225,7 +4225,7 @@ const QUESTIONS =
 },
 {
    "id":"353",
-   "text":"protoporfyrin IX",
+   "text":"Protoporfyrin IX",
    "tags":["Krev"],
    "answers":
       [
@@ -4237,7 +4237,7 @@ const QUESTIONS =
 },
 {
    "id":"354",
-   "text":"karboxyhemoglobin",
+   "text":"Karboxyhemoglobin",
    "tags":["Krev"],
    "answers":
       [
@@ -4249,7 +4249,7 @@ const QUESTIONS =
 },
 {
    "id":"355",
-   "text":"karbaminohemoglobin",
+   "text":"Karbaminohemoglobin",
    "tags":["Krev"],
    "answers":
       [
@@ -4273,7 +4273,7 @@ const QUESTIONS =
 },
 {
    "id":"357",
-   "text":"působí-li na hemoglobin oxidační činidla",
+   "text":"Působí-li na hemoglobin oxidační činidla",
    "tags":["Krev"],
    "answers":
       [
@@ -4285,7 +4285,7 @@ const QUESTIONS =
 },
 {
    "id":"358",
-   "text":"pro krvetvorbu platí",
+   "text":"Pro krvetvorbu platí",
    "tags":["Krev"],
    "answers":
       [
@@ -4297,7 +4297,7 @@ const QUESTIONS =
 },
 {
    "id":"359",
-   "text":"aminokyseliny se v krvi",
+   "text":"Aminokyseliny se v krvi",
    "tags":["Krev"],
    "answers":
       [
@@ -4309,7 +4309,7 @@ const QUESTIONS =
 },
 {
    "id":"360",
-   "text":"nebílkovinný dusík",
+   "text":"Nebílkovinný dusík",
    "tags":["Krev"],
    "answers":
       [
@@ -4321,7 +4321,7 @@ const QUESTIONS =
 },
 {
    "id":"361",
-   "text":"lipémie",
+   "text":"Lipémie",
    "tags":["Krev"],
    "answers":
       [
@@ -4333,7 +4333,7 @@ const QUESTIONS =
 },
 {
    "id":"362",
-   "text":"o plazmatických bílkovinách platí",
+   "text":"O plazmatických bílkovinách platí",
    "tags":["Krev"],
    "answers":
       [
@@ -4345,7 +4345,7 @@ const QUESTIONS =
 },
 {
    "id":"363",
-   "text":"osmotický tlak plazmy",
+   "text":"Osmotický tlak plazmy",
    "tags":["Krev"],
    "answers":
       [
@@ -4357,7 +4357,7 @@ const QUESTIONS =
 },
 {
    "id":"364",
-   "text":"chybný údaj o erytrocytech jest",
+   "text":"Chybný údaj o erytrocytech jest",
    "tags":["Krev"],
    "answers":
       [
@@ -4369,7 +4369,7 @@ const QUESTIONS =
 },
 {
    "id":"365",
-   "text":"plazma krevní",
+   "text":"Plazma krevní",
    "tags":["Krev"],
    "answers":
       [
@@ -4381,7 +4381,7 @@ const QUESTIONS =
 },
 {
    "id":"366",
-   "text":"glykémie",
+   "text":"Glykémie",
    "tags":["Krev"],
    "answers":
       [
@@ -4393,7 +4393,7 @@ const QUESTIONS =
 },
 {
    "id":"367",
-   "text":"fetální hemoglobin",
+   "text":"Fetální hemoglobin",
    "tags":["Krev"],
    "answers":
       [
@@ -4405,7 +4405,7 @@ const QUESTIONS =
 },
 {
    "id":"368",
-   "text":"pronormoblast a normoblast jsou součástí vývojové řady",
+   "text":"Pronormoblast a normoblast jsou součástí vývojové řady",
    "tags":["Krev"],
    "answers":
       [
@@ -4417,7 +4417,7 @@ const QUESTIONS =
 },
 {
    "id":"369",
-   "text":"urči, které dva elementy se spolu vyskytují v jedné vývojové  řadě",
+   "text":"Urči, které dva elementy se spolu vyskytují v jedné vývojové  řadě",
    "tags":["Krev"],
    "answers":
       [
@@ -4429,7 +4429,7 @@ const QUESTIONS =
 },
 {
    "id":"370",
-   "text":"apolipoproteiny, hemopexin, transferin, ceruloplazmin a  transkortin patří mezi",
+   "text":"Apolipoproteiny, hemopexin, transferin, ceruloplazmin a  transkortin patří mezi",
    "tags":["Krev"],
    "answers":
       [
@@ -4453,7 +4453,7 @@ const QUESTIONS =
 },
 {
    "id":"372",
-   "text":"transport tyroxinu, trijodtyroninu a vitaminu A je funkce  charakteristická pro",
+   "text":"Transport tyroxinu, trijodtyroninu a vitaminu A je funkce  charakteristická pro",
    "tags":["Krev"],
    "answers":
       [
@@ -4465,7 +4465,7 @@ const QUESTIONS =
 },
 {
    "id":"373",
-   "text":"pro syntézu hemu je nezbytný",
+   "text":"Pro syntézu hemu je nezbytný",
    "tags":["Krev"],
    "answers":
       [
@@ -4477,7 +4477,7 @@ const QUESTIONS =
 },
 {
    "id":"374",
-   "text":"železo v lidském organismu",
+   "text":"Železo v lidském organismu",
    "tags":["Krev"],
    "answers":
       [
@@ -4489,7 +4489,7 @@ const QUESTIONS =
 },
 {
    "id":"375",
-   "text":"při poranění cévní stěny se jako první aktivují  trombocyty. Jejich činnost lze charakterizovat několika  kroky, které probíhají v pořadí (uvedeno vždy jen několik  prvních dějů)",
+   "text":"Při poranění cévní stěny se jako první aktivují  trombocyty. Jejich činnost lze charakterizovat několika  kroky, které probíhají v pořadí (uvedeno vždy jen několik  prvních dějů)",
    "tags":["Krev"],
    "answers":
       [
@@ -4513,7 +4513,7 @@ const QUESTIONS =
 },
 {
    "id":"377",
-   "text":"protein C je",
+   "text":"Protein C je",
    "tags":["Krev"],
    "answers":
       [
@@ -4525,7 +4525,7 @@ const QUESTIONS =
 },
 {
    "id":"378",
-   "text":"provizorní hemostatická zátka",
+   "text":"Provizorní hemostatická zátka",
    "tags":["Krev"],
    "answers":
       [
@@ -4537,7 +4537,7 @@ const QUESTIONS =
 },
 {
    "id":"379",
-   "text":"není-li proakcelerin fakultativní kontraktilní protein  nahrazující systém aktino-myozinový při vyčerpání Ca-iontů, je  tedy",
+   "text":"Není-li proakcelerin fakultativní kontraktilní protein  nahrazující systém aktino-myozinový při vyčerpání Ca-iontů, je  tedy",
    "tags":["Krev"],
    "answers":
       [
@@ -4549,7 +4549,7 @@ const QUESTIONS =
 },
 {
    "id":"380",
-   "text":"do respirační zóny nepatří",
+   "text":"Do respirační zóny nepatří",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4561,7 +4561,7 @@ const QUESTIONS =
 },
 {
    "id":"381",
-   "text":"který údaj o počtu alveolů je správný ?",
+   "text":"Který údaj o počtu alveolů je správný ?",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4573,7 +4573,7 @@ const QUESTIONS =
 },
 {
    "id":"382",
-   "text":"hladká svalovina v dýchacím systému",
+   "text":"Hladká svalovina v dýchacím systému",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4585,7 +4585,7 @@ const QUESTIONS =
 },
 {
    "id":"383",
-   "text":"dechový objem",
+   "text":"Dechový objem",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4609,7 +4609,7 @@ const QUESTIONS =
 },
 {
    "id":"385",
-   "text":"mezi statické objemy plic nepatří",
+   "text":"Mezi statické objemy plic nepatří",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4621,7 +4621,7 @@ const QUESTIONS =
 },
 {
    "id":"386",
-   "text":"ohledně maximální minutové ventilace platí",
+   "text":"Ohledně maximální minutové ventilace platí",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4633,7 +4633,7 @@ const QUESTIONS =
 },
 {
    "id":"387",
-   "text":"velikost objemové změny plic v závislosti na změně tlaku udává",
+   "text":"Velikost objemové změny plic v závislosti na změně tlaku udává",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4645,7 +4645,7 @@ const QUESTIONS =
 },
 {
    "id":"388",
-   "text":"pasivním dějem je",
+   "text":"Pasivním dějem je",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4657,7 +4657,7 @@ const QUESTIONS =
 },
 {
    "id":"389",
-   "text":"dechový cyklus se v průběhu jedné minuty opakuje (v klidu)",
+   "text":"Dechový cyklus se v průběhu jedné minuty opakuje (v klidu)",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4669,7 +4669,7 @@ const QUESTIONS =
 },
 {
    "id":"390",
-   "text":"interpleurální tlak",
+   "text":"Interpleurální tlak",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4681,7 +4681,7 @@ const QUESTIONS =
 },
 {
    "id":"391",
-   "text":"při pneumothoraxu",
+   "text":"Při pneumothoraxu",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4693,7 +4693,7 @@ const QUESTIONS =
 },
 {
    "id":"392",
-   "text":"při inspiraci",
+   "text":"Při inspiraci",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4705,7 +4705,7 @@ const QUESTIONS =
 },
 {
    "id":"393",
-   "text":"retrakční síla plic",
+   "text":"Retrakční síla plic",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4717,7 +4717,7 @@ const QUESTIONS =
 },
 {
    "id":"394",
-   "text":"při expiraci",
+   "text":"Při expiraci",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4729,7 +4729,7 @@ const QUESTIONS =
 },
 {
    "id":"395",
-   "text":"expirace končí, když",
+   "text":"Expirace končí, když",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4741,7 +4741,7 @@ const QUESTIONS =
 },
 {
    "id":"396",
-   "text":"rychlost proudění vzduchu, vnikajícího během dechového cyklu díky tlakovým gradientům",
+   "text":"Rychlost proudění vzduchu, vnikajícího během dechového cyklu díky tlakovým gradientům",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4753,7 +4753,7 @@ const QUESTIONS =
 },
 {
    "id":"397",
-   "text":"odpor plic RL",
+   "text":"Odpor plic RL",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4765,7 +4765,7 @@ const QUESTIONS =
 },
 {
    "id":"398",
-   "text":"hlavním faktorem, který brání zkolabování chrupavkou  nevyztužených úseků dýchacích cest je",
+   "text":"Hlavním faktorem, který brání zkolabování chrupavkou  nevyztužených úseků dýchacích cest je",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4777,7 +4777,7 @@ const QUESTIONS =
 },
 {
    "id":"399",
-   "text":"hladkou svalovinu stěn cest dýchacích inervuje",
+   "text":"Hladkou svalovinu stěn cest dýchacích inervuje",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4789,7 +4789,7 @@ const QUESTIONS =
 },
 {
    "id":"400",
-   "text":"adrenalín v dýchacích cestách",
+   "text":"Adrenalín v dýchacích cestách",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4801,7 +4801,7 @@ const QUESTIONS =
 },
 {
    "id":"401",
-   "text":"vyšší koncentrace CO2 v alveolech",
+   "text":"Vyšší koncentrace CO2 v alveolech",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4813,7 +4813,7 @@ const QUESTIONS =
 },
 {
    "id":"402",
-   "text":"bronchokonstrikci způsobuje",
+   "text":"Bronchokonstrikci způsobuje",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4825,7 +4825,7 @@ const QUESTIONS =
 },
 {
    "id":"403",
-   "text":"při bronchiálním astmatu dochází",
+   "text":"Při bronchiálním astmatu dochází",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4837,7 +4837,7 @@ const QUESTIONS =
 },
 {
    "id":"404",
-   "text":"při emfyzému nedochází",
+   "text":"Při emfyzému nedochází",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4849,7 +4849,7 @@ const QUESTIONS =
 },
 {
    "id":"405",
-   "text":"pro chronickou bronchitidu je typická",
+   "text":"Pro chronickou bronchitidu je typická",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4873,7 +4873,7 @@ const QUESTIONS =
 },
 {
    "id":"407",
-   "text":"vrstvička fosfolipidů (produkovaných pneumocyty typu II)  vystýlající vnitřek alveolů se nazývá",
+   "text":"Vrstvička fosfolipidů (produkovaných pneumocyty typu II)  vystýlající vnitřek alveolů se nazývá",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4885,7 +4885,7 @@ const QUESTIONS =
 },
 {
    "id":"408",
-   "text":"surfaktant není",
+   "text":"Surfaktant není",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4909,7 +4909,7 @@ const QUESTIONS =
 },
 {
    "id":"410",
-   "text":"množství surfaktantu v alveolech",
+   "text":"Množství surfaktantu v alveolech",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4921,7 +4921,7 @@ const QUESTIONS =
 },
 {
    "id":"411",
-   "text":"expirační rezervní objem",
+   "text":"Expirační rezervní objem",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4933,7 +4933,7 @@ const QUESTIONS =
 },
 {
    "id":"412",
-   "text":"po ukončení klidného inspiria je možné vdechnout ještě",
+   "text":"Po ukončení klidného inspiria je možné vdechnout ještě",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4945,7 +4945,7 @@ const QUESTIONS =
 },
 {
    "id":"413",
-   "text":"reziduální objem je",
+   "text":"Reziduální objem je",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4957,7 +4957,7 @@ const QUESTIONS =
 },
 {
    "id":"414",
-   "text":"celková plicní kapacita není",
+   "text":"Celková plicní kapacita není",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4969,7 +4969,7 @@ const QUESTIONS =
 },
 {
    "id":"415",
-   "text":"při barometrickém tlaku 760 mm Hg a klidném dýchání je v  alveolech",
+   "text":"Při barometrickém tlaku 760 mm Hg a klidném dýchání je v  alveolech",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4981,7 +4981,7 @@ const QUESTIONS =
 },
 {
    "id":"416",
-   "text":"při barometrickém tlaku 760 mm Hg a klidném dýchání je v  alveolech",
+   "text":"Při barometrickém tlaku 760 mm Hg a klidném dýchání je v  alveolech",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -4993,7 +4993,7 @@ const QUESTIONS =
 },
 {
    "id":"417",
-   "text":"zpomalení dechu se nazývá",
+   "text":"Zpomalení dechu se nazývá",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5005,7 +5005,7 @@ const QUESTIONS =
 },
 {
    "id":"418",
-   "text":"mezi termíny označující abnormalitu v dýchání patří",
+   "text":"Mezi termíny označující abnormalitu v dýchání patří",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5017,7 +5017,7 @@ const QUESTIONS =
 },
 {
    "id":"419",
-   "text":"jako ortopnoi označujeme stav, kdy",
+   "text":"Jako ortopnoi označujeme stav, kdy",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5029,7 +5029,7 @@ const QUESTIONS =
 },
 {
    "id":"420",
-   "text":"arteria pulmonalis vede krev",
+   "text":"Arteria pulmonalis vede krev",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5041,7 +5041,7 @@ const QUESTIONS =
 },
 {
    "id":"421",
-   "text":"objem krve protékající malým plicním oběhem za minutu lze přiblížit těmito čísly",
+   "text":"Objem krve protékající malým plicním oběhem za minutu lze přiblížit těmito čísly",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5053,7 +5053,7 @@ const QUESTIONS =
 },
 {
    "id":"422",
-   "text":"celkový odpor malého krevního oběhu je oproti velkému oběhu asi",
+   "text":"Celkový odpor malého krevního oběhu je oproti velkému oběhu asi",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5065,7 +5065,7 @@ const QUESTIONS =
 },
 {
    "id":"423",
-   "text":"podíl odporu kapilárního řečiště na celkovém odporu velkého  oběhu činí",
+   "text":"Podíl odporu kapilárního řečiště na celkovém odporu velkého  oběhu činí",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5077,7 +5077,7 @@ const QUESTIONS =
 },
 {
    "id":"424",
-   "text":"u malého oběhu krevního tvoří podíl odporu kapilár na odporu  celkovém asi",
+   "text":"U malého oběhu krevního tvoří podíl odporu kapilár na odporu  celkovém asi",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5101,7 +5101,7 @@ const QUESTIONS =
 },
 {
    "id":"426",
-   "text":"ve velkém krevním oběhu je kapilární tlak",
+   "text":"Ve velkém krevním oběhu je kapilární tlak",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5113,7 +5113,7 @@ const QUESTIONS =
 },
 {
    "id":"427",
-   "text":"v malém krevním oběhu je kapilární tlak",
+   "text":"V malém krevním oběhu je kapilární tlak",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5125,7 +5125,7 @@ const QUESTIONS =
 },
 {
    "id":"428",
-   "text":"ventilačně perfuzní kvocient - VA/Q",
+   "text":"Ventilačně perfuzní kvocient - VA/Q",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5137,7 +5137,7 @@ const QUESTIONS =
 },
 {
    "id":"429",
-   "text":"celková plocha alveolo - kapilární bariéry činí",
+   "text":"Celková plocha alveolo - kapilární bariéry činí",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5149,7 +5149,7 @@ const QUESTIONS =
 },
 {
    "id":"430",
-   "text":"který údaj o klidové spotřebě kyslíku za minutu u dospělé  osoby je správný",
+   "text":"Který údaj o klidové spotřebě kyslíku za minutu u dospělé  osoby je správný",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5185,7 +5185,7 @@ const QUESTIONS =
 },
 {
    "id":"433",
-   "text":"deoxyhemoglobin",
+   "text":"Deoxyhemoglobin",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5197,7 +5197,7 @@ const QUESTIONS =
 },
 {
    "id":"434",
-   "text":"disociační křivka hemoglobinu pro kyslík nemá tvar",
+   "text":"Disociační křivka hemoglobinu pro kyslík nemá tvar",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5209,7 +5209,7 @@ const QUESTIONS =
 },
 {
    "id":"435",
-   "text":"klesne-li pO2 v alveolárním vzduchu ze 100 na 60 mm Hg, celkové  množství kyslíku navázaného na hemoglobin",
+   "text":"Klesne-li pO2 v alveolárním vzduchu ze 100 na 60 mm Hg, celkové  množství kyslíku navázaného na hemoglobin",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5221,7 +5221,7 @@ const QUESTIONS =
 },
 {
    "id":"436",
-   "text":"hemoglobin v koncových úsecích periferních kapilár obsahuje (v  klidu) z celkového množství navázaného kyslíku ještě asi",
+   "text":"Hemoglobin v koncových úsecích periferních kapilár obsahuje (v  klidu) z celkového množství navázaného kyslíku ještě asi",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5233,7 +5233,7 @@ const QUESTIONS =
 },
 {
    "id":"437",
-   "text":"pokles pH krve",
+   "text":"Pokles pH krve",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5245,7 +5245,7 @@ const QUESTIONS =
 },
 {
    "id":"438",
-   "text":"stoupající teplota afinitu hemoglobinu ke kyslíku",
+   "text":"Stoupající teplota afinitu hemoglobinu ke kyslíku",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5269,7 +5269,7 @@ const QUESTIONS =
 },
 {
    "id":"440",
-   "text":"fetální hemoglobin se od Hb dospělých liší",
+   "text":"Fetální hemoglobin se od Hb dospělých liší",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5281,7 +5281,7 @@ const QUESTIONS =
 },
 {
    "id":"441",
-   "text":"určete neplatné(á) tvrzení",
+   "text":"Určete neplatné(á) tvrzení",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5293,7 +5293,7 @@ const QUESTIONS =
 },
 {
    "id":"442",
-   "text":"erytrocytární výměna iontů HCO3- za Cl- plazmy se nazývá",
+   "text":"Erytrocytární výměna iontů HCO3- za Cl- plazmy se nazývá",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5305,7 +5305,7 @@ const QUESTIONS =
 },
 {
    "id":"443",
-   "text":"léze dýchacích center pontu či prodloužené míchy mohou způsobit  poruchu zvanou apneusis. Tu lze popsat jako",
+   "text":"Léze dýchacích center pontu či prodloužené míchy mohou způsobit  poruchu zvanou apneusis. Tu lze popsat jako",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5329,7 +5329,7 @@ const QUESTIONS =
 },
 {
    "id":"445",
-   "text":"apneustický práh",
+   "text":"Apneustický práh",
    "tags":["Dýchací systém"],
    "answers":
       [
@@ -5341,7 +5341,7 @@ const QUESTIONS =
 },
 {
    "id":"446",
-   "text":"etymologický původ slova imunita pochází z latinského  \"immunire\",což znamená",
+   "text":"Etymologický původ slova imunita pochází z latinského  \"immunire\",což znamená",
    "tags":["Imunita"],
    "answers":
       [
@@ -5353,7 +5353,7 @@ const QUESTIONS =
 },
 {
    "id":"447",
-   "text":"podle konvenčního rozdělení označujeme jako specifickou imunitu",
+   "text":"Podle konvenčního rozdělení označujeme jako specifickou imunitu",
    "tags":["Imunita"],
    "answers":
       [
@@ -5365,7 +5365,7 @@ const QUESTIONS =
 },
 {
    "id":"448",
-   "text":"granulocyty",
+   "text":"Granulocyty",
    "tags":["Imunita"],
    "answers":
       [
@@ -5377,7 +5377,7 @@ const QUESTIONS =
 },
 {
    "id":"449",
-   "text":"polymorfonukleární leukocyty",
+   "text":"Polymorfonukleární leukocyty",
    "tags":["Imunita"],
    "answers":
       [
@@ -5389,7 +5389,7 @@ const QUESTIONS =
 },
 {
    "id":"450",
-   "text":"améboidní pohyb leukocytů",
+   "text":"Améboidní pohyb leukocytů",
    "tags":["Imunita"],
    "answers":
       [
@@ -5401,7 +5401,7 @@ const QUESTIONS =
 },
 {
    "id":"451",
-   "text":"leukocyty jsou schopny migrace do cílových tkání na základě určitých signálů (molekuly toxinů, produkty rozpadu buňek atd.).V této souvislosti hovoříme o",
+   "text":"Leukocyty jsou schopny migrace do cílových tkání na základě určitých signálů (molekuly toxinů, produkty rozpadu buňek atd.).V této souvislosti hovoříme o",
    "tags":["Imunita"],
    "answers":
       [
@@ -5413,7 +5413,7 @@ const QUESTIONS =
 },
 {
    "id":"452",
-   "text":"diapedéza znamená",
+   "text":"Diapedéza znamená",
    "tags":["Imunita"],
    "answers":
       [
@@ -5425,7 +5425,7 @@ const QUESTIONS =
 },
 {
    "id":"453",
-   "text":"jádro eozinofilních granulocytů může vyvolat asociaci",
+   "text":"Jádro eozinofilních granulocytů může vyvolat asociaci",
    "tags":["Imunita"],
    "answers":
       [
@@ -5437,7 +5437,7 @@ const QUESTIONS =
 },
 {
    "id":"454",
-   "text":"určete chybný(é) údaj(e) o lymfocytu",
+   "text":"Určete chybný(é) údaj(e) o lymfocytu",
    "tags":["Imunita"],
    "answers":
       [
@@ -5449,7 +5449,7 @@ const QUESTIONS =
 },
 {
    "id":"455",
-   "text":"počet leukocytů je za normálních okolností",
+   "text":"Počet leukocytů je za normálních okolností",
    "tags":["Imunita"],
    "answers":
       [
@@ -5461,7 +5461,7 @@ const QUESTIONS =
 },
 {
    "id":"456",
-   "text":"mezi leukocytózu nepatří",
+   "text":"Mezi leukocytózu nepatří",
    "tags":["Imunita"],
    "answers":
       [
@@ -5473,7 +5473,7 @@ const QUESTIONS =
 },
 {
    "id":"457",
-   "text":"oproti adultnímu jedinci má novorozenec leukocytů",
+   "text":"Oproti adultnímu jedinci má novorozenec leukocytů",
    "tags":["Imunita"],
    "answers":
       [
@@ -5485,7 +5485,7 @@ const QUESTIONS =
 },
 {
    "id":"458",
-   "text":"útlum granulopoezy",
+   "text":"Útlum granulopoezy",
    "tags":["Imunita"],
    "answers":
       [
@@ -5497,7 +5497,7 @@ const QUESTIONS =
 },
 {
    "id":"459",
-   "text":"dřeňové myeloblasty, promyelocyty a myelocyty",
+   "text":"Dřeňové myeloblasty, promyelocyty a myelocyty",
    "tags":["Imunita"],
    "answers":
       [
@@ -5509,7 +5509,7 @@ const QUESTIONS =
 },
 {
    "id":"460",
-   "text":"marginující neutrofily",
+   "text":"Marginující neutrofily",
    "tags":["Imunita"],
    "answers":
       [
@@ -5521,7 +5521,7 @@ const QUESTIONS =
 },
 {
    "id":"461",
-   "text":"z funkčního hlediska jsou neutrofily",
+   "text":"Z funkčního hlediska jsou neutrofily",
    "tags":["Imunita"],
    "answers":
       [
@@ -5533,7 +5533,7 @@ const QUESTIONS =
 },
 {
    "id":"462",
-   "text":"stěžejní úlohu při alergických a parazitárních onemocněních  hrají",
+   "text":"Stěžejní úlohu při alergických a parazitárních onemocněních  hrají",
    "tags":["Imunita"],
    "answers":
       [
@@ -5545,7 +5545,7 @@ const QUESTIONS =
 },
 {
    "id":"463",
-   "text":"o bazofilních granulocytech neplatí",
+   "text":"O bazofilních granulocytech neplatí",
    "tags":["Imunita"],
    "answers":
       [
@@ -5557,7 +5557,7 @@ const QUESTIONS =
 },
 {
    "id":"464",
-   "text":"jsou největší krvinky. Tvoří 3 - 8 % všech leukocytů.  Transformují se v tkáňové makrofágy. Řeč je o",
+   "text":"Jsou největší krvinky. Tvoří 3 - 8 % všech leukocytů.  Transformují se v tkáňové makrofágy. Řeč je o",
    "tags":["Imunita"],
    "answers":
       [
@@ -5569,7 +5569,7 @@ const QUESTIONS =
 },
 {
    "id":"465",
-   "text":"mezi funkčně a morfologicky specializované makrofágy lze řadit",
+   "text":"Mezi funkčně a morfologicky specializované makrofágy lze řadit",
    "tags":["Imunita"],
    "answers":
       [
@@ -5581,7 +5581,7 @@ const QUESTIONS =
 },
 {
    "id":"466",
-   "text":"o makrofázích lze tvrdit, že",
+   "text":"O makrofázích lze tvrdit, že",
    "tags":["Imunita"],
    "answers":
       [
@@ -5593,7 +5593,7 @@ const QUESTIONS =
 },
 {
    "id":"467",
-   "text":"jsou to druhé nejpočetnější bílé krvinky. Tvoří 5 % všech buněk  těla. Jsou to jediné buňky schopné specificky rozpoznávat  antigen. Řeč jde obecně o",
+   "text":"Jsou to druhé nejpočetnější bílé krvinky. Tvoří 5 % všech buněk  těla. Jsou to jediné buňky schopné specificky rozpoznávat  antigen. Řeč jde obecně o",
    "tags":["Imunita"],
    "answers":
       [
@@ -5605,7 +5605,7 @@ const QUESTIONS =
 },
 {
    "id":"468",
-   "text":"tvorba protilátek je charakteristická pro",
+   "text":"Tvorba protilátek je charakteristická pro",
    "tags":["Imunita"],
    "answers":
       [
@@ -5617,7 +5617,7 @@ const QUESTIONS =
 },
 {
    "id":"469",
-   "text":"ohledně funkce při imunitní odpovědi se uplatňují (dle  konvenčního dělení)",
+   "text":"Ohledně funkce při imunitní odpovědi se uplatňují (dle  konvenčního dělení)",
    "tags":["Imunita"],
    "answers":
       [
@@ -5629,7 +5629,7 @@ const QUESTIONS =
 },
 {
    "id":"470",
-   "text":"mezi centrální lymfatické orgány patří",
+   "text":"Mezi centrální lymfatické orgány patří",
    "tags":["Imunita"],
    "answers":
       [
@@ -5653,7 +5653,7 @@ const QUESTIONS =
 },
 {
    "id":"472",
-   "text":"interleukiny",
+   "text":"Interleukiny",
    "tags":["Imunita"],
    "answers":
       [
@@ -5665,7 +5665,7 @@ const QUESTIONS =
 },
 {
    "id":"473",
-   "text":"lysozym",
+   "text":"Lysozym",
    "tags":["Imunita"],
    "answers":
       [
@@ -5677,7 +5677,7 @@ const QUESTIONS =
 },
 {
    "id":"474",
-   "text":"největší fagocytární kapacita spojená s rychlou akceschopností  je charakteristická pro",
+   "text":"Největší fagocytární kapacita spojená s rychlou akceschopností  je charakteristická pro",
    "tags":["Imunita"],
    "answers":
       [
@@ -5689,7 +5689,7 @@ const QUESTIONS =
 },
 {
    "id":"475",
-   "text":"opsoniny",
+   "text":"Opsoniny",
    "tags":["Imunita"],
    "answers":
       [
@@ -5701,7 +5701,7 @@ const QUESTIONS =
 },
 {
    "id":"476",
-   "text":"jako NK = Natural Killers označujeme",
+   "text":"Jako NK = Natural Killers označujeme",
    "tags":["Imunita"],
    "answers":
       [
@@ -5713,7 +5713,7 @@ const QUESTIONS =
 },
 {
    "id":"477",
-   "text":"soubor plazmatických bílkovin účastnící se látkových i  buněčných imunitních dějů nazýváme",
+   "text":"Soubor plazmatických bílkovin účastnící se látkových i  buněčných imunitních dějů nazýváme",
    "tags":["Imunita"],
    "answers":
       [
@@ -5725,7 +5725,7 @@ const QUESTIONS =
 },
 {
    "id":"478",
-   "text":"komplementový systém",
+   "text":"Komplementový systém",
    "tags":["Imunita"],
    "answers":
       [
@@ -5737,7 +5737,7 @@ const QUESTIONS =
 },
 {
    "id":"479",
-   "text":"antigen",
+   "text":"Antigen",
    "tags":["Imunita"],
    "answers":
       [
@@ -5749,7 +5749,7 @@ const QUESTIONS =
 },
 {
    "id":"480",
-   "text":"po navázání antigenu na receptor B-lymfocytu dochází k  jeho aktivaci, která vede",
+   "text":"Po navázání antigenu na receptor B-lymfocytu dochází k  jeho aktivaci, která vede",
    "tags":["Imunita"],
    "answers":
       [
@@ -5761,7 +5761,7 @@ const QUESTIONS =
 },
 {
    "id":"481",
-   "text":"o přeměně aktivovaného B lymfocytu na plazmatickou buňku platí",
+   "text":"O přeměně aktivovaného B lymfocytu na plazmatickou buňku platí",
    "tags":["Imunita"],
    "answers":
       [
@@ -5773,7 +5773,7 @@ const QUESTIONS =
 },
 {
    "id":"482",
-   "text":"produkce protilátek, jeden ze základních procesů humorální imunity, probíhá",
+   "text":"Produkce protilátek, jeden ze základních procesů humorální imunity, probíhá",
    "tags":["Imunita"],
    "answers":
       [
@@ -5785,7 +5785,7 @@ const QUESTIONS =
 },
 {
    "id":"483",
-   "text":"při sekundární odpovědi (opětovné reakci B-buněk na týž antigen",
+   "text":"Při sekundární odpovědi (opětovné reakci B-buněk na týž antigen",
    "tags":["Imunita"],
    "answers":
       [
@@ -5797,7 +5797,7 @@ const QUESTIONS =
 },
 {
    "id":"484",
-   "text":"jsou to glykoproteiny. Mají molekulovou hmotnost (150) 000 až 900 000. Představují 20 % plazmatických bílkovin. Jejich základní strukturní jednotka je tvořena čtyřmi peptidovými řetězci, spojenými disulfidickými vazbami. Jedná se o",
+   "text":"Jsou to glykoproteiny. Mají molekulovou hmotnost (150) 000 až 900 000. Představují 20 % plazmatických bílkovin. Jejich základní strukturní jednotka je tvořena čtyřmi peptidovými řetězci, spojenými disulfidickými vazbami. Jedná se o",
    "tags":["Imunita"],
    "answers":
       [
@@ -5809,7 +5809,7 @@ const QUESTIONS =
 },
 {
    "id":"485",
-   "text":"označte chybné tvrzení",
+   "text":"Označte chybné tvrzení",
    "tags":["Imunita"],
    "answers":
       [
@@ -5821,7 +5821,7 @@ const QUESTIONS =
 },
 {
    "id":"486",
-   "text":"tvoří 70 až 75 % všech imunoglobulinů. Jsou významnými opsoniny.  Dobře prostupují kapilární stěnou a pronikají placentou do  plodu. Označujeme je",
+   "text":"Tvoří 70 až 75 % všech imunoglobulinů. Jsou významnými opsoniny.  Dobře prostupují kapilární stěnou a pronikají placentou do  plodu. Označujeme je",
    "tags":["Imunita"],
    "answers":
       [
@@ -5833,7 +5833,7 @@ const QUESTIONS =
 },
 {
    "id":"487",
-   "text":"protilátky typu IgA se mohou nacházet",
+   "text":"Protilátky typu IgA se mohou nacházet",
    "tags":["Imunita"],
    "answers":
       [
@@ -5845,7 +5845,7 @@ const QUESTIONS =
 },
 {
    "id":"488",
-   "text":"prosencephalon (přední mozek)",
+   "text":"Prosencephalon (přední mozek)",
    "tags":["CNS"],
    "answers":
       [
@@ -5857,7 +5857,7 @@ const QUESTIONS =
 },
 {
    "id":"489",
-   "text":"střední mozek se skládá z",
+   "text":"Střední mozek se skládá z",
    "tags":["CNS"],
    "answers":
       [
@@ -5869,7 +5869,7 @@ const QUESTIONS =
 },
 {
    "id":"490",
-   "text":"mícha",
+   "text":"Mícha",
    "tags":["CNS"],
    "answers":
       [
@@ -5881,7 +5881,7 @@ const QUESTIONS =
 },
 {
    "id":"491",
-   "text":"na příčném průřezu míchy rozeznáváme",
+   "text":"Na příčném průřezu míchy rozeznáváme",
    "tags":["CNS"],
    "answers":
       [
@@ -5893,7 +5893,7 @@ const QUESTIONS =
 },
 {
    "id":"492",
-   "text":"mícha",
+   "text":"Mícha",
    "tags":["CNS"],
    "answers":
       [
@@ -5905,7 +5905,7 @@ const QUESTIONS =
 },
 {
    "id":"493",
-   "text":"zadní míšní provazce sprostředkovávají především",
+   "text":"Zadní míšní provazce sprostředkovávají především",
    "tags":["CNS"],
    "answers":
       [
@@ -5917,7 +5917,7 @@ const QUESTIONS =
 },
 {
    "id":"494",
-   "text":"primární vzestupné dráhy(zadní míšní provazce)",
+   "text":"Primární vzestupné dráhy(zadní míšní provazce)",
    "tags":["CNS"],
    "answers":
       [
@@ -5929,7 +5929,7 @@ const QUESTIONS =
 },
 {
    "id":"495",
-   "text":"sensitivní nervové buňky spinálních ganglií se v míše",
+   "text":"Sensitivní nervové buňky spinálních ganglií se v míše",
    "tags":["CNS"],
    "answers":
       [
@@ -5941,7 +5941,7 @@ const QUESTIONS =
 },
 {
    "id":"496",
-   "text":"dvě hlavní smyslové míšní dráhy",
+   "text":"Dvě hlavní smyslové míšní dráhy",
    "tags":["CNS"],
    "answers":
       [
@@ -5953,7 +5953,7 @@ const QUESTIONS =
 },
 {
    "id":"497",
-   "text":"odstředivý výkonný přenos vzruchů je zajištěn",
+   "text":"Odstředivý výkonný přenos vzruchů je zajištěn",
    "tags":["CNS"],
    "answers":
       [
@@ -5965,7 +5965,7 @@ const QUESTIONS =
 },
 {
    "id":"498",
-   "text":"nepřekřížené pyramidové dráhy",
+   "text":"Nepřekřížené pyramidové dráhy",
    "tags":["CNS"],
    "answers":
       [
@@ -5977,7 +5977,7 @@ const QUESTIONS =
 },
 {
    "id":"499",
-   "text":"prodloužená mícha",
+   "text":"Prodloužená mícha",
    "tags":["CNS"],
    "answers":
       [
@@ -5989,7 +5989,7 @@ const QUESTIONS =
 },
 {
    "id":"500",
-   "text":"z prodloužené míchy vycházejí",
+   "text":"Z prodloužené míchy vycházejí",
    "tags":["CNS"],
    "answers":
       [
@@ -6001,7 +6001,7 @@ const QUESTIONS =
 },
 {
    "id":"501",
-   "text":"mozkové nervy IX.,X., XI. a IX.",
+   "text":"Mozkové nervy IX.,X., XI. a IX.",
    "tags":["CNS"],
    "answers":
       [
@@ -6013,7 +6013,7 @@ const QUESTIONS =
 },
 {
    "id":"502",
-   "text":"mozeček",
+   "text":"Mozeček",
    "tags":["CNS"],
    "answers":
       [
@@ -6025,7 +6025,7 @@ const QUESTIONS =
 },
 {
    "id":"503",
-   "text":"pro udržování rovnováhy a postoje není nutný",
+   "text":"Pro udržování rovnováhy a postoje není nutný",
    "tags":["CNS"],
    "answers":
       [
@@ -6037,7 +6037,7 @@ const QUESTIONS =
 },
 {
    "id":"504",
-   "text":"diencefalon",
+   "text":"Diencefalon",
    "tags":["CNS"],
    "answers":
       [
@@ -6049,7 +6049,7 @@ const QUESTIONS =
 },
 {
    "id":"505",
-   "text":"hypothalamus",
+   "text":"Hypothalamus",
    "tags":["CNS"],
    "answers":
       [
@@ -6061,7 +6061,7 @@ const QUESTIONS =
 },
 {
    "id":"506",
-   "text":"střední mozek (messencefalon)",
+   "text":"Střední mozek (messencefalon)",
    "tags":["CNS"],
    "answers":
       [
@@ -6085,7 +6085,7 @@ const QUESTIONS =
 },
 {
    "id":"508",
-   "text":"telencefalon",
+   "text":"Telencefalon",
    "tags":["CNS"],
    "answers":
       [
@@ -6097,7 +6097,7 @@ const QUESTIONS =
 },
 {
    "id":"509",
-   "text":"nejnovější odhad počtu neuronů v kůře předního mozku člověka (je Mickroscop 157:285,1989 )",
+   "text":"Nejnovější odhad počtu neuronů v kůře předního mozku člověka (je Mickroscop 157:285,1989 )",
    "tags":["Vzrušivé tkáně"],
    "answers":
       [
@@ -6109,7 +6109,7 @@ const QUESTIONS =
 },
 {
    "id":"510",
-   "text":"šedá hmota mozkové kůry",
+   "text":"Šedá hmota mozkové kůry",
    "tags":["CNS"],
    "answers":
       [
@@ -6121,7 +6121,7 @@ const QUESTIONS =
 },
 {
    "id":"511",
-   "text":"z kůry před centrální Rolandovou brázdou vycházejí",
+   "text":"Z kůry před centrální Rolandovou brázdou vycházejí",
    "tags":["CNS"],
    "answers":
       [
@@ -6133,7 +6133,7 @@ const QUESTIONS =
 },
 {
    "id":"512",
-   "text":"kůra za sulcus centralis Rolandi",
+   "text":"Kůra za sulcus centralis Rolandi",
    "tags":["CNS"],
    "answers":
       [
@@ -6145,7 +6145,7 @@ const QUESTIONS =
 },
 {
    "id":"513",
-   "text":"limbický systém",
+   "text":"Limbický systém",
    "tags":["CNS"],
    "answers":
       [
@@ -6157,7 +6157,7 @@ const QUESTIONS =
 },
 {
    "id":"514",
-   "text":"z hlavových nervů obsahuje nejvíce parasympatických vláken (75%)",
+   "text":"Z hlavových nervů obsahuje nejvíce parasympatických vláken (75%)",
    "tags":["CNS"],
    "answers":
       [
@@ -6169,7 +6169,7 @@ const QUESTIONS =
 },
 {
    "id":"515",
-   "text":"autonomní (vegetativní nervová soustava)",
+   "text":"Autonomní (vegetativní nervová soustava)",
    "tags":["CNS"],
    "answers":
       [
@@ -6181,7 +6181,7 @@ const QUESTIONS =
 },
 {
    "id":"516",
-   "text":"eferentní část autonomního vegetativního nervstva",
+   "text":"Eferentní část autonomního vegetativního nervstva",
    "tags":["CNS"],
    "answers":
       [
@@ -6193,7 +6193,7 @@ const QUESTIONS =
 },
 {
    "id":"517",
-   "text":"rami communicans jsou",
+   "text":"Rami communicans jsou",
    "tags":["CNS"],
    "answers":
       [
@@ -6205,7 +6205,7 @@ const QUESTIONS =
 },
 {
    "id":"518",
-   "text":"pacemakerem cirkadiánního rytmu je",
+   "text":"Pacemakerem cirkadiánního rytmu je",
    "tags":["CNS"],
    "answers":
       [
@@ -6217,7 +6217,7 @@ const QUESTIONS =
 },
 {
    "id":"519",
-   "text":"mediátorem vegetativního nervstva je",
+   "text":"Mediátorem vegetativního nervstva je",
    "tags":["CNS"],
    "answers":
       [
@@ -6229,7 +6229,7 @@ const QUESTIONS =
 },
 {
    "id":"520",
-   "text":"receptory pro acetylcholin",
+   "text":"Receptory pro acetylcholin",
    "tags":["CNS"],
    "answers":
       [
@@ -6241,7 +6241,7 @@ const QUESTIONS =
 },
 {
    "id":"521",
-   "text":"je pravda, že",
+   "text":"Je pravda, že",
    "tags":["CNS"],
    "answers":
       [
@@ -6253,7 +6253,7 @@ const QUESTIONS =
 },
 {
    "id":"522",
-   "text":"je pravda, že",
+   "text":"Je pravda, že",
    "tags":["CNS"],
    "answers":
       [
@@ -6265,7 +6265,7 @@ const QUESTIONS =
 },
 {
    "id":"523",
-   "text":"vegetativní reflexy",
+   "text":"Vegetativní reflexy",
    "tags":["CNS"],
    "answers":
       [
@@ -6277,7 +6277,7 @@ const QUESTIONS =
 },
 {
    "id":"524",
-   "text":"spermatogonie se až do úrovně primárních  spermatocytů dělí",
+   "text":"Spermatogonie se až do úrovně primárních  spermatocytů dělí",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6289,7 +6289,7 @@ const QUESTIONS =
 },
 {
    "id":"525",
-   "text":"akrosom je",
+   "text":"Akrosom je",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6301,7 +6301,7 @@ const QUESTIONS =
 },
 {
    "id":"526",
-   "text":"je pravda, ze akrozom",
+   "text":"Je pravda, ze akrozom",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6313,7 +6313,7 @@ const QUESTIONS =
 },
 {
    "id":"527",
-   "text":"rychlost pohybu spermií",
+   "text":"Rychlost pohybu spermií",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6337,7 +6337,7 @@ const QUESTIONS =
 },
 {
    "id":"529",
-   "text":"který(é) z následujících hormonů nepatří mezi  pět pro spermatogenezu nejdůležitějších",
+   "text":"Který(é) z následujících hormonů nepatří mezi  pět pro spermatogenezu nejdůležitějších",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6349,7 +6349,7 @@ const QUESTIONS =
 },
 {
    "id":"530",
-   "text":"zrání spermií obvykle trvá",
+   "text":"Zrání spermií obvykle trvá",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6361,7 +6361,7 @@ const QUESTIONS =
 },
 {
    "id":"531",
-   "text":"najděte pravdivý(é) výrok(y)",
+   "text":"Najděte pravdivý(é) výrok(y)",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6373,7 +6373,7 @@ const QUESTIONS =
 },
 {
    "id":"532",
-   "text":"chámovody",
+   "text":"Chámovody",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6385,7 +6385,7 @@ const QUESTIONS =
 },
 {
    "id":"533",
-   "text":"tvorba androgenů neprobíhá",
+   "text":"Tvorba androgenů neprobíhá",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6397,7 +6397,7 @@ const QUESTIONS =
 },
 {
    "id":"534",
-   "text":"tvorba mužských pohlavních hormonů je  řízena",
+   "text":"Tvorba mužských pohlavních hormonů je  řízena",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6409,7 +6409,7 @@ const QUESTIONS =
 },
 {
    "id":"535",
-   "text":"o gonadoliberinu platí",
+   "text":"O gonadoliberinu platí",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6421,7 +6421,7 @@ const QUESTIONS =
 },
 {
    "id":"536",
-   "text":"luteinizační hormon (LH)",
+   "text":"Luteinizační hormon (LH)",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6433,7 +6433,7 @@ const QUESTIONS =
 },
 {
    "id":"537",
-   "text":"folikulostimulační hormon (FSH)",
+   "text":"Folikulostimulační hormon (FSH)",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6445,7 +6445,7 @@ const QUESTIONS =
 },
 {
    "id":"538",
-   "text":"co neplatí o testosteronu:",
+   "text":"Co neplatí o testosteronu:",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6457,7 +6457,7 @@ const QUESTIONS =
 },
 {
    "id":"539",
-   "text":"co platí o testosteronu:",
+   "text":"Co platí o testosteronu:",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6469,7 +6469,7 @@ const QUESTIONS =
 },
 {
    "id":"540",
-   "text":"pro hlen uretrálních a bulbouretrálních  žlázek je charakteristická reakce pH",
+   "text":"Pro hlen uretrálních a bulbouretrálních  žlázek je charakteristická reakce pH",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6481,7 +6481,7 @@ const QUESTIONS =
 },
 {
    "id":"541",
-   "text":"průměrný objem činí 2 - 3 ml, pH je lehce  kyselé, v 1 ml je 35 - 200 miliónů spermií, na jeho vypuzení se  podílí příčně pruhované svalstvo base penisu. Z těchto  informací o ejakulátu",
+   "text":"Průměrný objem činí 2 - 3 ml, pH je lehce  kyselé, v 1 ml je 35 - 200 miliónů spermií, na jeho vypuzení se  podílí příčně pruhované svalstvo base penisu. Z těchto  informací o ejakulátu",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6493,7 +6493,7 @@ const QUESTIONS =
 },
 {
    "id":"542",
-   "text":"vitality spermií se týkají následující  údaje. Označte správný(é)",
+   "text":"Vitality spermií se týkají následující  údaje. Označte správný(é)",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6505,7 +6505,7 @@ const QUESTIONS =
 },
 {
    "id":"543",
-   "text":"profáze první meiózy vajíčka nastává",
+   "text":"Profáze první meiózy vajíčka nastává",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6517,7 +6517,7 @@ const QUESTIONS =
 },
 {
    "id":"544",
-   "text":"dokončení prvního meiotického, redukčního dělení vajíčka",
+   "text":"Dokončení prvního meiotického, redukčního dělení vajíčka",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6529,7 +6529,7 @@ const QUESTIONS =
 },
 {
    "id":"545",
-   "text":"po dokončení redukčního dělení vajíčka",
+   "text":"Po dokončení redukčního dělení vajíčka",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6541,7 +6541,7 @@ const QUESTIONS =
 },
 {
    "id":"546",
-   "text":"platí, že",
+   "text":"Platí, že",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6565,7 +6565,7 @@ const QUESTIONS =
 },
 {
    "id":"548",
-   "text":"primordinální folikuly se těsně před  narozením",
+   "text":"Primordinální folikuly se těsně před  narozením",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6577,7 +6577,7 @@ const QUESTIONS =
 },
 {
    "id":"549",
-   "text":"v ovariích se netvoří",
+   "text":"V ovariích se netvoří",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6589,7 +6589,7 @@ const QUESTIONS =
 },
 {
    "id":"550",
-   "text":"v souvislosti se sekrecí pohlavních hormonů  rozeznáváme u ženy tři synchronní cykly - a to",
+   "text":"V souvislosti se sekrecí pohlavních hormonů  rozeznáváme u ženy tři synchronní cykly - a to",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6601,7 +6601,7 @@ const QUESTIONS =
 },
 {
    "id":"551",
-   "text":"folikulostimulační hormon u ženy",
+   "text":"Folikulostimulační hormon u ženy",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6613,7 +6613,7 @@ const QUESTIONS =
 },
 {
    "id":"552",
-   "text":"pro estrogeny platí",
+   "text":"Pro estrogeny platí",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6625,7 +6625,7 @@ const QUESTIONS =
 },
 {
    "id":"553",
-   "text":"neplatí, že estrogeny",
+   "text":"Neplatí, že estrogeny",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6637,7 +6637,7 @@ const QUESTIONS =
 },
 {
    "id":"554",
-   "text":"zvyšuje bazální teplotu, snižuje  kontraktilitu gravidní dělohy, vyvolává sekreční aktivitu lobulů  a alveolů mléčné žlázy - jde nejspíše o",
+   "text":"Zvyšuje bazální teplotu, snižuje  kontraktilitu gravidní dělohy, vyvolává sekreční aktivitu lobulů  a alveolů mléčné žlázy - jde nejspíše o",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6649,7 +6649,7 @@ const QUESTIONS =
 },
 {
    "id":"555",
-   "text":"androgeny se u ženy tvoří převážně",
+   "text":"Androgeny se u ženy tvoří převážně",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6661,7 +6661,7 @@ const QUESTIONS =
 },
 {
    "id":"556",
-   "text":"u ženy androgeny",
+   "text":"U ženy androgeny",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6673,7 +6673,7 @@ const QUESTIONS =
 },
 {
    "id":"557",
-   "text":"k první fázi ovariálního cyklu patří",
+   "text":"K první fázi ovariálního cyklu patří",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6685,7 +6685,7 @@ const QUESTIONS =
 },
 {
    "id":"558",
-   "text":"druhá fáze ovariálního cyklu",
+   "text":"Druhá fáze ovariálního cyklu",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6697,7 +6697,7 @@ const QUESTIONS =
 },
 {
    "id":"559",
-   "text":"o žlutém tělísku lze tvrdit, že",
+   "text":"O žlutém tělísku lze tvrdit, že",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6709,7 +6709,7 @@ const QUESTIONS =
 },
 {
    "id":"560",
-   "text":"fáze menstruačního cyklu",
+   "text":"Fáze menstruačního cyklu",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6721,7 +6721,7 @@ const QUESTIONS =
 },
 {
    "id":"561",
-   "text":"trvá od 5. do 14. dne cyklu. Prodlužují a  ztlušťují se spirální arterie. endometrium má mocnost 3 - 4 mm.  O kterou fázi menstruačního cyklu se jedná ?",
+   "text":"Trvá od 5. do 14. dne cyklu. Prodlužují a  ztlušťují se spirální arterie. endometrium má mocnost 3 - 4 mm.  O kterou fázi menstruačního cyklu se jedná ?",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6733,7 +6733,7 @@ const QUESTIONS =
 },
 {
    "id":"562",
-   "text":"tato fáze menstruačního cyklu předchází  fázi sekreční. Kusá informace by měla dostačovat k určení, že se  jedná o fázi",
+   "text":"Tato fáze menstruačního cyklu předchází  fázi sekreční. Kusá informace by měla dostačovat k určení, že se  jedná o fázi",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6745,7 +6745,7 @@ const QUESTIONS =
 },
 {
    "id":"563",
-   "text":"sliznice se připravuje na záchyt oplozeného  vajíčka. Endometriu vládne progesteron. Po něm jsou intronizovány  estrogeny. Jim vyměřený čas uplyne asi 28. den cyklu. Vše se  odehrává ve fázi",
+   "text":"Sliznice se připravuje na záchyt oplozeného  vajíčka. Endometriu vládne progesteron. Po něm jsou intronizovány  estrogeny. Jim vyměřený čas uplyne asi 28. den cyklu. Vše se  odehrává ve fázi",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6757,7 +6757,7 @@ const QUESTIONS =
 },
 {
    "id":"564",
-   "text":"předkládáme několik údajů o menstruační  fázi stejnojmenného cyklu - vyberte pravdivý(é)",
+   "text":"Předkládáme několik údajů o menstruační  fázi stejnojmenného cyklu - vyberte pravdivý(é)",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6769,7 +6769,7 @@ const QUESTIONS =
 },
 {
    "id":"565",
-   "text":"o klimakteriu není pravda, že",
+   "text":"O klimakteriu není pravda, že",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6781,7 +6781,7 @@ const QUESTIONS =
 },
 {
    "id":"566",
-   "text":"při sexuálním vzrušení ženy",
+   "text":"Při sexuálním vzrušení ženy",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6793,7 +6793,7 @@ const QUESTIONS =
 },
 {
    "id":"567",
-   "text":"spermie získávají pohyblivost",
+   "text":"Spermie získávají pohyblivost",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6805,7 +6805,7 @@ const QUESTIONS =
 },
 {
    "id":"568",
-   "text":"proces splynutí membrány plazmalemy spermie  s vnější akrosomální membránou se nazývá",
+   "text":"Proces splynutí membrány plazmalemy spermie  s vnější akrosomální membránou se nazývá",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6817,7 +6817,7 @@ const QUESTIONS =
 },
 {
    "id":"569",
-   "text":"po ovulaci",
+   "text":"Po ovulaci",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6829,7 +6829,7 @@ const QUESTIONS =
 },
 {
    "id":"570",
-   "text":"do procesu kapacitace nepatří",
+   "text":"Do procesu kapacitace nepatří",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6841,7 +6841,7 @@ const QUESTIONS =
 },
 {
    "id":"571",
-   "text":"o interakci spermie X vajíčko neplatí",
+   "text":"O interakci spermie X vajíčko neplatí",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6853,7 +6853,7 @@ const QUESTIONS =
 },
 {
    "id":"572",
-   "text":"největší pravděpodobnost oplození u  pravidelného 28 denního cyklu nastává (rozpětí udáno v dnech po  předchozí menstruaci)",
+   "text":"Největší pravděpodobnost oplození u  pravidelného 28 denního cyklu nastává (rozpětí udáno v dnech po  předchozí menstruaci)",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6865,7 +6865,7 @@ const QUESTIONS =
 },
 {
    "id":"573",
-   "text":"k oplození dochází obvykle",
+   "text":"K oplození dochází obvykle",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6877,7 +6877,7 @@ const QUESTIONS =
 },
 {
    "id":"574",
-   "text":"správný údaj týkající se nidace je",
+   "text":"Správný údaj týkající se nidace je",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6889,7 +6889,7 @@ const QUESTIONS =
 },
 {
    "id":"575",
-   "text":"je pravda, že",
+   "text":"Je pravda, že",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6901,7 +6901,7 @@ const QUESTIONS =
 },
 {
    "id":"576",
-   "text":"hormonální a metabolický systém placenty a  plodu nazýváme",
+   "text":"Hormonální a metabolický systém placenty a  plodu nazýváme",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6913,7 +6913,7 @@ const QUESTIONS =
 },
 {
    "id":"577",
-   "text":"při přestupu látek z krve matky do krve  plodu se",
+   "text":"Při přestupu látek z krve matky do krve  plodu se",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6925,7 +6925,7 @@ const QUESTIONS =
 },
 {
    "id":"578",
-   "text":"z krve matky do krve plodu přestupují",
+   "text":"Z krve matky do krve plodu přestupují",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6937,7 +6937,7 @@ const QUESTIONS =
 },
 {
    "id":"579",
-   "text":"o z placenty odtékající fetální krvi lze  říci:",
+   "text":"O z placenty odtékající fetální krvi lze  říci:",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6949,7 +6949,7 @@ const QUESTIONS =
 },
 {
    "id":"580",
-   "text":"choriongonadotropin",
+   "text":"Choriongonadotropin",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6961,7 +6961,7 @@ const QUESTIONS =
 },
 {
    "id":"581",
-   "text":"je tvořen v placentě. Sekrece jeho  kulminuje v 9. týdnu gravidity. Řídí činnost žlutého tělíska.  bývá neocenitelný při časném stanovení těhotenství. Nazývá se",
+   "text":"Je tvořen v placentě. Sekrece jeho  kulminuje v 9. týdnu gravidity. Řídí činnost žlutého tělíska.  bývá neocenitelný při časném stanovení těhotenství. Nazývá se",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6973,7 +6973,7 @@ const QUESTIONS =
 },
 {
    "id":"582",
-   "text":"o progesteronu v průběhu gravidity platí",
+   "text":"O progesteronu v průběhu gravidity platí",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6985,7 +6985,7 @@ const QUESTIONS =
 },
 {
    "id":"583",
-   "text":"estrogeny v graviditě",
+   "text":"Estrogeny v graviditě",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -6997,7 +6997,7 @@ const QUESTIONS =
 },
 {
    "id":"584",
-   "text":"tento hormon ovlivňuje především laktaci,  tvoří se v placentě, zvyšuje uvolňování mastných kyselin z  matčiny tukové tkáně a snižuje také citlivost tkání pro inzulin -  máme tedy na mysli",
+   "text":"Tento hormon ovlivňuje především laktaci,  tvoří se v placentě, zvyšuje uvolňování mastných kyselin z  matčiny tukové tkáně a snižuje také citlivost tkání pro inzulin -  máme tedy na mysli",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7009,7 +7009,7 @@ const QUESTIONS =
 },
 {
    "id":"585",
-   "text":"posuďte správnost číselných údajů,  vyjadřujících zvýšení metabolismu těhotné ženy",
+   "text":"Posuďte správnost číselných údajů,  vyjadřujících zvýšení metabolismu těhotné ženy",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7021,7 +7021,7 @@ const QUESTIONS =
 },
 {
    "id":"586",
-   "text":"která(é) z interpretací fyziologických změn  v těhotenství odpovídá(jí) skutečnosti ?",
+   "text":"Která(é) z interpretací fyziologických změn  v těhotenství odpovídá(jí) skutečnosti ?",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7033,7 +7033,7 @@ const QUESTIONS =
 },
 {
    "id":"587",
-   "text":"najděte chybný údaj o porodu",
+   "text":"Najděte chybný údaj o porodu",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7045,7 +7045,7 @@ const QUESTIONS =
 },
 {
    "id":"588",
-   "text":"mateřské mléko",
+   "text":"Mateřské mléko",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7057,7 +7057,7 @@ const QUESTIONS =
 },
 {
    "id":"589",
-   "text":"kojení",
+   "text":"Kojení",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7081,7 +7081,7 @@ const QUESTIONS =
 },
 {
    "id":"591",
-   "text":"urči pravdivý výrok",
+   "text":"Urči pravdivý výrok",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7093,7 +7093,7 @@ const QUESTIONS =
 },
 {
    "id":"592",
-   "text":"pro fetální růst je charakteristické, že",
+   "text":"Pro fetální růst je charakteristické, že",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7105,7 +7105,7 @@ const QUESTIONS =
 },
 {
    "id":"593",
-   "text":"již koncem 7. týdne gestace je vytvořen  základní kardiovaskulární systém. Mezi jeho specificky fetální  atributy patří",
+   "text":"Již koncem 7. týdne gestace je vytvořen  základní kardiovaskulární systém. Mezi jeho specificky fetální  atributy patří",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7117,7 +7117,7 @@ const QUESTIONS =
 },
 {
    "id":"594",
-   "text":"morfologické i funkční parametry orgánů  plodu jsou pochopitelně odlišné od hodnot adultních. Některé z  níže uvedených se však liší i od oněch fetálních. Určete  které.",
+   "text":"Morfologické i funkční parametry orgánů  plodu jsou pochopitelně odlišné od hodnot adultních. Některé z  níže uvedených se však liší i od oněch fetálních. Určete  které.",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7129,7 +7129,7 @@ const QUESTIONS =
 },
 {
    "id":"595",
-   "text":"v případě hypoxie může fétus vylučovat do  amniotické tekutiny pevný střevní obsah, čímž hrozí poškození  plicní tkáně. Ona, za normálních okolností nedefekovaná hmota se  nazývá",
+   "text":"V případě hypoxie může fétus vylučovat do  amniotické tekutiny pevný střevní obsah, čímž hrozí poškození  plicní tkáně. Ona, za normálních okolností nedefekovaná hmota se  nazývá",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7141,7 +7141,7 @@ const QUESTIONS =
 },
 {
    "id":"596",
-   "text":"novorozenec - tak lze oprávněně titulovat  človíčka teprv nedávno lůno matčino opustivšího po dobu prvních",
+   "text":"Novorozenec - tak lze oprávněně titulovat  človíčka teprv nedávno lůno matčino opustivšího po dobu prvních",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7153,7 +7153,7 @@ const QUESTIONS =
 },
 {
    "id":"597",
-   "text":"za jednu minutu zvládne organizmus  novorozence",
+   "text":"Za jednu minutu zvládne organizmus  novorozence",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7165,7 +7165,7 @@ const QUESTIONS =
 },
 {
    "id":"598",
-   "text":"určete osud spojek fetální cirkulace po  narození",
+   "text":"Určete osud spojek fetální cirkulace po  narození",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7177,7 +7177,7 @@ const QUESTIONS =
 },
 {
    "id":"599",
-   "text":"nepravdivé tvrzení o novorozenci není",
+   "text":"Nepravdivé tvrzení o novorozenci není",
    "tags":["Reprodukční systém"],
    "answers":
       [
@@ -7189,7 +7189,7 @@ const QUESTIONS =
 },
 {
    "id":"600",
-   "text":"masožravci zpracovávají potravu",
+   "text":"Masožravci zpracovávají potravu",
    "tags":["GIT"],
    "answers":
       [
@@ -7201,7 +7201,7 @@ const QUESTIONS =
 },
 {
    "id":"601",
-   "text":"v průběhu cyklosy",
+   "text":"V průběhu cyklosy",
    "tags":["GIT"],
    "answers":
       [
@@ -7213,7 +7213,7 @@ const QUESTIONS =
 },
 {
    "id":"602",
-   "text":"je pravda, že v rámci srovnání trávení obratlovců (O) a bezobratlých (B)",
+   "text":"Je pravda, že v rámci srovnání trávení obratlovců (O) a bezobratlých (B)",
    "tags":["GIT"],
    "answers":
       [
@@ -7225,7 +7225,7 @@ const QUESTIONS =
 },
 {
    "id":"603",
-   "text":"sliny",
+   "text":"Sliny",
    "tags":["GIT"],
    "answers":
       [
@@ -7237,7 +7237,7 @@ const QUESTIONS =
 },
 {
    "id":"604",
-   "text":"sliny",
+   "text":"Sliny",
    "tags":["GIT"],
    "answers":
       [
@@ -7249,7 +7249,7 @@ const QUESTIONS =
 },
 {
    "id":"605",
-   "text":"k předžaludkům u přežvýkavců nepatří",
+   "text":"K předžaludkům u přežvýkavců nepatří",
    "tags":["GIT"],
    "answers":
       [
@@ -7261,7 +7261,7 @@ const QUESTIONS =
 },
 {
    "id":"606",
-   "text":"normální (doporučené) hodnoty lipidů",
+   "text":"Normální (doporučené) hodnoty lipidů",
    "tags":["GIT"],
    "answers":
       [
@@ -7273,7 +7273,7 @@ const QUESTIONS =
 },
 {
    "id":"607",
-   "text":"cholesterol v krvi",
+   "text":"Cholesterol v krvi",
    "tags":["GIT"],
    "answers":
       [
@@ -7285,7 +7285,7 @@ const QUESTIONS =
 },
 {
    "id":"608",
-   "text":"k transportu krví",
+   "text":"K transportu krví",
    "tags":["GIT"],
    "answers":
       [
@@ -7297,7 +7297,7 @@ const QUESTIONS =
 },
 {
    "id":"609",
-   "text":"antigen (Ag) je (jsou)",
+   "text":"Antigen (Ag) je (jsou)",
    "tags":["Imunita"],
    "answers":
       [
@@ -7309,7 +7309,7 @@ const QUESTIONS =
 },
 {
    "id":"610",
-   "text":"úplně stejné antigeny",
+   "text":"Úplně stejné antigeny",
    "tags":["Imunita"],
    "answers":
       [
@@ -7321,7 +7321,7 @@ const QUESTIONS =
 },
 {
    "id":"611",
-   "text":"na řízení činnosti GIT se podílí",
+   "text":"Na řízení činnosti GIT se podílí",
    "tags":["GIT"],
    "answers":
       [
@@ -7333,7 +7333,7 @@ const QUESTIONS =
 },
 {
    "id":"612",
-   "text":"sliznice trávicího traktu",
+   "text":"Sliznice trávicího traktu",
    "tags":["GIT"],
    "answers":
       [
@@ -7345,7 +7345,7 @@ const QUESTIONS =
 },
 {
    "id":"613",
-   "text":"slizniční nervová pleteň Meissnerova je uložena",
+   "text":"Slizniční nervová pleteň Meissnerova je uložena",
    "tags":["GIT"],
    "answers":
       [
@@ -7357,7 +7357,7 @@ const QUESTIONS =
 },
 {
    "id":"614",
-   "text":"plexus myentericus Auerbachi",
+   "text":"Plexus myentericus Auerbachi",
    "tags":["GIT"],
    "answers":
       [
@@ -7369,7 +7369,7 @@ const QUESTIONS =
 },
 {
    "id":"615",
-   "text":"propulsivní pohyb trávicí trubice je",
+   "text":"Propulsivní pohyb trávicí trubice je",
    "tags":["GIT"],
    "answers":
       [
@@ -7381,7 +7381,7 @@ const QUESTIONS =
 },
 {
    "id":"616",
-   "text":"interdigestivní pohyby",
+   "text":"Interdigestivní pohyby",
    "tags":["GIT"],
    "answers":
       [
@@ -7393,7 +7393,7 @@ const QUESTIONS =
 },
 {
    "id":"617",
-   "text":"tvorba slizničních řas a kývavé pohyby klků jsou zajištěny",
+   "text":"Tvorba slizničních řas a kývavé pohyby klků jsou zajištěny",
    "tags":["GIT"],
    "answers":
       [
@@ -7405,7 +7405,7 @@ const QUESTIONS =
 },
 {
    "id":"618",
-   "text":"v žaludku, tenkém střevu a střevu tlustém až k rektu  se  nalézá svalovina",
+   "text":"V žaludku, tenkém střevu a střevu tlustém až k rektu  se  nalézá svalovina",
    "tags":["GIT"],
    "answers":
       [
@@ -7417,7 +7417,7 @@ const QUESTIONS =
 },
 {
    "id":"619",
-   "text":"o klidovém membránovém potenciálu buněk hladké svaloviny  GITu se dá říci, že",
+   "text":"O klidovém membránovém potenciálu buněk hladké svaloviny  GITu se dá říci, že",
    "tags":["GIT"],
    "answers":
       [
@@ -7429,7 +7429,7 @@ const QUESTIONS =
 },
 {
    "id":"620",
-   "text":"svalovinu smíšeného typu lze najít v",
+   "text":"Svalovinu smíšeného typu lze najít v",
    "tags":["GIT"],
    "answers":
       [
@@ -7441,7 +7441,7 @@ const QUESTIONS =
 },
 {
    "id":"621",
-   "text":"o hladké svalovině GITu neplatí",
+   "text":"O hladké svalovině GITu neplatí",
    "tags":["GIT"],
    "answers":
       [
@@ -7453,7 +7453,7 @@ const QUESTIONS =
 },
 {
    "id":"622",
-   "text":"určete platné tvrzení o činnosti hladké svaloviny GITu",
+   "text":"Určete platné tvrzení o činnosti hladké svaloviny GITu",
    "tags":["GIT"],
    "answers":
       [
@@ -7465,7 +7465,7 @@ const QUESTIONS =
 },
 {
    "id":"623",
-   "text":"tzv. bazální elektrický rytmus (dále BER) svaloviny GITu",
+   "text":"Tzv. bazální elektrický rytmus (dále BER) svaloviny GITu",
    "tags":["GIT"],
    "answers":
       [
@@ -7477,7 +7477,7 @@ const QUESTIONS =
 },
 {
    "id":"624",
-   "text":"ohledně bazálního elektrického rytmu (BER) hladké  svaloviny GITu platí",
+   "text":"Ohledně bazálního elektrického rytmu (BER) hladké  svaloviny GITu platí",
    "tags":["GIT"],
    "answers":
       [
@@ -7489,7 +7489,7 @@ const QUESTIONS =
 },
 {
    "id":"625",
-   "text":"stahy kruhové svaloviny GIT",
+   "text":"Stahy kruhové svaloviny GIT",
    "tags":["GIT"],
    "answers":
       [
@@ -7501,7 +7501,7 @@ const QUESTIONS =
 },
 {
    "id":"626",
-   "text":"v průběhu vláken nervového systému GITu se tvoří  ztluštěniny",
+   "text":"V průběhu vláken nervového systému GITu se tvoří  ztluštěniny",
    "tags":["GIT"],
    "answers":
       [
@@ -7513,7 +7513,7 @@ const QUESTIONS =
 },
 {
    "id":"627",
-   "text":"hladká svalovina GITu",
+   "text":"Hladká svalovina GITu",
    "tags":["GIT"],
    "answers":
       [
@@ -7525,7 +7525,7 @@ const QUESTIONS =
 },
 {
    "id":"628",
-   "text":"z funkčního hlediska dělíme hladkou svalovinu GITu na dva  typy -",
+   "text":"Z funkčního hlediska dělíme hladkou svalovinu GITu na dva  typy -",
    "tags":["GIT"],
    "answers":
       [
@@ -7537,7 +7537,7 @@ const QUESTIONS =
 },
 {
    "id":"629",
-   "text":"tonický typ hladké svaloviny GITu",
+   "text":"Tonický typ hladké svaloviny GITu",
    "tags":["GIT"],
    "answers":
       [
@@ -7549,7 +7549,7 @@ const QUESTIONS =
 },
 {
    "id":"630",
-   "text":"fázický typ hladké svaloviny",
+   "text":"Fázický typ hladké svaloviny",
    "tags":["GIT"],
    "answers":
       [
@@ -7561,7 +7561,7 @@ const QUESTIONS =
 },
 {
    "id":"631",
-   "text":"motilita GITu je řízena zejména",
+   "text":"Motilita GITu je řízena zejména",
    "tags":["GIT"],
    "answers":
       [
@@ -7573,7 +7573,7 @@ const QUESTIONS =
 },
 {
    "id":"632",
-   "text":"parasympatická inervace GITu",
+   "text":"Parasympatická inervace GITu",
    "tags":["GIT"],
    "answers":
       [
@@ -7585,7 +7585,7 @@ const QUESTIONS =
 },
 {
    "id":"633",
-   "text":"parasympatikus (většinou zprostředkovaně) svalstvo GITu",
+   "text":"Parasympatikus (většinou zprostředkovaně) svalstvo GITu",
    "tags":["GIT"],
    "answers":
       [
@@ -7597,7 +7597,7 @@ const QUESTIONS =
 },
 {
    "id":"634",
-   "text":"sympatikus (většinou zprostředkovaně) svalstvo GITu",
+   "text":"Sympatikus (většinou zprostředkovaně) svalstvo GITu",
    "tags":["GIT"],
    "answers":
       [
@@ -7609,7 +7609,7 @@ const QUESTIONS =
 },
 {
    "id":"635",
-   "text":"v následující nabídce možností budou tři z nich identické se třemi klasifikačními skupinami membránových receptorů na povrchu nervových i efektorových buněk GITu. Určete možnost čtvrtou, chybnou.",
+   "text":"V následující nabídce možností budou tři z nich identické se třemi klasifikačními skupinami membránových receptorů na povrchu nervových i efektorových buněk GITu. Určete možnost čtvrtou, chybnou.",
    "tags":["GIT"],
    "answers":
       [
@@ -7621,7 +7621,7 @@ const QUESTIONS =
 },
 {
    "id":"636",
-   "text":"myenterický reflex",
+   "text":"Myenterický reflex",
    "tags":["GIT"],
    "answers":
       [
@@ -7633,7 +7633,7 @@ const QUESTIONS =
 },
 {
    "id":"637",
-   "text":"reflex peristaltický (peristaltická vlna)",
+   "text":"Reflex peristaltický (peristaltická vlna)",
    "tags":["GIT"],
    "answers":
       [
@@ -7645,7 +7645,7 @@ const QUESTIONS =
 },
 {
    "id":"638",
-   "text":"mezi reflexy tvořené krátkým obloukem střevo/prevertebrální  ganglia sympatiku/střevo se řadí",
+   "text":"Mezi reflexy tvořené krátkým obloukem střevo/prevertebrální  ganglia sympatiku/střevo se řadí",
    "tags":["GIT"],
    "answers":
       [
@@ -7657,7 +7657,7 @@ const QUESTIONS =
 },
 {
    "id":"639",
-   "text":"najděte správný údaj",
+   "text":"Najděte správný údaj",
    "tags":["GIT"],
    "answers":
       [
@@ -7669,7 +7669,7 @@ const QUESTIONS =
 },
 {
    "id":"640",
-   "text":"z předložených funkčních souvislostí (ohledně kapilár  GITu) je jedna chybná. Určete která",
+   "text":"Z předložených funkčních souvislostí (ohledně kapilár  GITu) je jedna chybná. Určete která",
    "tags":["GIT"],
    "answers":
       [
@@ -7681,7 +7681,7 @@ const QUESTIONS =
 },
 {
    "id":"641",
-   "text":"vazodilataci ve sliznici působí",
+   "text":"Vazodilataci ve sliznici působí",
    "tags":["GIT"],
    "answers":
       [
@@ -7693,7 +7693,7 @@ const QUESTIONS =
 },
 {
    "id":"642",
-   "text":"k fenoménu zvanému \"autoregulační únik\" lze říci",
+   "text":"K fenoménu zvanému \"autoregulační únik\" lze říci",
    "tags":["GIT"],
    "answers":
       [
@@ -7705,7 +7705,7 @@ const QUESTIONS =
 },
 {
    "id":"643",
-   "text":"hlad coby fyziologický stav lze definovat jako",
+   "text":"Hlad coby fyziologický stav lze definovat jako",
    "tags":["GIT"],
    "answers":
       [
@@ -7717,7 +7717,7 @@ const QUESTIONS =
 },
 {
    "id":"644",
-   "text":"v regulaci příjmu potravy",
+   "text":"V regulaci příjmu potravy",
    "tags":["GIT"],
    "answers":
       [
@@ -7729,7 +7729,7 @@ const QUESTIONS =
 },
 {
    "id":"645",
-   "text":"glukostatická teorie",
+   "text":"Glukostatická teorie",
    "tags":["GIT"],
    "answers":
       [
@@ -7741,7 +7741,7 @@ const QUESTIONS =
 },
 {
    "id":"646",
-   "text":"z hlediska dlouhodobé regulace příjmu potravy byly  formulovány teorie",
+   "text":"Z hlediska dlouhodobé regulace příjmu potravy byly  formulovány teorie",
    "tags":["GIT"],
    "answers":
       [
@@ -7753,7 +7753,7 @@ const QUESTIONS =
 },
 {
    "id":"647",
-   "text":"roli ve vytváření pocitu nasycení hrají",
+   "text":"Roli ve vytváření pocitu nasycení hrají",
    "tags":["GIT"],
    "answers":
       [
@@ -7765,7 +7765,7 @@ const QUESTIONS =
 },
 {
    "id":"648",
-   "text":"imunokompetentní elementy či tkáně GITu dělíme do čtyř  skupin. Patří mezi ně",
+   "text":"Imunokompetentní elementy či tkáně GITu dělíme do čtyř  skupin. Patří mezi ně",
    "tags":["GIT"],
    "answers":
       [
@@ -7777,7 +7777,7 @@ const QUESTIONS =
 },
 {
    "id":"649",
-   "text":"plazmatické buňky v lamina propria mucosae",
+   "text":"Plazmatické buňky v lamina propria mucosae",
    "tags":["GIT"],
    "answers":
       [
@@ -7789,7 +7789,7 @@ const QUESTIONS =
 },
 {
    "id":"650",
-   "text":"bakteriální kolonizace GITu je",
+   "text":"Bakteriální kolonizace GITu je",
    "tags":["GIT"],
    "answers":
       [
@@ -7801,7 +7801,7 @@ const QUESTIONS =
 },
 {
    "id":"651",
-   "text":"imunitní systém GITu nezahrnuje",
+   "text":"Imunitní systém GITu nezahrnuje",
    "tags":["GIT"],
    "answers":
       [
@@ -7825,7 +7825,7 @@ const QUESTIONS =
 },
 {
    "id":"653",
-   "text":"pro GIT jsou typické žlázy",
+   "text":"Pro GIT jsou typické žlázy",
    "tags":["GIT"],
    "answers":
       [
@@ -7837,7 +7837,7 @@ const QUESTIONS =
 },
 {
    "id":"654",
-   "text":"pro šťávy zažívací trubice platí:",
+   "text":"Pro šťávy zažívací trubice platí:",
    "tags":["GIT"],
    "answers":
       [
@@ -7849,7 +7849,7 @@ const QUESTIONS =
 },
 {
    "id":"655",
-   "text":"působení látek (z hlediska žláz GITu) lze dělit na",
+   "text":"Působení látek (z hlediska žláz GITu) lze dělit na",
    "tags":["GIT"],
    "answers":
       [
@@ -7861,7 +7861,7 @@ const QUESTIONS =
 },
 {
    "id":"656",
-   "text":"cefalická, gastrická a intestinální fáze řízení exokrinní  sekrece se uvádí pro",
+   "text":"Cefalická, gastrická a intestinální fáze řízení exokrinní  sekrece se uvádí pro",
    "tags":["GIT"],
    "answers":
       [
@@ -7873,7 +7873,7 @@ const QUESTIONS =
 },
 {
    "id":"657",
-   "text":"sekretin",
+   "text":"Sekretin",
    "tags":["GIT"],
    "answers":
       [
@@ -7885,7 +7885,7 @@ const QUESTIONS =
 },
 {
    "id":"658",
-   "text":"žaludeční sekrece je stimulována",
+   "text":"Žaludeční sekrece je stimulována",
    "tags":["GIT"],
    "answers":
       [
@@ -7897,7 +7897,7 @@ const QUESTIONS =
 },
 {
    "id":"659",
-   "text":"sekreci pankreatické šťávy",
+   "text":"Sekreci pankreatické šťávy",
    "tags":["GIT"],
    "answers":
       [
@@ -7909,7 +7909,7 @@ const QUESTIONS =
 },
 {
    "id":"660",
-   "text":"pro žvýkání (mastikaci) je charakteristické, že",
+   "text":"Pro žvýkání (mastikaci) je charakteristické, že",
    "tags":["GIT"],
    "answers":
       [
@@ -7921,7 +7921,7 @@ const QUESTIONS =
 },
 {
    "id":"661",
-   "text":"síla žvýkacích svalů činí asi:",
+   "text":"Síla žvýkacích svalů činí asi:",
    "tags":["GIT"],
    "answers":
       [
@@ -7933,7 +7933,7 @@ const QUESTIONS =
 },
 {
    "id":"662",
-   "text":"sliny",
+   "text":"Sliny",
    "tags":["GIT"],
    "answers":
       [
@@ -7945,7 +7945,7 @@ const QUESTIONS =
 },
 {
    "id":"663",
-   "text":"sekrece slin je ovlivněna",
+   "text":"Sekrece slin je ovlivněna",
    "tags":["GIT"],
    "answers":
       [
@@ -7957,7 +7957,7 @@ const QUESTIONS =
 },
 {
    "id":"664",
-   "text":"najděte nepravdivý údaj o polykání",
+   "text":"Najděte nepravdivý údaj o polykání",
    "tags":["GIT"],
    "answers":
       [
@@ -7969,7 +7969,7 @@ const QUESTIONS =
 },
 {
    "id":"665",
-   "text":"v oblasti vyústění jícnu do žaludku je jícen uzavřen  mechanismem, na němž se podílejí",
+   "text":"V oblasti vyústění jícnu do žaludku je jícen uzavřen  mechanismem, na němž se podílejí",
    "tags":["GIT"],
    "answers":
       [
@@ -7981,7 +7981,7 @@ const QUESTIONS =
 },
 {
    "id":"666",
-   "text":"receptivní relaxací (akomodačním reflexem) rozumíme",
+   "text":"Receptivní relaxací (akomodačním reflexem) rozumíme",
    "tags":["GIT"],
    "answers":
       [
@@ -7993,7 +7993,7 @@ const QUESTIONS =
 },
 {
    "id":"667",
-   "text":"o plnění žaludku je pravda, že",
+   "text":"O plnění žaludku je pravda, že",
    "tags":["GIT"],
    "answers":
       [
@@ -8005,7 +8005,7 @@ const QUESTIONS =
 },
 {
    "id":"668",
-   "text":"žaludeční peristaltika",
+   "text":"Žaludeční peristaltika",
    "tags":["GIT"],
    "answers":
       [
@@ -8017,7 +8017,7 @@ const QUESTIONS =
 },
 {
    "id":"669",
-   "text":"mezi základní funkce pyloru (vrátníku) patří",
+   "text":"Mezi základní funkce pyloru (vrátníku) patří",
    "tags":["GIT"],
    "answers":
       [
@@ -8029,7 +8029,7 @@ const QUESTIONS =
 },
 {
    "id":"670",
-   "text":"zpomalení vyprazdňování žaludku napomáhá",
+   "text":"Zpomalení vyprazdňování žaludku napomáhá",
    "tags":["GIT"],
    "answers":
       [
@@ -8041,7 +8041,7 @@ const QUESTIONS =
 },
 {
    "id":"671",
-   "text":"žaludeční pohyby tlumí",
+   "text":"Žaludeční pohyby tlumí",
    "tags":["GIT"],
    "answers":
       [
@@ -8053,7 +8053,7 @@ const QUESTIONS =
 },
 {
    "id":"672",
-   "text":"jeden z údajů o zvracení je nesprávný. Zaškrtněte tři správné",
+   "text":"Jeden z údajů o zvracení je nesprávný. Zaškrtněte tři správné",
    "tags":["GIT"],
    "answers":
       [
@@ -8065,7 +8065,7 @@ const QUESTIONS =
 },
 {
    "id":"673",
-   "text":"pro žaludeční šťávu je charakteristický",
+   "text":"Pro žaludeční šťávu je charakteristický",
    "tags":["GIT"],
    "answers":
       [
@@ -8077,7 +8077,7 @@ const QUESTIONS =
 },
 {
    "id":"674",
-   "text":"mezi kompetence HCl v žaludku patří",
+   "text":"Mezi kompetence HCl v žaludku patří",
    "tags":["GIT"],
    "answers":
       [
@@ -8089,7 +8089,7 @@ const QUESTIONS =
 },
 {
    "id":"675",
-   "text":"co nespadá do sféry aktivit žaludeční HCl?",
+   "text":"Co nespadá do sféry aktivit žaludeční HCl?",
    "tags":["GIT"],
    "answers":
       [
@@ -8101,7 +8101,7 @@ const QUESTIONS =
 },
 {
    "id":"676",
-   "text":"o iontech žaludeční šťávy platí",
+   "text":"O iontech žaludeční šťávy platí",
    "tags":["GIT"],
    "answers":
       [
@@ -8113,7 +8113,7 @@ const QUESTIONS =
 },
 {
    "id":"677",
-   "text":"přímým působením na povrchové receptory parietálních buněk  zvyšuje sekreci HCl",
+   "text":"Přímým působením na povrchové receptory parietálních buněk  zvyšuje sekreci HCl",
    "tags":["GIT"],
    "answers":
       [
@@ -8125,7 +8125,7 @@ const QUESTIONS =
 },
 {
    "id":"678",
-   "text":"pro dva typy mechanismů umožňujících přestup K+ iontovými  kanály do kanalikulů parietálních buněk žaludku platí",
+   "text":"Pro dva typy mechanismů umožňujících přestup K+ iontovými  kanály do kanalikulů parietálních buněk žaludku platí",
    "tags":["GIT"],
    "answers":
       [
@@ -8149,7 +8149,7 @@ const QUESTIONS =
 },
 {
    "id":"680",
-   "text":"v souvislosti s H+secernovanými do kanalikulů lze tvrdit",
+   "text":"V souvislosti s H+secernovanými do kanalikulů lze tvrdit",
    "tags":["GIT"],
    "answers":
       [
@@ -8161,7 +8161,7 @@ const QUESTIONS =
 },
 {
    "id":"681",
-   "text":"hlavní aniont žaludeční šťávy",
+   "text":"Hlavní aniont žaludeční šťávy",
    "tags":["GIT"],
    "answers":
       [
@@ -8173,7 +8173,7 @@ const QUESTIONS =
 },
 {
    "id":"682",
-   "text":"mezi buňky tubulární žaludeční žlázy nepatří",
+   "text":"Mezi buňky tubulární žaludeční žlázy nepatří",
    "tags":["GIT"],
    "answers":
       [
@@ -8185,7 +8185,7 @@ const QUESTIONS =
 },
 {
    "id":"683",
-   "text":"vnitřní (intrinsic) faktor žaludeční pro vstřebávání B12",
+   "text":"Vnitřní (intrinsic) faktor žaludeční pro vstřebávání B12",
    "tags":["GIT"],
    "answers":
       [
@@ -8197,7 +8197,7 @@ const QUESTIONS =
 },
 {
    "id":"684",
-   "text":"pepsiny",
+   "text":"Pepsiny",
    "tags":["GIT"],
    "answers":
       [
@@ -8209,7 +8209,7 @@ const QUESTIONS =
 },
 {
    "id":"685",
-   "text":"v tenkém střevě",
+   "text":"V tenkém střevě",
    "tags":["GIT"],
    "answers":
       [
@@ -8221,7 +8221,7 @@ const QUESTIONS =
 },
 {
    "id":"686",
-   "text":"pro sekreci hlenu a roztoku elektrolytů s vysokým obsahem  HCO3- uskutečňovanou v proximální části duodena platí, že",
+   "text":"Pro sekreci hlenu a roztoku elektrolytů s vysokým obsahem  HCO3- uskutečňovanou v proximální části duodena platí, že",
    "tags":["GIT"],
    "answers":
       [
@@ -8233,7 +8233,7 @@ const QUESTIONS =
 },
 {
    "id":"687",
-   "text":"která z charakteristik pankreatické šťávy je chybná?",
+   "text":"Která z charakteristik pankreatické šťávy je chybná?",
    "tags":["GIT"],
    "answers":
       [
@@ -8245,7 +8245,7 @@ const QUESTIONS =
 },
 {
    "id":"688",
-   "text":"o řízení tvorby pankreatické šťávy lze tvrdit, že",
+   "text":"O řízení tvorby pankreatické šťávy lze tvrdit, že",
    "tags":["GIT"],
    "answers":
       [
@@ -8257,7 +8257,7 @@ const QUESTIONS =
 },
 {
    "id":"689",
-   "text":"hormonální část tvorby trávicí šťávy pankreatu je  zastoupena",
+   "text":"Hormonální část tvorby trávicí šťávy pankreatu je  zastoupena",
    "tags":["GIT"],
    "answers":
       [
@@ -8269,7 +8269,7 @@ const QUESTIONS =
 },
 {
    "id":"690",
-   "text":"pankreatická lipáza",
+   "text":"Pankreatická lipáza",
    "tags":["GIT"],
    "answers":
       [
@@ -8281,7 +8281,7 @@ const QUESTIONS =
 },
 {
    "id":"691",
-   "text":"mezi proteolytické enzymy pankreatické šťávy patří",
+   "text":"Mezi proteolytické enzymy pankreatické šťávy patří",
    "tags":["GIT"],
    "answers":
       [
@@ -8293,7 +8293,7 @@ const QUESTIONS =
 },
 {
    "id":"692",
-   "text":"je produkována v množství 0,7 - 1,2 litru za den, její  sekrece z vývodů je izotonická, obsahuje IgG, je hlavním  prostředkem k vyloučení cholesterolu z organismu. Jedná se o",
+   "text":"Je produkována v množství 0,7 - 1,2 litru za den, její  sekrece z vývodů je izotonická, obsahuje IgG, je hlavním  prostředkem k vyloučení cholesterolu z organismu. Jedná se o",
    "tags":["GIT"],
    "answers":
       [
@@ -8305,7 +8305,7 @@ const QUESTIONS =
 },
 {
    "id":"693",
-   "text":"kde v organismu naleznete Heringovy kanály?",
+   "text":"Kde v organismu naleznete Heringovy kanály?",
    "tags":["GIT"],
    "answers":
       [
@@ -8317,7 +8317,7 @@ const QUESTIONS =
 },
 {
    "id":"694",
-   "text":"zdroje žlučových kyselin jsou",
+   "text":"Zdroje žlučových kyselin jsou",
    "tags":["GIT"],
    "answers":
       [
@@ -8329,7 +8329,7 @@ const QUESTIONS =
 },
 {
    "id":"695",
-   "text":"kyseliny: cholová, chenodeoxycholová, deoxycholová a  lithocholová se řadí mezi",
+   "text":"Kyseliny: cholová, chenodeoxycholová, deoxycholová a  lithocholová se řadí mezi",
    "tags":["GIT"],
    "answers":
       [
@@ -8341,7 +8341,7 @@ const QUESTIONS =
 },
 {
    "id":"696",
-   "text":"riziko rakoviny colon zvyšuje",
+   "text":"Riziko rakoviny colon zvyšuje",
    "tags":["GIT"],
    "answers":
       [
@@ -8353,7 +8353,7 @@ const QUESTIONS =
 },
 {
    "id":"697",
-   "text":"tvrzení platná o žlučových kyselinách jsou",
+   "text":"Tvrzení platná o žlučových kyselinách jsou",
    "tags":["GIT"],
    "answers":
       [
@@ -8365,7 +8365,7 @@ const QUESTIONS =
 },
 {
    "id":"698",
-   "text":"o vylučování žlučových kyselin lze prohlásit",
+   "text":"O vylučování žlučových kyselin lze prohlásit",
    "tags":["GIT"],
    "answers":
       [
@@ -8377,7 +8377,7 @@ const QUESTIONS =
 },
 {
    "id":"699",
-   "text":"bilirubin",
+   "text":"Bilirubin",
    "tags":["GIT"],
    "answers":
       [
@@ -8389,7 +8389,7 @@ const QUESTIONS =
 },
 {
    "id":"700",
-   "text":"odvádění žluči do duodena je závislé na",
+   "text":"Odvádění žluči do duodena je závislé na",
    "tags":["GIT"],
    "answers":
       [
@@ -8401,7 +8401,7 @@ const QUESTIONS =
 },
 {
    "id":"701",
-   "text":"vyber správný údaj o anatomii tlustého střeva",
+   "text":"Vyber správný údaj o anatomii tlustého střeva",
    "tags":["GIT"],
    "answers":
       [
@@ -8413,7 +8413,7 @@ const QUESTIONS =
 },
 {
    "id":"702",
-   "text":"v colon je působení parasympatiku",
+   "text":"V colon je působení parasympatiku",
    "tags":["GIT"],
    "answers":
       [
@@ -8425,7 +8425,7 @@ const QUESTIONS =
 },
 {
    "id":"703",
-   "text":"mezi pohyby kolon řadíme",
+   "text":"Mezi pohyby kolon řadíme",
    "tags":["GIT"],
    "answers":
       [
@@ -8437,7 +8437,7 @@ const QUESTIONS =
 },
 {
    "id":"704",
-   "text":"bakterie tlustého střeva",
+   "text":"Bakterie tlustého střeva",
    "tags":["GIT"],
    "answers":
       [
@@ -8449,7 +8449,7 @@ const QUESTIONS =
 },
 {
    "id":"705",
-   "text":"jeden údaj o iontové bilanci kolon je chybný, označte jej",
+   "text":"Jeden údaj o iontové bilanci kolon je chybný, označte jej",
    "tags":["GIT"],
    "answers":
       [
@@ -8461,7 +8461,7 @@ const QUESTIONS =
 },
 {
    "id":"706",
-   "text":"za normálních okolností stolice obsahuje",
+   "text":"Za normálních okolností stolice obsahuje",
    "tags":["GIT"],
    "answers":
       [
@@ -8473,7 +8473,7 @@ const QUESTIONS =
 },
 {
    "id":"707",
-   "text":"co nenastává při defekaci ?",
+   "text":"Co nenastává při defekaci ?",
    "tags":["GIT"],
    "answers":
       [
@@ -8485,7 +8485,7 @@ const QUESTIONS =
 },
 {
    "id":"708",
-   "text":"ze sacharidů je obvykle v potravě nejvíce zastoupen",
+   "text":"Ze sacharidů je obvykle v potravě nejvíce zastoupen",
    "tags":["GIT"],
    "answers":
       [
@@ -8497,7 +8497,7 @@ const QUESTIONS =
 },
 {
    "id":"709",
-   "text":"z cukrů se v trávicím traktu vstřebávají téměř výhradně",
+   "text":"Z cukrů se v trávicím traktu vstřebávají téměř výhradně",
    "tags":["GIT"],
    "answers":
       [
@@ -8509,7 +8509,7 @@ const QUESTIONS =
 },
 {
    "id":"710",
-   "text":"pro vstřebávání monosacharidů je charakteristické, že",
+   "text":"Pro vstřebávání monosacharidů je charakteristické, že",
    "tags":["GIT"],
    "answers":
       [
@@ -8521,7 +8521,7 @@ const QUESTIONS =
 },
 {
    "id":"711",
-   "text":"v membráně kartáčového lemu enterocytů se nacházejí enzymy",
+   "text":"V membráně kartáčového lemu enterocytů se nacházejí enzymy",
    "tags":["GIT"],
    "answers":
       [
@@ -8545,7 +8545,7 @@ const QUESTIONS =
 },
 {
    "id":"713",
-   "text":"v žaludku se",
+   "text":"V žaludku se",
    "tags":["GIT"],
    "answers":
       [
@@ -8557,7 +8557,7 @@ const QUESTIONS =
 },
 {
    "id":"714",
-   "text":"micely",
+   "text":"Micely",
    "tags":["GIT"],
    "answers":
       [
@@ -8569,7 +8569,7 @@ const QUESTIONS =
 },
 {
    "id":"715",
-   "text":"o resorpci tuků a látek v nich rozpustných platí údaj(e)",
+   "text":"O resorpci tuků a látek v nich rozpustných platí údaj(e)",
    "tags":["GIT"],
    "answers":
       [
@@ -8581,7 +8581,7 @@ const QUESTIONS =
 },
 {
    "id":"716",
-   "text":"urči pravdivé údaje",
+   "text":"Urči pravdivé údaje",
    "tags":["GIT"],
    "answers":
       [
@@ -8593,7 +8593,7 @@ const QUESTIONS =
 },
 {
    "id":"717",
-   "text":"resorpce vody v GITu",
+   "text":"Resorpce vody v GITu",
    "tags":["GIT"],
    "answers":
       [
@@ -8605,7 +8605,7 @@ const QUESTIONS =
 },
 {
    "id":"718",
-   "text":"ohledně vstřebávání iontů v GITu je pravda, že",
+   "text":"Ohledně vstřebávání iontů v GITu je pravda, že",
    "tags":["GIT"],
    "answers":
       [
@@ -8629,7 +8629,7 @@ const QUESTIONS =
 },
 {
    "id":"720",
-   "text":"vstřebávání železa v GITu",
+   "text":"Vstřebávání železa v GITu",
    "tags":["GIT"],
    "answers":
       [
@@ -8641,7 +8641,7 @@ const QUESTIONS =
 },
 {
    "id":"721",
-   "text":"z vazby na proteiny potravy se uvolňuje v žaludku, váže se na R-proteiny ze slin a žaludeční šťávy, z této neužitečné vazby  se uvolňuje působením proteáz a naváže se před resorbcí na  vnitřní faktor. Jde o",
+   "text":"Z vazby na proteiny potravy se uvolňuje v žaludku, váže se na R-proteiny ze slin a žaludeční šťávy, z této neužitečné vazby  se uvolňuje působením proteáz a naváže se před resorbcí na  vnitřní faktor. Jde o",
    "tags":["GIT"],
    "answers":
       [
@@ -8653,7 +8653,7 @@ const QUESTIONS =
 },
 {
    "id":"722",
-   "text":"chování zvířat",
+   "text":"Chování zvířat",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8665,7 +8665,7 @@ const QUESTIONS =
 },
 {
    "id":"723",
-   "text":"nepodmíněné reflexy",
+   "text":"Nepodmíněné reflexy",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8677,7 +8677,7 @@ const QUESTIONS =
 },
 {
    "id":"724",
-   "text":"základní jednotkou vrozené nervové činnosti  podle klasické neurofyziologie je",
+   "text":"Základní jednotkou vrozené nervové činnosti  podle klasické neurofyziologie je",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8689,7 +8689,7 @@ const QUESTIONS =
 },
 {
    "id":"726",
-   "text":"motorická odpověď zprostředkovaná míchou",
+   "text":"Motorická odpověď zprostředkovaná míchou",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8701,7 +8701,7 @@ const QUESTIONS =
 },
 {
    "id":"727",
-   "text":"hypothalamus",
+   "text":"Hypothalamus",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8713,7 +8713,7 @@ const QUESTIONS =
 },
 {
    "id":"728",
-   "text":"je důležitým mezičlánkem senzorických drah před  jejich vstupem do mozkové kůry, uplatňuje se při řízení EEG  aktivity, úrovně bdělosti, pozornosti a vědomí, ale i při vzniku  emocí a některá jeho jádra se účastní i řízení motorických  funkcí. Tvoří jej skupina diencefalických jader. Jedná se o",
+   "text":"Je důležitým mezičlánkem senzorických drah před  jejich vstupem do mozkové kůry, uplatňuje se při řízení EEG  aktivity, úrovně bdělosti, pozornosti a vědomí, ale i při vzniku  emocí a některá jeho jádra se účastní i řízení motorických  funkcí. Tvoří jej skupina diencefalických jader. Jedná se o",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8725,7 +8725,7 @@ const QUESTIONS =
 },
 {
    "id":"729",
-   "text":"neurony retikulární formace",
+   "text":"Neurony retikulární formace",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8737,7 +8737,7 @@ const QUESTIONS =
 },
 {
    "id":"730",
-   "text":"sestupný systém retikulární formace",
+   "text":"Sestupný systém retikulární formace",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8749,7 +8749,7 @@ const QUESTIONS =
 },
 {
    "id":"731",
-   "text":"ascendentní facilitační systém retikulární  formace",
+   "text":"Ascendentní facilitační systém retikulární  formace",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8761,7 +8761,7 @@ const QUESTIONS =
 },
 {
    "id":"734",
-   "text":"limbický systém, který se podílí na emocích,  učení a paměti je napojen na",
+   "text":"Limbický systém, který se podílí na emocích,  učení a paměti je napojen na",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8773,7 +8773,7 @@ const QUESTIONS =
 },
 {
    "id":"735",
-   "text":"limbický systém, který se podílí na emocích,  učení a paměti",
+   "text":"Limbický systém, který se podílí na emocích,  učení a paměti",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8809,7 +8809,7 @@ const QUESTIONS =
 },
 {
    "id":"738",
-   "text":"bdělý stav je udržován především",
+   "text":"Bdělý stav je udržován především",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8821,7 +8821,7 @@ const QUESTIONS =
 },
 {
    "id":"739",
-   "text":"pomalý spánek (Non-REM)",
+   "text":"Pomalý spánek (Non-REM)",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8833,7 +8833,7 @@ const QUESTIONS =
 },
 {
    "id":"740",
-   "text":"fáze REM",
+   "text":"Fáze REM",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8845,7 +8845,7 @@ const QUESTIONS =
 },
 {
    "id":"741",
-   "text":"mezi mechanizmy řídící chování na základě vrozených informací nepatří",
+   "text":"Mezi mechanizmy řídící chování na základě vrozených informací nepatří",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8857,7 +8857,7 @@ const QUESTIONS =
 },
 {
    "id":"742",
-   "text":"habituace",
+   "text":"Habituace",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8869,7 +8869,7 @@ const QUESTIONS =
 },
 {
    "id":"743",
-   "text":"senzitizace",
+   "text":"Senzitizace",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8881,7 +8881,7 @@ const QUESTIONS =
 },
 {
    "id":"744",
-   "text":"mezi asociativní učení patří",
+   "text":"Mezi asociativní učení patří",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8893,7 +8893,7 @@ const QUESTIONS =
 },
 {
    "id":"745",
-   "text":"do paměti (ukládání, uchovávání a vybavování)  nepatří",
+   "text":"Do paměti (ukládání, uchovávání a vybavování)  nepatří",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8905,7 +8905,7 @@ const QUESTIONS =
 },
 {
    "id":"746",
-   "text":"nezdolnost a psychická síla při onemocnění",
+   "text":"Nezdolnost a psychická síla při onemocnění",
    "tags":["Integrace CNS"],
    "answers":
       [
@@ -8917,7 +8917,7 @@ const QUESTIONS =
 },
 {
    "id":"747",
-   "text":"denní doporučená dávka askorbátu se nyní zvyšuje",
+   "text":"Denní doporučená dávka askorbátu se nyní zvyšuje",
    "tags":["GIT"],
    "answers":
       [
@@ -8941,7 +8941,7 @@ const QUESTIONS =
 },
 {
    "id":"749",
-   "text":"vitaminy - je pravda, že",
+   "text":"Vitaminy - je pravda, že",
    "tags":["GIT"],
    "answers":
       [
@@ -8953,7 +8953,7 @@ const QUESTIONS =
 },
 {
    "id":"750",
-   "text":"v tukových buňkách jsou mastné kyseliny",
+   "text":"V tukových buňkách jsou mastné kyseliny",
    "tags":["GIT"],
    "answers":
       [

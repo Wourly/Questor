@@ -68,6 +68,15 @@ header
     padding: 15px;
 
     height: 50px;
+
+    transition: height 1s;
+    z-index: 1;
+}
+
+header[active]
+{
+    height: 100vh;
+    background: linear-gradient(45deg, #091d25, #0a3026);
 }
 
 test-main
@@ -93,35 +102,50 @@ footer
     height: 50px;
     width: 100%;
     bottom: 0;
-    background: linear-gradient( 45deg, #1b5a74, #166b56);
-    
-}
-
-footer:hover {
-    background: linear-gradient( -45deg, #1b5a74, #166b56);
-}
-
-footer:not([open]) {
-    cursor: pointer;
+    background: linear-gradient(45deg, #1b5a74, #166b56);
 }
 
 footer[open] {
     height: 100vh;
 }
 
-warning-container {
-    z-index: 666;
+footer question-position {
+    display: block;
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 20px;
+}
+
+warning-container, identificator-container {
 
     position: fixed;
+    z-index: 999;
+
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #f09308;
+    border-radius: 3px;
+    background: linear-gradient(60deg, rgb(29, 42, 51), rgb(30, 51, 65));
+}
+
+identificator-container {
+    
+    display: none;
+
+    right: 0;
+    bottom: 0;
+}
+
+warning-container {
+
     display: block;
 
-    background-color: black;
-
-    bottom: 0;
+    top: 0;
     right: 0;
-
-    padding: 15px;
-    margin: 15px;
 
     opacity: 1;
 
@@ -131,6 +155,15 @@ warning-container {
 warning-container[fading] {
     opacity: 0;
 }
+
+question-title:hover ~ identificator-container {
+    display: block;
+}
+
+.subject-container {
+    cursor: pointer;
+}
+
 
 /*
 footer-toggler {

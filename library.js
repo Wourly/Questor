@@ -101,7 +101,7 @@ function writeGuidePage (errorMessage) {
             subjectContainer.classList.add('subject-container');
             subjectContainer.addEventListener('click', function anchor ()
             {
-                window.location.href = window.location.pathname + '?test=' + subject.folder;
+                window.location.href = window.location.pathname + '?test=' + subject.code;
             });
             
             const subjectName = document.createElement('span');

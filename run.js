@@ -20,7 +20,26 @@ window.addEventListener('load', function pageLoad () {
             
             questionScript.addEventListener('load', function questionScriptLoaded () {
 
-                q = new Questor(QUESTIONS, TAGS);
+                console.log(URLVARS);
+
+                //const SETTINGS = new Object();
+
+                const SETTINGS = (function findSubject () {
+
+                    for (let index = 0; index < AVAILABLE_SUBJECTS.length; index++)
+                    {
+                        const subjectData = AVAILABLE_SUBJECTS[index];
+
+                        if (subjectData.code === selectedTest)
+                        {
+                            return subjectData;
+                        }
+                    };
+                })();
+
+                console.log(SETTINGS);
+
+                q = new Questor(QUESTIONS, TAGS, SETTINGS);
                 console.log(q);
             });
 
