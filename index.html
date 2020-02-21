@@ -18,18 +18,28 @@
 <body>
     <header id="inventory">
         <subject-name id="subject-name" class="left-block"></subject-name>
-        <inventory-container>
-            <test-summary id="test-summary">
-                <score-element id="total-questions"></score-element>
-                <score-element id="correct-questions"></score-element>
-                <score-element id="total-questions"></score-element>
-                <score-element id="total-questions"></score-element>
-                <score-element id="total-questions"></score-element>
-            </test-summary>
-            <incorrect-indexes id="incorrect-indexes"></incorrect-indexes>
-            <saved-indexes id="saved-indexes"></saved-indexes>
-        </inventory-container>
+        
     </header>
+    <inventory-close id="inventory-close"></inventory-close>
+    <inventory-container id="inventory-container">
+
+        
+        
+        <test-summary id="test-summary">
+            <score-element id="total-questions"></score-element>
+            <score-element id="correct-questions"></score-element>
+            <score-element id="total-questions"></score-element>
+            <score-element id="total-questions"></score-element>
+            <score-element id="total-questions"></score-element>
+        </test-summary>
+
+        <inventory-label class="left-block-clear">Incorrect questions' identificators:</inventory-label>
+        <incorrect-identificators id="incorrect-identificators" class="left-block-clear"></incorrect-identificators>
+
+        <inventory-label class="left-block-clear">Saved questions' identificators:</inventory-label>
+        <saved-identificators id="saved-identificators" contenteditable="true" class="left-block-clear"></saved-identificators>
+
+    </inventory-container>
     <test-main id="test-main" menu-type="custom">
 
             <test-menu id="menu">

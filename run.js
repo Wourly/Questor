@@ -37,7 +37,7 @@ window.addEventListener('load', function pageLoad () {
                     };
                 })();
 
-                console.log(SETTINGS);
+                SETTINGS.selectedFolder = selectedFolder;
 
                 q = new Questor(QUESTIONS, TAGS, SETTINGS);
                 console.log(q);

@@ -58,25 +58,123 @@ header
     width: 100%;
     background: linear-gradient( 45deg, #1b5a74, #166b56);
 
+    padding: 15px;
+
+    height: 50px;
+
+   z-index: -10000;
+}
+
+subject-name {
+    
     font-size: 25px;
     line-height: 25px;
 
     color: rgb(186, 233, 33);
     text-shadow: 3px 3px #000;
     font-weight: 900;
+}
+
+
+inventory-container {
+
+    display: block;
+    position: absolute;
+
+    opacity: 0;
+    transition: opacity 0.5s linear;
+
+    height: 100vh;
+    width: 100%;
 
     padding: 15px;
 
-    height: 50px;
+    background: linear-gradient(60deg, rgb(29, 42, 51), rgb(30, 51, 65));
 
-    transition: height 1s;
-    z-index: 1;
+    word-break: break-word;
+
+    overflow: auto;
+
+    z-index: -999;
+  
 }
 
-header[active]
-{
-    height: 100vh;
-    background: linear-gradient(45deg, #091d25, #0a3026);
+inventory-container[active] {
+
+    opacity: 1;
+    z-index: 999;
+}
+
+inventory-close {
+    top: 0px;
+    right: 0px;
+    position: absolute;
+    display: block;
+    margin-top: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+  }
+
+inventory-close::before, inventory-close::after {
+    content: '';
+    display: block;
+    position: absolute;
+
+    top: 0px;
+    left: calc(50% - 3px);
+
+    height: 50px;
+    width: 6px;
+
+    background-color: #42809b;
+
+    transform: rotate(0deg);
+    transform-origin: center center;
+
+    border-radius: 6px;
+
+    
+
+    Z-index: 1;
+}
+
+inventory-close::before {
+    transition: transform 1s ease-out, background-color 0.5s;
+}
+  
+inventory-close::after {
+    transition: transform 1s  ease-in, background-color 0.5s;
+}
+
+inventory-container[active] inventory-close::before {
+    transform: rotate(225deg);
+}
+inventory-container[active] inventory-close::after {
+    transform: rotate(-45deg);
+}
+
+inventory-close:hover::after, inventory-close:hover::before {
+    background-color: rgb(255, 165, 0);
+}
+
+inventory-label {
+    font-size: 18px;
+    color: rgb(186, 233, 33);
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+incorrect-identificators, saved-identificators {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+    border: 1px solid orangered;
+    padding: 5px;
+    background-color: lightblue;
+    border-radius: 6px;
+    color: black;
 }
 
 test-main
@@ -93,8 +191,6 @@ test-main
 
 
 }
-
-
 
 footer
 {

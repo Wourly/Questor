@@ -2,10 +2,10 @@
 
 function Questor (QUESTIONS, TAGS, SETTINGS) {
 
-    this.QUESTIONS = QUESTIONS || null;
-    this.TAGS = TAGS || null;
-    this.SETTINGS = SETTINGS || null;
-    this.questionsMaxIndex = this.QUESTIONS.length - 1 || null;
+    this.QUESTIONS = null;
+    this.TAGS = null;
+    this.SETTINGS = null;
+    this.questionsMaxIndex = null;
     
     this.DOM = null;
 
@@ -51,7 +51,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         DOM.menu = connectDOM(['menu','option-custom', 'option-real', 'tags-array', 'index-array', 'custom-inputs', 'flat-input', 'index-input', 'tags-input', 'read-button', 'start-button', 'finish-button']);
         DOM.flatInput = connectDOM(['flatInputMin', 'flatInputMax']);
-        DOM.inventory = connectDOM(['subject-name', 'test-summary', 'incorrect-indexes', 'saved-indexes']);
+        DOM.inventory = connectDOM(['inventory-container', 'inventory-close', 'subject-name', 'test-summary', 'incorrect-identificators', 'saved-identificators']);
         DOM.score = connectDOM(['total-questions']);
         DOM.global = connectDOM(['test-main', 'content', 'footer', 'question-position', 'arrow-left', 'arrow-right']);
 
@@ -67,7 +67,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         API.loadQuestions = null;
         API.loadTags = null;
-        API.setupTest = null;
+        API.loadSettings = null;
 
         Object.seal(API);
 
@@ -89,10 +89,26 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             }
         }
 
-        API.setupTest = function setupTest ()
+        API.loadSettings = function loadSettings (SETTINGS)
         {
-            
-        }
+            this.SETTINGS = new Object();
+    
+            this.SETTINGS.code = SETTINGS.code || 'code missing';
+            this.SETTINGS.name = SETTINGS.name || 'name missing';
+
+            this.SETTINGS.questionDoc = SETTINGS.questionDoc || null;
+            this.SETTINGS.downloadTest = SETTINGS.downloadTest || null;
+    
+            const defaultTest = new Object();
+            defaultTest.questionsOnPage = SETTINGS.defaultTest.questionsOnPage || 20;
+            defaultTest.questionsTotal = SETTINGS.defaultTest.questionsTotal || 20;
+            defaultTest.timeLimit = SETTINGS.defaultTest.timeLimit || 60;
+
+            this.SETTINGS.defaultTest = defaultTest;
+
+            this.activate.settings();
+    
+        }.bind(this);
 
         return API;
 
@@ -256,6 +272,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
                 runtimeQuestion.element = questionBlock;
                 runtimeQuestion.index = index;
+                runtimeQuestion.id = question.id;
                 runtimeQuestion.answers = new Array();
 
             this.runtime.questions[question.id] = runtimeQuestion;
@@ -274,6 +291,27 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                     const questionTitle = document.createElement('question-title');
                     questionUpper.appendChild(questionTitle);
                     questionTitle.innerHTML = question.text;
+                    questionTitle.setAttribute('identificator', question.id);
+                    questionTitle.addEventListener('click', function () {
+
+                        const container = this.DOM.inventory['saved-identificators'];
+                        const id = JSON.stringify(questionTitle.getAttribute('identificator'));
+
+                        if (container.innerText.trim() !== '')
+                        {
+                            container.innerText += ', ' + id;
+                        }
+                        else
+                        {
+                            container.innerText += id;
+                        }
+
+
+                        console.log(id)
+
+
+
+                    }.bind(this));
                 }
 
                 {
@@ -321,11 +359,13 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                         questionAnswers.appendChild(answerContainer);
                         runtimeAnswer.element = answerContainer;
 
-                        answerContainer.addEventListener('click', function () {
+                        runtimeAnswer.clickHandler = function () {
 
+                            return this.runtime.answerClick(answerContainer, runtimeAnswer);
                             
-                            
-                        });
+                        }.bind(this);
+
+                        answerContainer.addEventListener('click', runtimeAnswer.clickHandler);
 
                         const answerAlpha = document.createElement('answer-alpha');
                         answerContainer.appendChild(answerAlpha);
@@ -393,12 +433,20 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         const activate = new Object();
 
+        activate.settings = null;
+
         activate.elementToggleSelectability = null;
         activate.elementSelectableOnlyOneOf = null;
         activate.startButton = null;
         activate.finishButton = null;
 
         Object.seal(activate);
+
+        activate.settings = function settings () {
+
+            this.DOM.inventory['subject-name'].innerText = this.SETTINGS.name;
+
+        }.bind(this);
 
         activate.elementToggleSelectability = function elementToggleSelectability (elementArray) {
 
@@ -531,7 +579,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         //array variables
         runtime.testPages = null;
         runtime.questions = null;
-        runtime.incorrectQuestionsIndexes = null;
+        runtime.incorrectQuestionsIdentificators = null;
 
         //functions
         runtime.setFooterPage = null;
@@ -544,6 +592,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         runtime.setActiveTestPage = null;
 
         runtime.answerClick = null;
+        runtime.questionClick = null;
 
         runtime.initializeTest = null;
             runtime.determineTestType = null;
@@ -557,6 +606,9 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         runtime.endTest = null;
 
         runtime.adjustElementsForTest = null;
+
+        runtime.openInventory = null;
+        runtime.closeInventory = null;
 
         Object.seal(runtime);
 
@@ -667,6 +719,12 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         }.bind(this);
 
+        runtime.questionClick = function () {
+
+            console.log();
+
+        }.bind(this);
+
         runtime.answerClick = function (elementReference, runtimeReference) {
 
             if (!runtimeReference.selected)
@@ -679,8 +737,15 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 elementReference.removeAttribute('selected');
                 runtimeReference.selected = false;
             }
-
         }
+
+        runtime.openInventory = function openInventory () {
+            this.DOM.inventory['inventory-container'].setAttribute('active', '');
+        }.bind(this);
+
+        runtime.closeInventory = function closeInventory () {
+            this.DOM.inventory['inventory-container'].removeAttribute('active');
+        }.bind(this);
 
         runtime.startTest = function (questionsArray) {
             
@@ -689,8 +754,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             runtime.incorrectAnswersCount = 0;
             runtime.correctAnswersCount = 0;
 
-            runtime.incorrectQuestionsIndexes = new Array();
-
+            runtime.incorrectQuestionsIdentificators = new Array();
 
             this.build.newTestContent(questionsArray);
             
@@ -720,7 +784,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 {
                     const answer = answers[answerIndex];
 
-                    answer.element.removeEventListener('click', answerClick);
+                    answer.element.removeEventListener('click', answer.clickHandler);
 
                     if (answer.selected && answer.valid)
                     {
@@ -750,7 +814,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                                     
                 if (incorrectAnswers)
                 {
-                    runtime.incorrectQuestionsIndexes.push(question.index);
+                    runtime.incorrectQuestionsIdentificators.push(question.id);
                     runtime.incorrectQuestionsCount++;
                 }
                 else
@@ -759,11 +823,16 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 }
             }
 
+            
+            runtime.openInventory();
 
+            const incorrectQuestionsIdentificators = JSON.stringify(this.runtime.incorrectQuestionsIdentificators);
+
+            this.DOM.inventory['incorrect-identificators'].innerText = incorrectQuestionsIdentificators.slice(1, incorrectQuestionsIdentificators.length - 1);
 
             //summary
 
-            console.log('wrong questions', runtime.incorrectQuestionsIndexes);
+            console.log('wrong questions', runtime.incorrectQuestionsIdentificators);
             console.log('correct questions', runtime.correctQuestionsCount);
             console.log('incorrect questions', runtime.incorrectQuestionsCount);
             console.log('correct answers', runtime.correctAnswersCount);
@@ -1098,27 +1167,10 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
     var initialization = function () {
     //settings
-    {console.log(this.SETTINGS)
-
-        const info = new Object();            
-
-        try
-        {
-            //errors are adequate now
-            info.subjectName = this.SETTINGS.name; 
-            info.subjectCode = this.SETTINGS.code;
-        }
-        catch (error)
-        {
-            console.error('Settings does not contain name and or code of subject.');
-        }
-
-        const defaultTest = new Object();
-        defaultTest.questionsOnPage = this.SETTINGS.defaultTest.questionsOnPage || 20;
-        defaultTest.questionsTotal = this.SETTINGS.defaultTest.questionsTotal || 20;
-        defaultTest.timeLimit = this.SETTINGS.defaultTest.timeLimit || 60;
-
-        this.DOM.inventory['subject-name'].innerText = info.subjectName;
+    {
+        this.API.loadQuestions(QUESTIONS);
+        this.API.loadTags(TAGS);
+        this.API.loadSettings(SETTINGS)
     }
     //activating test type
     {
@@ -1145,6 +1197,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         this.activate.finishButton(this.DOM.menu['finish-button']);
     }
     
+    this.DOM.inventory['inventory-close'].addEventListener('click', this.runtime.closeInventory);
+
     this.runtime.initializeTest();
         
         //build.newTestContent([15,196,53,153,154,48,78,96,63,21,14,47,48,59,23,14,35,1,364,34,64,48,64,555,61,323,84,78,351,43,153,95,84,351,333,94,64,746,487,522,533,566,447,448,449,550,551]);    
