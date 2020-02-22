@@ -24,39 +24,50 @@
     <inventory-container id="inventory-container">
 
         
-        <inventory-label class="left-block-clear">Test summary:</inventory-label>
-        <test-summary id="test-summary" class="left-block-clear">
-            
+        
+        <test-summary id="test-summary">
+            <inventory-label class="left-block-clear">Test summary:</inventory-label>
             <!--QUESTIONS-->
-            <summary-headline class="left-block-clear">     Questions:                  </summary-headline>
-            <score-element    class="left-block-clear"      id="correct-questions">     </score-element>
-            <summary-label    class="left-block">           &nbsp;out of&nbsp;          </summary-label>
-            <score-element    class="left-block"            id="total-questions">       </score-element>
-            <summary-label    class="left-block">           &nbsp;question/s correct.   </summary-label>
-            <score-element    class="left-block-clear"      id="questions-percentage">  </score-element>
-            <summary-label    class="left-block">           %                           </summary-label>
+            <question-holder class="left-block-clear">
+                <summary-headline class="left-block-clear">     Questions:                  </summary-headline>
+                <score-element    class="left-block-clear"      id="correct-questions">     </score-element>
+                <summary-label    class="left-block">           &nbsp;out of&nbsp;          </summary-label>
+                <score-element    class="left-block" static     id="total-questions">       </score-element>
+                <summary-label    class="left-block">           &nbsp;questions correct.    </summary-label>
+                <score-element    class="left-block-clear"      id="questions-percentage">  </score-element>
+                <summary-label    class="left-block">           &nbsp;%                     </summary-label>
+            </question-holder>
             <!--/QUESTIONS-->
-
+            
             <!--ANSWERS-->
-            <summary-label class="left-block-clear">Answers</summary-label>
-            <score-element id="correct-answers"></score-element>&nbsp;<score-element id="total-answers"></score-element>
-            <br>
-            <score-element id="answers-percentage"></score-element>
+            <answer-holder class="left-block">
+                <summary-headline class="left-block-clear">     Answers:                  </summary-headline>
+                <score-element    class="left-block-clear"      id="correct-answers">     </score-element>
+                <summary-label    class="left-block">           &nbsp;out of&nbsp;        </summary-label>
+                <score-element    class="left-block" static     id="total-answers">       </score-element>
+                <summary-label    class="left-block">           &nbsp;answers correct.    </summary-label>
+                <score-element    class="left-block-clear"      id="answers-percentage">  </score-element>
+                <summary-label    class="left-block">           &nbsp;%                   </summary-label>
+            </answer-holder>
             <!--/ANSWERS-->
 
-            <!---->
-            <score-element id="correct-questions"></score-element>
-            <score-element id="total-questions"></score-element>
-            <score-element id="total-questions"></score-element>
-            <score-element id="total-questions"></score-element>
-            <summary-label class="left-block-clear">Incorrect questions' identificators:</summary-label>
-            <incorrect-identificators id="incorrect-identificators" class="left-block-clear"></incorrect-identificators>
+            <incorrect-identificators-container id="incorrect-identificators-container" class="left-block-clear">
+                <summary-label class="left-block-clear">Incorrect questions' identificators:&nbsp;</summary-label>
+                <incorrect-identificators id="incorrect-identificators" class="left-block-clear"></incorrect-identificators>
+            </incorrect-identificators-container>
+
+            <summary-buttons class="left-block-clear">
+                <repeat-button class="main-button left-block" id="repeat-button">Repeat wrong</repeat-button>
+                <clear-button class="main-button left-block" id="clear-button">Clear test</clear-button>
+            </summary-buttons>
         </test-summary>
 
         
 
         <inventory-label class="left-block-clear">Saved questions' identificators:</inventory-label>
         <saved-identificators id="saved-identificators" contenteditable="true" class="left-block-clear"></saved-identificators>
+        <download-question id="download-questions" class="left-block-clear main-button">Download questions</download-question>
+        <download-test id="download-test" class="left-block main-button">Download test</download-test>
 
     </inventory-container>
     <test-main id="test-main" menu-type="custom">
@@ -69,8 +80,7 @@
                 
                 <custom-inputs id="custom-inputs" class="clear">
 
-                    <!--//!-->
-                    <flat-input selected id="flat-input" data-value="flat" class="left-block">
+                    <flat-input id="flat-input" data-value="flat" class="left-block">
                         <input-caption class="block">
                             Select questions by their index:
                         </input-caption>
@@ -106,29 +116,24 @@
                     </tags-input>
 
                 </custom-inputs>
-                <test-buttons class="left-block-clear">
-                    <test-button id="read-button" class="main-button left-block">
-                        Read questions
-                    </test-button>
-                    <test-button id="start-button" class="main-button left-block">
-                        Start test
-                    </test-button>
-                </test-buttons>
+                <test-button id="start-button" class="main-button left-block-clear">
+                    Start test
+                </test-button>
             </test-menu>
 
 
         
-        <test-content id="content" class="left-block-clear">
+        <test-content id="test-content" class="left-block-clear">
 
             <!--will be filled by tag questions-->
 
         </test-content>
 
-        <test-end class="left-block-clear">
-            <finish-test id="finish-button" class="main-button left-block">
-                End test
-            </finish-test>
-        </test-end>
+        
+        <test-button id="end-button" class="main-button left-block-clear">
+            End test
+        </test-button>
+
     </test-main>
     <footer id="footer">
         <question-position id="question-position"></question-position>

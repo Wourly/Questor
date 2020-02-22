@@ -4,7 +4,6 @@ custom-inputs {
     display: none;
 }
 
-
 [class=block], [class*=-block], [class*=block-] {
     display: block;
 }
@@ -64,14 +63,11 @@ tag-container {
 
 [class~=main-button] {
 
-    box-sizing: content-box;
-
     margin-top: 5px;
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 15px;
 
-    height: 40px;
     line-height: 40px;
     font-size: 20px;
     border-radius: 15px;
@@ -117,12 +113,6 @@ footer[data-page="0"] arrow-container#arrow-left
 footer[data-page="max"] arrow-container#arrow-right
 {
     display: none;
-}
-
-
-
-finish-test {
-    margin-bottom: 10px;
 }
 
 input, tag-count {
@@ -217,12 +207,6 @@ tag-container:not(:last-child) {
     margin-right: 10px;
 }
 
-
-
-test-buttons {
-    margin-top: 5px;
-}
-
 /*test-button {
     display: block;
     float: left;
@@ -279,6 +263,26 @@ arrow-right {
     box-shadow: 5px 0px 0 0 #7FFF00;
   }
 
+summary-buttons {
+    width: 100%;
+}
+
+incorrect-identificators-container, #repeat-button {
+    display: none !important;
+}
+
+incorrect-identificators-container[active], #repeat-button[active] {
+    display: block !important;
+}
+
+download-question, download-test {
+    display: none !important;
+}
+
+download-question[active], download-test[active] {
+    display: block !important;
+}
+
 
 @media screen and (max-width:600px) {
 
@@ -302,4 +306,39 @@ arrow-right {
         width: 100%;
         margin: 3px;
     }
+
+    test-option {
+        margin-left: 0 !important;
+    }
+
+    test-option {
+        margin-top: 5px;
+    }
+
+    arrow-container {
+        width: 90px;
+    }
+
+    arrow-left, arrow-right {
+        font-size: 16px !important;
+    }
+
+    question-position {
+        font-size: 16px !important;
+    }
+
+    [class*=button]:not(tag-container) {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width:400px) {
+
+
+    tag-container {
+        width: 100%;
+    }
+
+
 }

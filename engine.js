@@ -49,11 +49,11 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
     {
         const DOM = new Object();
 
-        DOM.menu = connectDOM(['menu', 'questions-count', 'option-custom', 'option-real', 'tags-array', 'read-button', 'start-button', 'finish-button']);
+        DOM.menu = connectDOM(['menu', 'questions-count', 'option-custom', 'option-real', 'tags-array', 'start-button', 'end-button']);
         DOM.inputs = connectDOM(['custom-inputs', 'flat-input', 'index-input', 'tags-input', 'flat-min', 'flat-max', 'index-array']);
-        DOM.inventory = connectDOM(['inventory-container', 'inventory-button', 'subject-name', 'test-summary', 'incorrect-identificators', 'saved-identificators']);
+        DOM.inventory = connectDOM(['test-summary', 'clear-button', 'repeat-button', 'inventory-container', 'inventory-button', 'subject-name', 'test-summary', 'incorrect-identificators-container', 'incorrect-identificators', 'saved-identificators', 'download-questions', 'download-test']);
         DOM.score = connectDOM(['correct-questions', 'total-questions', 'questions-percentage', 'correct-answers', 'total-answers', 'answers-percentage']);
-        DOM.global = connectDOM(['test-main', 'content', 'footer', 'question-position', 'arrow-left', 'arrow-right']);
+        DOM.global = connectDOM(['test-main', 'test-content', 'footer', 'question-position', 'arrow-left', 'arrow-right']);
 
         DOM.misc = connectDOM();
 
@@ -97,8 +97,10 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             this.SETTINGS.code = SETTINGS.code || 'code missing';
             this.SETTINGS.name = SETTINGS.name || 'name missing';
 
-            this.SETTINGS.questionDoc = SETTINGS.questionDoc || null;
-            this.SETTINGS.downloadTest = SETTINGS.downloadTest || null;
+            this.SETTINGS.questionFile = SETTINGS.questionFile || null;
+            this.SETTINGS.testFile = SETTINGS.testFile || null;
+
+            this.SETTINGS.minPercentageLimit = SETTINGS.minPercentageLimit || 60;
     
             const defaultTest = new Object();
             defaultTest.questionsOnPage = SETTINGS.defaultTest.questionsOnPage || 20;
@@ -181,7 +183,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
             if (inputIndexes instanceof Array)
             {
-                const content = this.DOM.global.content;
+                const content = this.DOM.global['test-content'];
                 const contentFragment = new DocumentFragment();
                 const quantity = 10;
                 const indexesLength = inputIndexes.length;
@@ -295,6 +297,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                     questionUpper.appendChild(questionTitle);
                     questionTitle.innerHTML = question.text;
                     questionTitle.setAttribute('identificator', question.id);
+                    //click
                     questionTitle.addEventListener('click', function () {
 
                         const container = this.DOM.inventory['saved-identificators'];
@@ -309,10 +312,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                             container.innerText += id;
                         }
 
-
-                        console.log(id)
-
-
+                        this.misc.createMessage('Identificator: <span style="color:#62b9df;">' + id + '</span> was added to inventory.');
 
                     }.bind(this));
                 }
@@ -356,7 +356,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
                         runtimeAnswer.valid = answer.valid;
                         runtimeAnswer.selected = false;
-                        
 
                         const answerContainer = document.createElement('answer-container');
                         questionAnswers.appendChild(answerContainer);
@@ -442,7 +441,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         activate.elementToggleSelectability = null;
         activate.elementSelectableOnlyOneOf = null;
         activate.startButton = null;
-        activate.finishButton = null;
+        activate.endButton = null;
 
         Object.seal(activate);
 
@@ -459,6 +458,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             this.DOM.inventory['subject-name'].innerText = this.SETTINGS.name;
 
         }.bind(this);
+        
 
         activate.elementToggleSelectability = function elementToggleSelectability (elementArray) {
 
@@ -557,18 +557,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             };
         };
 
-        activate.startButton = function (element) {
-
-            element.addEventListener('click', this.runtime.initializeTest);
-
-        }.bind(this);
-
-        activate.finishButton = function (element) {
-
-            element.addEventListener('click', this.runtime.endTest);
-
-        }.bind(this);
-
         return activate;
 
     }.bind(this))();
@@ -611,13 +599,15 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             runtime.determineInputType = null;
 
             runtime.getFlatInput = null;
-            runtime.getIndexInput = null;
+            runtime.getIdentificatorInput = null;
             runtime.getTagsInput = null;
 
         runtime.startTest = null;
         runtime.endTest = null;
-
-        runtime.adjustElementsForTest = null;
+            runtime.processQuestions = null;
+            runtime.createSummary = null;
+        runtime.clearTest = null;
+        runtime.repeatTest = null;
 
         runtime.inventoryButton = null;
         runtime.isInventoryOverflow = null;
@@ -655,9 +645,38 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             
         }.bind(this);
 
+        runtime.attachTestPageControl = function () {
+
+            const isOnlyOnePage = runtime.countOfPages === 1;
+
+            
+
+            if (!isOnlyOnePage)
+            {
+                runtime.setFooterPage(runtime.currentTestPage);
+
+                this.DOM.global['arrow-left'].addEventListener('click', runtime.pageBack);
+                this.DOM.global['arrow-right'].addEventListener('click', runtime.pageNext);
+            }
+            else
+            {
+                runtime.setFooterPage('only');
+            }
+            
+            
+        }.bind(this);
+
+        runtime.detachTestPageControl = function () {
+
+            this.DOM.global['arrow-left'].removeEventListener('click', this.runtime.pageBack);
+            this.DOM.global['arrow-right'].removeEventListener('click', this.runtime.pageNext);
+            
+        }.bind(this);
+
         runtime.removeFooterPage = function removeFooterPage ()
         {
             this.DOM.global['footer'].removeAttribute('data-page');
+            this.DOM.global['question-position'].innerText = '';
         }.bind(this);
 
         runtime.pageBack = function () {
@@ -694,31 +713,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 runtime.setActiveTestPage(runtime.currentTestPage);
             }
         };
-
-        runtime.attachTestPageControl = function () {
-
-            const isOnlyOnePage = this.runtime.countOfPages === 1; 
-
-            if (!isOnlyOnePage)
-            {
-                runtime.setFooterPage(runtime.currentTestPage);
-                //! přidává nekonečno listenerů za víc testů?
-                this.DOM.global['arrow-left'].addEventListener('click', runtime.pageBack);
-                this.DOM.global['arrow-right'].addEventListener('click', runtime.pageNext);
-            }
-            else
-            {
-                runtime.setFooterPage('only');
-            }
-            
-            
-        }.bind(this);
-
-        runtime.detachTestPageControl = function () {
-            runtime.removeFooterPage();
-            this.DOM.global['arrow-left'].removeEventListener('click', runtime.pageBack);
-            this.DOM.global['arrow-right'].removeEventListener('click', runtime.pageNext);
-        }.bind(this);
         
         runtime.setActiveTestPage = function setActiveTestPage (position) {
 
@@ -730,12 +724,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
             runtime.activeTestPage.setAttribute('active', 'true');
         }
-
-        runtime.adjustElementsForTest = function () {
-
-            this.DOM.global['test-main'].setAttribute('active', '');
-
-        }.bind(this);
 
         runtime.questionClick = function () {
 
@@ -779,8 +767,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             const inventoryHeight = inventory.scrollHeight;
             const windowHeight = window.innerHeight;
 
-            console.log(inventoryHeight, windowHeight);
-
             return inventoryHeight > windowHeight ? true : false;
 
         }.bind(this);
@@ -805,32 +791,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         }.bind(this);
 
-        runtime.startTest = function (questionsArray) {
-            
-            if (Array.isArray(questionsArray) && questionsArray.length > 0)
-            {
-
-                //if runtime.shuffle
-                //this.misc.shuffleArray(questionsArray);
-                runtime.incorrectQuestionsCount = 0;
-                runtime.correctQuestionsCount = 0;
-                runtime.incorrectAnswersCount = 0;
-                runtime.correctAnswersCount = 0;
-    
-                runtime.incorrectQuestionsIdentificators = new Array();
-    
-                this.build.newTestContent(questionsArray);
-                //!! needs to be detached
-                runtime.adjustElementsForTest();
-                runtime.attachTestPageControl(); 
-                
-
-            }
-
-        }.bind(this);
-
-        runtime.endTest = function ()
-        {
+        runtime.processQuestions = function () {
             const questions = runtime.questions;
 
             //evaluation
@@ -886,42 +847,117 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                     runtime.correctQuestionsCount++;
                 }
             }
+        }.bind(this);
 
-            //SUMMARY
-            
+        runtime.createSummary = function () {
 
-            const incorrectQuestionsIdentificators = JSON.stringify(this.runtime.incorrectQuestionsIdentificators);
+            const correctQuestions = runtime.correctQuestionsCount;
+            const incorrectQuestions = runtime.incorrectQuestionsCount;
+            const totalQuestions = correctQuestions + incorrectQuestions;
+            const questionsPercentage = Math.round(correctQuestions / totalQuestions * 10000) / 100;
+            const correctQuestionsColor = this.misc.createScoreColor(questionsPercentage);
+//?! no HINTS
+            this.DOM.score['correct-questions'].innerHTML = '<span style="color: ' + correctQuestionsColor + '">' + correctQuestions + '</span>';
+            this.DOM.score['total-questions'].innerText = totalQuestions;
+            this.DOM.score['questions-percentage'].innerHTML = '<span style="color: ' + correctQuestionsColor + '">' + questionsPercentage + '</span>';
+        
+            //ANSWERS
+        
+            const correctAnswers = runtime.correctAnswersCount;
+            const incorrectAnswers = runtime.incorrectAnswersCount;
+            const totalAnswers = correctAnswers + incorrectAnswers;
+            const answersPercentage = Math.round(correctAnswers / totalAnswers * 10000) / 100;
+            const correctAnswersColor = this.misc.createScoreColor(answersPercentage);
 
+            this.DOM.score['correct-answers'].innerHTML = '<span style="color: ' + correctAnswersColor + '">' + correctAnswers + '</span>';
+            this.DOM.score['total-answers'].innerText = totalAnswers;
+            this.DOM.score['answers-percentage'].innerHTML = '<span style="color: ' + correctAnswersColor + '">' + answersPercentage + '</span>';
+
+            if (this.runtime.incorrectQuestionsIdentificators.length)
             {
-                const correctQuestions = runtime.correctQuestionsCount;
-                const incorrectQuestions = runtime.incorrectQuestionsCount;
-                const totalQuestions = correctQuestions + incorrectQuestions;
+                this.DOM.inventory['incorrect-identificators-container'].setAttribute('active', '');
+                this.DOM.inventory['repeat-button'].setAttribute('active', '');
 
-                this.DOM.score['correct-questions'].innerText = correctQuestions;
-                this.DOM.score['total-questions'].innerText = totalQuestions;
-
-                const questionsPercentage = correctQuestions / totalQuestions;
-
-                this.DOM.score['questions-percentage'].innerText = questionsPercentage;
-                
-
+                const incorrectQuestionsIdentificators = JSON.stringify(this.runtime.incorrectQuestionsIdentificators);
+                this.DOM.inventory['incorrect-identificators'].innerText = incorrectQuestionsIdentificators.slice(1, incorrectQuestionsIdentificators.length - 1);
             }
-            console.log('wrong questions', runtime.incorrectQuestionsIdentificators);
+
+            this.DOM.global['test-main'].setAttribute('status', 'summary');
+            this.DOM.inventory['test-summary'].setAttribute('active', '');
+
+        }.bind(this);
+
+        runtime.startTest = function (questionsArray) {
             
+            if (Array.isArray(questionsArray) && questionsArray.length > 0)
+            {
+
+                //if runtime.shuffle
+                //this.misc.shuffleArray(questionsArray);
+                runtime.incorrectQuestionsCount = 0;
+                runtime.correctQuestionsCount = 0;
+                runtime.incorrectAnswersCount = 0;
+                runtime.correctAnswersCount = 0;
+    
+                runtime.incorrectQuestionsIdentificators = new Array();
+    
+                this.build.newTestContent(questionsArray);
+                runtime.attachTestPageControl();
+                this.DOM.global['test-main'].setAttribute('status', 'running');
+            }
+
+        }.bind(this);
+
+        
+
+        runtime.endTest = function ()
+        {
             
-            console.log('correct questions', runtime.correctQuestionsCount);
-            console.log('incorrect questions', runtime.incorrectQuestionsCount);
-
-            this.DOM.inventory['incorrect-identificators'].innerText = incorrectQuestionsIdentificators.slice(1, incorrectQuestionsIdentificators.length - 1);
 
             
-
-
-            console.log('correct answers', runtime.correctAnswersCount);
-            console.log('incorrect answers', runtime.incorrectAnswersCount);
-
-            console.log('answer success', runtime.correctAnswersCount/(runtime.incorrectAnswersCount + runtime.correctAnswersCount) * 100);
+            //?! prevent test end if not on last page or when closing tab
+            //?! add timer
+            
+            runtime.processQuestions();
+            runtime.createSummary();
             runtime.openInventory();
+            
+
+        }.bind(this);
+
+        runtime.clearTest = function () {
+
+            this.DOM.inventory['test-summary'].removeAttribute('active');
+
+            //deleting summary
+            /*
+            const scoreElements = this.DOM.score;
+            for (let id in this.DOM.score)
+            {
+                const element = scoreElements[id];
+                element.innerText = '';
+            };
+            this.DOM.inventory['incorrect-identificators'].innerText = '';*/
+            this.DOM.global['test-main'].setAttribute('status', 'off');
+            this.DOM.global['test-content'].innerText = '';
+
+            this.DOM.inventory['incorrect-identificators-container'].removeAttribute('active');
+            this.DOM.inventory['repeat-button'].removeAttribute('active');
+
+            runtime.detachTestPageControl();
+            runtime.removeFooterPage();
+            runtime.closeInventory();
+            //runtime.
+
+        }.bind(this);
+
+        runtime.repeatTest = function () {
+
+            const questionsArray = runtime.getIdentificatorInput(runtime.incorrectQuestionsIdentificators);
+            console.log(questionsArray)
+            runtime.clearTest();
+
+            runtime.startTest(questionsArray);
 
         }.bind(this);
 
@@ -954,7 +990,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 }
                 else if (inputType === 'index')
                 {
-                    const questionsArray = runtime.getIndexInput();
+                    const questionsArray = runtime.getIdentificatorInput();
 
                     if (questionsArray)
                     {
@@ -972,12 +1008,12 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 }
                 else
                 {
-                    this.errorHandling.createWarning('Click on one of test types');
+                    this.misc.createMessage('Select one input type.', 'warning');
                 }
             }
             else
             {
-                this.errorHandling.createWarning('Select test type');
+                this.misc.createMessage('Select test type.', 'warning');
             }
 
         }.bind(this);
@@ -1017,7 +1053,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                                 const inputTag = inputTags[inputTagsIndex];
                                 
                                 if (inputTag === questionTag)
-                                {//!!
+                                {//?!!
                                     /*const recentQuestionsLength = questionIndexes.length;
                                     let alreadyPresent = false;
 
@@ -1052,58 +1088,74 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             }
             else
             {
-                this.errorHandling.createWarning('No tags selected.');
+                this.misc.createMessage('No tags selected.', 'warning');
                 return null;
             }
 
         }.bind(this);
 
-        runtime.getIndexInput = function () {
+        runtime.getIdentificatorInput = function (repeatInput) {
 
-            const indexesValue = this.DOM.inputs['index-array'].value.trim();
-            let indexesArray = null;
+            var identificatorArray = null;
 
-            if (indexesValue)
+            //this input is passed from runtime.repeatTest()
+            if (repeatInput)
             {
-                try
-                {
-                    indexesArray = JSON.parse('[' + indexesValue + ']');
-                }
-                catch (error)
-                {
-                    this.errorHandling.createWarning('Incorrect index syntax detected nearby:\n' + error.message);
-                    return null;
-                }
+                identificatorArray = repeatInput;
             }
             else
             {
-                this.errorHandling.createWarning('No indexes.');
-                return null;
+                const identificatorValue = this.DOM.inputs['index-array'].value.trim();
+
+                if (identificatorValue)
+                {
+                    try
+                    {
+                        identificatorArray = JSON.parse('[' + identificatorValue + ']');
+                    }
+                    catch (error)
+                    {
+                        this.misc.createMessage('Incorrect index syntax detected nearby:\n' + error.message, 'warning');
+                        return null;
+                    }
+                }
+                else
+                {
+                    this.misc.createMessage('No indexes in input.', 'warning');
+                    return null;
+                }
             }
 
+            
+            
+            //?!filter duplicate indexinput tagsimput
+            
+            const identificatorArrayLength = identificatorArray.length;
+            
+            //looking for indexes by their identificators in QUESTIONS
             const filteredIndexes = new Array();
-            console.log(indexesArray);
-            const indexesArrayLength = indexesArray.length;
+            
+            const questions = this.QUESTIONS;
+            const questionsLength = questions.length;
 
-            const questionsLength = this.QUESTIONS.length;
-            for (let inputI = 0; inputI < indexesArrayLength; inputI++)
+            for (let inputIndex = 0; inputIndex < identificatorArrayLength; inputIndex++)
             {
-                const inputIndex = indexesArray[inputI];
+                const inputIdentificator = identificatorArray[inputIndex];
 
-                for (let dbI = 0; dbI < questionsLength; dbI++)
+                for (let questionsIndex = 0; questionsIndex < questionsLength; questionsIndex++)
                 {
-                    const dbIdentificator = this.QUESTIONS[dbI];
+                    const questionIdentificator = questions[questionsIndex].id;
 
-                    if (dbIdentificator.id === inputIndex)
+                    if (questionIdentificator === inputIdentificator)
                     {
-                        filteredIndexes.push(dbI)
+                        filteredIndexes.push(questionsIndex)
                     }
                 };
             };
 
             return filteredIndexes;
 
-            /*if (indexesValue.trim());
+            /*if (identificatorValue.trim());
             {
 
             }*/
@@ -1120,7 +1172,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             }
             else
             {
-                this.errorHandling.createWarning('Minimal flat input must be 0 or more.');
+                this.misc.createMessage('Minimal flat input must be 0 or more.', 'warning');
             }*/
 
         }.bind(this);
@@ -1148,17 +1200,17 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                     }
                     else
                     {
-                        this.errorHandling.createWarning('Minimal flat input must be equal or smaller to max input.');
+                        this.misc.createMessage('Minimal flat input must be equal or smaller to max input.', 'warning');
                     }
                 }
                 else
                 {
-                    this.errorHandling.createWarning('Maximal flat input must be ' + String(this.QUESTIONS.length - 1) + '.');
+                    this.misc.createMessage('Maximal flat input must be ' + String(this.QUESTIONS.length - 1) + '.', 'warning');
                 }
             }
             else
             {
-                this.errorHandling.createWarning('Minimal flat input must be 0 or more.');
+                this.misc.createMessage('Minimal flat input must be 0 or more.', 'warning');
             }
 
             return null;
@@ -1199,16 +1251,36 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
     }.bind(this))();
 
-    this.errorHandling = (function ERROR ()
+    this.misc = (function MISC ()
     {
-        const errorHandling = new Object();
+        const misc = new Object();
 
-        errorHandling.createWarning = function (message, halflife) {
+        misc.createMessage = null;
+        misc.generateRandomUniqueNumbersArray = null;
+        misc.createIndexArray = null;
+        misc.shuffleArray = null;
+        misc.createScoreColor = null;
+
+        Object.seal(misc);
+
+        misc.createMessage = function (message, type, halflife) {
 
             halflife = halflife || 1000;
 
-            const container = document.createElement('warning-container');
-            container.innerText = message;
+            const container = document.createElement('warning-container');;
+
+            type = type || 'message';
+
+            if (type === 'warning')
+            {
+                container.setAttribute('warning', '')
+            }
+            else
+            {
+                container.setAttribute('message', '');
+            }
+
+            container.innerHTML = message;
 
             document.body.appendChild(container);
 
@@ -1220,20 +1292,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 container.remove();
             }, halflife * 2);
         }
-
-        return errorHandling;
-
-    }.bind(this))();
-
-    this.misc = (function MISC ()
-    {
-        const misc = new Object();
-
-        misc.generateRandomUniqueNumbersArray = null;
-        misc.createIndexArray = null;
-        misc.shuffleArray = null;
-
-        Object.seal(misc);
 
         misc.generateRandomUniqueNumbersArray = function (min, max) {
 
@@ -1284,48 +1342,105 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             }
         }
 
+        misc.createScoreColor = function scoreColor (percentage)
+        {
+            let red = 0;
+            let green = 0;
+            let blue = 0;
+
+            const limit = this.SETTINGS.minPercentageLimit;
+
+            if (percentage >= limit)
+            {
+                const percentAboveLimit = (percentage - limit) / 40 * 100;
+                const invertpercentAboveLimit = 100 - percentAboveLimit;
+                
+                red = 255 * invertpercentAboveLimit / 100;
+                green = 255;
+
+            }
+            else
+            {
+                red = 255;
+            }
+
+            const RGB = 'rgb(' + String(red) + ', ' + String(green) + ', ' + String(blue) + ')';
+
+            return RGB;
+        }.bind(this);
+
         return misc;
-    })();
+    }.bind(this))();
 
-    var initialization = function () {
-    //settings
-    {
-        this.API.loadQuestions(QUESTIONS);
-        this.API.loadTags(TAGS);
-        this.API.loadSettings(SETTINGS)
-    }
-    //activating test type
-    {
-        const options = new Array(this.DOM.menu['option-custom'], this.DOM.menu['option-real']);
-        this.activate.elementSelectableOnlyOneOf(options, false);
-    }
-    //activating inputs
-    {
-        const inputs = new Array(this.DOM.inputs['flat-input'], this.DOM.inputs['index-input'], this.DOM.inputs['tags-input']);
-        this.activate.elementSelectableOnlyOneOf(inputs, true); 
-    }    
-    //activating tags
-    {
-        this.build.menuTags();
-            const tags = this.DOM.menu['tags-array'].querySelectorAll('tag-container');
-        this.activate.elementToggleSelectability(tags);
-    }
-    //activating start button
-    {
-        this.activate.startButton(this.DOM.menu['start-button']);
-    }
-    //activating end button
-    {
-        this.activate.finishButton(this.DOM.menu['finish-button']);
-    }
     
-    this.DOM.inventory['inventory-button'].addEventListener('click', this.runtime.inventoryButton);
 
-    this.runtime.initializeTest();
-
-    this.runtime.endTest();
+    var initialization = function ()
+    {
+        //settings
+        {
+            this.API.loadQuestions(QUESTIONS);
+            this.API.loadTags(TAGS);
+            this.API.loadSettings(SETTINGS)
+        }
+        //activating test type
+        {
+            const options = new Array(this.DOM.menu['option-custom'], this.DOM.menu['option-real']);
+            this.activate.elementSelectableOnlyOneOf(options, false);
+        }
+        //activating inputs
+        {
+            const inputs = new Array(this.DOM.inputs['flat-input'], this.DOM.inputs['index-input'], this.DOM.inputs['tags-input']);
+            this.activate.elementSelectableOnlyOneOf(inputs, true); 
+        }    
+        //activating tags
+        {
+            this.build.menuTags();
+                const tags = this.DOM.menu['tags-array'].querySelectorAll('tag-container');
+            this.activate.elementToggleSelectability(tags);
+        }
+        //activating start button
+        {
+            this.DOM.menu['start-button'].addEventListener('click', this.runtime.initializeTest);
+        }
+        //activating end button
+        {
+            this.DOM.menu['end-button'].addEventListener('click', this.runtime.endTest);
+        }
+        //activating clear button
+        {
+            this.DOM.inventory['clear-button'].addEventListener('click', this.runtime.clearTest);
+        }
+        //activationg repeat button
+        {
+            this.DOM.inventory['repeat-button'].addEventListener('click', this.runtime.repeatTest);
+        }
+        //download questions
+        if (this.SETTINGS.questionFile)
+        {
+            const button = this.DOM.inventory['download-questions'];
+            button.setAttribute('active', '');
+            button.addEventListener('click', function () {
+                //?!! code should be required when loading settings, otherwise it may create error 404
+                window.location = window.location.pathname.replace(/\/[^\/]*$/m, '\/') + 'Tests/' + this.SETTINGS.code + '/' + this.SETTINGS.questionFile;
+            }.bind(this));
+        }
+        //download test
+        if (this.SETTINGS.testFile)
+        {
+            const button = this.DOM.inventory['download-test'];
+            button.setAttribute('active', '');
+            button.addEventListener('click', function () {
+                //?!! code should be required when loading settings, otherwise it may create error 404
+                window.location = window.location.pathname.replace(/\/[^\/]*$/m, '\/') + 'Tests/' + this.SETTINGS.code + '/' + this.SETTINGS.testFile;
+            }.bind(this));
+        }
         
-        //build.newTestContent([15,196,53,153,154,48,78,96,63,21,14,47,48,59,23,14,35,1,364,34,64,48,64,555,61,323,84,78,351,43,153,95,84,351,333,94,64,746,487,522,533,566,447,448,449,550,551]);    
+        
+        document.querySelector('head title').innerText = this.SETTINGS.name;
+        
+        this.DOM.inventory['inventory-button'].addEventListener('click', this.runtime.inventoryButton);
+            
+            //build.newTestContent([15,196,53,153,154,48,78,96,63,21,14,47,48,59,23,14,35,1,364,34,64,48,64,555,61,323,84,78,351,43,153,95,84,351,333,94,64,746,487,522,533,566,447,448,449,550,551]);    
 
     }.bind(this);
 

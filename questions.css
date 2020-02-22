@@ -8,7 +8,7 @@ question-page:not([active]) {
 
 question-block {
     display: block;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 question-upper {
@@ -38,7 +38,6 @@ question-identificator::before {
 
 answer-container {
     display: block;
-    cursor: pointer;
 
     margin-top: 2px;
 
@@ -48,20 +47,24 @@ answer-container {
     transition: color 0.4s;
 }
 
-/*//!only if test is active*/
-answer-container:hover {
+test-main[status=running] answer-container {
+    cursor: pointer;
+}
+
+test-main[status=running] answer-container:hover {
     color: #62b9df;
 }
 
-answer-container[selected] {
+/*id for importance*/
+#test-main answer-container[selected] {
     color: #00FF00;
 }
 
 /*just for clarity*/
 answer-container[selected][incorrect] {
-    color: #F00;
+    color: #F00 !important;
 }
 
 answer-container[incorrect] {
-    color: #FF0;
+    color: #FF0 !important;
 }

@@ -6,8 +6,8 @@ function getUrlVariables () {
     const capturedVariables = captureVariables.exec(window.location);
 
     var variableString = null;
-
-    if (capturedVariables.length > 1) {
+    //! if no var, crashes
+    if (capturedVariables && capturedVariables.length > 1) {
         variableString = capturedVariables[1];
     }
     else

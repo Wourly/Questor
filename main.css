@@ -3,8 +3,17 @@ test-option#option-custom[selected] ~ custom-inputs {
     display: block;
 }
 
-test-main[active] test-menu{
+test-main[status=running] test-menu, test-main[status=summary] test-menu{
     display: none;
+}
+
+#end-button {
+    display: none;
+    margin-bottom: 15px;
+}
+
+test-main[status="running"] #end-button {
+    display: block;
 }
 
 custom-inputs {
@@ -89,6 +98,7 @@ inventory-container {
     width: 100%;
 
     padding: 15px;
+    padding-bottom: 30px;
 
     background: linear-gradient(60deg, rgb(29, 42, 51), rgb(30, 51, 65));
 
@@ -108,6 +118,14 @@ inventory-container[active] {
 
 inventory-container[active] + test-main {
     display: none;
+}
+
+test-summary {
+    display: none;
+}
+
+test-summary[active] {
+    display: block;
 }
 
 inventory-button {
@@ -180,17 +198,23 @@ inventory-label {
 }
 
 incorrect-identificators, saved-identificators {
-    display: block;
-    font-weight: bold;
-    font-size: 18px;
+    font-size: 15px;
     border: 1px solid orangered;
+    word-break: break-all;
     padding: 5px;
     background-color: lightblue;
     border-radius: 6px;
     color: black;
+    margin: 15px 0;
+    max-width: 600px;
+    max-height: 400px;
+    overflow: auto;
 }
 
-
+answer-holder {
+    margin-left: 75px;
+    margin-bottom: 25px;
+}
 
 summary-headline {
     color: #f09308;
@@ -203,7 +227,9 @@ score-element {
     color: red;
 }
 
-
+score-element[static] {
+    color: #62b9df;
+}
 
 test-main
 {
@@ -261,14 +287,14 @@ identificator-container {
     display: none;
 
     right: 0;
-    bottom: 0;
+    bottom: 50px;
 }
 
 warning-container {
 
     display: block;
 
-    top: 0;
+    top: 50px;
     right: 0;
 
     opacity: 1;
@@ -300,6 +326,12 @@ question-title:hover ~ identificator-container {
     inventory-container {
         padding-top: 65px;
     }
+
+    answer-holder {
+        margin-left: 0;
+        margin-top: 15px;
+        clear: both;
+    }
   } 
 
 /*
@@ -319,3 +351,7 @@ footer-toggler::before {
     content: '\2191';
 }
 */
+
+.subject-container {
+    cursor: pointer;
+}

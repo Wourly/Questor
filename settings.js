@@ -9,7 +9,9 @@ const AVAILABLE_SUBJECTS = [
             questionsOnPage: 20,
             questionsTotal: 20,
             timeLimit: 60
-        }
+        },
+        questionFile: 'questions.doc',
+        testFile: 'physiology.rar'
     }
 ];
 

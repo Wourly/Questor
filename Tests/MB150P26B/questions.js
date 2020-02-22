@@ -3206,7 +3206,7 @@ const QUESTIONS =
 {
    "id":"268",
    "text":"Při choleře dochází k průjmu",
-   "tags":["Epitely", "Srdce"],
+   "tags":["Epitely"],
    "answers":
       [
          {"valid":true,"text":"v důsledku otevření Cl- kanálů po jejich cAMP dependentní fosforylaci. Jde o permanentní aktivitu stimulační alfa podjednotky G proteinu, vlivem lokálního účinku cholerového toxinu."},

@@ -62,7 +62,7 @@ window.addEventListener('load', function pageLoad () {
     }
     else
     {
-        createGuidePage();
+        writeGuidePage();
     }
 
 });
