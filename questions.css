@@ -8,7 +8,7 @@ question-page:not([active]) {
 
 question-block {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
 }
 
 question-upper {
@@ -48,12 +48,13 @@ answer-container {
     transition: color 0.4s;
 }
 
+/*//!only if test is active*/
 answer-container:hover {
     color: #62b9df;
 }
 
 answer-container[selected] {
-    color: #7FFF00;
+    color: #00FF00;
 }
 
 /*just for clarity*/

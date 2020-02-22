@@ -61,12 +61,13 @@ header
     padding: 15px;
 
     height: 50px;
-
-   z-index: -10000;
 }
 
 subject-name {
     
+    display: inline-block;
+    width: calc(100% - 50px);
+
     font-size: 25px;
     line-height: 25px;
 
@@ -82,7 +83,7 @@ inventory-container {
     position: absolute;
 
     opacity: 0;
-    transition: opacity 0.5s linear;
+    transition: opacity 0.3s linear;
 
     height: 100vh;
     width: 100%;
@@ -92,7 +93,7 @@ inventory-container {
     background: linear-gradient(60deg, rgb(29, 42, 51), rgb(30, 51, 65));
 
     word-break: break-word;
-
+    
     overflow: auto;
 
     z-index: -999;
@@ -105,24 +106,33 @@ inventory-container[active] {
     z-index: 999;
 }
 
-inventory-close {
+inventory-container[active] + test-main {
+    display: none;
+}
+
+inventory-button {
     top: 0px;
     right: 0px;
-    position: absolute;
+    position: fixed;
     display: block;
-    margin-top: 5px;
-    margin-right: 5px;
+    margin-top: 10px;
+    margin-right: 10px;
     cursor: pointer;
     height: 50px;
     width: 50px;
-  }
 
-inventory-close::before, inventory-close::after {
+    z-index: 20000;
+}
+
+inventory-button[inventory-overflow] {
+    margin-right: 25px;
+}
+
+inventory-button::before, inventory-button::after {
     content: '';
     display: block;
     position: absolute;
-
-    top: 0px;
+    
     left: calc(50% - 3px);
 
     height: 50px;
@@ -130,40 +140,43 @@ inventory-close::before, inventory-close::after {
 
     background-color: #42809b;
 
-    transform: rotate(0deg);
+    transform: rotate(90deg);
     transform-origin: center center;
 
     border-radius: 6px;
 
-    
-
     Z-index: 1;
 }
 
-inventory-close::before {
-    transition: transform 1s ease-out, background-color 0.5s;
+inventory-button::before {
+    top: -15px;
+    transition: all 1s ease-in, background-color 0.5s;
 }
   
-inventory-close::after {
-    transition: transform 1s  ease-in, background-color 0.5s;
+inventory-button::after {
+    top: 0px;
+    transition: all 1s  ease-out, background-color 0.5s;
 }
 
-inventory-container[active] inventory-close::before {
-    transform: rotate(225deg);
-}
-inventory-container[active] inventory-close::after {
+inventory-button[next-action=closing]::before {
+    top: 0;
     transform: rotate(-45deg);
 }
+inventory-button[next-action=closing]::after {
+    top: 0;
+    transform: rotate(225deg);
+}
 
-inventory-close:hover::after, inventory-close:hover::before {
+inventory-button:hover::after, inventory-button:hover::before {
     background-color: rgb(255, 165, 0);
 }
 
 inventory-label {
-    font-size: 18px;
+    font-size: 22px;
     color: rgb(186, 233, 33);
     margin-top: 10px;
     margin-bottom: 5px;
+    font-weight: 900;
 }
 
 incorrect-identificators, saved-identificators {
@@ -176,6 +189,21 @@ incorrect-identificators, saved-identificators {
     border-radius: 6px;
     color: black;
 }
+
+
+
+summary-headline {
+    color: #f09308;
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 3px;
+}
+
+score-element {
+    color: red;
+}
+
+
 
 test-main
 {
@@ -256,10 +284,23 @@ question-title:hover ~ identificator-container {
     display: block;
 }
 
-.subject-container {
-    cursor: pointer;
-}
 
+@media only screen and (max-width: 600px) {
+    header {
+      position: relative;
+      float: left;
+      height: unset;
+    }
+
+    test-main {
+        padding-top: 10px;
+        position: relative;
+    }
+
+    inventory-container {
+        padding-top: 65px;
+    }
+  } 
 
 /*
 footer-toggler {

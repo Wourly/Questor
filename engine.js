@@ -49,10 +49,10 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
     {
         const DOM = new Object();
 
-        DOM.menu = connectDOM(['menu','option-custom', 'option-real', 'tags-array', 'index-array', 'custom-inputs', 'flat-input', 'index-input', 'tags-input', 'read-button', 'start-button', 'finish-button']);
-        DOM.flatInput = connectDOM(['flatInputMin', 'flatInputMax']);
-        DOM.inventory = connectDOM(['inventory-container', 'inventory-close', 'subject-name', 'test-summary', 'incorrect-identificators', 'saved-identificators']);
-        DOM.score = connectDOM(['total-questions']);
+        DOM.menu = connectDOM(['menu', 'questions-count', 'option-custom', 'option-real', 'tags-array', 'read-button', 'start-button', 'finish-button']);
+        DOM.inputs = connectDOM(['custom-inputs', 'flat-input', 'index-input', 'tags-input', 'flat-min', 'flat-max', 'index-array']);
+        DOM.inventory = connectDOM(['inventory-container', 'inventory-button', 'subject-name', 'test-summary', 'incorrect-identificators', 'saved-identificators']);
+        DOM.score = connectDOM(['correct-questions', 'total-questions', 'questions-percentage', 'correct-answers', 'total-answers', 'answers-percentage']);
         DOM.global = connectDOM(['test-main', 'content', 'footer', 'question-position', 'arrow-left', 'arrow-right']);
 
         DOM.misc = connectDOM();
@@ -71,23 +71,24 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         Object.seal(API);
 
-        //could possibly be 'absorbData' with specified property, but it loses semantics
         API.loadQuestions = function loadQuestions (data) {
 
             if (data && Array.isArray(data))
             {
                 this.QUESTIONS = data;
+                this.activate.questions();
             }
 
         }.bind(this);
 
         API.loadTags = function loadTags (data) {
-
-            if (data && Array.isArray(data))
+            
+            if (data && data instanceof Object)
             {
                 this.TAGS = data;
             }
-        }
+
+        }.bind(this);
 
         API.loadSettings = function loadSettings (SETTINGS)
         {
@@ -171,6 +172,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             
             this.DOM.menu['tags-array'].innerHTML = '';
             this.DOM.menu['tags-array'].appendChild(fragment);
+
+            
 
         }.bind(this);
 
@@ -434,6 +437,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         const activate = new Object();
 
         activate.settings = null;
+        activate.questions = null;
 
         activate.elementToggleSelectability = null;
         activate.elementSelectableOnlyOneOf = null;
@@ -441,6 +445,14 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         activate.finishButton = null;
 
         Object.seal(activate);
+
+        activate.questions = function questions () {
+
+            const questionsCount = this.QUESTIONS.length;
+            this.DOM.menu['questions-count'].innerText = questionsCount;
+            this.DOM.inputs['flat-max'].value = questionsCount - 1;
+
+        }.bind(this);
 
         activate.settings = function settings () {
 
@@ -607,6 +619,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         runtime.adjustElementsForTest = null;
 
+        runtime.inventoryButton = null;
+        runtime.isInventoryOverflow = null;
         runtime.openInventory = null;
         runtime.closeInventory = null;
 
@@ -648,6 +662,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         runtime.pageBack = function () {
             
+            window.scrollTo(0, 0);
+
             if (runtime.currentTestPage > 0)
             {
                 runtime.currentTestPage--;
@@ -658,6 +674,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         runtime.pageNext = function pageNext () {
             
+            window.scrollTo(0, 0);
+
             const maxPage = runtime.countOfPages - 1;
 
             if (runtime.currentTestPage < maxPage)
@@ -739,29 +757,76 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             }
         }
 
+        runtime.inventoryButton = function () {
+
+            const button = this.DOM.inventory['inventory-button'];
+
+            if (button.getAttribute('next-action') === 'opening')
+            {
+                runtime.openInventory();
+            }
+            else
+            {
+                runtime.closeInventory();
+            }
+
+        }.bind(this);
+
+        runtime.isInventoryOverflow = function () {
+
+            const inventory = this.DOM.inventory['inventory-container'];
+
+            const inventoryHeight = inventory.scrollHeight;
+            const windowHeight = window.innerHeight;
+
+            console.log(inventoryHeight, windowHeight);
+
+            return inventoryHeight > windowHeight ? true : false;
+
+        }.bind(this);
+
         runtime.openInventory = function openInventory () {
+
             this.DOM.inventory['inventory-container'].setAttribute('active', '');
+            this.DOM.inventory['inventory-button'].setAttribute('next-action', 'closing');
+            
+            if (runtime.isInventoryOverflow())
+            {
+                this.DOM.inventory['inventory-button'].setAttribute('inventory-overflow', '');
+            }
+
         }.bind(this);
 
         runtime.closeInventory = function closeInventory () {
             this.DOM.inventory['inventory-container'].removeAttribute('active');
+            this.DOM.inventory['inventory-button'].setAttribute('next-action', 'opening');
+
+            this.DOM.inventory['inventory-button'].removeAttribute('inventory-overflow');
+
         }.bind(this);
 
         runtime.startTest = function (questionsArray) {
             
-            runtime.incorrectQuestionsCount = 0;
-            runtime.correctQuestionsCount = 0;
-            runtime.incorrectAnswersCount = 0;
-            runtime.correctAnswersCount = 0;
+            if (Array.isArray(questionsArray) && questionsArray.length > 0)
+            {
 
-            runtime.incorrectQuestionsIdentificators = new Array();
+                //if runtime.shuffle
+                //this.misc.shuffleArray(questionsArray);
+                runtime.incorrectQuestionsCount = 0;
+                runtime.correctQuestionsCount = 0;
+                runtime.incorrectAnswersCount = 0;
+                runtime.correctAnswersCount = 0;
+    
+                runtime.incorrectQuestionsIdentificators = new Array();
+    
+                this.build.newTestContent(questionsArray);
+                //!! needs to be detached
+                runtime.adjustElementsForTest();
+                runtime.attachTestPageControl(); 
+                
 
-            this.build.newTestContent(questionsArray);
-            
-            runtime.adjustElementsForTest();
-            this.runtime.attachTestPageControl(); 
-            
-            console.log(runtime.questions)
+            }
+
         }.bind(this);
 
         runtime.endTest = function ()
@@ -772,7 +837,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             for (let questionId in questions)
             {
                 const question = questions[questionId];
-                console.log(question)
 
                 const answers = question.answers;
                 const answersLength = answers.length;
@@ -823,23 +887,41 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 }
             }
 
+            //SUMMARY
             
-            runtime.openInventory();
 
             const incorrectQuestionsIdentificators = JSON.stringify(this.runtime.incorrectQuestionsIdentificators);
 
-            this.DOM.inventory['incorrect-identificators'].innerText = incorrectQuestionsIdentificators.slice(1, incorrectQuestionsIdentificators.length - 1);
+            {
+                const correctQuestions = runtime.correctQuestionsCount;
+                const incorrectQuestions = runtime.incorrectQuestionsCount;
+                const totalQuestions = correctQuestions + incorrectQuestions;
 
-            //summary
+                this.DOM.score['correct-questions'].innerText = correctQuestions;
+                this.DOM.score['total-questions'].innerText = totalQuestions;
 
+                const questionsPercentage = correctQuestions / totalQuestions;
+
+                this.DOM.score['questions-percentage'].innerText = questionsPercentage;
+                
+
+            }
             console.log('wrong questions', runtime.incorrectQuestionsIdentificators);
+            
+            
             console.log('correct questions', runtime.correctQuestionsCount);
             console.log('incorrect questions', runtime.incorrectQuestionsCount);
+
+            this.DOM.inventory['incorrect-identificators'].innerText = incorrectQuestionsIdentificators.slice(1, incorrectQuestionsIdentificators.length - 1);
+
+            
+
+
             console.log('correct answers', runtime.correctAnswersCount);
             console.log('incorrect answers', runtime.incorrectAnswersCount);
 
             console.log('answer success', runtime.correctAnswersCount/(runtime.incorrectAnswersCount + runtime.correctAnswersCount) * 100);
-
+            runtime.openInventory();
 
         }.bind(this);
 
@@ -853,8 +935,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             {
                 //random 20 questions
                 let questionsArray = this.misc.createIndexArray(0, this.questionsMaxIndex);
-                //this.misc.shuffleArray(questionsArray);
-                questionsArray = questionsArray.slice(0,2);
+                
+                questionsArray = questionsArray.slice(0,20);
                 runtime.startTest(questionsArray);
             }
             else if (testType === 'custom')
@@ -864,17 +946,29 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 if (inputType === 'flat')
                 {
                     const questionsArray = runtime.getFlatInput();
-                    runtime.startTest(questionsArray);
+
+                    if (questionsArray)
+                    {
+                        runtime.startTest(questionsArray);
+                    }
                 }
                 else if (inputType === 'index')
                 {
                     const questionsArray = runtime.getIndexInput();
-                    runtime.startTest(questionsArray);
+
+                    if (questionsArray)
+                    {
+                        runtime.startTest(questionsArray);
+                    }
                 }
                 else if (inputType === 'tags')
                 {
                     const questionsArray = runtime.getTagsInput();
-                    runtime.startTest(questionsArray);
+                    
+                    if (questionsArray)
+                    {
+                        runtime.startTest(questionsArray);
+                    }
                 }
                 else
                 {
@@ -923,8 +1017,31 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                                 const inputTag = inputTags[inputTagsIndex];
                                 
                                 if (inputTag === questionTag)
-                                {
-                                    questionIndexes.push(questionIndex);
+                                {//!!
+                                    /*const recentQuestionsLength = questionIndexes.length;
+                                    let alreadyPresent = false;
+
+                                    //mimicking Set()
+                                    for (let recentQuestionsIndex = 0; recentQuestionsIndex < recentQuestionsLength; recentQuestionsIndex++)
+                                    {
+                                        const recentIndex = questionIndexes[recentQuestionsIndex];
+
+                                        if (recentIndex === questionIndex)
+                                        {
+                                            alreadyPresent = true;
+                                            break;
+                                        }
+                                    };
+
+                                    if (!alreadyPresent)
+                                    {*/
+                                        questionIndexes.push(questionIndex);
+                                    /*}
+                                    else
+                                    {
+                                        console.log('duplicate:', question);
+                                    }*/
+                                    
                                 }
                             };
                         };
@@ -943,14 +1060,14 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         runtime.getIndexInput = function () {
 
-            const indexesValue = this.DOM.menu['index-array'].value.trim();
+            const indexesValue = this.DOM.inputs['index-array'].value.trim();
             let indexesArray = null;
 
             if (indexesValue)
             {
                 try
                 {
-                    indexesArray = JSON.parse('[' + indexesValue + ']');                    
+                    indexesArray = JSON.parse('[' + indexesValue + ']');
                 }
                 catch (error)
                 {
@@ -958,9 +1075,14 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                     return null;
                 }
             }
+            else
+            {
+                this.errorHandling.createWarning('No indexes.');
+                return null;
+            }
 
             const filteredIndexes = new Array();
-
+            console.log(indexesArray);
             const indexesArrayLength = indexesArray.length;
 
             const questionsLength = this.QUESTIONS.length;
@@ -1005,8 +1127,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         runtime.getFlatInput = function () {
 
-            const min = parseInt(this.DOM.flatInput['flatInputMin'].value);
-            const max = parseInt(this.DOM.flatInput['flatInputMax'].value);
+            const min = parseInt(this.DOM.inputs['flat-min'].value);
+            const max = parseInt(this.DOM.inputs['flat-max'].value);
 
             if (min >= 0)
             {
@@ -1060,7 +1182,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         runtime.determineInputType = function () {
 
-            const element = this.DOM.menu['custom-inputs'].querySelector('flat-input[selected], index-input[selected], tags-input[selected]');
+            const element = this.DOM.inputs['custom-inputs'].querySelector('flat-input[selected], index-input[selected], tags-input[selected]');
             
             if (element)
             {
@@ -1179,7 +1301,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
     }
     //activating inputs
     {
-        const inputs = new Array(this.DOM.menu['flat-input'], this.DOM.menu['index-input'], this.DOM.menu['tags-input']);
+        const inputs = new Array(this.DOM.inputs['flat-input'], this.DOM.inputs['index-input'], this.DOM.inputs['tags-input']);
         this.activate.elementSelectableOnlyOneOf(inputs, true); 
     }    
     //activating tags
@@ -1197,9 +1319,11 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         this.activate.finishButton(this.DOM.menu['finish-button']);
     }
     
-    this.DOM.inventory['inventory-close'].addEventListener('click', this.runtime.closeInventory);
+    this.DOM.inventory['inventory-button'].addEventListener('click', this.runtime.inventoryButton);
 
     this.runtime.initializeTest();
+
+    this.runtime.endTest();
         
         //build.newTestContent([15,196,53,153,154,48,78,96,63,21,14,47,48,59,23,14,35,1,364,34,64,48,64,555,61,323,84,78,351,43,153,95,84,351,333,94,64,746,487,522,533,566,447,448,449,550,551]);    
 

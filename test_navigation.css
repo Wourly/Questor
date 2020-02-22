@@ -99,6 +99,16 @@ arrow-button[class=button]:hover {
     background-color: red;
 }
 
+/*idle*/
+footer:not([data-page]) arrow-container {
+    display: none;
+}
+
+/*short test*/
+footer[data-page="only"] arrow-container {
+    display: none;
+}
+
 footer[data-page="0"] arrow-container#arrow-left
 {
     display: none;
@@ -109,9 +119,7 @@ footer[data-page="max"] arrow-container#arrow-right
     display: none;
 }
 
-footer[data-page="only"] arrow-container {
-    display: none;
-}
+
 
 finish-test {
     margin-bottom: 10px;

@@ -20,21 +20,40 @@
         <subject-name id="subject-name" class="left-block"></subject-name>
         
     </header>
-    <inventory-close id="inventory-close"></inventory-close>
+    <inventory-button id="inventory-button" next-action="opening"></inventory-button>
     <inventory-container id="inventory-container">
 
         
-        
-        <test-summary id="test-summary">
-            <score-element id="total-questions"></score-element>
+        <inventory-label class="left-block-clear">Test summary:</inventory-label>
+        <test-summary id="test-summary" class="left-block-clear">
+            
+            <!--QUESTIONS-->
+            <summary-headline class="left-block-clear">     Questions:                  </summary-headline>
+            <score-element    class="left-block-clear"      id="correct-questions">     </score-element>
+            <summary-label    class="left-block">           &nbsp;out of&nbsp;          </summary-label>
+            <score-element    class="left-block"            id="total-questions">       </score-element>
+            <summary-label    class="left-block">           &nbsp;question/s correct.   </summary-label>
+            <score-element    class="left-block-clear"      id="questions-percentage">  </score-element>
+            <summary-label    class="left-block">           %                           </summary-label>
+            <!--/QUESTIONS-->
+
+            <!--ANSWERS-->
+            <summary-label class="left-block-clear">Answers</summary-label>
+            <score-element id="correct-answers"></score-element>&nbsp;<score-element id="total-answers"></score-element>
+            <br>
+            <score-element id="answers-percentage"></score-element>
+            <!--/ANSWERS-->
+
+            <!---->
             <score-element id="correct-questions"></score-element>
             <score-element id="total-questions"></score-element>
             <score-element id="total-questions"></score-element>
             <score-element id="total-questions"></score-element>
+            <summary-label class="left-block-clear">Incorrect questions' identificators:</summary-label>
+            <incorrect-identificators id="incorrect-identificators" class="left-block-clear"></incorrect-identificators>
         </test-summary>
 
-        <inventory-label class="left-block-clear">Incorrect questions' identificators:</inventory-label>
-        <incorrect-identificators id="incorrect-identificators" class="left-block-clear"></incorrect-identificators>
+        
 
         <inventory-label class="left-block-clear">Saved questions' identificators:</inventory-label>
         <saved-identificators id="saved-identificators" contenteditable="true" class="left-block-clear"></saved-identificators>
@@ -43,24 +62,25 @@
     <test-main id="test-main" menu-type="custom">
 
             <test-menu id="menu">
-                <test-info class="left-block-clear">There are currently <question-number id="question-number">X</question-number> questions for this test.</test-info>
+                <test-info class="left-block-clear">There are currently <questions-count id="questions-count">X</questions-count> questions for this test.</test-info>
 
                 <test-option selected id="option-custom" data-value="custom" class='button togglable left-block-clear'>Custom test</test-option>
                 <test-option id="option-real" data-value="real" class='button togglable left-block'>Real test</test-option>
                 
                 <custom-inputs id="custom-inputs" class="clear">
 
+                    <!--//!-->
                     <flat-input selected id="flat-input" data-value="flat" class="left-block">
                         <input-caption class="block">
                             Select questions by their index:
                         </input-caption>
                         <input-container one class="left-block">
                             <label class="block">from</label>
-                            <input id="flatInputMin" value="0">
+                            <input id="flat-min" value="0">
                         </input-container>
                         <input-container two class="left-block">
                         <label class="block">to</label>
-                            <input id="flatInputMax" value="2">
+                            <input id="flat-max" value="2">
                         </input-container>
                     </flat-input>
 
@@ -106,7 +126,7 @@
 
         <test-end class="left-block-clear">
             <finish-test id="finish-button" class="main-button left-block">
-                Finish test
+                End test
             </finish-test>
         </test-end>
     </test-main>
