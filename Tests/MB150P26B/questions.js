@@ -8966,7 +8966,7 @@ const QUESTIONS =
 {
    "id":"751",
    "text":"Respirační kvocient je",
-   "tags":["Fyziologické regulace"],
+   "tags":["Regulace"],
    "answers":
       [
          {"valid":false,"text":"poměr spotřeby kyslíku v mozku k celkové spotřebě"},
@@ -8978,7 +8978,7 @@ const QUESTIONS =
 {
    "id":"752",
    "text":"Při nepřímé kalorimetrii",
-   "tags":["Fyziologické regulace"],
+   "tags":["Regulace"],
    "answers":
       [
          {"valid":true,"text":"je produkce tepla přibližně úměrná množství spotřebovaného kyslíku"},
@@ -8990,7 +8990,7 @@ const QUESTIONS =
 {
    "id":"753",
    "text":"Při zvýšení teploty o 10 oC",
-   "tags":["Fyziologické regulace"],
+   "tags":["Regulace"],
    "answers":
       [
          {"valid":false,"text":"hovoříme o tepelném basálním metabolismu"},
@@ -9002,7 +9002,7 @@ const QUESTIONS =
 {
    "id":"754",
    "text":"Třesová termogenese",
-   "tags":["Fyziologické regulace"],
+   "tags":["Regulace"],
    "answers":
       [
          {"valid":false,"text":"je typická pro parkinsoniky, kteří mají stále teplotu o 1-2 stupně vyšší"},
@@ -9014,7 +9014,7 @@ const QUESTIONS =
 {
    "id":"755",
    "text":"Hibernace",
-   "tags":["Fyziologické regulace"],
+   "tags":["Regulace"],
    "answers":
       [
          {"valid":false,"text":"vzniká u každého poikilotermního živočicha po extirpaci hypotalamu"},
@@ -9026,7 +9026,7 @@ const QUESTIONS =
 {
    "id":"756",
    "text":"Estivací mohou projít",
-   "tags":["Fyziologické regulace"],
+   "tags":["Regulace"],
    "answers":
       [
          {"valid":false,"text":"kombajnisté, kteří za horka usnou na poli"},
@@ -9038,7 +9038,7 @@ const QUESTIONS =
 {
    "id":"757",
    "text":"Pyrogeny jsou",
-   "tags":["Fyziologické regulace"],
+   "tags":["Regulace"],
    "answers":
       [
          {"valid":true,"text":"buď exogenní, bakteriální endotoxiny gram-negativních bakterií, tepelně stabilní polysacharidy."},
@@ -9050,7 +9050,7 @@ const QUESTIONS =
 {
    "id":"758",
    "text":"Teplota člověka",
-   "tags":["Fyziologické regulace"],
+   "tags":["Regulace"],
    "answers":
       [
          {"valid":true,"text":"stoupá odpoledne a navečer a proto obézní lidé bez večeře spalují více tuků a hubnou rychleji, než při dopoledním hladovění"},
@@ -9062,7 +9062,7 @@ const QUESTIONS =
 {
    "id":"759",
    "text":"Trepka Paramecium",
-   "tags":["Fyziologické regulace"],
+   "tags":["Regulace"],
    "answers":
       [
          {"valid":false,"text":"reaguje na náraz přední částí tělíčka obratem o 180 stupňů"},
@@ -9074,7 +9074,7 @@ const QUESTIONS =
 {
    "id":"760",
    "text":"Ovce a jiná chlupatá ruminantia",
-   "tags":["Fyziologické regulace"],
+   "tags":["Regulace"],
    "answers":
       [
          {"valid":false,"text":"se ochlazují za běhu vyplazeným jazykem¨"},
@@ -9383,4 +9383,4 @@ const QUESTIONS =
          {"valid":true,"text":"Synomony - prospěch obou"}
       ]
 }];
-const TAGS = {"Regulace":105,"Vzrušivé tkáně":115,"Srdce":32,"Ledviny a homeostáza":26,"Krev":66,"Epitely":10,"Endokrinologie":50,"Dýchací systém":67,"Imunita":44,"CNS":35,"Reprodukční systém":76,"GIT":124,"Integrace CNS":22,"Fyziologické regulace":10};
+const TAGS = {"Regulace":115,"Vzrušivé tkáně":115,"Srdce":32,"Ledviny a homeostáza":26,"Krev":66,"Epitely":10,"Endokrinologie":50,"Dýchací systém":67,"Imunita":44,"CNS":35,"Reprodukční systém":76,"GIT":124,"Integrace CNS":22};

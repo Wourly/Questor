@@ -11,7 +11,8 @@ var SETTINGS = {
 
     visible_hint_identificator: '~',
     invisible_hint_identificator: '^',
-    tags_identificator: '#',
+    tag_identificator: '#',
+    link_identificator: '@',
     property_splitter: '|',
 
     correct_answer_identificator: 'T',

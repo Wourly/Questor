@@ -11,7 +11,7 @@ const AVAILABLE_SUBJECTS = [
             timeLimit: 60
         },
         questionFile: 'questions.doc',
-        testFile: 'physiology.rar'
+        testFile: 'physiology.zip'
     }
 ];
 

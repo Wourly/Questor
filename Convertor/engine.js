@@ -157,8 +157,9 @@ var Convertor = function (settings) {
 
         this.settings.visibleHintIdentificator = settings.visible_hint_identificator || '~';
         this.settings.invisibleHintIdentificator = settings.invisible_hint_identificator || '^';
-        this.settings.tagIdentificator = settings.tags_identificator || '#';
-        this.settings.propertySplitter = settings.tag_splitter || '|';
+        this.settings.tagIdentificator = settings.tag_identificator || '#';
+        this.settings.linkIdentificator = settings.link_identificator || '#';
+        this.settings.propertySplitter = settings.property_splitter || '|';
 
         miscellaneous.escapeChar = function (character) {
 
@@ -170,7 +171,17 @@ var Convertor = function (settings) {
             return '\\' + character;
         };
 
-        this.regExp.captureHintIdentificators = new RegExp('([' + miscellaneous.escapeChar(this.settings.visibleHintIdentificator) + miscellaneous.escapeChar(this.settings.invisibleHintIdentificator) + miscellaneous.escapeChar(this.settings.tagIdentificator) + '])', 'g');
+        this.regExp.captureHintIdentificators = new RegExp('(['
+        +
+        miscellaneous.escapeChar(this.settings.visibleHintIdentificator)
+        +
+        miscellaneous.escapeChar(this.settings.invisibleHintIdentificator)
+        +
+        miscellaneous.escapeChar(this.settings.tagIdentificator)
+        +
+        miscellaneous.escapeChar(this.settings.linkIdentificator)
+        +
+        '])', 'g');
         miscellaneous.splitterSequence = settings.splitter_sequence || 'ůíá';
 
         //============================
@@ -1189,6 +1200,12 @@ var Convertor = function (settings) {
                         variableText = miscellaneous.processTags(variableText);
 
                         break;
+
+                    case this.settings.linkIdentificator:
+
+
+
+                        break;
                     default:
                         recognizedVariable = variableIdentifier;
                         break;
@@ -1386,6 +1403,9 @@ var Convertor = function (settings) {
 
         miscellaneous.fillOutputTextarea('outputText');
         console.log(performance.now() - performanceStart, 'finished');
+
+        console.log('outputArray:', this.outputArray);
+        console.log('tags:', this.tags);
 
         return true;
 

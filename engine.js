@@ -5,7 +5,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
     this.QUESTIONS = null;
     this.TAGS = null;
     this.SETTINGS = null;
-    this.questionsMaxIndex = null;
     
     this.DOM = null;
 
@@ -576,6 +575,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         runtime.incorrectAnswersCount = null;
         runtime.correctAnswersCount = null;
 
+        runtime.isTestEndAble = null;
+
         //array variables
         runtime.testPages = null;
         runtime.questions = null;
@@ -589,6 +590,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         runtime.detachTestPageControl = null;
             runtime.pageBack = null;
             runtime.pageNext = null;
+            runtime.testKeyboardController = null;
+            runtime.confirmTestEnding = null;
         runtime.setActiveTestPage = null;
 
         runtime.answerClick = null;
@@ -609,7 +612,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         runtime.clearTest = null;
         runtime.repeatTest = null;
 
-        runtime.inventoryButton = null;
+        runtime.inventoryButtonHandler = null;
         runtime.isInventoryOverflow = null;
         runtime.openInventory = null;
         runtime.closeInventory = null;
@@ -645,6 +648,21 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             
         }.bind(this);
 
+        runtime.testKeyboardController = function (event) {
+            console.log(event);
+
+            if (event.key && event.code) {
+
+                const key = event.key.toLowerCase();
+
+                switch (key) {
+                    case 'arrowleft': runtime.pageBack(); break;
+                    case 'arrowright': runtime.pageNext(); break;
+                    //no need to default case, simply no function for random key
+                }
+            }
+        }
+
         runtime.attachTestPageControl = function () {
 
             const isOnlyOnePage = runtime.countOfPages === 1;
@@ -657,11 +675,14 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
                 this.DOM.global['arrow-left'].addEventListener('click', runtime.pageBack);
                 this.DOM.global['arrow-right'].addEventListener('click', runtime.pageNext);
+                
             }
             else
             {
                 runtime.setFooterPage('only');
             }
+
+            window.addEventListener('keyup', runtime.testKeyboardController);
             
             
         }.bind(this);
@@ -670,6 +691,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
             this.DOM.global['arrow-left'].removeEventListener('click', this.runtime.pageBack);
             this.DOM.global['arrow-right'].removeEventListener('click', this.runtime.pageNext);
+            window.removeEventListener('keyup', runtime.testKeyboardController);
             
         }.bind(this);
 
@@ -677,6 +699,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         {
             this.DOM.global['footer'].removeAttribute('data-page');
             this.DOM.global['question-position'].innerText = '';
+
         }.bind(this);
 
         runtime.pageBack = function () {
@@ -733,6 +756,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         runtime.answerClick = function (elementReference, runtimeReference) {
 
+            runtime.isTestEndAble = false;
+
             if (!runtimeReference.selected)
             {
                 elementReference.setAttribute('selected', '');
@@ -745,7 +770,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             }
         }
 
-        runtime.inventoryButton = function () {
+        runtime.inventoryButtonHandler = function () {
 
             const button = this.DOM.inventory['inventory-button'];
 
@@ -893,22 +918,40 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             {
 
                 //if runtime.shuffle
-                //this.misc.shuffleArray(questionsArray);
+                //?! being shuffled second time, when real test option
+                this.misc.shuffleArray(questionsArray);
                 runtime.incorrectQuestionsCount = 0;
                 runtime.correctQuestionsCount = 0;
                 runtime.incorrectAnswersCount = 0;
                 runtime.correctAnswersCount = 0;
+
+                runtime.isTestEndAble = true; //selecting answer will make it false
     
                 runtime.incorrectQuestionsIdentificators = new Array();
     
                 this.build.newTestContent(questionsArray);
+                window.addEventListener('beforeunload', runtime.confirmTestEnding);
+                window.addEventListener('hashchange', runtime.confirmTestEnding);
                 runtime.attachTestPageControl();
                 this.DOM.global['test-main'].setAttribute('status', 'running');
             }
 
         }.bind(this);
 
-        
+        runtime.confirmTestEnding = function (event) {
+
+            if (!runtime.isTestEndAble && !event)
+            {
+                runtime.isTestEndAble = confirm('Do you really want to end test?');
+            }
+
+            //beforeunlaod || hashchange
+            if (!runtime.isTestEndAble && event)
+            {
+                event.returnValue = true;
+                return true;
+            }
+        }
 
         runtime.endTest = function ()
         {
@@ -918,10 +961,16 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             //?! prevent test end if not on last page or when closing tab
             //?! add timer
             
-            runtime.processQuestions();
-            runtime.createSummary();
-            runtime.openInventory();
-            
+           runtime.confirmTestEnding();
+
+            if (runtime.isTestEndAble)
+            {
+                window.removeEventListener('beforeunload', runtime.confirmTestEnding);
+                window.removeEventListener('hashchange', runtime.confirmTestEnding);
+                runtime.processQuestions();
+                runtime.createSummary();
+                runtime.openInventory();
+            }
 
         }.bind(this);
 
@@ -970,9 +1019,9 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             if (testType === 'real')
             {
                 //random 20 questions
-                let questionsArray = this.misc.createIndexArray(0, this.questionsMaxIndex);
-                
-                questionsArray = questionsArray.slice(0,20);
+                let questionsArray = this.misc.createIndexArray(0, this.QUESTIONS.length - 1);
+                this.misc.shuffleArray(questionsArray);
+                questionsArray = questionsArray.slice(0, this.SETTINGS.defaultTest.questionsTotal);
                 runtime.startTest(questionsArray);
             }
             else if (testType === 'custom')
@@ -991,6 +1040,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 else if (inputType === 'index')
                 {
                     const questionsArray = runtime.getIdentificatorInput();
+                    console.log(questionsArray);
 
                     if (questionsArray)
                     {
@@ -1128,7 +1178,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
             
             
-            //?!filter duplicate indexinput tagsimput
+            //?!filter duplicate indexinput tagsinput
             
             const identificatorArrayLength = identificatorArray.length;
             
@@ -1153,7 +1203,15 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 };
             };
 
-            return filteredIndexes;
+            if (filteredIndexes.length)
+            {
+                return filteredIndexes;
+            }
+            else
+            {
+                this.misc.createMessage('No such indexes found in questions.', 'warning')
+                return null;
+            }
 
             /*if (identificatorValue.trim());
             {
@@ -1181,6 +1239,16 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
             const min = parseInt(this.DOM.inputs['flat-min'].value);
             const max = parseInt(this.DOM.inputs['flat-max'].value);
+
+
+            if (!min || !max)
+            {
+                if (min !== 0)
+                {
+                    this.misc.createMessage('Use only numbers.', 'warning');
+                    return null;
+                }
+            }
 
             if (min >= 0)
             {
@@ -1372,8 +1440,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         return misc;
     }.bind(this))();
 
-    
-
     var initialization = function ()
     {
         //settings
@@ -1435,10 +1501,19 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             }.bind(this));
         }
         
-        
         document.querySelector('head title').innerText = this.SETTINGS.name;
         
-        this.DOM.inventory['inventory-button'].addEventListener('click', this.runtime.inventoryButton);
+        this.DOM.inventory['inventory-button'].addEventListener('click', this.runtime.inventoryButtonHandler);
+        window.addEventListener('keyup', function (event) {
+
+            if (event && event.key && event.key.toLowerCase() === 'q')
+            {
+                this.runtime.inventoryButtonHandler();
+            }
+            
+        }.bind(this));
+
+        this.runtime.inventoryButtonHandler();
             
             //build.newTestContent([15,196,53,153,154,48,78,96,63,21,14,47,48,59,23,14,35,1,364,34,64,48,64,555,61,323,84,78,351,43,153,95,84,351,333,94,64,746,487,522,533,566,447,448,449,550,551]);    
 
