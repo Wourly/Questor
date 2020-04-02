@@ -1,7 +1,7 @@
-(1) Pro všechny formy života je třeba kolika prvků? # Regulace
+(1) Pro všechny formy života je třeba kolika prvků? # Regulace ^ Těmito prvky dokážete sestavit všechny životní formy dosud známé.
 X 16
 X 32
-X 6
+X 6 ^ CHNOPS - prvky nezbytné pro každý život
 T 27
 
 (2) 100 % voda (H2O) je kolika molární (mol/l)? # Regulace
@@ -22,7 +22,7 @@ T jeden nepolární konec (tvořený dvěma mastnými kyselinami)  a jeden konec
 X dva polární konce (tvořené dvěma fosfáty) a jeden nepolární  (nenasyc. mastná kyselina)
 X jeden nepolární konec (tvořený fosfátem) a jeden polární  (tvořený dvěma nasyc.mastnými kyselinami)
 
-(5) Fosfatidylcholin # Regulace
+(5) Fosfatidylcholin # Regulace @ cholin
 T se také nazývá lecithin
 X je vlastně fosfatidylglycerol
 X obsahuje SH skupinu
@@ -4495,7 +4495,7 @@ T rychlost utilizace a tvorby ATP vztažená na spotřebu glukózy v šedé ků�
 T je přímo úměrná rychlosti a kvalitě uzdravování
 X nemá žádný vliv ani na imunitu ani na průběh jiných onemocnění
 T se projeví u dětí tím, že nezbedové stůňou lépe a kratčeji než zakřiknuté a tiché děti
-T vede k přímé aktivaci produkce lymfocytů@LH 6
+T vede k přímé aktivaci produkce lymfocytů LH 6
 
 (747) Denní doporučená dávka askorbátu se nyní zvyšuje # GIT
 X z 10 mg na 150 mg

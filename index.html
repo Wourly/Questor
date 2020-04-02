@@ -6,6 +6,7 @@
     <meta charset="utf-8">
 
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="common.css">
     <link rel="stylesheet" type="text/css" href="test_navigation.css">
     <link rel="stylesheet" type="text/css" href="questions.css">
 
@@ -62,7 +63,13 @@
             </summary-buttons>
         </test-summary>
 
-        
+        <inventory-topic id="inventory-topic-container">
+            <inventory-label id="inventory-topic-label" class="left-block-clear">Topic</inventory-label>
+            <topic-functional-label id="open-in-new-tab-inventory-button" class="left-block-clear">(open in new tab)</topic-functional-label>
+            <topic-functional-label id="clear-inventory-button" class="right-block">(clear topic)</topic-functional-label>
+            <!--in progress:-->
+            <iframe id="inventory-topic-iframe" class="left-block-clear"></iframe>
+        </inventory-topic>
 
         <inventory-label class="left-block-clear">Saved questions' identificators:</inventory-label>
         <saved-identificators id="saved-identificators" contenteditable="true" class="left-block-clear"></saved-identificators>

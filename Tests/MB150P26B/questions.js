@@ -3,11 +3,12 @@ const QUESTIONS =
    "id":"1",
    "text":"Pro všechny formy života je třeba kolika prvků?",
    "tags":["Regulace"],
+   "iH":"Těmito prvky dokážete sestavit všechny životní formy dosud známé.",
    "answers":
       [
          {"valid":false,"text":"16"},
          {"valid":false,"text":"32"},
-         {"valid":false,"text":"6"},
+         {"valid":false,"text":"6","iH":"CHNOPS - prvky nezbytné pro každý život"},
          {"valid":true,"text":"27"}
       ]
 },
@@ -51,6 +52,7 @@ const QUESTIONS =
    "id":"5",
    "text":"Fosfatidylcholin",
    "tags":["Regulace"],
+   "links":["cholin"],
    "answers":
       [
          {"valid":true,"text":"se také nazývá lecithin"},
@@ -8912,7 +8914,7 @@ const QUESTIONS =
          {"valid":true,"text":"je přímo úměrná rychlosti a kvalitě uzdravování"},
          {"valid":false,"text":"nemá žádný vliv ani na imunitu ani na průběh jiných onemocnění"},
          {"valid":true,"text":"se projeví u dětí tím, že nezbedové stůňou lépe a kratčeji než zakřiknuté a tiché děti"},
-         {"valid":true,"text":"vede k přímé aktivaci produkce lymfocytů@LH 6"}
+         {"valid":true,"text":"vede k přímé aktivaci produkce lymfocytů LH 6"}
       ]
 },
 {

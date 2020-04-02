@@ -21,33 +21,9 @@ custom-inputs {
     max-width: 700px;
 }
 
-*
-{
-    box-sizing: border-box;
-    font-family: Tahoma, Verdana, sans-serif;
-
-    margin: 0;
-
-    margin-block-start: 0px;
-    margin-block-end: 0px;
-
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-
-    padding: 0;
-
-    padding-block-start: 0px;
-    padding-block-end: 0px; 
-
-    padding-inline-start: 0px;
-    padding-inline-end: 0px;
-}
-
 body {
     background: linear-gradient(60deg, rgb(29, 42, 51), rgb(30, 51, 65));
-    font-family: Verdana;
     min-height: 100vh;
-    color: #f09308;
     position: relative;
 }
 
@@ -100,14 +76,11 @@ inventory-container {
     padding: 15px;
     padding-bottom: 30px;
 
-    background: linear-gradient(60deg, rgb(29, 42, 51), rgb(30, 51, 65));
-
     word-break: break-word;
     
     overflow: auto;
 
     z-index: -999;
-  
 }
 
 inventory-container[active] {
@@ -352,6 +325,34 @@ footer-toggler::before {
 }
 */
 
+inventory-topic {
+    display: none;
+}
+
+inventory-topic[active] {
+    display: block;
+}
+
+#inventory-topic-iframe {
+    border: 0;
+    width: 100%;
+}
+
 .subject-container {
     cursor: pointer;
+}
+
+topic-functional-label {
+    font-size: 12px;
+    color: yellow;
+    opacity: 0.7;
+    cursor: pointer;
+    padding: 5px 0;
+
+    transition: all 0.8s;
+}
+
+topic-functional-label:hover {
+    opacity: 1;
+    color: #62b9df;
 }

@@ -1,0 +1,60 @@
+*
+{
+    box-sizing: border-box;
+    font-family: Tahoma, Verdana, sans-serif;
+
+    margin: 0;
+
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+
+    padding: 0;
+
+    padding-block-start: 0px;
+    padding-block-end: 0px; 
+
+    padding-inline-start: 0px;
+    padding-inline-end: 0px;
+}
+
+inventory-container, body.subtopic-isolated {
+    background: linear-gradient(60deg, rgb(29, 42, 51), rgb(30, 51, 65));
+}
+
+body {
+    color: #f09308;
+    font-family: Verdana, Tahoma;
+}
+
+h1 {
+    color: #f09308;
+}
+
+etymology-description {
+
+    display: block;
+    float: left;
+    clear: both;
+
+    margin-left: 10px;
+
+    color: gray;
+
+    opacity: 0.8;
+    font-style: italic;
+}
+
+etymology-description i {
+    display: block;
+    float: left;
+    clear: both;
+}
+
+etymology-description label {
+    display: block;
+    float: left;
+    margin-left: 5px;
+}

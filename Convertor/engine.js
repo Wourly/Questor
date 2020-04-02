@@ -262,7 +262,8 @@ var Convertor = function (settings) {
 
                 let propertyOutput = '"' + property + '":';
 
-                if (property !== 'tags') {
+                console.log(property);
+                if (property !== 'tags' && property !== 'links') {
                     propertyOutput += '"' + value + '"';
                 }
                 else {
@@ -1194,18 +1195,15 @@ var Convertor = function (settings) {
                     case this.settings.invisibleHintIdentificator:
                         recognizedVariable = 'iH';
                         break;
-                    case this.settings.tagIdentificator:
-                        recognizedVariable = 'tags'
-                        
-                        variableText = miscellaneous.processTags(variableText);
-
-                        break;
-
                     case this.settings.linkIdentificator:
-
-
-
+                        recognizedVariable = 'links';
+                        variableText = miscellaneous.processTags(variableText);
                         break;
+                    case this.settings.tagIdentificator:
+                        recognizedVariable = 'tags';
+                        variableText = miscellaneous.processTags(variableText);
+                        break;
+
                     default:
                         recognizedVariable = variableIdentifier;
                         break;
@@ -1224,7 +1222,7 @@ var Convertor = function (settings) {
 
         const tagArray = tagsString.split(this.settings.propertySplitter);
         const tagArrayLength = tagArray.length;
-
+        
         const preStringArray = new Array();
 
         for (let index = 0; index < tagArrayLength; index++) {

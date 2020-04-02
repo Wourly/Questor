@@ -1,3 +1,22 @@
+test-main[status=running] answer-container,
+question-link
+{
+    cursor: pointer;
+}
+
+test-main[status=running] answer-container:hover {
+    color: #62b9df;
+}
+
+question-identificator,
+question-link:hover {
+    color: rgb(186, 233, 33);
+}
+
+question-links:hover {
+    opacity: 1;
+}
+
 question-page[active] {
     display: block;
 }
@@ -27,9 +46,11 @@ question-title {
     line-height: 22px;
 }
 
-question-identificator {
-    color: rgb(186, 233, 33);
-    font-style: 14px;
+question-links {
+    color: gray;
+    opacity: 0.8;
+
+    transition: all 0.8s;
 }
 
 question-identificator::before {
@@ -45,14 +66,6 @@ answer-container {
 
     color: #42809b;
     transition: color 0.4s;
-}
-
-test-main[status=running] answer-container {
-    cursor: pointer;
-}
-
-test-main[status=running] answer-container:hover {
-    color: #62b9df;
 }
 
 /*id for importance*/
