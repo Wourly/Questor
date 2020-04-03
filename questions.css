@@ -48,6 +48,8 @@ question-title {
 
 a.question-link {
     transition: color 0.4s;
+    color: gray;
+    text-decoration: none;
 }
 
 question-links {
@@ -55,6 +57,10 @@ question-links {
     opacity: 0.8;
 
     transition: all 0.8s;
+}
+
+question-link-separator {
+    margin: 0 5px;
 }
 
 question-identificator::before {

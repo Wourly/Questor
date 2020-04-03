@@ -20,8 +20,23 @@
     padding-inline-end: 0px;
 }
 
-inventory-container, body.subtopic-isolated {
+html {
+    min-height: 100%;
+}
+
+inventory-container, body[isolated] {
     background: linear-gradient(60deg, rgb(29, 42, 51), rgb(30, 51, 65));
+}
+
+/*maybe should to be placed into some specific subtopic sheet*/
+body[isolated] {
+    padding: 10px;
+
+}
+
+[subtopic] *
+{
+    position: relative;
 }
 
 body {
@@ -31,6 +46,12 @@ body {
 
 h1 {
     color: #f09308;
+}
+
+p {
+    display: block;
+    float: left;
+    clear: both;
 }
 
 etymology-description {
@@ -57,4 +78,20 @@ etymology-description label {
     display: block;
     float: left;
     margin-left: 5px;
+}
+
+name-aliases {
+    display: block;
+    float: left;
+    clear: both;
+}
+
+name-aliases label {
+    display: inline-block;
+}
+
+img {
+    display: block;
+    float: left;
+    clear: both;
 }

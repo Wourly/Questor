@@ -22,7 +22,7 @@ T jeden nepolární konec (tvořený dvěma mastnými kyselinami)  a jeden konec
 X dva polární konce (tvořené dvěma fosfáty) a jeden nepolární  (nenasyc. mastná kyselina)
 X jeden nepolární konec (tvořený fosfátem) a jeden polární  (tvořený dvěma nasyc.mastnými kyselinami)
 
-(5) Fosfatidylcholin # Regulace @ cholin
+(5) Fosfatidylcholin # Regulace
 T se také nazývá lecithin
 X je vlastně fosfatidylglycerol
 X obsahuje SH skupinu

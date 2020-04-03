@@ -44,6 +44,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
     };
 
     //stores references to important elements
+    //no elements are queried inside code, everything uses reference to this.DOM, so there is less risk of getting reference error
     this.DOM = (function DOM ()
     {
         const DOM = new Object();
@@ -107,6 +108,27 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             defaultTest.timeLimit = SETTINGS.defaultTest.timeLimit || 60;
 
             this.SETTINGS.defaultTest = defaultTest;
+
+            this.SETTINGS.browserScrollSize = (function ()
+            {
+                const div = document.createElement('div');
+
+                const appliedWidth = 100;
+            
+                div.style.width= String(appliedWidth) + 'px';
+                div.style.height = '0';
+                div.style.overflow = 'scroll';
+                div.style.visibility = 'hidden';
+                div.style.position = 'fixed';
+            
+                document.body.appendChild(div);
+                
+                const scrollWidth = appliedWidth - div.clientWidth;
+                
+                div.remove();
+            
+                return scrollWidth;
+            })();
 
             this.activate.settings();
     
@@ -360,6 +382,14 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                         questionLinkElement.addEventListener('click', questionLinkClickHandler);
 
                         questionLinks.appendChild(questionLinkElement);
+
+                        //last element
+                        if ((questionLinksLength - 1) !== index)
+                        {
+                            const linkSeparator = document.createElement('question-link-separator');
+                            linkSeparator.innerText = '|';
+                            questionLinks.appendChild(linkSeparator);
+                        }
                     }
 
                     questionUpper.appendChild(questionLinks);
@@ -474,6 +504,10 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         activate.startButton = null;
         activate.endButton = null;
 
+        activate.inventory = null;
+
+        activate.downloads = null;
+
         Object.seal(activate);
 
         activate.questions = function questions () {
@@ -533,7 +567,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             {
                 const currentElement = elements[index];
 
-                //just a variable, created by IIFE, that have every button, except the actual one above
+                //just array variable, created by IIFE, that contain every other button (not currently 'mouseDowned' button)
                 const otherElements = (function filterOtherElementsFromAllElements () {
                             
                     const otherElements = new Array();
@@ -587,6 +621,99 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 );
             };
         };
+
+        activate.inventory = function activateInventory () {
+            
+            //clickability of inventory button
+            this.DOM.inventory['inventory-button'].addEventListener('click', this.runtime.inventoryButtonHandler);
+
+            //opening of inventory with keyup q or Q
+            window.addEventListener('keyup', function toggleInventory (event) {
+
+                if (event && event.key && event.key.toLowerCase() === 'q')
+                {
+                    this.runtime.inventoryButtonHandler();
+                }
+                
+            }.bind(this));
+            
+            //inventory topic clearance
+            this.DOM.inventory['clear-inventory-button'].addEventListener('click', this.runtime.clearInventoryTopic);
+
+            //subtopic messages receiving
+            window.addEventListener('message', function messageHandler (event) {
+                if (event)
+                {
+                    if (event.data)
+                    {
+                        const {data} = event;
+                        const {action} = data;
+                        
+                        switch (action) {
+                            case 'setIframeHeight':
+                                {
+                                    const iframe = this.DOM.inventory['inventory-topic-iframe'];
+                                    const {height, isScrollbarPresent} = data;
+
+                                    let horizontalScrollbarHeight = 0;
+
+                                    if (isScrollbarPresent)
+                                    {
+                                        horizontalScrollbarHeight = this.SETTINGS.browserScrollSize;
+                                    }
+
+                                    iframe.style.height = String(height + horizontalScrollbarHeight) + 'px';
+
+                                    this.runtime.fixButtonWhenInventoryScrollbarAppears();
+
+                                    break;
+                                }
+                            //clicking on iframe would disable events on window
+                            case 'focusMainWindow':
+                                {
+                                    window.focus();
+                                    break;
+                                }
+                            default:
+                                {
+                                    console.warn('unrecognized action');
+                                }
+                        }
+                    }
+                }
+            }.bind(this))
+
+        }.bind(this);
+
+        activate.downloads = function activateDownloads () {
+             
+            if (this.SETTINGS && this.SETTINGS.code)
+            {
+                //download questions
+                if (this.SETTINGS.questionFile)
+                {
+                    const button = this.DOM.inventory['download-questions'];
+                    button.setAttribute('active', '');
+                    button.addEventListener('click', function downloadQuestionsHandler() {
+
+                        window.location = window.location.pathname.replace(/\/[^\/]*$/m, '\/') + 'Tests/' + this.SETTINGS.code + '/' + this.SETTINGS.questionFile;
+
+                    }.bind(this));
+                }
+                //download test
+                if (this.SETTINGS.testFile && this.SETTINGS.code)
+                {
+                    const button = this.DOM.inventory['download-test'];
+                    button.setAttribute('active', '');
+                    button.addEventListener('click', function downloadTestHandler() {
+
+                        window.location = window.location.pathname.replace(/\/[^\/]*$/m, '\/') + 'Tests/' + this.SETTINGS.code + '/' + this.SETTINGS.testFile;
+
+                    }.bind(this));
+                }
+            }
+            
+        }.bind(this);
 
         return activate;
 
@@ -649,7 +776,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         runtime.clearInventoryTopic = null;
 
         runtime.inventoryButtonHandler = null;
-        runtime.isInventoryOverflow = null;
+        runtime.fixButtonWhenInventoryScrollbarAppears = null;
         runtime.openInventory = null;
         runtime.closeInventory = null;
 
@@ -829,7 +956,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             iframe.setAttribute('data-topic-name', topicName);
 
             newTabAnchor.setAttribute('href', src);
-
             container.setAttribute('active', '');
 
         }.bind(this);
@@ -841,6 +967,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             iframe.removeAttribute('src');
             iframe.removeAttribute('data-topic-name');
             container.removeAttribute('active');
+
+            runtime.fixButtonWhenInventoryScrollbarAppears()
 
         }.bind(this);
 
@@ -869,14 +997,19 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         }.bind(this);
 
-        runtime.isInventoryOverflow = function isInventoryOverflow () {
+        runtime.fixButtonWhenInventoryScrollbarAppears = function fixButtonWhenInventoryScrollbarAppears () {
 
             const inventory = this.DOM.inventory['inventory-container'];
 
             const inventoryHeight = inventory.scrollHeight;
             const windowHeight = window.innerHeight;
 
-            return inventoryHeight > windowHeight ? true : false;
+            const mustBeAdjusted = inventoryHeight > windowHeight ? true : false;
+
+            if (mustBeAdjusted)
+                this.DOM.inventory['inventory-button'].setAttribute('inventory-overflow', '');
+            else
+                this.DOM.inventory['inventory-button'].removeAttribute('inventory-overflow');
 
         }.bind(this);
 
@@ -885,10 +1018,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             this.DOM.inventory['inventory-container'].setAttribute('active', '');
             this.DOM.inventory['inventory-button'].setAttribute('next-action', 'closing');
             
-            if (runtime.isInventoryOverflow())
-            {
-                this.DOM.inventory['inventory-button'].setAttribute('inventory-overflow', '');
-            }
+            runtime.fixButtonWhenInventoryScrollbarAppears();
 
         }.bind(this);
 
@@ -1521,6 +1651,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             const RGB = 'rgb(' + String(red) + ', ' + String(green) + ', ' + String(blue) + ')';
 
             return RGB;
+
         }.bind(this);
 
         return misc;
@@ -1566,49 +1697,22 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         {
             this.DOM.inventory['repeat-button'].addEventListener('click', this.runtime.repeatTest);
         }
-        //download questions
-        if (this.SETTINGS.questionFile)
-        {
-            const button = this.DOM.inventory['download-questions'];
-            button.setAttribute('active', '');
-            button.addEventListener('click', function downloadQuestionsHandler() {
-                //?!! code should be required when loading settings, otherwise it may create error 404
-                window.location = window.location.pathname.replace(/\/[^\/]*$/m, '\/') + 'Tests/' + this.SETTINGS.code + '/' + this.SETTINGS.questionFile;
-            }.bind(this));
-        }
-        //download test
-        if (this.SETTINGS.testFile)
-        {
-            const button = this.DOM.inventory['download-test'];
-            button.setAttribute('active', '');
-            button.addEventListener('click', function downloadTestHandler() {
-                //?!! code should be required when loading settings, otherwise it may create error 404
-                window.location = window.location.pathname.replace(/\/[^\/]*$/m, '\/') + 'Tests/' + this.SETTINGS.code + '/' + this.SETTINGS.testFile;
-            }.bind(this));
-        }
+        this.activate.downloads();
+
         
         document.querySelector('head title').innerText = this.SETTINGS.name;
-        
-        this.DOM.inventory['inventory-button'].addEventListener('click', this.runtime.inventoryButtonHandler);
-
-        window.addEventListener('keyup', function toggleInventory (event) {
-
-            if (event && event.key && event.key.toLowerCase() === 'q')
-            {
-                this.runtime.inventoryButtonHandler();
-            }
             
-        }.bind(this));
-
-        this.DOM.inventory['clear-inventory-button'].addEventListener('click', this.runtime.clearInventoryTopic);
+        this.activate.inventory();
+            
 
         //this.runtime.inventoryButtonHandler();
 
-        this.runtime.startTest([4]);
+        //this.runtime.startTest([4]);
 
-        //this.runtime.openInventory();
-        //this.runtime.setInventoryTopic('cholin');
+        this.runtime.openInventory();
+        this.runtime.setInventoryTopic('fosfatidylcholin');
             
+        
             //build.newTestContent([15,196,53,153,154,48,78,96,63,21,14,47,48,59,23,14,35,1,364,34,64,48,64,555,61,323,84,78,351,43,153,95,84,351,333,94,64,746,487,522,533,566,447,448,449,550,551]);    
 
     }.bind(this);
