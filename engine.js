@@ -328,25 +328,32 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                         questionTags.innerText = ' ' + question.tags.join(' | ');
                     }
                 }
-
                                     
                 if (question.links)
                 {
 
                     const questionLinks = document.createElement('question-links');
 
+                    const testCode = this.SETTINGS.code;
+
                     const questionLinksLength = question.links.length;
 
                     for (let index = 0; index < questionLinksLength; index++)
                     {
-                        const questionLinkText = question.links[index];
-                        const questionLinkElement = document.createElement('question-link');
+                        const topicName = question.links[index];
+                        const questionLinkElement = document.createElement('a');
+                        questionLinkElement.classList.add('question-link');
 
-                        questionLinkElement.innerText = questionLinkText;
+                        //href
+                        const url = './Tests/' + testCode + '/subtopics/' + topicName + '/index.html';
 
-                        const questionLinkClickHandler = function createQuestionLinkClickHandler () {
+                        questionLinkElement.setAttribute('href', url)
+                        questionLinkElement.innerText = topicName;
 
-                            return this.runtime.questionLinkClickHandler(questionLinkText);
+                        //! dont forget to prevent default on ctrl
+                        const questionLinkClickHandler = function createQuestionLinkClickHandler (event) {
+
+                            return this.runtime.questionLinkClickHandler(topicName, event);
 
                         }.bind(this);
 
@@ -640,8 +647,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         runtime.setInventoryTopic = null;
         runtime.clearInventoryTopic = null;
-        runtime.openInNewTabButtonLabelHandler = null;
-        runtime.openInventoryInNewTab = null;
 
         runtime.inventoryButtonHandler = null;
         runtime.isInventoryOverflow = null;
@@ -816,9 +821,14 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             const iframe = this.DOM.inventory['inventory-topic-iframe'];
             const testCode = this.SETTINGS['code'];
 
+            const newTabAnchor = this.DOM.inventory['open-in-new-tab-inventory-button'];
+
             const src = './Tests/' + testCode + '/subtopics/' + topicName + '/index.html';
+
             iframe.src = src;
             iframe.setAttribute('data-topic-name', topicName);
+
+            newTabAnchor.setAttribute('href', src);
 
             container.setAttribute('active', '');
 
@@ -834,50 +844,14 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         }.bind(this);
 
-        runtime.openInNewTabButtonLabelHandler = function openInNewTabButtonLabelHandler () {
 
-            const iframe = this.DOM.inventory['inventory-topic-iframe'];
+        runtime.questionLinkClickHandler = function questionLinkClickHandler (topicName, event) {
 
-            if (iframe.dataset)
+            if (event && !event.ctrlKey)
             {
-                const topicName = iframe.dataset['topicName'];
-
-                if (topicName)
-                {
-                    runtime.openInventoryInNewTab(topicName);
-                }
+                event.preventDefault();
+                runtime.setInventoryTopic(topicName);
             }
-
-        }.bind(this);
-
-        runtime.openInventoryInNewTab = function openInventoryInNewTab (topicName) {
-
-            const testCode = this.SETTINGS['code'];
-
-            const url = './Tests/' + testCode + '/subtopics/' + topicName + '/index.html';
-
-            const anchor = document.createElement('a');
-            anchor.href = url;
-
-            const event = new MouseEvent('click', {
-                ctrlKey : true
-            });
-
-            anchor.addEventListener('click', (event) => {
-                console.log(event.ctrlKey);
-            })
-
-            anchor.dispatchEvent(event);
-
-            //anchor.click();
-
-        }.bind(this);
-
-        runtime.questionLinkClickHandler = function questionLinkClickHandler (link) {
-
-
-            runtime.setInventoryTopic(link);
-
         };
 
         runtime.inventoryButtonHandler = function inventoryButtonHandler () {
@@ -1626,16 +1600,14 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             
         }.bind(this));
 
-
-        this.DOM.inventory['open-in-new-tab-inventory-button'].addEventListener('click', this.runtime.openInNewTabButtonLabelHandler);
         this.DOM.inventory['clear-inventory-button'].addEventListener('click', this.runtime.clearInventoryTopic);
 
         //this.runtime.inventoryButtonHandler();
 
-        //this.runtime.startTest([4]);
+        this.runtime.startTest([4]);
 
-        this.runtime.openInventory();
-        this.runtime.setInventoryTopic('cholin');
+        //this.runtime.openInventory();
+        //this.runtime.setInventoryTopic('cholin');
             
             //build.newTestContent([15,196,53,153,154,48,78,96,63,21,14,47,48,59,23,14,35,1,364,34,64,48,64,555,61,323,84,78,351,43,153,95,84,351,333,94,64,746,487,522,533,566,447,448,449,550,551]);    
 

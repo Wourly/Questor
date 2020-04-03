@@ -9,7 +9,7 @@ test-main[status=running] answer-container:hover {
 }
 
 question-identificator,
-question-link:hover {
+a.question-link:hover {
     color: rgb(186, 233, 33);
 }
 
@@ -44,6 +44,10 @@ question-title {
 
     font-size: 22px;
     line-height: 22px;
+}
+
+a.question-link {
+    transition: color 0.4s;
 }
 
 question-links {
