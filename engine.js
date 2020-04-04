@@ -131,6 +131,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 return scrollWidth;
             })();
 
+            this.SETTINGS.hasClipboardEvent = Boolean(window.ClipboardEvent);
+
             this.activate.settings();
     
         }.bind(this);
@@ -647,6 +649,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                                 
                                 if (event.ctrlKey && this.runtime.isSubtopicIframeLastFocus)
                                 {
+
                                     if (this.runtime.lastSubtopicIframeTextSelection !== null)
                                     {
                                         event.preventDefault();
@@ -1595,6 +1598,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         misc.shuffleArray = null;
         misc.createScoreColor = null;
 
+        misc.copyEventHandler = null;
+
         Object.seal(misc);
 
         misc.createMessage = function createMessage (message, type, halflife) {
@@ -1704,6 +1709,10 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         }.bind(this);
 
+        misc.copyEventHandler = function copyEventHandler (event) {
+            console.log(event);
+        };
+
         return misc;
     }.bind(this))();
 
@@ -1787,9 +1796,9 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         }.bind(this));
 
 
-        window.requestAnimationFrame(function (stamp) {
-            console.log('stampi', stamp)
-        });
+        window.addEventListener('copy', function (event) {
+            this.misc.copyEventHandler(event);
+        }.bind(this));
         //!must be triggered by parent, which should ask for dimensions
         window.addEventListener('resize', function () {
             

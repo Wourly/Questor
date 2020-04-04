@@ -38,31 +38,30 @@ window.addEventListener('load', function ()
     }
     else
     {
+        //informs parent window of frame height dimension
         const messageIframeHeight = function messageIframeHeight () {
 
-            const isScrollbarPresent = (function detectScrollbarPresence () {
-
-                const offSetScrollDifference = (document.body.offsetWidth - document.body.scrollWidth);
-                //console.log(offSetScrollDifference);
-                //edge has sometimes difference of 1
-                if (offSetScrollDifference < 0)
-                    return true;
-                else
-                    return false;
-
-            })()
+            //window.innerWidth is equal to maximum width, which could be provided by browser (if we consider frame has 100% width in parent)
+            //DOMRect.width is equal to width actually used by frame
+            //so scrollbar is present, if frame can maximally use less space, than the content is really using
+            const isScrollbarPresent = window.innerWidth <= Math.ceil(document.body.getBoundingClientRect().width);
             
             //console.log(document.body.scrollHeight, document.body.clientHeight, document.body.offsetHeight)
+            //console.log(window.innerWidth, outerWidth, document.body.scrollHeight, document.body.clientHeight, document.body.offsetHeight, document.body.getBoundingClientRect().width)
 
+            //console.group();
+            //console.log(window.innerWidth <= document.body.getBoundingClientRect().width, window.innerWidth, document.body.getBoundingClientRect().width)
+            //console.log((window.innerWidth <= document.body.getBoundingClientRect().width) === (window.innerWidth <= parseInt(document.body.getBoundingClientRect().width)))
+            //console.groupEnd();
             //console.log(isScrollbarPresent)
 
-            parent.postMessage({action: 'setIframeHeight', height: document.body.scrollHeight, isScrollbarPresent: isScrollbarPresent}, '*');
+            parent.postMessage({action: 'setIframeHeight', height: document.body.offsetHeight, isScrollbarPresent: isScrollbarPresent}, '*');
         }
 
         //stylesheet need to be loaded, before it is possible to correctly calculate content height of iframe
         stylesheet.addEventListener('load', messageIframeHeight);
 
-        //!must be called from resize event on parent
+        //messaging
         window.addEventListener('message', function messageHandler (event) {
             if (event)
             {
@@ -72,6 +71,7 @@ window.addEventListener('load', function ()
                     const {action} = data;
                     
                     switch (action) {
+                        //requested on resize event from parent, so frame can be stretched
                         case 'requestIframeSize':
                             {
                                 messageIframeHeight();
@@ -88,8 +88,7 @@ window.addEventListener('load', function ()
         })
 
         window.addEventListener('mouseup', function (event) {
-            //console.log(event);
-            
+
             const selection = window.getSelection();
             const isSomethingSelected = (selection.anchorOffset - selection.focusOffset) !== 0 ? true : false;
 

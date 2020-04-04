@@ -34,6 +34,11 @@ body[isolated] {
 
 }
 
+body[subtopic] {
+    overflow-y: hidden;
+    float: left;
+}
+
 [subtopic] *
 {
     position: relative;
