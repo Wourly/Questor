@@ -30,7 +30,7 @@ inventory-container, body[isolated] {
 
 /*maybe should to be placed into some specific subtopic sheet*/
 body[isolated] {
-    padding: 10px;
+    padding: 20px 10px 10px 20px;
 
 }
 
@@ -88,6 +88,12 @@ name-aliases {
 
 name-aliases label {
     display: inline-block;
+}
+
+space-block {
+    display: block;
+    float: left;
+    clear: both;
 }
 
 img {

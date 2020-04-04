@@ -1,6 +1,8 @@
+
+
 window.addEventListener('load', function ()
 {
-
+    window.name = 'subtopicIframe';
     document.body.setAttribute('subtopic', '');
 
     const stylesheet = document.createElement('link');
@@ -38,7 +40,21 @@ window.addEventListener('load', function ()
     {
         const messageIframeHeight = function messageIframeHeight () {
 
-            const isScrollbarPresent = (document.body.offsetWidth - document.body.scrollWidth) !== 0;
+            const isScrollbarPresent = (function detectScrollbarPresence () {
+
+                const offSetScrollDifference = (document.body.offsetWidth - document.body.scrollWidth);
+                //console.log(offSetScrollDifference);
+                //edge has sometimes difference of 1
+                if (offSetScrollDifference < 0)
+                    return true;
+                else
+                    return false;
+
+            })()
+            
+            //console.log(document.body.scrollHeight, document.body.clientHeight, document.body.offsetHeight)
+
+            //console.log(isScrollbarPresent)
 
             parent.postMessage({action: 'setIframeHeight', height: document.body.scrollHeight, isScrollbarPresent: isScrollbarPresent}, '*');
         }
@@ -46,12 +62,47 @@ window.addEventListener('load', function ()
         //stylesheet need to be loaded, before it is possible to correctly calculate content height of iframe
         stylesheet.addEventListener('load', messageIframeHeight);
 
-        window.addEventListener('resize', messageIframeHeight);
-
-        //main window loses events, if iframe is focused
-        window.addEventListener('focus', function () {
-            parent.postMessage({action: 'focusMainWindow'}, '*')
+        //!must be called from resize event on parent
+        window.addEventListener('message', function messageHandler (event) {
+            if (event)
+            {
+                if (event.data)
+                {
+                    const {data} = event;
+                    const {action} = data;
+                    
+                    switch (action) {
+                        case 'requestIframeSize':
+                            {
+                                messageIframeHeight();
+                                break;
+                            }
+                            
+                        default:
+                            {
+                                console.warn('unrecognized action');
+                            }
+                    }
+                }
+            }
         })
+
+        window.addEventListener('mouseup', function (event) {
+            //console.log(event);
+            
+            const selection = window.getSelection();
+            const isSomethingSelected = (selection.anchorOffset - selection.focusOffset) !== 0 ? true : false;
+
+            let selectionText = null;
+
+            if (isSomethingSelected)
+            {
+                selectionText = selection + '';
+            }
+
+            parent.postMessage({action: 'textSelection', text: selectionText}, '*')
+            parent.postMessage({action: 'focusMainWindow'}, '*')
+        });
     }
 
     //image copyright processing
@@ -61,6 +112,7 @@ window.addEventListener('load', function ()
 
         const imagesCount = images.length;
 
+        //iterating over all images
         for (let index = 0; index < imagesCount; index++)
         {
             const image = images[index];
@@ -84,7 +136,7 @@ window.addEventListener('load', function ()
                     const propertyName = possibleDatasetCopyrightProperties[propertyIndex];
                     const propertyValue = image.dataset[propertyName];
 
-                    if (propertyName === 'title')
+                    if (propertyName === 'title' && propertyValue)
                     {
                         imageTitle.push(propertyValue + '\n');
                     }
@@ -95,13 +147,35 @@ window.addEventListener('load', function ()
                             imageTitle.push(propertyName + ': ' + propertyValue);
                         }
                     }
-
-                    
                 }
 
                 image.setAttribute('title', imageTitle.join('\n'))
             }
-        };
+        }
     }
     //image copyright processing end
+
+    //space-block processing
+    {
+        const blocks = document.querySelectorAll('space-block');
+
+        const blocksCount = blocks.length;
+
+        //iterating over all images
+        for (let index = 0; index < blocksCount; index++)
+        {
+            const block = blocks[index];
+
+            //console.log(block);
+
+            if (block.dataset)
+            {
+                const {height} = block.dataset;
+
+                if (height)
+                    block.style.height = String(height) + 'px';
+            }
+
+        }
+    }
 });

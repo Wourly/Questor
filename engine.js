@@ -116,7 +116,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 const appliedWidth = 100;
             
                 div.style.width= String(appliedWidth) + 'px';
-                div.style.height = '0';
                 div.style.overflow = 'scroll';
                 div.style.visibility = 'hidden';
                 div.style.position = 'fixed';
@@ -126,6 +125,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 const scrollWidth = appliedWidth - div.clientWidth;
                 
                 div.remove();
+
+                console.log(scrollWidth);
             
                 return scrollWidth;
             })();
@@ -628,11 +629,43 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             this.DOM.inventory['inventory-button'].addEventListener('click', this.runtime.inventoryButtonHandler);
 
             //opening of inventory with keyup q or Q
-            window.addEventListener('keyup', function toggleInventory (event) {
+            window.addEventListener('keyup', function keyboardRouter (event) {
 
-                if (event && event.key && event.key.toLowerCase() === 'q')
+                if (event && event.key)
                 {
-                    this.runtime.inventoryButtonHandler();
+                    const key = event.key.toLowerCase();
+
+                    switch (key) {
+                        case 'q':
+                            {
+                                this.runtime.inventoryButtonHandler();
+                                break;
+                            }
+                        case 'c':
+                            {
+
+                                
+                                if (event.ctrlKey && this.runtime.isSubtopicIframeLastFocus)
+                                {
+                                    if (this.runtime.lastSubtopicIframeTextSelection !== null)
+                                    {
+                                        event.preventDefault();
+                                        //!! refactoring to make it coherent with my app
+                                        const el = document.createElement('textarea');
+                                        el.value = this.runtime.lastSubtopicIframeTextSelection;
+                                        document.body.appendChild(el);
+                                        el.select();
+                                        document.execCommand('copy');
+                                        document.body.removeChild(el);
+                                    }
+                                        //console.log(this.runtime.lastSubtopicIframeTextSelection);
+                                }
+
+                                break;
+                            }
+                    }
+
+
                 }
                 
             }.bind(this));
@@ -658,9 +691,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                                     let horizontalScrollbarHeight = 0;
 
                                     if (isScrollbarPresent)
-                                    {
                                         horizontalScrollbarHeight = this.SETTINGS.browserScrollSize;
-                                    }
 
                                     iframe.style.height = String(height + horizontalScrollbarHeight) + 'px';
 
@@ -671,7 +702,21 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                             //clicking on iframe would disable events on window
                             case 'focusMainWindow':
                                 {
+                                    this.runtime.isFocusSynthetic = true;
+                                    this.runtime.isSubtopicIframeLastFocus = true;
                                     window.focus();
+                                    break;
+                                }
+                                /*
+                            case 'blurSubtopicIframe':
+                                {
+                                    this.runtime.isSubtopicIframeLastFocus = false;
+                                    break;
+                                }*/
+                            case 'textSelection':
+                                {
+                                    const {text} = data;
+                                    this.runtime.lastSubtopicIframeTextSelection = text;
                                     break;
                                 }
                             default:
@@ -779,6 +824,11 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         runtime.fixButtonWhenInventoryScrollbarAppears = null;
         runtime.openInventory = null;
         runtime.closeInventory = null;
+
+        //iframe subtopic interaction
+        runtime.lastSubtopicIframeTextSelection = null; //string
+        runtime.isSubtopicIframeLastFocus = null; //bool
+        runtime.isFocusSynthetic = null; //bool
 
         Object.seal(runtime);
 
@@ -1674,7 +1724,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         {
             const inputs = new Array(this.DOM.inputs['flat-input'], this.DOM.inputs['index-input'], this.DOM.inputs['tags-input']);
             this.activate.elementSelectableOnlyOneOf(inputs, true); 
-        }    
+        }
         //activating tags
         {
             this.build.menuTags();
@@ -1699,21 +1749,64 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         }
         this.activate.downloads();
 
-        
         document.querySelector('head title').innerText = this.SETTINGS.name;
             
         this.activate.inventory();
             
-
         //this.runtime.inventoryButtonHandler();
 
         //this.runtime.startTest([4]);
 
         this.runtime.openInventory();
         this.runtime.setInventoryTopic('fosfatidylcholin');
-            
         
+        //!!should I even use this event?
+        //only blur? to setSubtopicIframe to false?
+        window.addEventListener('focus', function () {
+            
+            if (!this.runtime.isFocusSynthetic) {
+
+                this.runtime.isSubtopicIframeLastFocus = false;
+            }
+
+            this.runtime.isFocusSynthetic = false;
+
+            //console.log(this.runtime.isSubtopicIframeLastFocus);
+
+            //condition must be triggerable by mouseEvent (possibly from iframe)
+            // "isNextFocusTriggeredBySubtopicIframe
+            //!!!also focus event is probably triggered first
+            //if (this.runtime.isSubtopicIframeLastFocus)
+            //{
+            //    this.runtime.isSubtopicIframeLastFocus = false;
+                //console.log('eh');
+            //}
+
+            //console.log(event);
+
+        }.bind(this));
+
+
+        window.requestAnimationFrame(function (stamp) {
+            console.log('stampi', stamp)
+        });
+        //!must be triggered by parent, which should ask for dimensions
+        window.addEventListener('resize', function () {
+            
+            //console.log(event.target.);
+
+            this.DOM.inventory['inventory-topic-iframe'].contentWindow.postMessage({action: 'requestIframeSize'}, '*');
+        }.bind(this));
+
+        //!!possibly really have to be mousedown
+        window.addEventListener('mousedown', function () {
+            
+            this.runtime.isSubtopicIframeLastFocus = false;
+
+        }.bind(this));
             //build.newTestContent([15,196,53,153,154,48,78,96,63,21,14,47,48,59,23,14,35,1,364,34,64,48,64,555,61,323,84,78,351,43,153,95,84,351,333,94,64,746,487,522,533,566,447,448,449,550,551]);    
+
+        
 
     }.bind(this);
 

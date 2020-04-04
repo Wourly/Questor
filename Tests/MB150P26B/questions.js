@@ -52,7 +52,7 @@ const QUESTIONS =
    "id":"5",
    "text":"Fosfatidylcholin",
    "tags":["Regulace"],
-   "links":["cholin","fosfatidylcholin"],
+   "links":["fosfatidylcholin","cholin"],
    "answers":
       [
          {"valid":true,"text":"se také nazývá lecithin"},
