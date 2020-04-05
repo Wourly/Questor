@@ -2,7 +2,8 @@
 
 function Questor (QUESTIONS, TAGS, SETTINGS) {
 
-    //
+    //contains fundamental data to process test
+    //loaded by this.API
     this.QUESTIONS = null;
     this.TAGS = null;
     this.SETTINGS = null;
