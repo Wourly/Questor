@@ -177,4 +177,42 @@ window.addEventListener('load', function ()
 
         }
     }
+    //space-block processing
+
+    //children-style processing
+    /*{
+        const elements = document.querySelectorAll('*[data-children-style]');
+
+        const elementsCount = elements.length;
+
+        //iterating over all images
+        for (let index = 0; index < elementsCount; index++)
+        {
+            const element = elements[index];
+
+            console.log(element);
+
+            console.log(JSON.parse(element.dataset.childrenStyle));
+
+        }
+    }*/
+
+    //children-style processing
+
+    //source-reference processing
+    //adds target="_blank" to anchors
+    {
+        const anchors = document.querySelectorAll('source-reference a');
+
+        const anchorsCount = anchors.length;
+
+        //iterating over all images
+        for (let index = 0; index < anchorsCount; index++)
+        {
+            const anchor = anchors[index];
+            anchor.setAttribute('target', '_blank');
+
+        }
+    }
+    //source-reference processing
 });

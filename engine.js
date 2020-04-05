@@ -125,8 +125,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 const scrollWidth = appliedWidth - div.clientWidth;
                 
                 div.remove();
-
-                console.log(scrollWidth);
             
                 return scrollWidth;
             })();
@@ -637,38 +635,23 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 {
                     const key = event.key.toLowerCase();
 
-                    switch (key) {
+                    switch (key)
+                    {
                         case 'q':
-                            {
-                                this.runtime.inventoryButtonHandler();
-                                break;
-                            }
+                        {
+                            this.runtime.inventoryButtonHandler();
+                            break;
+                        }
                         case 'c':
-                            {
-
-                                
-                                if (event.ctrlKey && this.runtime.isSubtopicIframeLastFocus)
-                                {
-
-                                    if (this.runtime.lastSubtopicIframeTextSelection !== null)
-                                    {
-                                        event.preventDefault();
-                                        //!! refactoring to make it coherent with my app
-                                        const el = document.createElement('textarea');
-                                        el.value = this.runtime.lastSubtopicIframeTextSelection;
-                                        document.body.appendChild(el);
-                                        el.select();
-                                        document.execCommand('copy');
-                                        document.body.removeChild(el);
-                                    }
-                                        //console.log(this.runtime.lastSubtopicIframeTextSelection);
-                                }
-
-                                break;
-                            }
+                        {
+                            if (!this.SETTINGS.hasClipboardEvent)                               //browser does not support clipboard event
+                                if (event.ctrlKey && this.runtime.isSubtopicIframeLastFocus)    //ctrlKey + iframe was focused recently
+                                    if (this.runtime.lastSubtopicIframeTextSelection !== null)  //iframe text is selected
+                                        this.misc.copyEventHandler(null, true);                 //call handler with isSynthetic:true
+                            
+                            break;
+                        }
                     }
-
-
                 }
                 
             }.bind(this));
@@ -687,45 +670,39 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                         
                         switch (action) {
                             case 'setIframeHeight':
-                                {
-                                    const iframe = this.DOM.inventory['inventory-topic-iframe'];
-                                    const {height, isScrollbarPresent} = data;
+                            {
+                                const iframe = this.DOM.inventory['inventory-topic-iframe'];
+                                const {height, isScrollbarPresent} = data;
 
-                                    let horizontalScrollbarHeight = 0;
+                                let horizontalScrollbarHeight = 0;
 
-                                    if (isScrollbarPresent)
-                                        horizontalScrollbarHeight = this.SETTINGS.browserScrollSize;
+                                if (isScrollbarPresent)
+                                    horizontalScrollbarHeight = this.SETTINGS.browserScrollSize;
 
-                                    iframe.style.height = String(height + horizontalScrollbarHeight) + 'px';
+                                iframe.style.height = String(height + horizontalScrollbarHeight) + 'px';
 
-                                    this.runtime.fixButtonWhenInventoryScrollbarAppears();
+                                this.runtime.fixButtonWhenInventoryScrollbarAppears();
 
-                                    break;
-                                }
+                                break;
+                            }
                             //clicking on iframe would disable events on window
                             case 'focusMainWindow':
-                                {
-                                    this.runtime.isFocusSynthetic = true;
-                                    this.runtime.isSubtopicIframeLastFocus = true;
-                                    window.focus();
-                                    break;
-                                }
-                                /*
-                            case 'blurSubtopicIframe':
-                                {
-                                    this.runtime.isSubtopicIframeLastFocus = false;
-                                    break;
-                                }*/
+                            {
+                                this.runtime.isFocusSynthetic = true;
+                                this.runtime.isSubtopicIframeLastFocus = true;
+                                window.focus();
+                                break;
+                            }
                             case 'textSelection':
-                                {
-                                    const {text} = data;
-                                    this.runtime.lastSubtopicIframeTextSelection = text;
-                                    break;
-                                }
+                            {
+                                const {text} = data;
+                                this.runtime.lastSubtopicIframeTextSelection = text;
+                                break;
+                            }
                             default:
-                                {
-                                    console.warn('unrecognized action');
-                                }
+                            {
+                                console.warn('unrecognized action');
+                            }
                         }
                     }
                 }
@@ -1599,6 +1576,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         misc.createScoreColor = null;
 
         misc.copyEventHandler = null;
+        misc.canCopyEventProceed = true; //true, event cannot proceed only if there was triggered new copy event in event handler (to copy content of iframe, which has no focus)
 
         Object.seal(misc);
 
@@ -1709,9 +1687,43 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         }.bind(this);
 
-        misc.copyEventHandler = function copyEventHandler (event) {
-            console.log(event);
-        };
+        //copy function, which also provides copying from iframe
+        //this handler (with event) is enough for modern browsers, but for old:
+        //it is triggered by keyup: 'c' + ctrlKey
+        misc.copyEventHandler = function copyEventHandler (event, isSynthetic) {
+
+            //if copy event was called because of iframe workaround, it should not get triggered again
+            //but it allows to be triggered again generally
+            if (!this.misc.canCopyEventProceed) {
+                this.misc.canCopyEventProceed = true;
+                return;
+            }
+
+            //synthetic copy event
+            //copying from iframe, which blurs automatically to preserve main window events
+            if (this.runtime.isSubtopicIframeLastFocus) {
+                
+                //synthetic call does not have event (neither listener)
+                if (event)
+                    event.preventDefault();
+
+                if (!isSynthetic)
+                    this.misc.canCopyEventProceed = false;
+
+                //copying to clipboard via textarea element value
+                const textarea = document.createElement('textarea');
+                textarea.value = this.runtime.lastSubtopicIframeTextSelection;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy'); //already considered obsolete, but clipboard event has terrible support
+                document.body.removeChild(textarea);
+            }
+            else
+            {
+                this.misc.canCopyEventProceed = true;
+            }
+
+        }.bind(this);
 
         return misc;
     }.bind(this))();
@@ -1766,48 +1778,28 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         //this.runtime.startTest([4]);
 
-        this.runtime.openInventory();
-        this.runtime.setInventoryTopic('fosfatidylcholin');
-        
-        //!!should I even use this event?
-        //only blur? to setSubtopicIframe to false?
+        //isFocusSynthetic is set true by iframe message
+        //if it was not synthetic, iframe was not focused lastly
         window.addEventListener('focus', function () {
             
             if (!this.runtime.isFocusSynthetic) {
-
                 this.runtime.isSubtopicIframeLastFocus = false;
             }
 
+            //new triggers have chance to set this flag themselves before focus()
             this.runtime.isFocusSynthetic = false;
 
-            //console.log(this.runtime.isSubtopicIframeLastFocus);
-
-            //condition must be triggerable by mouseEvent (possibly from iframe)
-            // "isNextFocusTriggeredBySubtopicIframe
-            //!!!also focus event is probably triggered first
-            //if (this.runtime.isSubtopicIframeLastFocus)
-            //{
-            //    this.runtime.isSubtopicIframeLastFocus = false;
-                //console.log('eh');
-            //}
-
-            //console.log(event);
-
         }.bind(this));
 
 
-        window.addEventListener('copy', function (event) {
-            this.misc.copyEventHandler(event);
-        }.bind(this));
+        window.addEventListener('copy', this.misc.copyEventHandler);
         //!must be triggered by parent, which should ask for dimensions
         window.addEventListener('resize', function () {
-            
-            //console.log(event.target.);
-
             this.DOM.inventory['inventory-topic-iframe'].contentWindow.postMessage({action: 'requestIframeSize'}, '*');
         }.bind(this));
 
-        //!!possibly really have to be mousedown
+        //this event is not triggered by iframe click, so iframe was not selected
+        //this is needed for example if we go to console and then we click back on main window (not iframe)
         window.addEventListener('mousedown', function () {
             
             this.runtime.isSubtopicIframeLastFocus = false;
@@ -1815,6 +1807,9 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         }.bind(this));
             //build.newTestContent([15,196,53,153,154,48,78,96,63,21,14,47,48,59,23,14,35,1,364,34,64,48,64,555,61,323,84,78,351,43,153,95,84,351,333,94,64,746,487,522,533,566,447,448,449,550,551]);    
 
+            this.runtime.openInventory();
+            this.runtime.setInventoryTopic('biogenní prvky');
+    
         
 
     }.bind(this);

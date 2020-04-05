@@ -1,3 +1,9 @@
+/*variables are not used to prevent compatibility issues, they are used as reference to copy*/
+:root {
+    --text-dark-blue: #42809b;
+    --text-light-blue: #62b9df;
+}
+
 *
 {
     box-sizing: border-box;
@@ -34,9 +40,16 @@ body[isolated] {
 
 }
 
+body {
+    color: #f09308;
+    font-family: Verdana, Tahoma;
+}
+
 body[subtopic] {
     overflow-y: hidden;
     float: left;
+
+    font-size: 14px;
 }
 
 [subtopic] *
@@ -44,65 +57,72 @@ body[subtopic] {
     position: relative;
 }
 
-body {
-    color: #f09308;
-    font-family: Verdana, Tahoma;
-}
+
 
 h1 {
     color: #f09308;
 }
 
-p {
+h3 {
+    color: #62b9df;
+}
+
+etymology-description,
+etymology-description i,
+source-reference,
+source-reference a,
+source-reference i,
+name-alias,
+space-block,
+h1,
+h3,
+ol,
+ul,
+li,
+img,
+p
+{
     display: block;
     float: left;
     clear: both;
 }
 
-etymology-description {
-
+etymology-description label,
+name-alias label {
     display: block;
     float: left;
-    clear: both;
+    margin-left: 5px;
+}
+
+etymology-description {
 
     margin-left: 10px;
-
     color: gray;
 
     opacity: 0.8;
     font-style: italic;
 }
 
-etymology-description i {
-    display: block;
-    float: left;
-    clear: both;
+source-reference {
+    margin-top: 15px;
 }
 
-etymology-description label {
-    display: block;
-    float: left;
-    margin-left: 5px;
+source-reference a {
+
+    text-decoration: none;
+    color: rgb(186, 233, 33);
+    transition: color 0.4s;
 }
 
-name-aliases {
-    display: block;
-    float: left;
-    clear: both;
+source-reference a:hover {
+    color: #62b9df;
 }
 
-name-aliases label {
-    display: inline-block;
+[data-font-size=small] {
+    font-size: 12px;
 }
 
-space-block {
-    display: block;
-    float: left;
-    clear: both;
-}
-
-img {
-    display: block;
-    float: left;
-    clear: both;
+/*should be processed by js, if more value appear*/
+li {
+    margin-left: 15px;
 }
