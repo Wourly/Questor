@@ -199,10 +199,10 @@ window.addEventListener('load', function ()
 
     //children-style processing
 
-    //source-reference processing
+    //link processing
     //adds target="_blank" to anchors
     {
-        const anchors = document.querySelectorAll('source-reference a');
+        const anchors = document.querySelectorAll('a');
 
         const anchorsCount = anchors.length;
 

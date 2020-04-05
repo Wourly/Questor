@@ -3,7 +3,7 @@ const QUESTIONS =
    "id":"1",
    "text":"Pro všechny formy života je třeba kolika prvků?",
    "tags":["Regulace"],
-   "iH":"Těmito prvky dokážete sestavit všechny životní formy dosud známé.",
+   "links":["biogenní prvky"],
    "answers":
       [
          {"valid":false,"text":"16"},

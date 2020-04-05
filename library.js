@@ -69,6 +69,32 @@ function createWarning (message, halflife) {
 
 }
 
+//creates object containing requested elements by their ids
+function connectDOM (ids) {
+
+    const container = new Object();
+
+    if (ids)
+    {
+        const idsLength = ids.length;
+
+        for (let index = 0; index < idsLength; index++)
+        {
+            const id = ids[index];
+            const element = document.getElementById(id);
+
+            //if no element was found
+            if (!(container[id] = element)) {
+
+                //console.error('Could not connect to DOM, when connecting to element with id: ' + id);
+                throw new Error('Could not connect to DOM, when connecting to element with id: ' + id);
+            }
+        }
+    }
+
+    return container;
+};
+
 function writeGuidePage (errorMessage) {
     
     const body = document.body;

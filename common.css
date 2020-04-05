@@ -37,7 +37,10 @@ inventory-container, body[isolated] {
 /*maybe should to be placed into some specific subtopic sheet*/
 body[isolated] {
     padding: 20px 10px 10px 20px;
+}
 
+body[subtopic]:not([isolated]) {
+    overflow-y: hidden;
 }
 
 body {
@@ -46,7 +49,6 @@ body {
 }
 
 body[subtopic] {
-    overflow-y: hidden;
     float: left;
 
     font-size: 14px;

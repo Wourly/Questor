@@ -2,49 +2,45 @@
 
 function Questor (QUESTIONS, TAGS, SETTINGS) {
 
+    //
     this.QUESTIONS = null;
     this.TAGS = null;
     this.SETTINGS = null;
     
+    //references to all elements, which are used
+    //prevents potential reference error
+    //elements are never queried inside further code
     this.DOM = null;
 
+    //================
+    // variable groups
+    //================
+
+    //functions not related to application logic
     this.misc = null;
+
+    //allows to load QUESTIONS, TAGS and SETTINGS
     this.API = null;
+
+    //creates content inside referenced elements
     this.build = null;
+
+    //populate application with listeners and setup of basic variables
     this.activate = null;
+
+    //function and their variables, that can change over time
     this.runtime = null;
+
+    //informs user of errors, usually also offers a message
     this.errorHandling = null;
 
+    //no other property can be added
     Object.seal(this);
 
-    //creates object containing requested elements by their ids
-    function connectDOM (ids) {
+    //================
+    // DOM
+    //================
 
-        const container = new Object();
-
-        if (ids)
-        {
-            const idsLength = ids.length;
-
-            for (let index = 0; index < idsLength; index++)
-            {
-                const id = ids[index];
-                const element = document.getElementById(id);
-    
-                //if no element was found
-                if (!(container[id] = element)) {
-    
-                    //console.error('Could not connect to DOM, when connecting to element with id: ' + id);
-                    throw new Error('Could not connect to DOM, when connecting to element with id: ' + id);
-                }
-            }
-        }
-
-        return container;
-    };
-
-    //stores references to important elements
-    //no elements are queried inside code, everything uses reference to this.DOM, so there is less risk of getting reference error
     this.DOM = (function DOM ()
     {
         const DOM = new Object();
@@ -55,11 +51,13 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         DOM.score = connectDOM(['correct-questions', 'total-questions', 'questions-percentage', 'correct-answers', 'total-answers', 'answers-percentage']);
         DOM.global = connectDOM(['test-main', 'test-content', 'footer', 'question-position', 'arrow-left', 'arrow-right']);
 
-        DOM.misc = connectDOM();
-
         return DOM;
 
     })();
+
+    //================
+    // API
+    //================
 
     this.API = (function API ()
     {
@@ -139,34 +137,26 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
     }.bind(this))();
 
-    
-//console.log(this.DOM)
-/*
-    this.DOM.global['footer'].addEventListener('click', function toggleInventory ()
-    {
-        const inventory = this.DOM.global['footer'];
-        
-        if (!inventory.hasAttribute('open'))
-        {
-            inventory.setAttribute('open', '');
-        }
-        else
-        {
-            inventory.removeAttribute('open');
-        }
+
+    //================
+    // build
+    //================
 
 
-    }.bind(this));
-*/
     this.build = (function BUILD ()
     {
         const build = new Object();
 
         //functions
-        build.newTestContent = null;
-        build.questionPage = null;
-        build.questionBlock = null;
+        //=========
 
+        //build all question pages
+        build.newTestContent = null;
+        //builds page element, that contains currently 10 questions
+        build.questionPage = null;
+        //builds elements, that contain question title and answers, with it's functionality
+        build.questionBlock = null;
+        //builds tags into menu
         build.menuTags = null;
 
         Object.seal(build);
@@ -196,8 +186,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             
             this.DOM.menu['tags-array'].innerHTML = '';
             this.DOM.menu['tags-array'].appendChild(fragment);
-
-            
 
         }.bind(this);
 
@@ -285,7 +273,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         }.bind(this);
 
-        //builds elements, that contain question title and answers, with it's functionality
         build.questionBlock = function questionBlock (index) {
 
             const question = this.QUESTIONS[index] || null;
@@ -305,7 +292,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 runtimeQuestion.answers = new Array();
 
             this.runtime.questions[question.id] = runtimeQuestion;
-            //used for array
             
             //=======
             // UPPER
@@ -442,71 +428,53 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                         questionAnswers.appendChild(answerContainer);
                         runtimeQuestion.answers.push(runtimeAnswer);
                     };
-
-                    
-
                 }
-
-            
             }
             
-            
-            
-/*
-            <question-block>
-            <question-lower>
-                <question-answers>
-                    <answer-block selected>
-                        <answer-text>Využívají ATP</answer-text>
-                        <hint-visible></hint-visible>
-                        <hint-invisible></hint-invisible>
-                    </answer-block>
-                    <answer-block>
-                        <answer-text>Pohyb vždy procesivní</answer-text>
-                        <hint-visible></hint-visible>
-                        <hint-invisible></hint-invisible>
-                    </answer-block>
-                    <answer-block>
-                        <answer-text>Unknown</answer-text>
-                        <hint-visible></hint-visible>
-                        <hint-invisible></hint-invisible>
-                    </answer-block>
-                    <answer-block>
-                        <answer-text>Transportují RNA, endosomy</answer-text>
-                        <hint-visible></hint-visible>
-                        <hint-invisible>netransportují RNA</hint-invisible>
-                    </answer-block>
-                </question-answers>
-            </question-lower>
-        </question-block>
-*/
+
             return questionBlock;
         }.bind(this);
 
-
-        /*
-        this.DOM.global.content.appendChild(build.questionBlock(0));
-        this.DOM.global.content.appendChild(build.questionBlock(1));
-        this.DOM.global.content.appendChild(build.questionBlock(2));*/
+        
+        //this.DOM.global.content.appendChild(build.questionBlock(0));
+        //this.DOM.global.content.appendChild(build.questionBlock(1));
+        //this.DOM.global.content.appendChild(build.questionBlock(2));
         
         return build;
 
     }.bind(this))();
 
-    this.activate = (function ACTIVATION () {
+    
+    //================
+    // activate
+    //================
+
+    this.activate = (function ACTIVATE () {
 
         const activate = new Object();
 
+        //functions
+        //=========
+
+        //called after SETTINGS loaded by API, updates test name
         activate.settings = null;
+        //updates number of question and maximum value for flat input
         activate.questions = null;
 
+        //allows elements to change between selected and disabled by adding handler on them
         activate.elementToggleSelectability = null;
+
+        //allows one element of group to be selected, others are disabled
         activate.elementSelectableOnlyOneOf = null;
+
+        //handlers for buttons
         activate.startButton = null;
         activate.endButton = null;
 
+        //adds inventory basic events for manipulations
         activate.inventory = null;
 
+        //allows download button, if there is file to be downloaded (specified in SETTINGS)
         activate.downloads = null;
 
         Object.seal(activate);
@@ -528,7 +496,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         activate.elementToggleSelectability = function elementToggleSelectability (elementArray) {
 
-            //inputs must not be togglable, needs new function
             if (elementArray && (Array.isArray(elementArray) || elementArray instanceof NodeList))
             {
                 const elementArrayLength = elementArray.length;
@@ -628,6 +595,10 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             //clickability of inventory button
             this.DOM.inventory['inventory-button'].addEventListener('click', this.runtime.inventoryButtonHandler);
 
+            window.addEventListener('resize', function () {
+                this.DOM.inventory['inventory-topic-iframe'].contentWindow.postMessage({action: 'requestIframeSize'}, '*');
+            }.bind(this));
+
             //opening of inventory with keyup q or Q
             window.addEventListener('keyup', function keyboardRouter (event) {
 
@@ -681,7 +652,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
                                 iframe.style.height = String(height + horizontalScrollbarHeight) + 'px';
 
-                                this.runtime.fixButtonWhenInventoryScrollbarAppears();
+                                //this.runtime.fixButtonWhenInventoryScrollbarAppears();
 
                                 break;
                             }
@@ -744,29 +715,42 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
     }.bind(this))();
 
+    //================
+    // runtime
+    //================
+
     this.runtime = (function RUNTIME () {
 
         const runtime = new Object();
 
         //variables
-        runtime.activeTestPage = null;
-        runtime.lastActiveTestPage = null;
-        runtime.currentTestPage = null;
-        runtime.countOfPages = null;
+        //=========
 
-        runtime.incorrectQuestionsCount = null;
-        runtime.correctQuestionsCount = null;
-        runtime.incorrectAnswersCount = null;
-        runtime.correctAnswersCount = null;
+        runtime.activeTestPage = null; //number
+        runtime.lastActiveTestPage = null; //number
+        runtime.currentTestPage = null; //number
+        runtime.countOfPages = null; //number
 
-        runtime.isTestEndAble = null;
+        runtime.incorrectQuestionsCount = null; //number
+        runtime.correctQuestionsCount = null; //number
+        runtime.incorrectAnswersCount = null; //number
+        runtime.correctAnswersCount = null; //number
+
+        runtime.isTestEndAble = null; //bool
+
+        //iframe subtopic interaction
+        runtime.lastSubtopicIframeTextSelection = null; //string
+        runtime.isSubtopicIframeLastFocus = null; //bool
+        runtime.isFocusSynthetic = null; //bool
 
         //array variables
+        //===============
         runtime.testPages = null;
         runtime.questions = null;
         runtime.incorrectQuestionsIdentificators = null;
 
         //functions
+        //=========
         runtime.setFooterPage = null;
         runtime.removeFooterPage = null;
         
@@ -804,11 +788,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         runtime.fixButtonWhenInventoryScrollbarAppears = null;
         runtime.openInventory = null;
         runtime.closeInventory = null;
-
-        //iframe subtopic interaction
-        runtime.lastSubtopicIframeTextSelection = null; //string
-        runtime.isSubtopicIframeLastFocus = null; //bool
-        runtime.isFocusSynthetic = null; //bool
 
         Object.seal(runtime);
 
@@ -1035,6 +1014,8 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
             const windowHeight = window.innerHeight;
 
             const mustBeAdjusted = inventoryHeight > windowHeight ? true : false;
+
+            //console.log(mustBeAdjusted);
 
             if (mustBeAdjusted)
                 this.DOM.inventory['inventory-button'].setAttribute('inventory-overflow', '');
@@ -1459,26 +1440,6 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
                 return null;
             }
 
-            /*if (identificatorValue.trim());
-            {
-
-            }*/
-
-            /*try {
-                JSON.parse(indexes);
-            }
-
-            console.log(JSON.parse('[' + indexes + ']'));*/
-
-            /*if ()
-            {
-                
-            }
-            else
-            {
-                this.misc.createMessage('Minimal flat input must be 0 or more.', 'warning');
-            }*/
-
         }.bind(this);
 
         runtime.getFlatInput = function getFlatInput () {
@@ -1564,6 +1525,11 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         return runtime;
 
     }.bind(this))();
+
+    
+    //================
+    // misc
+    //================
 
     this.misc = (function MISC ()
     {
@@ -1770,7 +1736,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         }
         this.activate.downloads();
 
-        document.querySelector('head title').innerText = this.SETTINGS.name;
+        document.title = this.SETTINGS.name;
             
         this.activate.inventory();
             
@@ -1791,12 +1757,7 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
 
         }.bind(this));
 
-
         window.addEventListener('copy', this.misc.copyEventHandler);
-        //!must be triggered by parent, which should ask for dimensions
-        window.addEventListener('resize', function () {
-            this.DOM.inventory['inventory-topic-iframe'].contentWindow.postMessage({action: 'requestIframeSize'}, '*');
-        }.bind(this));
 
         //this event is not triggered by iframe click, so iframe was not selected
         //this is needed for example if we go to console and then we click back on main window (not iframe)
@@ -1807,10 +1768,9 @@ function Questor (QUESTIONS, TAGS, SETTINGS) {
         }.bind(this));
             //build.newTestContent([15,196,53,153,154,48,78,96,63,21,14,47,48,59,23,14,35,1,364,34,64,48,64,555,61,323,84,78,351,43,153,95,84,351,333,94,64,746,487,522,533,566,447,448,449,550,551]);    
 
-            this.runtime.openInventory();
-            this.runtime.setInventoryTopic('biogenní prvky');
-    
-        
+            //this.runtime.startTest([0])
+            //this.runtime.openInventory();
+            //this.runtime.setInventoryTopic('biogenní prvky');
 
     }.bind(this);
 

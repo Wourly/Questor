@@ -11,9 +11,6 @@ test-main[status=running] answer-container:hover {
 question-identificator,
 a.question-link:hover {
     color: rgb(186, 233, 33);
-}
-
-question-links:hover {
     opacity: 1;
 }
 
@@ -47,20 +44,14 @@ question-title {
 }
 
 a.question-link {
-    transition: color 0.4s;
-    color: gray;
+    transition: all 0.4s;
+    color: rgb(128, 128, 128, 0.8);
     text-decoration: none;
-}
-
-question-links {
-    color: gray;
-    opacity: 0.8;
-
-    transition: all 0.8s;
 }
 
 question-link-separator {
     margin: 0 5px;
+    color: rgb(128, 128, 128, 0.5);
 }
 
 question-identificator::before {
